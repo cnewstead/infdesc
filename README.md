@@ -7,7 +7,7 @@ The main website for the book is [here](https://infinitedescent.xyz/).
 
 ## Navigating the source
 
-To compile the source, you will need a TeX implementation on your computer, or a browser-based TeX editor such as [Overleaf](https://www.overleaf.com/), using the compiler pdfLaTeX.
+To compile the source, you will need a LaTeX implementation on your computer, or a browser-based LaTeX editor such as [Overleaf](https://www.overleaf.com/), using the compiler pdfLaTeX.
 
 The root document is `book.tex`, which calls all the other files it needs to compile the document.
 
