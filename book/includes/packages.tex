@@ -1,0 +1,78 @@
+%
+% Packages to be included
+%
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{afterpage}
+\usepackage{appendix}
+\usepackage{array}
+\usepackage[british]{babel}
+\usepackage{bbm}
+\usepackage{bussproofs}
+\usepackage{calc}
+\usepackage{datetime}
+    \newdateformat{customdate}{\dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR} \ordinaldate{\THEDAY} \monthname[\THEMONTH] \THEYEAR}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{environ}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[showcrop]{geometry}
+\usepackage{graphicx}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage[utf8]{inputenc}
+\usepackage{lastpage}
+\usepackage{listings} % TeX code in TeX
+    \lstset
+    {
+        language=[LaTeX]TeX,
+        breaklines=true,
+        basicstyle=\tt\color[HTML]{003388},
+        keywordstyle=\color[HTML]{003388},
+        emphstyle=\color[HTML]{003388},
+        identifierstyle=\color[HTML]{003388},
+        commentstyle=\color[HTML]{883300},
+        escapeinside={(*@}{@*)},
+        escapebegin={@*)},
+        emph={includegraphics,maketitle,setlength,text,theoremstyle},
+    }
+\usepackage{mathptmx}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage{pifont}
+\usepackage{refcount}
+\usepackage[absolute]{textpos}
+    \setlength{\TPHorizModule}{1in}
+    \setlength{\TPVertModule}{1in}
+\usepackage[artemisia]{textgreek}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+\usepackage{tikz}
+    \tikzset{node distance=3cm and 5cm, auto}
+    \usetikzlibrary{arrows,shapes}
+\usepackage{tikz-cd}
+\usepackage{titlesec}
+\usepackage{type1cm}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{xpatch}
+
+% Packages that are fussy about what order they're put in
+\usepackage[makeindex]{imakeidx}
+\usepackage{hyperref}
+\usepackage[numbered]{bookmark}
+    \hypersetup{
+        pdftitle={An Infinite Descent into Pure Mathematics},
+        pdfsubject={Introductory pure mathematics textbook with an emphasis on proof},
+        pdfauthor={Clive Newstead},
+        pdfkeywords={math,maths,mathematics,pure mathematics,undergraduate,textbook},
+        pdfproducer={Clive Newstead},
+        pdfcreator={LaTeX}
+    }
+\usepackage[nameinlink,capitalise]{cleveref}
+    \crefrangelabelformat{section}{#3#1#4--#5#2#6}

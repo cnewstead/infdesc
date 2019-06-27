@@ -1,0 +1,85 @@
+\documentclass{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{afterpage}
+\usepackage{appendix}
+\usepackage{array}
+\usepackage[UKenglish]{babel}
+\usepackage{bbm}
+\usepackage[numbered]{bookmark}
+\usepackage[nameinlink]{cleveref}
+\usepackage{datetime}
+    \newdateformat{customdate}{\dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR} \ordinaldate{\THEDAY} \monthname[\THEMONTH] \THEYEAR}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+    \setlist[itemize]{topsep=0pt}
+    \setlist[enumerate]{topsep=0pt}
+\usepackage{environ}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage{hyperref}
+    \hypersetup{
+    pdftitle={An infinite descent into pure mathematics},
+    pdfsubject={Introductory pure mathematics textbook with an emphasis on proof},
+    pdfauthor={Clive Newstead},
+    pdfkeywords={math,maths,mathematics,pure mathematics,undergraduate,textbook},
+    pdfproducer={Clive Newstead}
+    }
+\usepackage[latin1]{inputenc}
+\usepackage{lastpage}
+\usepackage{makeidx}
+    \makeindex
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{multicol}
+\usepackage{refcount}
+\usepackage{thmtools}
+\usepackage{tikz}
+    \tikzset{node distance=3cm and 5cm, auto}
+    \usetikzlibrary{arrows}
+\usepackage{tikz-cd}
+\usepackage{type1cm}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{xparse}
+
+% Original colours
+% \definecolor{infty1}{HTML}{380038}
+% \definecolor{infty2}{HTML}{500050}
+% \definecolor{infty3}{HTML}{680068}
+% \definecolor{infty4}{HTML}{800080}
+% \definecolor{infty5}{HTML}{980090}
+% \definecolor{infty6}{HTML}{B000B0}
+% \definecolor{infty7}{HTML}{C800C8}
+% \definecolor{infty8}{HTML}{E000E0}
+
+% New colours
+\definecolor{infty1}{HTML}{880088}
+\definecolor{infty2}{HTML}{000088}
+\definecolor{infty3}{HTML}{008888}
+\definecolor{infty4}{HTML}{008800}
+\definecolor{infty5}{HTML}{888800}
+\definecolor{infty6}{HTML}{880000}
+\definecolor{infty7}{HTML}{880088}
+\definecolor{infty8}{HTML}{888888}
+
+\begin{document}
+\begin{minipage}{70pt}
+\vspace{10pt}
+\centering
+{\color{infty1} \fontsize{2cm}{2cm}\selectfont $\infty$} \\ \vspace{10pt}
+{\color{infty2} \fontsize{1.33cm}{1.33cm}\selectfont $\infty$} \\ \vspace{5pt}
+{\color{infty3} \fontsize{0.89cm}{0.89cm}\selectfont $\infty$} \\
+{\color{infty4} \fontsize{0.59cm}{0.59cm}\selectfont $\infty$} \\ \vspace{-2pt}
+{\color{infty5} \fontsize{0.40cm}{0.40cm}\selectfont $\infty$} \\ \vspace{-5pt}
+{\color{infty6} \fontsize{0.26cm}{0.26cm}\selectfont $\infty$} \\ \vspace{-7pt}
+{\color{infty7} \fontsize{0.18cm}{0.18cm}\selectfont $\infty$} \\
+{\color{infty8} \hspace{3.4pt}$\vdots$}
+\vspace{10pt}
+\end{minipage}
+
+\end{document}

@@ -1,0 +1,308 @@
+\section{Strong induction}
+\secbegin{secStrongInduction}
+\index{induction!strong|(}
+
+Consider the following example, which we will attempt to prove by induction.
+
+\begin{example}
+\label{exProofByWeakInductionFail}
+Define a sequence recursively by
+\[ b_0 = 1 \quad \text{and} \quad b_{n+1} = 1 + \sum_{k=0}^n b_k \text{ for all } n \in \mathbb{N} \]
+We will attempt to prove by induction that $b_n = 2^n$ for all $n \in \mathbb{N}$.
+
+\begin{itemize}
+\item (\textbf{Base case}) By definition of the sequence we have $b_0=1=2^0$. So far so good.
+
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$, and suppose that $b_n = 2^n$. We need to show that $b_{n+1}=2^{n+1}$.
+
+Well, $b_{n+1} = 1 + \sum_{k=0}^n b_k = {\dots}$ uh oh.
+\end{itemize}
+
+Here's what went wrong. If we could replace each $b_k$ by $2^k$ in the sum, then we'd be able to complete the proof. However we cannot justify this substitution: our induction hypothesis only gives us information about $b_n$, not about a general term $b_k$ for $k < n$.
+\end{example}
+
+The \textit{strong} induction principle looks much like the weak induction principle, except that its induction hypothesis is more powerful. Despite its name, strong induction is no stronger than weak induction; the two principles are equivalent. In fact, we'll prove the strong induction principle \textit{by weak induction}!
+
+\begin{theorem}[Strong induction principle]
+\label{thmStrongInduction}
+\index{induction!on $\mathbb{N}$ (strong)}
+\index{strong induction principle}
+Let $p(x)$ be a statement about natural numbers and let $n_0 \in \mathbb{N}$. If
+\begin{enumerate}[(i)]
+\item $p(n_0)$ is true; and
+\item For all $n \in \mathbb{N}$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true;
+\end{enumerate}
+then $p(n)$ is true for all $n \ge n_0$.
+\end{theorem}
+
+\begin{cproof}
+For each $n \ge n_0$, let $q(n)$ be the assertion that $p(k)$ is true for all $n_0 \le k \le n$.
+
+Notice that $q(n)$ implies $p(n)$ for all $n \ge n_0$, since given $n \ge n_0$, if $p(k)$ is true for all $n_0 \le k \le n$, then in particular $p(k)$ is true when $k=n$.
+
+So it suffices to prove $q(n)$ is true for all $n \ge n_0$. We do so by weak induction.
+
+\begin{itemize}
+\item (\textbf{Base case}) $q(n_0)$ is equivalent to $p(n_0)$, since the only natural number $k$ with $n_0 \le k \le n_0$ is $n_0$ itself; hence $q(n_0)$ is true by condition (i).
+
+\item (\textbf{Induction step}) Let $n \ge n_0$ and suppose $q(n)$ is true. Then $p(k)$ is true for all $n_0 \le k \le n$.
+
+We need to prove that $q(n+1)$ is true---that is, that $p(k)$ is true for all $n_0 \le k \le n+1$. But we know $p(k)$ is true for all $n_0 \le k \le n$---this is the induction hypothesis---and then $p(n+1)$ is true by condition (ii). So we have that $p(k)$ is true for all $n_0 \le k \le n+1$ after all.
+\end{itemize}
+By induction, $q(n)$ is true for all $n \ge n_0$. Hence $p(n)$ is true for all $n \ge n_0$.
+\end{cproof}
+
+\begin{strategy}[Proof by strong induction]
+\label{strStrongInduction}
+\index{proof!by strong induction}
+In order to prove a proposition of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that $p(n_0)$ is true and that, for all $n \ge n_0$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true.
+\end{strategy}
+
+Like with weak induction, we can illustrate how strong induction works diagrammatically. The induction hypothesis, represented by the large square, now encompasses $p(k)$ for all $n_0 \le k \le n$, where $p(n_0)$ is the base case.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[fill=indstepcol] (-1,-1) rectangle (8,1);
+\draw (0,0) node[diamond, draw, text width=27, text centered, fill=indbasecol] {$n_0$};
+\draw (2,0) node[circle, draw, text width=27, text centered, fill=white] {$n_0+1$};
+\draw (3.5,0) node {$\cdots$};
+\draw (5,0) node[circle, draw, text width=27, text centered, fill=white] {$n-1$};
+\draw (7,0) node[circle, draw, text width=27, text centered, fill=white] {$n$};
+\draw (9.5,0) node[circle, draw, dashed, text width=27, text centered, fill=white](nplusone) {$n+1$};
+\draw[->] (8,0) -- (nplusone);
+\end{tikzpicture}
+\end{center}
+
+Observe that the only difference from weak induction is the induction hypothesis.
+\begin{itemize}
+\item \textbf{Weak induction step:} Fix $n \ge n_0$, \fbox{assume $p(n)$ is true}~, derive $p(n+1)$;
+\item \textbf{Strong induction step:} Fix $n \ge n_0$, \fbox{assume $p(k)$ is true for all $n_0 \le k \le n$}~, derive $p(n+1)$.
+\end{itemize}
+
+We now use strong induction to complete the proof of \Cref{exProofByWeakInductionFail}.
+
+\begin{example}[\Cref{exProofByWeakInductionFail} revisited]
+Define a sequence recursively by
+\[ b_0 = 1 \quad \text{and} \quad b_{n+1} = 1 + \sum_{k=0}^n b_k \text{ for all } n \in \mathbb{N} \]
+We will prove by strong induction that $b_n = 2^n$ for all $n \in \mathbb{N}$.
+
+\begin{itemize}
+\item (\textbf{Base case}) By definition of the sequence we have $b_0=1=2^0$.
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$, and suppose that $b_k=2^k$ for all $k \le n$. We need to show that $b_{n+1}=2^{n+1}$. This is true, since
+\begin{align*}
+b_{n+1} &= 1 + \sum_{k=0}^n b_k && \text{by the recursive formula for $b_{n+1}$} \\
+&= 1 + \sum_{k=0}^n 2^k && \text{by the induction hypothesis} \\
+&= 1 + (2^{n+1}-1) && \text{by \Cref{exSumOfPowersOf2}} \\
+&= 2^{n+1}
+\end{align*}
+\end{itemize}
+By induction, it follows that $b_n=2^n$ for all $n \in \mathbb{N}$.
+\end{example}
+
+The following theorem adapts the strong induction principle to proofs where we need to refer to a \textit{fixed} number of previous steps in our induction step.
+
+\begin{theorem}[Strong induction principle {(multiple base cases)}]
+\label{thmSIPMultipleBaseCases}
+Let $p(n)$ be a logical formula with free variable $n \in \mathbb{N}$ and let $n_0 < n_1 \in \mathbb{N}$. If
+\begin{enumerate}[(i)] \vspace{5pt} 
+\item $p(n_0), p(n_0+1), \dots, p(n_1)$ are all true; and
+\item For all $n \ge n_1$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true;
+\end{enumerate}
+\vspace{5pt}
+then $p(n)$ is true for all $n \ge n_0$.
+\end{theorem}
+
+\begin{cproof}
+The fact that $p(n)$ is true for all $n \ge n_1$ follows from strong induction. Indeed:
+\begin{itemize}
+\item $p(n_1)$ is true by (i);
+\item Fix $n \ge n_1$ and assume $p(k)$ is true for all $n_1 \le k \le n$. Then in fact $p(k)$ is true for all $n_0 \le k \le n$, since $p(n_0), p(n_0+1), \dots p(n_1-1)$ are true by (i). So $p(n+1)$ is true by (ii)
+\end{itemize}
+So $p(n)$ is true for all $n \ge n_1$. But then $p(n)$ is true for all $n \ge n_0$, again by (i).
+\end{cproof}
+
+\begin{strategy}[Proof by strong induction with multiple base cases]
+\index{proof!by strong induction with multiple base cases}
+In order to prove a statement of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove $p(k)$ for all $k \in \{ n_0, n_0+1, \dots, n_1 \}$, where $n_1 > n_0$, and then given $n \ge n_1$, assuming $p(k)$ is true for all $n_0 \le k \le n$, prove that $p(n+1)$ is true.
+\end{strategy}
+
+This kind of strong induction differs from the usual kind in two main ways:
+\begin{itemize}
+\item There are multiple base cases $p(n_0), p(n_0+1), \dots, p(n_1)$, not just one.
+\item The induction step refers to both the least base case $n_0$ and the greatest base case $n_1$: the variable $n$ in the induction step is taken to be greater than or equal to $n_1$, while the induction hypothesis assumes $p(k)$ for all $n_0 \le k \le n$.
+\end{itemize}
+
+The following diagram illustrates how strong induction with multiple base cases works.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[fill=indstepcol] (-1,-1) rectangle (9,1);
+\draw (0,0) node[diamond, draw, text width=27, text centered, fill=indbasecol] {$n_0$};
+\draw (1.5,0) node {$\cdots$};
+\draw (3,0) node[diamond, draw, text width=27, text centered, fill=indbasecol] {$n_1$};
+\draw (5,0) node[circle, draw, text width=27, text centered, fill=white] {$n_1+1$};
+\draw (6.5,0) node {$\cdots$};
+\draw (8,0) node[circle, draw, text width=27, text centered, fill=white] {$n$};
+\draw (10.5,0) node[circle, draw, dashed, text width=27, text centered, fill=white](nplusone) {$n+1$};
+\draw[->] (9,0) -- (nplusone);
+\end{tikzpicture}
+\end{center}
+
+Note the difference in quantification of variables in the induction step between regular strong induction and strong induction with multiple base cases:
+\begin{itemize}
+\item \textbf{One base case.} Fix $n \ge \boxed{n_0}$ and assume $p(k)$ is true for all $\boxed{n_0} \le k \le n$.
+\item \textbf{Multiple base cases.} Fix $n \ge \boxed{n_1}$ and assume $p(k)$ is true for all $\boxed{n_0} \le k \le n$.
+\end{itemize}
+
+Getting the quantification of the variables $n$ and $k$ in the strong induction step is crucial, since the quantification affects what may be assumed about $n$ and $k$.
+
+The need for multiple base cases often arises when proving results about recursively defined sequences, where the definition of a general term depends on the values of a fixed number of previous terms.
+
+\begin{example}
+Define the sequence
+\[ a_0 = 0, \quad a_1 = 1, \quad a_n = 3a_{n-1} - 2a_{n-2} \text{ for all } n \ge 2 \]
+We find and prove a general formula for $a_n$ in terms of $n$. Writing out the first few terms in the sequence establishes a pattern that we might attempt to prove:
+\begin{center}
+\begin{tabular}{c|ccccccccc}
+$n$   & $0$ & $1$ & $2$ & $3$ & $4$  & $5$  & $6$  & $7$   & $8$ \\ \hline
+$a_n$ & $0$ & $1$ & $3$ & $7$ & $15$ & $31$ & $63$ & $127$ & $255$
+\end{tabular}
+\end{center}
+
+It appears that $a_n = 2^n - 1$ for all $n \ge 0$. We prove this by strong induction, taking the cases $n=0$ and $n=1$ as our base cases.
+
+\begin{itemize}
+\item (\textbf{Base cases}) By definition of the sequence, we have:
+\begin{itemize}
+\item $a_0 = 0 = 2^0 - 1$; and
+\item $a_1 = 1 = 2^1 - 1$;
+\end{itemize}
+so the claim is true when $n=0$ and $n=1$.
+
+\item (\textbf{Induction step}) Fix $n \ge 1$ and assume that $a_k = 2^k - 1$ for all $0 \le k \le n$. We need to prove that $a_{n+1} = 2^{n+1} - 1$.
+
+Well since $n \ge 1$, we have $n+1 \ge 2$, so we can apply the recursive formula to $a_{n+1}$. Thus
+\begin{align*}
+a_{n+1} &= 3a_n - 2a_{n-1} && \text{by definition of $a_{n+1}$} \\
+&= 3(2^n-1) - 2(2^{n-1}-1) && \text{by induction hypothesis} \\
+&= 3 \cdot 2^n - 3 - 2 \cdot 2^{n-1} + 2 && \text{expanding} \\
+&= 3 \cdot 2^n - 3 - 2^n + 2 && \text{using laws of indices} \\
+&= 2 \cdot 2^n - 1 && \text{simplifying} \\
+&= 2^{n+1} - 1 && \text{using laws of indices}
+\end{align*}
+\end{itemize}
+So the result follows by induction.
+\end{example}
+
+The following exercises have proofs by strong induction with multiple base cases.
+
+\begin{exercise}
+Define a sequence recursively by $a_0 = 4$, $a_1 = 9$ and $a_n = 5a_{n-1} - 6a_{n-2}$ for all $n \ge 2$. Prove that $a_n = 3 \cdot 2^n + 3^n$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+\begin{exercise}
+The \textit{Tribonacci sequence} is the sequence $t_0, t_1, t_2, \dots$ defined by
+\[ t_0 = 0, \quad t_1 = 0, \quad t_2 = 1, \quad t_n = t_{n-1} + t_{n-2} + t_{n-3} \text{ for all } n \ge 3 \]
+Prove that $t_n \le 2^{n-3}$ for all $n \ge 3$.
+\end{exercise}
+
+\begin{exercise}
+The \textit{Frobenius coin problem} asks when a given amount of money can be obtained from coins of given denominations. For example, a value of $7$ dubloons cannot be obtained using only $3$ dubloon and $5$ dubloon coins, but for all $n \ge 8$, a value of $n$ dubloons \textit{can} be obtained using only $3$ dubloon and $5$ dubloon coins. Prove this.
+\hintlabel{exFrobeniusCoinProblem}{%
+Observe that if $n$ dubloons can be obtained using only $3$ and $5$ dubloon coins, then so can $n+3$. See how you might use this fact to exploit strong induction with multiple base cases.
+}
+\end{exercise}
+
+\subsection*{Well-ordering principle}
+
+The underlying reason why we can perform induction and recursion on the natural numbers is because of the way they are ordered. Specifically, the natural numbers satisfy the \textit{well-ordering principle}: if a set of natural numbers has at least one element, then it has a least element. This sets the natural numbers apart from the other number sets; for example, $\mathbb{Z}$ has no least element, since if $a \in \mathbb{Z}$ then $a-1 \in \mathbb{Z}$ and $a-1 < a$.
+
+\begin{theorem}[Well-ordering principle]
+\label{thmWellOrderingPrinciple}
+\index{well-ordering principle}
+Let $X$ be a set of natural numbers. If $X$ is inhabited, then $X$ has a least element.
+\end{theorem}
+
+\begin{cidea}
+Under the assumption that $X$ is a set of natural numbers, the proposition we want to prove has the form $p \Rightarrow q$. Namely
+\[ X \text{ is inhabited} \quad \Rightarrow \quad X \text{ has a least element} \]
+Assuming $X$ is inhabited doesn't really give us much to work with, so let's try the contrapositive:
+\[ X \text{ has no least element} \quad \Rightarrow \quad X \text{ is empty} \]
+The assumption that $X$ has no least element \textit{does} give us something to work with. Under this assumption we need to deduce that $X$ is empty.
+
+We will do this by `forcing $X$ up' by strong induction. Certainly $0 \not \in X$, otherwise it would be the least element. If none of the numbers $0, 1, \dots, n$ are elements of $X$ then neither can $n+1$ be, since if it were then \textit{it} would be the least element of $X$. Let's make this argument formal.
+\end{cidea}
+
+\begin{cproof}
+Let $X$ be a set of natural numbers containing no least element. We prove by strong induction that $n \not \in X$ for all $n \in \mathbb{N}$.
+
+\begin{itemize}
+\item (\textbf{Base case}) $0 \not \in X$ since if $0 \in X$ then $0$ must be the least element of $X$, as it is the least natural number.
+\item (\textbf{Induction step}) Suppose $k \not \in X$ for all $0 \le k \le n$. If $n+1 \in X$ then $n+1$ is the least element of $X$; indeed, if $\ell < n+1$ then $0 \le \ell \le n$, so $\ell \not \in X$ by the induction hypothesis. This contradicts the assumption that $X$ has no least element, so $n+1 \not \in X$.
+\end{itemize}
+By strong induction, $n \not \in X$ for each $n \in \mathbb{N}$. Since $X$ is a set of natural numbers, and it contains no natural numbers, it follows that $X$ is empty.
+\end{cproof}
+
+The following proof that $\sqrt{2}$ is irrational is a classic application of the well-ordering principle.
+
+\begin{proposition}
+\label{propSqrt2Irrational}
+The number $\sqrt{2}$ is irrational.
+\end{proposition}
+
+To prove \Cref{propSqrt2Irrational} we will use the following lemma, which uses the well-ordering principle to prove that fractions can be `cancelled to lowest terms'.
+
+\begin{lemma}
+\label{lemFractionInLowestTerms}
+Let $q$ be a positive rational number. There is a pair of nonzero natural numbers $a,b$ such that $q=\frac{a}{b}$ and such that the only natural number which divides both $a$ and $b$ is $1$.
+\end{lemma}
+
+\begin{cproof}
+First note that we can express $q$ as the ratio of two nonzero natural numbers, since $q$ is a positive rational number. By the well-ordering principle, there is a \textit{least} natural number $a$ such that $q=\frac{a}{b}$ for some positive $b \in \mathbb{N}$.
+
+Suppose that some natural number $d$ other than $1$ divides both $a$ and $b$. Note that $d \ne 0$, since if $d=0$ then that would imply $a=0$. Since $d \ne 1$, it follows that $d \ge 2$.
+
+Since $d$ divides $a$ and $b$, there exist natural numbers $a',b'$ such that $a=a'd$ and $b=b'd$. Moreover, $a',b'>0$ since $a,b,d > 0$. It follows that
+\[ q = \frac{a}{b} = \frac{a'd}{b'd} = \frac{a'}{b'} \]
+But $d \ge 2$, and hence
+\[ a' = \frac{a}{d} \le \frac{a}{2} < a \]
+contradicting minimality of $a$. Hence our assumption that some natural number $d$ other than $1$ divides both $a$ and $b$ was false---it follows that the only natural number dividing both $a$ and $b$ is $1$.
+\end{cproof}
+
+We are now ready to prove that $\sqrt{2}$ is irrational.
+
+\begin{cproof}[of \Cref{propSqrt2Irrational}]
+Suppose $\sqrt{2}$ is rational. Since $\sqrt{2}>0$, this means that we can write
+\[ \sqrt{2} = \frac{a}{b} \]
+where $a$ and $b$ are both positive natural numbers. By \Cref{lemFractionInLowestTerms}, we may assume that the only natural number dividing $a$ and $b$ is $1$.
+
+Multiplying the equation $\sqrt{2} = \frac{a}{b}$ and squaring yields
+\[ a^2=2b^2 \]
+Hence $a^2$ is even. By \Cref{propIfProductEvenThenSomeFactorEven}, $a$ is even, so we can write $a=2c$ for some $c > 0$. Then $a^2=(2c)^2=4c^2$, and hence
+\[ 4c^2=2b^2 \]
+Dividing by $2$ yields
+\[ 2c^2 = b^2 \]
+and hence $b^2$ is even. By \Cref{propIfProductEvenThenSomeFactorEven} again, $b$ is even.
+
+But if $a$ and $b$ are both even, the natural number $2$ divides both $a$ and $b$. This contradicts the fact that the only natural number dividing both $a$ and $b$ is $1$. Hence our assumption that $\sqrt{2}$ is rational is incorrect, and $\sqrt{2}$ is irrational.
+\end{cproof}
+
+\begin{writingtip}
+In the proof of \Cref{propSqrt2Irrational} we could have separately proved that $a^2$ being even implies $a$ is even, and that $b^2$ being even implies $b$ is even. This would have required us to repeat the same proof twice, which is somewhat tedious! Proving auxiliary results separately (as in \Cref{lemFractionInLowestTerms}) and then quoting them in later theorems can improve the readability of the main proof, particularly when the auxiliary results are particularly technical. Doing so also helps emphasise the important steps.
+\end{writingtip}
+
+\begin{exercise}
+What goes wrong in the proof of \Cref{propSqrt2Irrational} if we try instead to prove that $\sqrt{4}$ is irrational?
+\end{exercise}
+
+\begin{exercise}
+\label{exSquareRootThreeIsIrrational}
+Prove that $\sqrt{3}$ is irrational.
+\begin{backhint}
+\hintref{exSquareRootThreeIsIrrational}
+Prove first that if $a \in \mathbb{Z}$ and $a^2$ is divisible by $3$, then $a$ is divisible by $3$.
+\end{backhint}
+\end{exercise}
+
+
+\index{induction!strong|)}

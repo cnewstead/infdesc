@@ -1,0 +1,1019 @@
+\section{Propositional logic}
+\secbegin{secPropositionalLogic}
+
+Every mathematical proof is written in the context of certain \textit{assumptions} being made, and certain \textit{goals} to be achieved.
+
+\begin{itemize}
+\item \textbf{Assumptions} are the propositions which are known to be true, or which we are assuming to be true for the purposes of proving something. They include theorems that have already been proved, prior knowledge which is assumed of the reader, and assumptions which are explicitly made using words like `suppose' or `assume'.
+\item \textbf{Goals} are the propositions we are trying to prove in order to complete the proof of a result, or perhaps just a step in the proof.
+\end{itemize}
+
+With every phrase we write, our assumptions and goals change. This is perhaps best illustrated by example. In \Cref{exAssumptionsGoals} below, we will examine the proof of \Cref{propDivisibilityIsTransitive} in detail, so that we can see how the words we wrote affected the assumptions and goals at each stage in the proof. We will indicate our assumptions and goals at any given stage using tables---the assumptions listed will only be those assumptions which are made explicitly; prior knowledge and previously proved theorems will be left implicit.
+
+\begin{example}
+\label{exAssumptionsGoals}
+The statement of \Cref{propDivisibilityIsTransitive} was as follows:
+\begin{quote}
+Let $a,b,c \in \mathbb{Z}$. If $c$ divides $b$ and $b$ divides $a$, then $c$ divides $a$.
+\end{quote}
+The set-up of the proposition instantly gives us our initial assumptions and goals:
+\begin{center}
+\begin{tabular}{C{150pt}|C{150pt}}
+\textbf{Assumptions} & \textbf{Goals} \\ \hline
+$a,b,c \in \mathbb{Z}$ & If $c$ divides $b$ and $b$ divides $a$, then $c$ divides $a$
+\end{tabular}
+\end{center}
+We will now proceed through the proof, line by line, to see what effect the words we wrote had on the assumptions and goals.
+
+Since our goal was an expression of the form `if\dots{}then\dots{}', it made sense to start by assuming the `if' statement, and using that assumption to prove the `then' statement. As such, the first thing we wrote in our proof was:
+\begin{quote}
+Suppose that $c$ divides $b$ and $b$ divides $a$.
+\end{quote}
+Our updated assumptions and goals are reflected in the following table.
+\begin{center}
+\begin{tabular}{C{150pt}|C{150pt}}
+\textbf{Assumptions} & \textbf{Goals} \\ \hline
+$a,b,c \in \mathbb{R}$ & $c$ divides $a$ \\
+$c$ divides $b$ & \\
+$b$ divides $a$ & 
+\end{tabular}
+\end{center}
+
+Our next step in the proof was to unpack the definitions of `$c$ divides $b$' and `$b$ divides $a$', giving us more to work with.
+
+\begin{quote}
+{\color{gray} Suppose that $c$ divides $b$ and $b$ divides $a$.} By \Cref{defDivisionPreliminary}, it follows that
+\[
+b=qc \quad \text{and} \quad a=rb
+\]
+for some integers $q$ and $r$.
+\end{quote}
+
+This introduces two new variables $q,r$ and allows us to replace the assumptions `$c$ divides $b$' and `$b$ divides $a$' with their definitions.
+
+\begin{center}
+\begin{tabular}{C{150pt}|C{150pt}}
+\textbf{Assumptions} & \textbf{Goals} \\ \hline
+$a,b,c,q,r \in \mathbb{Z}$ & $c$ divides $a$ \\
+$b=qc$ & \\
+$a=rb$ &
+\end{tabular}
+\end{center}
+
+At this point we have pretty much exhausted all of the assumptions we can make, and so our attention turns towards the goal---that is, we must prove that $c$ divides $a$. At this point, it helps to `work backwards' by unpacking the goal: what does it mean for $c$ to divide $a$? Well, by \Cref{defDivisionPreliminary}, we need to prove that $a$ is equal to some integer multiplied by $c$---this will be reflected in the following table of assumptions and goals.
+
+Since we are now trying to express $a$ in terms of $c$, it makes sense to use the equations we have relating $a$ with $b$, and $b$ with $c$, to relate $a$ with $c$.
+
+\begin{quote}
+{\color{gray} Suppose that $c$ divides $b$ and $b$ divides $a$. By \Cref{defDivisionPreliminary}, it follows that
+\[
+b=qc \quad \text{and} \quad a=rb
+\]
+for some integers $q$ and $r$.} Using the first equation, we may substitute $qc$ for $b$ in the second equation, to obtain
+\[
+a=r(qc)
+\]
+\end{quote}
+
+We are now very close, as indicated in the following table.
+
+\begin{center}
+\begin{tabular}{C{150pt}|C{150pt}}
+\textbf{Assumptions} & \textbf{Goals} \\ \hline
+$a,b,c,q,r \in \mathbb{Z}$ & $a = [\text{some integer}] \cdot c$ \\
+$b=qc$ & \\
+$a=rb$ & \\
+$a=r(qc)$ & 
+\end{tabular}
+\end{center}
+
+Our final step was to observe that the goal has at last been achieved:
+
+\begin{quote}
+{\color{gray} Suppose that $c$ divides $b$ and $b$ divides $a$. By \Cref{defDivisionPreliminary}, it follows that
+\[
+b=qc \quad \text{and} \quad a=rb
+\]
+for some integers $q$ and $r$. Using the first equation, we may substitute $qc$ for $b$ in the second equation, to obtain}
+\[
+{\color{gray} a=r(qc)}
+\]
+But $r(qc) = (rq)c$, and $rq$ is an integer,
+\end{quote}
+
+\begin{center}
+\begin{tabular}{C{150pt}|C{150pt}}
+\textbf{Assumptions} & \textbf{Goals} \\ \hline
+$a,b,c,q,r \in \mathbb{Z}$ &  \\
+$b=qc$ & \\
+$a=rb$ & \\
+$a=r(qc)$ & \\
+$a=(rq)c$ & \\
+$rq \in \mathbb{Z}$ & 
+\end{tabular}
+\end{center}
+
+Now that there is nothing left to prove, it is helpful to reiterate that point so that the reader has some closure on the matter.
+
+\begin{quote}
+{\color{gray} Suppose that $c$ divides $b$ and $b$ divides $a$. By \Cref{defDivisionPreliminary}, it follows that
+\[
+b=qc \quad \text{and} \quad a=rb
+\]
+for some integers $q$ and $r$. Using the first equation, we may substitute $qc$ for $b$ in the second equation, to obtain
+\[
+a=r(qc)
+\]
+But $r(qc) = (rq)c$, and $rq$ is an integer,} so it follows from \Cref{defDivisionPreliminary} that $c$ divides $a$.
+\end{quote}
+\end{example}
+
+\subsection*{Symbolic logic}
+
+Consider again the proposition that we proved in \Cref{propDivisibilityIsTransitive} (for given integers $a,b,c$):
+
+\begin{center}
+If $c$ divides $b$ and $b$ divides $a$, then $c$ divides $a$.
+\end{center}
+
+The three statements `$c$ divides $b$', `$b$ divides $a$' and `$c$ divides $a$' are all propositions in their own right, despite the fact that they all appear inside a more complex proposition. We can examine the logical structure of the proposition by replacing these simpler propositions with symbols, called \textit{propositional variables}. Writing $P$ to represent `$c$ divides $b$', $Q$ to represent `$b$ divides $a$' and $R$ to represent `$c$ divides $a$', we obtain:
+
+\begin{center}
+If $P$ and $Q$, then $R$.
+\end{center}
+
+Breaking down the proposition in this way makes it clear that a feasible \textit{assume} $P$ and $Q$, and then \textit{derive} $R$ from these assumptions---this is exactly what we did in the proof, which we examined in great detail in \Cref{exAssumptionsGoals}. But importantly, it suggests that the same proof strategy might work for other propositions which are also of the form `if $P$ and $Q$, then $R$', such as the following proposition (for a given integer $n$):
+
+\begin{center}
+If $n > 2$ and $n$ is prime, then $n$ is odd.
+\end{center}
+
+Observe that the simpler propositions are joined together to form a more complex proposition using language, namely the word `and' and the construction `if\dots{} then\dots{}'---we will represent these constructions symbolically using \textit{logical operators}, which will be introduced in \Cref{defLogicalOperator}.
+
+Zooming in even more closely, we can use \Cref{defDivisionPreliminary} to observe that `$c$ divides $b$' really means `$b = qc$ for some $q \in \mathbb{Z}$'. The expression `for some $q \in \mathbb{Z}$' introduces a new variable $q$, which we must deal with appropriately in our proof. Words which we attach to variables in our proofs---such as `any', `exists', `all', `some', `unique' and `only'---will be represented symbolically using \textit{quantifiers}, which we will study in \Cref{secVariablesQuantifiers}.
+
+By breaking down a complex proposition into simpler statements which are connected together using logical operators and quantifiers, we can more precisely identify what assumptions we can make at any given stage in a proof of the proposition, and what steps are needed in order to finish the proof.
+
+\subsection*{Propositional formulae}
+
+We begin our development of symbolic logic with some definitions to fix our terminology.
+
+\begin{definition}
+\label{defPropositionalVariable}
+\index{propositional variable}
+\index{truth value}
+A \textbf{propositional variable} is a symbol that represents a proposition. Propositional variables may be assigned \textbf{truth values} (`true' or `false').
+\end{definition}
+
+We will typically use the lower-case letters $p$, $q$, $r$ and $s$ as our propositional variables.
+
+We will be able to form more complex expressions representing propositions by connecting together simpler ones using \textit{logical operators} such as $\wedge$ (which represents `and'), $\vee$ (which represents `or'), $\Rightarrow$ (which represents `if\dots{}then\dots{}') and $\neg$ (which represents `not').
+
+The definition of the notions of \textit{logical operator} and \textit{propositional formula} given below is a little bit difficult to digest, so it is best understood by considering examples of propositional formulae and instances of logical operators. Fortunately we will see plenty of these, since they are the central objects of study for the rest of this section.
+
+\begin{definition}
+\label{defPropositionalFormula}
+\label{defLogicalOperator}
+\index{logical operator}
+\index{propositional formula}
+\index{subformula}
+A \textbf{propositional formula} is an expression that is either a propositional variable, or is built up from simpler propositional formulae (`subformulae') using a \textbf{\mbox{logical} \mbox{operator}}. In the latter case, the truth value of the propositional formula is determined by the truth values of the subformulae according to the rules of the logical operator.
+\end{definition}
+
+On first sight, \Cref{defPropositionalFormula} seems circular---it defines the term `propositional formula' in terms of propositional formulae! But in fact it is not circular; it is an example of a \textit{recursive} definition (we avoid circularity with the word `simpler'). To illustrate, consider the following example of a propositional formula:
+\[
+(p \wedge q) \Rightarrow r
+\]
+This expression represents a proposition of the form `if $p$ and $q$, then $r$', where $p,q,r$ are themselves propositions. It is built from the subformulae $p \wedge q$ and $r$ using the logical operator $\Rightarrow$, and $p \wedge q$ is itself built up from the subformulae $p$ and $q$ using the logical operator $\wedge$.
+
+The truth value of $(p \wedge q) \Rightarrow r$ is then determined by the truth values of the constituent propositional variables ($p$, $q$ and $r$) according to the rules for the logical operators $\wedge$ and $\Rightarrow$.
+
+If this all seems a bit abstract, that is because it \textit{is} abstract, and you are forgiven if it makes no sense to you yet. From this point onwards, we will only study particular instances of logical operators, which will make it all much easier to understand.
+
+\subsubsection*{Conjunction (`and', $\wedge$)}
+
+Conjunction is the logical operator which makes precise what we mean when we say `and'.
+
+\begin{idefinition}
+\label{defConjunction}
+\index{conjunction}
+\nindex{conjunction}{$\wedge$}{conjunction}
+The \textbf{conjunction} operator is the logical operator $\wedge$ \inlatex{wedge}\lindexmmc{wedge}{$\wedge$}, defined according to the following rules:
+\begin{itemize}
+\item \introrule{\wedge} If $p$ is true and $q$ is true, then $p \wedge q$ is true;
+\item \elimrulesub{\wedge}{1} If $p \wedge q$ is true, then $p$ is true;
+\item \elimrulesub{\wedge}{2} If $p \wedge q$ is true, then $q$ is true.
+\end{itemize}
+The expression $p \wedge q$ represents `$p$ and $q$'.
+\end{idefinition}
+
+It is not always obvious when conjunction is being used; sometimes it sneaks in without the word `and' ever being mentioned! Be on the look-out for occasions like this, such as in the following exercise.
+
+\begin{example}
+\label{exSevenDividesTwentyEightConjunction}
+We can express the proposition `$7$ is a prime factor of $28$' in the form $p \wedge q$, by letting $p$ represent the proposition `$7$ is prime' and letting $q$ represent the proposition `$7$ divides $28$'.
+\end{example}
+
+\begin{exercise}
+\label{exJohnMathematicianPittsburgh}
+Express the proposition `John is a mathematician who lives in Pittsburgh' in the form $p \wedge q$, for propositions $p$ and $q$.
+\end{exercise}
+
+The rules in \Cref{defConjunction} are examples of \textit{rules of inference}---they tell us how to deduce (or `infer') the truth of one propositional formula from the truth of other propositional formulae. In particular, rules of inference never directly tell us when a proposition is \textit{false}---in order to prove something is false, we will prove its \textit{negation} is true (see \Cref{defNegation}).
+
+Rules of inference tell us how to use the logical structure of propositions in proofs:
+
+\begin{itemize}
+\item The rule \introrule{\wedge} is an \textit{introduction rule}, meaning that it tells us how to \textit{prove a goal} of the form $p \wedge q$---indeed, if we want to prove that $p \wedge q$ is true, \introrule{\wedge} tells us that it suffices to prove that $p$ is true and prove that $q$ is true.
+
+\item The rules \elimrulesub{\wedge}{1} and \elimrulesub{\wedge}{2} are \textit{elimination rules}, meaning that they tell us how to \textit{use an assumption} of the form $p \wedge q$---indeed, if we are assuming that $p \wedge q$ is true, we are then free to use the fact that $p$ is true and the fact that $q$ is true.
+\end{itemize}
+
+Each logical operator will come equipped with some introduction and/or elimination rules, which tell us how to prove goals or use assumptions which include the logical operator in question. It is in this way that the logical structure of a proposition informs \textit{proof strategies}, like the following:
+
+\begin{strategy}[Proving conjunctions]
+\label{strProvingConjunctionsDirect}
+A proof of the proposition $p \wedge q$ can be obtained by tying together two proofs, one being a proof that $p$ is true and one being a proof that $q$ is true.
+\end{strategy}
+
+\begin{example}
+\label{exSevenDividesTwentyEightConjunctionProof}
+Suppose we are required to prove that $7$ is a prime factor of $28$. In \Cref{exSevenDividesTwentyEightConjunction} we expressed `$7$ is a prime factor of $28$' as the conjunction of the propositions `$7$ is prime' and `$7$ divides $28$', and so \Cref{strProvingConjunctionsDirect} breaks down the proof into two steps: first prove that $7$ is prime, and then prove that $7$ divides $28$.
+\end{example}
+
+Much like \Cref{strProvingConjunctionsDirect} was informed by the introduction rule for $\wedge$, the elimination rules inform how we may make use of an assumption involving a conjunction.
+
+\begin{strategy}[Assuming conjunctions]
+\label{strAssumingConjunctionsDirect}
+If an assumption in a proof has the form $p \wedge q$, then we may assume $p$ and assume $q$ in the proof.
+\end{strategy}
+
+\begin{example}
+\label{exSevenDividesTwentyEightConjunctionAssumption}
+Suppose that, somewhere in the process of proving a proposition, we arrive at the fact that $7$ is a prime factor of $28$. \Cref{strAssumingConjunctionsDirect} then allows us to use the separate facts that $7$ is prime and that $7$ divides $28$.
+\end{example}
+
+\Cref{strProvingConjunctionsDirect,strAssumingConjunctionsDirect} seem almost \textit{obvious}. To an extent they are obvious, and that is why we are stating them first. But the real reason we are going through the process of precisely defining logical operators, their introduction and elimination rules, and the corresponding proof strategies, is that when you are in the middle of the proof of a complicated result, it is all too easy to lose track of what you have already proved and what remains to be proved. Keeping track of the assumptions and goals in a proof, and understanding what must be done in order to complete the proof, is a difficult task.
+
+To avoid drawing this process out too long, we need a compact way of expressing rules of inference that allows us to simply read off corresponding proof strategies. We \textit{could} use tables of assumptions and goals like in \Cref{exAssumptionsGoals}, but this quickly becomes clunky---indeed, even the very simple conjunction introduction rule \introrule{\wedge} doesn't look very nice in this format:
+
+\begin{center}
+\begin{tabular}{C{60pt}|C{60pt}}
+{\small \textbf{Assumptions}} & {\small \textbf{Goals}} \\ \hline
+$\vdots$ & $p \wedge q$ \\
+$\vdots$ & ~
+\end{tabular}
+$\quad \leadsto \quad$
+\begin{tabular}{C{60pt}|C{60pt}}
+{\small \textbf{Assumptions}} & \small{\textbf{Goals}} \\ \hline
+$\vdots$ & $p$ \\
+$\vdots$ & $q$
+\end{tabular}
+\end{center}
+
+Instead, we will represent rules of inference in the style of \textit{natural deduction}. In this style, we write the \textit{premises} $p_1,p_2,\dots,p_k$ of a rule above a line, with a single \textit{conclusion} $q$ below the line, representing the assertion that the truth of a proposition $q$ follows from the truth of (all of) the premises $p_1,p_2,\dots,p_k$.
+
+\begin{center}
+\begin{prooftree}
+  \AxiomC{$p_1$}
+  \AxiomC{$p_2$}
+  \AxiomC{$\cdots$}
+  \AxiomC{$p_k$}
+\QuaternaryInfC{$q$}
+\end{prooftree}
+\end{center}
+
+For instance, the introduction and elimination rules for conjunction can be expressed concisely follows:
+
+\begin{center}
+\begin{minipage}{0.15\textwidth}
+\centering
+\begin{prooftree}
+  \AxiomC{$p$}
+  \AxiomC{$q$}
+\TagC{\introrule{\wedge}}
+\BinaryInfC{$p \wedge q$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}{0.15\textwidth}
+\centering
+\begin{prooftree}
+  \AxiomC{$p \wedge q$}
+\TagC{\elimrulesub{\wedge}{1}}
+\UnaryInfC{$p$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}{0.15\textwidth}
+\centering
+\begin{prooftree}
+  \AxiomC{$p \wedge q$}
+\TagC{\elimrulesub{\wedge}{2}}
+\UnaryInfC{$q$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+
+In addition to its clean and compact nature, this way of writing rules of inference is useful because we can combine them into \textit{proof trees} in order to see how to prove more complicated propositions. For example, consider the following proof tree, which combines two instances of the conjunction introduction rule.
+
+\begin{center}
+\begin{prooftree}
+    \AxiomC{$p$}
+    \AxiomC{$q$}
+  \BinaryInfC{$p \wedge q$}
+  \AxiomC{$r$}
+\BinaryInfC{$(p \wedge q) \wedge r$}
+\end{prooftree}
+\end{center}
+
+From this proof tree, we obtain a strategy for proving a proposition of the form $(p \wedge q) \wedge r$. Namely, first prove $p$ and prove $q$, to conclude $p \wedge q$; and then prove $r$, to conclude $(p \wedge q) \wedge r$. This illustrates that the logical structure of a proposition informs how we may structure a proof of the proposition.
+
+\begin{exercise}
+Write a proof tree whose conclusion is the propositional formula $(p \wedge q) \wedge (r \wedge s)$, where $p,q,r,s$ are propositional variables. Express `$2$ is an even prime number and $3$ is an odd prime number' in the form $(p \wedge q) \wedge (r \wedge s)$, for appropriate propositions $p$, $q$, $r$ and $s$, and describe how your proof tree suggests what a proof might look like.
+\end{exercise}
+
+\subsubsection*{Disjunction (`or', $\vee$)}
+
+\begin{idefinition}
+\label{defDisjunction}
+\index{disjunction}
+\nindex{disjunction}{$\vee$}{disjunction}
+The \textbf{disjunction} operator is the logical operator $\vee$ \inlatex{vee}\lindexmmc{vee}{$\vee$}, defined according to the following rules:
+\begin{itemize}
+\item \introrulesub{\vee}{1} If $p$ is true, then $p \vee q$ is true;
+\item \introrulesub{\vee}{2} If $q$ is true, then $p \vee q$ is true;
+\item \elimrule{\vee} If $p \vee q$ is true, and if $r$ can be derived from $p$ and from $q$, then $r$ is true.
+\end{itemize}
+The expression $p \vee q$ represents `$p$ or $q$'.
+\end{idefinition}
+
+The introduction and elimination rules for disjunction are represented diagramatically as follows.
+
+\begin{center}
+\begin{minipage}[b]{0.15\textwidth}
+\centering
+\begin{prooftree}
+  \AxiomC{$p$}
+\TagC{\introrulesub{\vee}{1}}
+\UnaryInfC{$p \vee q$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}[b]{0.15\textwidth}
+\centering
+\begin{prooftree}
+  \AxiomC{$q$}
+\TagC{\introrulesub{\vee}{2}}
+\UnaryInfC{$p \vee q$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}[b]{0.35\textwidth}
+\begin{prooftree}
+  \AxiomC{$p \vee q$}
+    \AxiomC{$[p]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$r$}
+    \AxiomC{$[q]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$r$}
+\TagC{\elimrule{\vee}}
+\TrinaryInfC{$r$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+
+We will discuss what the notation $[p] \leadsto r$ and $[q] \leadsto r$ means momentarily. First, we zoom in on how the disjunction introduction rules inform proofs of propositions of the form `$p$ or $q$'.
+
+\begin{strategy}[Proving disjunctions]
+\label{strProvingDisjunctionsDirect}
+In order to prove a proposition of the form $p \vee q$, it suffices to prove just one of $p$ or $q$.
+\end{strategy}
+
+\begin{example}
+Suppose we want prove that $8192$ is not divisible by $3$. We know by the division theorem (\Cref{thmDivisionPreliminary}) that an integer is not divisible by $3$ if and only if it leaves a remainder of $1$ or $2$ when divided by $3$, and so it suffices to prove the following:
+\[
+\begin{matrix} 8192 \text{ leaves a remainder of } 1 \\ \text{when divided by } 3 \end{matrix}
+\quad \vee \quad
+\begin{matrix} 8192 \text{ leaves a remainder of } 2 \\
+\text{when divided by } 3 \end{matrix}
+\]
+A quick computation reveals that $8192 = 2730 \times 3 + 2$, so that $8192$ leaves a remainder of $2$ when divided by $3$. By \Cref{strProvingDisjunctionsDirect}, the proof is now complete, since the full disjunction follows by \introrulesub{\vee}{2}.
+\end{example}
+
+\begin{example}
+Let $p,q,r,s$ be propositional variables. The propositional formula $(p \vee q) \wedge (r \vee s)$ represents `$p$ or $q$, and $r$ or $s$'. What follows are two examples of truth trees for this propositional formula.
+
+\begin{center}
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$p$}
+  \TagC{\introrulesub{\vee}{1}}
+  \UnaryInfC{$p \vee q$}
+    \AxiomC{$r$}
+  \TagC{\introrulesub{\vee}{1}}
+  \UnaryInfC{$r \vee s$}
+\TagC{\introrule{\wedge}}
+\BinaryInfC{$(p \vee q) \wedge (r \vee s)$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$q$}
+  \TagC{\introrulesub{\vee}{2}}
+  \UnaryInfC{$p \vee q$}
+    \AxiomC{$s$}
+  \TagC{\introrulesub{\vee}{2}}
+  \UnaryInfC{$r \vee s$}
+\TagC{\introrule{\wedge}}
+\BinaryInfC{$(p \vee q) \wedge (r \vee s)$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+
+The proof tree on the left suggests the following proof strategy for $(p \vee q) \wedge (r \vee s)$. First prove $p$, and deduce $p \vee q$; then prove $r$, and deduce $r \vee s$; and finally deduce $(p \vee q) \wedge (r \vee s)$. The proof tree on the right suggests a different strategy, where $p \vee q$ is deduced by proving $q$ instead of $p$, and $r \vee s$ is deduced by proving $s$ instead of $r$.
+
+Selecting which (if any) of these to use in a proof might depend on what we are trying to prove. For example, for a fixed natural number $n$, let $p$ represent `$n$ is even', let $q$ represent `$n$ is odd', let $r$ represent `$n \ge 2$' and let $s$ represent `$n$ is a perfect square'. Proving $(p \vee q) \wedge (r \vee s)$ when $n=2$ would be most easily done using the left-hand proof tree above, since $p$ and $r$ are evidently true when $n=2$. However, the second proof tree would be more appropriate for proving $(p \vee q) \wedge (r \vee s)$ when $n=1$.
+\end{example}
+
+\begin{aside}
+If you haven't already mixed up $\wedge$ and $\vee$, you probably will soon, so here's a way of remembering which is which:
+\begin{center} \vspace{-10pt} \large \textbf{fish n chips} \end{center}
+\vspace{-10pt} If you forget whether it's $\wedge$ or $\vee$ that means `and', just write it in place of the `n' in `fish n chips':
+\begin{center} \vspace{-10pt} fish $\wedge$ chips \qquad \qquad fish $\vee$ chips \end{center}
+\vspace{-10pt} Clearly the first looks more correct, so $\wedge$ means `and'. If you don't eat fish (or chips), then worry not, as this mnemonic can be modified to accommodate a wide variety of dietary restrictions; for instance `mac n cheese' or `quinoa n kale' or, for the meat lovers, `ribs n brisket'.
+\end{aside}
+
+Recall the diagrammatic statement of the disjunction elimination rule:
+
+\begin{center}
+\begin{prooftree}
+  \AxiomC{$p \vee q$}
+    \AxiomC{$[p]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$r$}
+    \AxiomC{$[q]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$r$}
+\TagC{\elimrule{\vee}}
+\TrinaryInfC{$r$}
+\end{prooftree}
+\end{center}
+
+The curious notation $[p] \leadsto r$ indicates that $p$ is a \textit{temporary assumption}. In the part of the proof corresponding to $[p] \leadsto r$, we would assume that $p$ is true and derive $r$ from that assumption, and remove the assumption that $p$ is true from that point onwards. Likewise for $[q] \leadsto r$.
+
+The proof strategy obtained from the disjunction elimination rule is called \textit{proof by cases}.
+
+\begin{strategy}[Assuming disjunctions---proof by cases]
+\label{strAssumingDisjunctionsDirect}
+\index{proof!by cases}
+If an assumption in a proof has the form $p \vee q$, then we may derive a proposition $r$ by splitting into two cases: first, derive $r$ from the temporary assumption that $p$ is true, and then derive $r$ from the assumption that $q$ is true.
+\end{strategy}
+
+The following example illustrates how \Cref{strProvingDisjunctionsDirect,strAssumingDisjunctionsDirect} can be used together in a proof.
+
+\begin{example}
+\label{exPositiveProperFactorOfFourEvenOrPerfectSquare}
+Let $n$ be a positive proper factor of $4$, and suppose we want to prove that $n$ is either even or a perfect square.
+\begin{itemize}
+\item Our assumption that $n$ is a positive proper factor of $4$ can be expressed as the disjunction $n = 1 \vee n = 2$.
+\item Our goal is to prove the disjunction `$n \text{ is even} \vee n \text{ is a perfect square}$'.
+\end{itemize}
+
+According to \Cref{strAssumingConjunctionsDirect}, we split into two cases, one in which $n=1$ and one in which $n=2$. In each case, we must derive `$n \text{ is even} \vee n \text{ is a perfect square}$', for which it suffices by \Cref{strProvingDisjunctionsDirect} to derive either that $n$ is even or that $n$ is a perfect square. Thus a proof might look something like this:
+
+\begin{quote}
+Since $n$ is a positive proper factor of $4$, either $n=1$ or $n=2$.
+\begin{itemize}
+\item \textbf{Case 1.} Suppose $n=1$. Then since $1^2=1$ we have $n = 1^2$, so that $n$ is a perfect square.
+\item \textbf{Case 2.} Suppose $n=2$. Then since $2 = 2 \times 1$, we have that $n$ is even.
+\end{itemize}
+Hence $n$ is either even or a perfect square. \qed
+\end{quote}
+
+Notice that in both Case 1 and Case 2, we did not explicitly mention that we had proved that `$n \text{ is even} \vee n \text{ is a perfect square}$', leaving that deducgion to the reader---we only mentioned it after the proofs in each case were complete.
+\end{example}
+
+The proof of \Cref{propRemainderOfSquaresModulo3} below splits into \textit{three} cases, rather than just two.
+
+\begin{proposition}
+\label{propRemainderOfSquaresModulo3}
+Let $n \in \mathbb{Z}$. Then $n^2$ leaves a remainder of $0$ or $1$ when divided by $3$.
+\end{proposition}
+
+\begin{cproof}
+Let $n \in \mathbb{Z}$. By the division theorem (\Cref{thmDivisionPreliminary}), one of the following must be true for some $k \in \mathbb{Z}$:
+\[
+n=3k \quad \text{or} \quad n=3k+1 \quad \text{or} \quad n=3k+2
+\]
+\begin{itemize}
+\item Suppose $n=3k$. Then
+\[
+n^2 = (3k)^2 = 9k^2 = 3 \cdot (3k^2)
+\]
+So $n^2$ leaves a remainder of $0$ when divided by $3$.
+\item Suppose $n=3k+1$. Then
+\[
+n^2 = (3k+1)^2 = 9k^2+6k+1 = 3(3k^2+2k)+1
+\]
+So $n^2$ leaves a remainder of $1$ when divided by $3$.
+\item Suppose $n=3k+2$. Then
+\[
+n^2 = (3k+2)^2 = 9k^2+12k+4 = 3(3k^2+4k+1)+1
+\]
+So $n^2$ leaves a remainder of $1$ when divided by $3$.
+\end{itemize}
+In all cases, $n^2$ leaves a remainder of $0$ or $1$ when divided by $3$.
+\end{cproof}
+
+Note that in the proof of \Cref{propRemainderOfSquaresModulo3}, unlike in \Cref{exPositiveProperFactorOfFourEvenOrPerfectSquare}, we did not explictly use the word `case', even though we were using proof by cases. Whether or not to make your proof strategies explicit is up to you---discussion of this kind of matter can be found in \Cref{secVocabulary}.
+
+When completing the following exercises, try to keep track of exactly where you use the introduction and elimination rules that we have seen so far.
+
+\begin{exercise}
+Let $n$ be an integer. Prove that $n^2$ leaves a remainder of $0$, $1$ or $4$ when divided by $5$.
+\hintlabel{exSquareRemainderModuloFive}{f
+Mimic the proof of \Cref{propRemainderOfSquaresModulo3}.
+}
+\end{exercise}
+
+\begin{exercise}
+Let $a,b \in \mathbb{R}$ and suppose $a^2-4b \ne 0$. Let $\alpha$ and $\beta$ be the (distinct) roots of the polyonomial $x^2+ax+b$. Prove that there is a real number $c$ such that either $\alpha-\beta = c$ or $\alpha - \beta = ci$.
+\end{exercise}
+
+\subsubsection*{Implication (`if\dots{}then\dots{}', $\Rightarrow$)}
+
+\begin{definition}
+\label{defImplication}
+\index{implication}
+\nindex{implies}{$\Rightarrow$}{implication}
+The \textbf{implication} operator is the logical operator $\Rightarrow$ \inlatex{Rightarrow}\lindexmmc{Rightarrow}{$\Rightarrow$}, defined according to the following rules:
+\begin{itemize}
+\item \introrule{\Rightarrow} If $q$ can be derived from the assumption that $p$ is true, then $p \Rightarrow q$ is true;
+\item \elimrule{\Rightarrow} If $p \Rightarrow q$ is true and $p$ is true, then $q$ is true.
+\end{itemize}
+The expression $p \Rightarrow q$ represents `if $p$, then $q$'.
+\end{definition}
+
+\begin{center}
+\begin{minipage}[b]{0.15\textwidth}
+\begin{prooftree}
+      \AxiomC{$[p]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$q$}
+\TagC{\introrule{\Rightarrow}}
+\UnaryInfC{$p \Rightarrow q$}
+\end{prooftree}
+\end{minipage}
+%
+\vspace{20pt}
+%
+\begin{minipage}[b]{0.3\textwidth}
+\begin{prooftree}
+  \AxiomC{$p \Rightarrow q$}
+  \AxiomC{$p$}
+\TagC{\elimrule{\Rightarrow}}
+\BinaryInfC{$q$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+
+\begin{strategy}[Proving implications]
+\label{strProvingImplicationsDirect}
+In order to prove a proposition of the form $p \Rightarrow q$, it suffices to assume that $p$ is true, and then derive $q$ from that assumption.
+\end{strategy}
+
+The following proposition illustrates how \Cref{strProvingImplicationsDirect} can be used in a proof.
+
+\begin{proposition}
+\label{propRationalTwoOfThree}
+Let $x$ and $y$ be real numbers. If $x$ and $x+y$ are rational, then $y$ is rational.
+\end{proposition}
+
+\begin{cproof}
+Suppose $x$ and $x+y$ are rational. Then there exist integers $a,b,c,d$ with $b,d \ne 0$ such that
+\[
+x = \frac{a}{b} \quad \text{and} \quad x+y = \frac{c}{d}
+\]
+It then follows that
+\[
+y = (x+y)-x = \frac{c}{d}-\frac{a}{b} = \frac{bc-ad}{bd}
+\]
+Since $bc-ad$ and $bd$ are integers, and $bd \ne 0$, it follows that $y$ is rational.
+\end{cproof}
+
+The key phrase in the above proof was `Suppose $x$ and $x+y$ are rational.' This introduced the assumptions $x \in \mathbb{Q}$ and $x+y \in \mathbb{Q}$, and reduced our goal to that of deriving a proof that $y$ is rational---this was the content of the rest of the proof.
+
+\begin{exercise}
+Let $p(x)$ be a polynomial over $\mathbb{C}$. Prove that if $\alpha$ is a root of $p(x)$, and $a \in \mathbb{C}$, then $\alpha$ is a root of $(x-a)p(x)$.
+\end{exercise}
+
+The elimination rule for implication \elimrule{\Rightarrow} is more commonly known by the Latin name \textit{modus ponens}.
+
+\begin{strategy}[Assuming implications---modus ponens]
+\label{strAssumingImplicationsDirect}
+\index{modus ponens}
+If an assumption in a proof has the form $p \Rightarrow q$, and $p$ is also assumed to be true, then we may deduce that $q$ is true.
+\end{strategy}
+
+\Cref{strAssumingDisjunctionsDirect} is frequently used to reduce a more complicated goal to a simpler one. Indeed, if we know that $p \Rightarrow q$ is true, and if $p$ is easy to verify, then it allows us to prove $q$ by proving $p$ instead.
+
+\begin{example}
+Let $f(x) = x^2+ax+b$ be a polynomial with $a,b \in \mathbb{R}$, and let $\Delta = a^2-4b$ be its discriminant. Part of \Cref{exDiscriminantRealRoots} was to prove that:
+\begin{enumerate}[(i)]
+\item If $\Delta > 0$, then $f$ has two real roots;
+\item If $\Delta = 0$, then $f$ has one real root;
+\item If $\Delta < 0$, then $f$ has no real roots.
+\end{enumerate}
+Given the polynomial $f(x) = x^2-68+1156$, it would be a pain to go through the process of solving the equation $f(x)=0$ in order to determine how many real roots $f$ has. However, each of the propositions (i), (ii) and (iii) take the form $p \Rightarrow q$, so \Cref{strAssumingImplicationsDirect} reduces the problem of finding how many real roots $f$ has to that of evaluating $\Delta$ and comparing it with $0$. And indeed, $(-68)^2 - 4 \times 1156 = 0$, so the implication (ii) together with \elimrule{\Rightarrow} tell us that $f$ has one real root.
+\end{example}
+
+A common task faced by mathematicians is to prove that two conditions are equivalent. For example, given a polynomial $f(x) = x^2+ax+b$ with $a,b \in \mathbb{R}$, we know that \textit{if} $a^2-4b>0$ \textit{then} $f$ has two real roots, but is it also true that if $f$ has two real roots then $a^2-4b>0$? (The answer is `yes'.) The relationship between these two implications is that each is the \textit{converse} of the other.
+
+\begin{definition}
+\label{defConverse}
+\index{converse}
+The \textbf{converse} of a proposition of the form $p \Rightarrow q$ is the proposition $q \Rightarrow p$.
+\end{definition}
+
+A quick remark on terminology is pertinent. The following table summarises some common ways of referring to the propositions `$p \Rightarrow q$' and `$q \Rightarrow p$'.
+
+\begin{center}
+\begin{tabular}{c|c}
+$p \Rightarrow q$ & $q \Rightarrow p$ \\ \hline
+if $p$, then $q$ & if $q$, then $p$ \\
+$p$ only if $q$ & $p$ if $q$ \\
+$p$ is sufficient for $q$ & $p$ is necessary for $q$
+\end{tabular}
+\end{center}
+
+We so often encounter the problem of proving both an implication and its converse that we introduce a new logical operator that represents the conjunction of both.
+
+\begin{definition}
+\label{defBiconditional}
+\index{biconditional}
+\nindex{biconditional}{$\Leftrightarrow$}{biconditional}
+The \textbf{biconditional} operator is the logical operator $\Leftrightarrow$ \inlatex{Leftrightarrow}\lindexmmc{Leftrightarrow}{$\Leftrightarrow$}, defined by declaring $p \Leftrightarrow q$ to mean $(p \Rightarrow q) \wedge (q \Rightarrow p)$. The expression $p \Leftrightarrow q$ represents `$p$ if and only if $q$'.
+\end{definition}
+
+Many examples of biconditional statements come from solving equations; indeed, to say that the values $\alpha_1,\dots,\alpha_n$ are the solutions to a particular equation is precisely to say that
+\[
+x \text{ is a solution} \quad \Leftrightarrow \quad x = \alpha_1 \text{ or } x = \alpha_2 \text{ or } \cdots \text{ or } x = \alpha_n
+\]
+
+\begin{example}
+\label{exSolveSqrtFirstExample}
+We find all real solutions $x$ to the equation
+\[
+\sqrt{x-3} + \sqrt{x+4} = 7
+\]
+Let's rearrange the equation to find out what the possible solutions may be.
+\begin{align*}
+&\phantom{\Rightarrow\;\;} \sqrt{x-3} + \sqrt{x+4} = 7 && \\
+&\Rightarrow (x-3) + 2\sqrt{(x-3)(x+4)} + (x+4) = 49 && \text{squaring} \\
+&\Rightarrow 2\sqrt{(x-3)(x+4)} = 48-2x && \text{rearranging} \\
+&\Rightarrow 4(x-3)(x+4) = (48-2x)^2 && \text{squaring} \\
+&\Rightarrow 4x^2+4x-48 = 2304-192x+4x^2 && \text{expanding} \\
+&\Rightarrow 196x = 2352 && \text{rearranging} \\
+&\Rightarrow x=12 && \text{dividing by $196$}
+\end{align*}
+You might be inclined to stop here. Unfortunately, all we have proved is that, given a real number $x$, \textit{if} $x$ solves the equation $\sqrt{x-3} + \sqrt{x+4} = 7$, \textit{then} $x=12$. This narrows down the set of possible solutions to just one candidate---but we still need to check the converse, namely that \textit{if} $x=12$, \textit{then} $x$ is a solution to the equation.
+
+As such, to finish off the proof, note that
+\[
+\sqrt{12-3} + \sqrt{12+4} = \sqrt{9} + \sqrt{16} = 3 + 4 = 7
+\]
+and so the value $x=12$ is indeed a solution to the equation.
+\end{example}
+
+The last step in \Cref{exSolveSqrtFirstExample} may have seemed a little bit silly; but \Cref{exSolveSqrtSecondExample} demonstrates that proving the converse when solving equations truly is necessary.
+
+\begin{example}
+\label{exSolveSqrtSecondExample}
+We find all real solutions $x$ to the equation
+\[
+x+\sqrt{x}=0
+\]
+We proceed as before, rearranging the equation to find all possible solutions.
+\begin{align*}
+&\phantom{\Rightarrow\;\;} x+\sqrt{x} = 0 && \\
+&\Rightarrow x=-\sqrt{x} && \text{rearranging} \\
+&\Rightarrow x^2=x && \text{squaring} \\
+&\Rightarrow x(x-1)=0 && \text{rearranging} \\
+&\Rightarrow x=0 \text{ or } x=1 && 
+\end{align*}
+Now certainly $0$ is a solution to the equation, since
+\[
+0+\sqrt{0} = 0+0 = 0
+\]
+However, $1$ is \textit{not} a solution, since
+\[
+1+\sqrt{1} = 1+1 = 2
+\]
+Hence it is actually the case that, given a real number $x$, we have
+\[
+x+\sqrt{x} = 0 \quad \Leftrightarrow \quad x=0
+\]
+Checking the converse here was vital to our success in solving the equation!
+\end{example}
+
+A slightly more involved example of a biconditional statement arising from the solution to an equation---in fact, a class of equations---is the proof of the quadratic formula.
+
+\begin{itheorem}[Quadratic formula]
+\label{thmQuadraticFormula}
+Let $a,b \in \mathbb{C}$. A complex number $\alpha$ is a root of the polynomial $x^2+ax+b$ if and only if
+\[
+\alpha = \frac{-a+\sqrt{a^2-4b}}{2} \quad \text{or} \quad \alpha =\frac{-a-\sqrt{a^2-4b}}{2}
+\]
+\end{itheorem}
+
+\begin{cproof}
+First we prove that \textit{if} $\alpha$ is a root, \textit{then} $\alpha$ is one of the values given in the statement of the proposition. So suppose $\alpha$ be a root of the polynomial $x^2+ax+b$. Then
+\[
+\alpha^2 + a\alpha + b = 0
+\]
+The algebraic technique of `completing the square' tells us that
+\[
+\alpha^2 + a\alpha = \left( \alpha + \frac{a}{2} \right)^2 - \frac{a^2}{4}
+\]
+and hence
+\[
+\left( \alpha + \frac{a}{2} \right)^2 - \frac{a^2}{4} + b = 0
+\]
+Rearranging yields
+\[
+\left( \alpha + \frac{a}{2} \right)^2  = \frac{a^2}{4} - b = \frac{a^2-4b}{4}
+\]
+Taking square roots gives
+\[
+\alpha + \frac{a}{2} = \frac{\sqrt{a^2-4b}}{2} \quad \text{or} \quad \alpha + \frac{a}{2} = \frac{-\sqrt{a^2-4b}}{2}
+\]
+and, finally, subtracting $\frac{a}{2}$ from both sides gives the desired result.
+
+The proof of the converse is \Cref{exQuadraticFormulaConverse}.
+\end{cproof}
+
+\begin{exercise}
+\label{exQuadraticFormulaConverse}
+Complete the proof of the quadratic formula. That is, for fixed $a,b \in \mathbb{C}$, prove that if
+\[
+\alpha = \frac{-a+\sqrt{a^2-4b}}{2} \quad \text{or} \quad \alpha =\frac{-a-\sqrt{a^2-4b}}{2}
+\]
+then $\alpha$ is a root of the polynomial $x^2+ax+b$.
+\end{exercise}
+
+Another class of examples of biconditional propositions arise in finding necessary and sufficient criteria for an integer $n$ to be divisible by some number---for example, that an integer is divisible by $10$ if and only if its base-$10$ expansion ends with the digit $0$.
+
+\begin{example}
+Let $n \in \mathbb{N}$. We will prove that $n$ is divisible by $8$ if and only if the number formed of the last three digits of the base-$10$ expansion of $n$ is divisible by $8$.
+
+First, we will do some `scratch work'. Let $d_rd_{r-1}\dots{}d_1d_0$ be the base-$10$ expansion of $n$. Then
+\[
+n = d_r \cdot 10^r + d_{r-1} \cdot 10^{r-1} + \cdots + d_1 \cdot 10 + d_0
+\]
+Define
+\[
+n' = d_2d_1d_0 \quad \text{and} \quad n'' = n-n' = d_rd_{r-1}\dots{}d_4d_3000
+\]
+Now $n-n' = 1000 \cdot d_rd_{r-1} \dots d_4d_3$ and $1000 = 8 \cdot 125$, so it follows that $8$ divides $n''$.
+
+Our goal is now to prove that $8$ divides $n$ if and only if $8$ divides $n'$.
+
+\begin{itemize}
+\item ($\Rightarrow$) Suppose $8$ divides $n$. Since $8$ divides $n''$, it follows from \Cref{exDivisibilityIsLinear} that $8$ divides $an+bn''$ for all $a,b \in \mathbb{Z}$. But
+\[
+n' = n-(n-n') = n-n'' = 1 \cdot n + (-1) \cdot n''
+\]
+so indeed $8$ divides $n'$, as required.
+\item ($\Leftarrow$)  Suppose $8$ divides $n'$. Since $8$ divides $n''$, it follows from \Cref{exDivisibilityIsLinear} that $8$ divides $an'+bn''$ for all $a,b \in \mathbb{Z}$. But
+\[
+n = n'+(n-n') = n'+n'' = 1 \cdot n' + 1 \cdot n''
+\]
+so indeed $8$ divides $n$, as required.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Prove that a natural number $n$ is divisible by $3$ if and only if the sum of its base-$10$ digits is divisible by $3$.
+\hintlabel{exSumOfDigitsDivisibleByThree}{%
+Suppose $n = d_r \cdot 10^r + \cdots + d_1 \cdot 10 + d_0$ and let $s = d_r + \cdots + d_1 + d_0$. Start by proving that $3 \mid n-s$.
+}
+\end{exercise}
+
+\subsubsection*{Negation (`not', $\neg$)}
+
+So far we only officially know how to prove that true propositions are \textit{true}. The negation operator makes precise what we mean by `not', which allows us to prove that false propositions are \textit{false}.
+
+\begin{definition}
+\label{defContradiction}
+\index{contradiction}
+\nindex{contradiction}{$\bot$}{contradiction}
+A \textbf{contradiction} is a proposition that is known or assumed to be false. We will use the symbol $\bot$ \inlatex{bot}\lindexmmc{bot}{$\bot$} to represent an arbitrary contradiction.
+\end{definition}
+
+\begin{example}
+Some examples of contradictions include the assertion that $0=1$, or that $\sqrt{2}$ is rational, or that the equation $x^2=-1$ has a solution $x \in \mathbb{R}$.
+\end{example}
+
+\begin{definition}
+\label{defNegation}
+\index{negation}
+\nindex{negation}{$\neg$}{negation}
+The \textbf{negation} operator is the logical operator $\neg$ \inlatex{neg}\lindexmmc{neg}{$\neg$}, defined according to the following rules:
+\begin{itemize}
+\item \introrule{\neg} If a contradiction can be derived from the assumption that $p$ is true, then $\neg p$ is true;
+\item \elimrule{\neg} If $\neg p$ and $p$ are both true, then a contradiction may be derived.
+\end{itemize}
+The expression $\neg p$ represents `not $p$' (or `$p$ is false').
+\end{definition}
+
+\begin{center}
+\begin{minipage}[b]{0.2\textwidth}
+\begin{prooftree}
+      \AxiomC{$[p]$}
+    \noLine
+    \UnaryInfC{$\downleadsto$}
+  \noLine
+  \UnaryInfC{$\bot$}
+\TagC{\introrule{\neg}}
+\UnaryInfC{$\neg p$}
+\end{prooftree}
+\end{minipage}
+%
+\hspace{20pt}
+%
+\begin{minipage}[b]{0.2\textwidth}
+\begin{prooftree}
+  \AxiomC{$\neg p$}
+  \AxiomC{$p$}
+\TagC{\elimrule{\neg}}
+\BinaryInfC{$\bot$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+
+\begin{aside}
+The rules \introrule{\neg} and \elimrule{\neg} closely resemble \introrule{\Rightarrow} and \elimrule{\Rightarrow}---indeed, we could simply define $\neg p$ to mean `$p \Rightarrow \bot$', where $\bot$ represents an arbitrary contradiction, but it will be easier later on to have a primitive notion of negation.
+\end{aside}
+
+The introduction rule for negation \introrule{\neg} gives rise to a proof strategy called \textit{proof by contradiction}, which turns out to be extremely useful.
+
+\begin{strategy}[Proving negations---proof by contradiction]
+\label{strProvingNegationsDirect}
+\label{strProofByContradictionDirect}
+\index{proof!by contradiction (direct)}
+\index{contradiction!(direct) proof by}
+In order to prove a proposition $p$ is false (that is, that $\neg p$ is true), it suffices to assume that $p$ is true and derive a contradiction.
+\end{strategy}
+
+The following proposition has a classic proof by contradiction.
+
+\begin{proposition}
+Let $r$ be a rational number and let $a$ be an irrational number. Then $r+a$ is irrational. 
+\end{proposition}
+
+\begin{cproof}
+By \Cref{defIrrationalNumber}, we need to prove that $r+a$ is real and not rational. It is certainly real, since $r$ and $a$ are real, so it remains to prove that $r+a$ is not rational.
+
+Suppose $r+a$ is rational. Since $r$ is rational, it follows from \Cref{propRationalTwoOfThree} that $a$ is rational, since
+\[
+a = (r+a) - r
+\]
+This contradicts the assumption that $a$ is irrational. It follows that $r+a$ is not rational, and is therefore irrational.
+\end{cproof}
+
+Now you can try proving some elementary facts by contradiction.
+
+\begin{exercise}
+\label{exNegationAndReciprocalOfIrrationalNumbers}
+Let $x \in \mathbb{R}$. Prove by contradiction that if $x$ is irrational then $-x$ and $\frac{1}{x}$ are irrational.
+\end{exercise}
+
+\begin{exercise}
+\label{exNoLeastPositiveReal}
+Prove by contradiction that there is no least positive real number. That is, prove that there is not a positive real number $a$ such that $a \le b$ for all positive real numbers $b$.
+\end{exercise}
+
+A proof need not be a `proof by contradiction' in its entirety---indeed, it may be that only a small portion of the proof uses contradiction. This is exhibited in the proof of the following proposition.
+
+\begin{proposition}
+\label{propOddIffRemainderOfOne}
+Let $a$ be an integer. Then $a$ is odd if and only if $a=2b+1$ for some integer $b$.
+\end{proposition}
+\begin{cproof}
+Suppose $a$ is odd. By the division theorem (\Cref{thmDivisionPreliminary}), either $a=2b$ or $a=2b+1$, for some $b \in \mathbb{Z}$. If $a=2b$, then $2$ divides $a$, contradicting the assumption that $a$ is odd; so it must be the case that $a=2b+1$.
+
+Conversely, suppose $a=2b+1$. Then $a$ leaves a remainder of $1$ when divided by $2$. However, by the division theorem, the even numbers are precisely those that leave a remainder of $0$ when divided by $2$. It follows that $a$ is not even, so is odd.
+\end{cproof}
+
+The elimination rule for the negation operator \elimrule{\neg} simply says that a proposition can't be true and false at the same time.
+
+\begin{strategy}[Assuming negations]
+\label{strAssumingNegations}
+If an assumption in a proof has the form $\neg p$, then any derivation of $p$ leads to a contradiction.
+\end{strategy}
+
+The main use of \Cref{strAssumingNegations} is for obtaining the contradiction in a proof by contradiction---in fact, we have already used it in our examples of proof by contradiction! As such, we will not dwell on it further.
+
+\subsection*{Logical axioms}
+
+We wrap up this section by introducing a couple of additional logical rules (\textit{axioms}) that we will use in our proofs.
+
+The first is the so-called \textit{law of excluded middle}, which appears so obvious that it is not even worth stating (let alone naming)---what it says is that every proposition is either true or false. But beware, as looks can be deceiving; the law of excluded middle is a non-constructive axiom, meaning that it should not be accepted in settings it is important to keep track of how a proposition is proved---simply knowing that a proposition is either true or false tells us nothing about how it might be proved or refuted. In most mathematical contexts, though, it is accepted without a second's thought.
+
+\begin{axiom}[Law of excluded middle]
+\label{axLEM}
+\index{law of excluded middle}
+Let $p$ be a propositional formula. Then $p \vee (\neg p)$ is true.
+\end{axiom}
+
+The law of excluded middle can be represented diagramatically as follows; there are no premises above the line, since we are simply asserting that it is true.
+
+\begin{center}
+\begin{prooftree}
+  \AxiomC{}
+\TagC{LEM}
+\UnaryInfC{$p \vee (\neg p)$}
+\end{prooftree}
+\end{center}
+
+\begin{strategy}[Using the law of excluded middle]
+\label{strLEM}
+In order to prove a proposition $q$ is true, it suffices to split into cases based on whether some other proposition $p$ is true or false, and prove that $q$ is true in each case.
+\end{strategy}
+
+The proof of \Cref{propIfProductEvenThenSomeFactorEven} below makes use of the law of excluded middle---note that we defined `odd' to mean `not even' (\Cref{defEvenOdd}).
+
+\begin{proposition}
+\label{propIfProductEvenThenSomeFactorEven}
+Let $a,b \in \mathbb{Z}$. If $ab$ is even, then either $a$ is even or $b$ is even (or both).
+\end{proposition}
+\begin{cproof}
+Suppose $a,b \in \mathbb{Z}$ with $ab$ even.
+\begin{itemize}
+\item Suppose $a$ is even---then we're done.
+\item Suppose $a$ is odd. If $b$ is also odd, then by \Cref{propOddIffRemainderOfOne} can write
+\[
+a = 2k+1 \quad \text{and} \quad b=2\ell+1
+\]
+for some integers $k,\ell$. This implies that
+\[
+ab = (2k+1)(2\ell+1) = 4k\ell + 2k + 2\ell + 1 = 2(\underbrace{2k\ell + k + \ell}_{\in \mathbb{Z}}) + 1
+\]
+so that $ab$ is odd. This contradicts the assumption that $ab$ is even, and so $b$ must in fact be even.
+\end{itemize}
+In both cases, either $a$ or $b$ is even.
+\end{cproof}
+
+\begin{exercise}
+Reflect on the proof of \Cref{propIfProductEvenThenSomeFactorEven}. Where in the proof did we use the law of excluded middle? Where in the proof did we use proof by contradiction? What was the contradiction in this case? Prove \Cref{propIfProductEvenThenSomeFactorEven} twice more, once using contradiction and not using the law of excluded middle, and once using the law of excluded middle and not using contradiction.
+\end{exercise}
+
+\begin{exercise}
+Let $a$ and $b$ be irrational numbers. By considering the number $\sqrt{2}^{\sqrt{2}}$, prove that it is possible that $a^b$ be rational.
+\hintlabel{exIrrationalExpIrrationalCanBeRational}{%
+Use the law of excluded middle according to whether the proposition `$\sqrt{2}^{\sqrt{2}}$ is rational' is true or false.}
+\end{exercise}
+
+Another logical rule that we will use is the \textit{principle of explosion}, which is also known by its Latin name, \textit{ex falso sequitur quodlibet}, which approximately translates to `\textit{from falsity follows whatever you like}'.
+
+\begin{axiom}[Principle of explosion]
+\label{axPrincipleOfExplosion}
+If a contradiction is assumed, any consequence may be derived.
+\end{axiom}
+
+\begin{center}
+\begin{prooftree}
+  \AxiomC{$\bot$}
+\TagC{Expl}
+\UnaryInfC{$p$}
+\end{prooftree}
+\end{center}
+
+The principle of explosion is a bit confusing on first sight. To shed a tiny bit of intuition on it, think of it as saying that both true and false propositions are consequences of a contradictory assumption. For instance, suppose that $-1 = 1$. From this we can obtain consequences that are false, such as $0=2$ by adding $1$ to both sides of the equation, and consequences that are true, such as $1=1$ by squaring both sides of the equation.
+
+We will rarely use the principle of explosion directly in our mathematical proofs, but we will use it in \Cref{secLogicalEquivalence} for proving logical formulae are equivalent.

@@ -1,0 +1,33 @@
+The goal of this chapter is to develop a methodical way of breaking up a proposition into smaller components and seeing how these components fit together---this is called the \textit{logical structure} of a proposition. The logical structure of a proposition is very informative: it tells us what we need to do in order to prove it, what we need to write in order to communicate our proof, and how to explore the consequences of the proposition after it has been proved.
+
+\begin{center} \vspace{-15pt}
+\fitwidth{%
+\begin{tikzcd}[row sep={30pt}, column sep={20pt}, ampersand replacement=\&]
+\&
+\text{\begin{minipage}{90pt}\centering logical structure of a proposition\end{minipage}}
+\arrow[dl]
+\arrow[d]
+\arrow[dr]
+\&
+\\
+\text{\begin{minipage}{120pt}\centering strategies for proving\\ the proposition\end{minipage}}
+\&
+\text{\begin{minipage}{100pt}\centering structure and wording of the proof \end{minipage}}
+\&
+\text{\begin{minipage}{100pt}\centering consequences of\\ the proposition\end{minipage}}
+\end{tikzcd}%
+}
+\end{center}
+
+%The effectiveness of a good mathematical proof is influenced by many factors:
+%\begin{itemize}
+%\item \textbf{Correctness.} Are the steps in the proof logically valid? Are the assumptions made and conclusions drawn appropriate? Are definitions and results applied accurately?
+%\item \textbf{Completeness.} Is the conclusion reached? Are any claims made without sufficient justification?
+%\item \textbf{Clarity.} Is the proof understandable to a member of its target audience? Is the logical flow of the proof made clear to the reader? Is sufficient detail provided, and if so, do the details obfuscate the bigger picture?
+%\end{itemize}
+%
+%It is difficult to think about all of these things at the same time, especially if the result you are trying to prove is very complicated---in fact, sometimes it is difficult just to get started, or to know what to write in order to communicate your ideas.
+
+\Cref{secPropositionalLogic,secVariablesQuantifiers} are dedicated to developing a system of \textit{symbolic logic} for reasoning about propositions. We will be able to represent a proposition using a string of variables and symbols, and this expression will guide how we can prove the proposition and explore its consequences. In \Cref{secLogicalEquivalence} we will develop techniques for manipulating these logical expressions algebraically---this, in turn, will yield new proof techniques (some have fancy names like `proof by contraposition', but some do not).
+
+Exploring how the logical structure of a proposition informs the structure and wording of its proof is the content of \Cref{secVocabulary}.

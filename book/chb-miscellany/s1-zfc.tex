@@ -1,0 +1,160 @@
+\section{Set theoretic foundations}
+\secbegin{secZFC}
+
+\todo{}
+
+\subsection*{Zermelo--Fraenkel set theory}
+
+\todo{}
+
+The first two axioms of ZF set theory that we introduce are the \textit{axiom of extensionality} and the \textit{axiom of foundation}. They concern the behaviour of the set elementhood relation $\in$, with the axiom of extensionality describing how it relates to equality of sets (as in \Cref{axSetEquality}), and axiom of foundation 
+
+\begin{axiom}[Axiom of extensionality]
+\label{axZFCExtensionality}
+\index{extensionality}
+If two sets have the same elements, then they are equal.
+\[ \forall X,\, \forall Y,\, [(\forall a,\, a \in X \Leftrightarrow a \in Y) \Rightarrow X=Y] \]
+\end{axiom}
+
+A consequence of the axiom of extensionality is that two sets can be proved to be equal by proving that they contain the same elements.
+
+\begin{axiom}[Axiom of foundation]
+Every inhabited set has an $\in$-minimal element.
+\[ \forall X,\, [(\exists y,\, y \in X) \Rightarrow \exists x,\, (x \in X \wedge \forall u \in X,\, u \not \in x)] \]
+The axiom of foundation states that $\in$ is a well-founded relation.
+\end{axiom}
+
+The axiom of foundation is mysterious at first sight, but it captures the idea that every set should built up from $\varnothing$ using set theoretic operations.
+
+\begin{lemma}
+Under the axiom of foundation, we have $X \not \in X$ for all sets $X$.
+\end{lemma}
+
+\begin{cproof}
+Let $X$ be a set. The set $\{ X \}$ is inhabited since $X \in \{ X \}$, so by the axiom of foundation there is some $x \in \{ X \}$ such that $u \not\in x$ for all $u \in \{ X \}$. But the only element of $\{ X \}$ is $X$ itself, so this says exactly that $X \not\in X$.
+\end{cproof}
+
+\begin{exercise}
+\label{exStrictlyDecreasingSequenceOfSets}
+Use the axiom of foundation to prove that there is no sequence of sets $X_0,X_1,X_2,\dots$ such that $X_{n+1} \in X_n$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+The next few axioms of ZF set theory posit the existence of certain sets or constructions of sets.
+
+\begin{axiom}[Empty set axiom]
+\label{axZFCEmptySet}
+There is a set with no elements.
+\[ \exists X,\, \forall x,\, x \not \in X \]
+The empty set axiom asserts the existence of $\varnothing$.
+\end{axiom}
+
+\begin{axiom}[Pairing axiom]
+\label{axZFCPairing}
+For any two sets $x$ and $y$, there is a set containing only $x$ and $y$.
+\[ \forall x,\, \forall y,\, \exists X,\, \forall u,\, [u \in X \Leftrightarrow (u=x \vee u=y)] \]
+The axiom of pairing asserts the existence of sets of the form $\{ x, y \}$.
+\end{axiom}
+
+\begin{axiom}[Union axiom]
+\label{axZFCUnion}
+The union of any family of sets exists and is a set.
+\[ \forall F,\, \exists U,\, \forall x,\, [x \in U \Leftrightarrow \exists X,\, (x \in X \wedge X \in F)] \]
+The axiom of union asserts that if $F = \{ X_i \mid i \in I \}$ is a family of sets then the set $U=\bigcup_{i \in I} X_i$ exists.
+\end{axiom}
+
+\begin{axiom}[Power set axiom]
+\label{axZFCPowerSet}
+The set of all subsets of a set is a set.
+\[ \forall X,\, \exists P,\, \forall U,\, [U \in P \Leftrightarrow \forall u,\, (u \in U \Rightarrow u \in X)] \]
+The axiom of power set asserts the existence of $\mathcal{P}(X)$ for all sets $X$.
+\end{axiom}
+
+Assuming only the previously stated axioms, it is entirely plausible that every set be finite. This isn't good news for us, since we want to be able to reason about infinite sets, such as the set $\mathbb{N}$ of natural numbers. The \textit{axiom of infinity} asserts the existence of an infinite set using a clever set theoretic construction called the \textit{successor set} operation.
+
+\begin{definition}
+\label{defSuccessorSet}
+\label{successor set}
+Given a set $X$, the \textbf{successor set} of $X$ is the set $X^+$ defined by
+\[ X^+ = X \cup \{ X \} \]
+\end{definition}
+
+\begin{lemma}
+\label{lemSuccessorSetIsInjective}
+Let $X$ and $Y$ be sets. If $X^+ = Y^+$, then $X=Y$.
+\end{lemma}
+
+\begin{cproof}
+Assume $X^+=Y^+$. Then
+\begin{itemize}
+\item We have $X \in X^+$, so $X \in Y^+ = Y \cup \{ Y \}$, and so either $X = Y$ or $X \in Y$;
+\item We have $Y \in Y^+$, so $Y \in X^+ = X \cup \{ X \}$, and so either $Y = X$ or $Y \in X$.
+\end{itemize}
+If $X=Y$ then we're done. Otherwise, we must have $X \in Y$ and $Y \in X$. But then we can define a sequence of sets by letting
+\[ X_n = \begin{cases} X & \text{if } n \text{ is even} \\ Y & \text{if } n \text{ is odd} \end{cases} \]
+for all $n \in \mathbb{N}$. This sequence satisfies $X_{n+1} \in X_n$ for all $n \in \mathbb{N}$, since if $n$ is even then
+\[ X_{n+1} = Y \in X = X_n \]
+and if $n$ is odd then
+\[ X_{n+1} = X \in Y = X_n \]
+This contradicts \Cref{exStrictlyDecreasingSequenceOfSets}, so we must have $X=Y$, as claimed.
+\end{cproof}
+
+\begin{axiom}[Axiom of infinity]
+\label{axZFCInfinity}
+There is an inhabited set containing successor sets of all of its elements.
+\[ \exists X,\, [(\exists u,\, u \in X) \wedge \forall x,\, (x \in X \Rightarrow x^+ \in X)] \]
+\end{axiom}
+
+Intuitively, the axiom of infinity tells us that there is a set $X$ which contains (at least) a family of elements of the form $u, u^+, u^{++}, u^{+++}$, and so on---each of these elements must be distinct by \Cref{lemSuccessorSetIsInjective}, so that $X$ must be infinite.
+
+\begin{axiom}[Axiom of replacement]
+\label{axZFCReplacement}
+The image of any set under any function is a set. That is, for each logical formula $p(x,y)$ with two free variables $x,y$, we have
+\[ \forall X,\, [(\forall x \in X,\, \exists ! y,\, p(x,y)) \Rightarrow \exists Y,\, \forall y,\, y \in Y \Leftrightarrow \exists x \in X,\, p(x,y)] \]
+\end{axiom}
+
+\begin{axiom}[Axiom of separation]
+\label{axZFCSeparation}
+For any logical formula $p(x)$ with one free variable, and any set $X$, there is a set consisting of the elements of $X$ satisfying $p(x)$.
+\[ \forall X,\, \exists U,\, \forall x,\, [x \in U \Leftrightarrow (x \in X \wedge p(x))] \]
+The axiom of separation asserts the existence of sets of the form $\{ x \in X \mid p(x) \}$.
+\end{axiom}
+
+\begin{exercise}
+\label{exEmptySetFromInfinityAndSeparation}
+Prove that the axioms of infinity and separation imply the existence of an empty set.
+\begin{backhint}
+\hintref{exEmptySetFromInfinityAndSeparation}
+Let $X$ be the set whose existence is asserted by the axiom of infinity, and take $p(x)$ to be the formula $x \ne x$ in the axiom of separation.
+\end{backhint}
+\end{exercise}
+
+In light of \Cref{exEmptySetFromInfinityAndSeparation}, the empty set axiom (\Cref{axZFCEmptySet}) is in fact redundant, in the presence of the other axioms. We keep it around for the sake of convenience.
+
+
+
+\subsection*{Grothendieck universes}
+\label{subsecGrothendieckUniverses}
+
+In \Cref{secSets} one of the first things we defined was a \textit{universal set}, which we promptly forgot about and mentioned as little as possible. In this short subsection we briefly introduce the notion of a \textit{Grothendieck universe}, named after the interesting (and influential) mathematician Alexander Grothendieck.
+
+\begin{definition}
+\label{defGrothendieckUniverse}
+\index{universe!Grothendieck}
+A \textbf{Grothendieck universe} is a set $\mathcal{U}$ satisfying the following properties:
+\begin{enumerate}[(i)]
+\item The elements of $\mathcal{U}$ are sets;
+\item For all $X \in \mathcal{U}$, if $x \in X$, then $x \in \mathcal{U}$;
+\item $\mathbb{N}_{\mathsf{vN}} \in \mathcal{U}$ (see \Cref{cnsNaturalNumbersVonNeumann});
+\item For all $X \in \mathcal{U}$, we have $\mathcal{P}(X) \in \mathcal{U}$;
+\item For all $I \in \mathcal{U}$ and all $\{ X_i \mid i \in I \} \subseteq \mathcal{U}$, we have $\bigcup_{i \in I} X_i \in \mathcal{U}$.
+\end{enumerate}
+\end{definition}
+
+The existence of a Grothendieck universe is not implied by the axioms of Zermelo--Frankel set theory (with or without the axiom of choice)---if it were, it would violate \textit{G\"{o}del's incompleteness theorem}, a result that is even further beyond the scope of this book than Grothendieck universes are!
+
+\begin{theorem}
+\label{thmGrothendieckUniversesAreModelOfZFC}
+Let $\mathcal{U}$ be a Grothendieck universe. The axioms of Zermelo--Fraenkel set theory are satisfied relative to $\mathcal{U}$. If the axiom of choice is assumed, then that is also satisfied relative to $\mathcal{U}$. \qed
+\end{theorem}
+
+The upshot of \Cref{thmGrothendieckUniversesAreModelOfZFC} is that although there is no universal set, if we assume the existence of a Grothendieck universe $\mathcal{U}$, then for the purposes of this book, we may relativise everything we do to $\mathcal{U}$ and \textit{pretend} that $\mathcal{U}$ is indeed a universal set. And this is exactly what we did in \Cref{secSets}.

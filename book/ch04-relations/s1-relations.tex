@@ -1,0 +1,391 @@
+\section{Relations}
+\secbegin{secRelations}
+\index{relation|(}
+
+Many interesting results or concepts in mathematics arise from observing how the elements of one set interact with the elements of another set, or how elements of a single set interact with each other. We can make this idea of `interaction' precise using the notion of a \textit{relation}.
+
+\begin{definition}
+\index{relation}
+\index{homogeneous relation}
+\index{domain!of a relation}
+\index{codomain!of a relation}
+Let $X$ and $Y$ be sets. A (\textbf{binary}) \textbf{relation} from $X$ to $Y$ is a logical formula $R(x,y)$ with two free variables $x \in X$ and $y \in Y$. We call $X$ the \textbf{domain} of $R$ and $Y$ the \textbf{codomain} of $R$.
+
+A relation $R$ is \textbf{homogeneous} if it has the same domain and codomain $X$, in which case we say that $R$ is a relation \textbf{on} $X$.
+
+Given $x \in X$ and $y \in Y$, if $R(x,y)$ is true then we say `$x$ is \textbf{related} to $y$ by $R$', and write $x \mathrel{R} y$ \inlatexnb{x \textbackslash{}mathrel\{R\} y}\lindexmmc{mathrel}{$\mathrel{R}, \dots$}.
+\end{definition}
+
+\begin{example}
+\label{exRelationExamples}
+We have already seen many examples of relations.
+\begin{itemize}
+\item Divisibility (`$x$ divides $y$') is a relation on $\mathbb{Z}$.
+\item The inequality relation $\le$ is a relation on $\mathbb{R}$.
+\item For any set $X$, equality $=$ is a relation on $X$.
+\item Logical equivalence $\equiv$ is a relation on the set of all logical formulae.
+\item For any set $X$, the subset relation $\subseteq$ is a relation on $\mathcal{P}(X)$.
+\end{itemize}
+These relations were all homogeneous, but not all relations are:
+\begin{itemize}
+\item For any set $X$, the elementhood relation $\in$ is a relation from $X$ to $\mathcal{P}(X)$.
+\item Every function $f : X \to Y$ induces a relation $R_f$ from $X$ to $Y$, defined by taking $x \mathrel{R_f} y$ to mean $f(x) = y$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Give three more examples of relations, not all of which are homogeneous.
+\end{exercise}
+
+Like with sets and functions, we must determine when to declare that two relations are equal. For example, consider the relation $R$ on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by letting $a \mathrel{R} b$ mean $\exists x \in \mathbb{R},~ a+x^2=b$. It so happens that $a \mathbin{R} b$ if and only if $a \le b$---we'll prove this in \Cref{exLeqOnRFromAddingSquare}. So should $R$ be equal to $\le$? On the one hand you might say `yes', since $\le$ and $R$ relate the same pairs of real numbers. On the other hand you might say `no', since the fact that $\le$ and $R$ relate the same pairs of real numbers was not immediate and required proof. In fact, if we were to replace $\mathbb{R}$ by $\mathbb{Q}$, it then $\le$ and $R$ would \textit{not} relate the same pairs of elements, since for instance $0 \le 2$ but there is no rational number $x$ such that $0+x^2=2$.
+
+But as with sets and functions, we settle for the \textit{extensional} notion of equality: just as two sets are equal when they have the same elements (\Cref{axSetEquality}), and two functions are equal when they have the same values (\Cref{axFunctionExtensionality}), we consider two relations to be equal when they relate the same pairs of elements (\Cref{axRelationEquality}).
+
+\begin{axiom}[Relation extensionality]
+\label{axRelationEquality}
+Let $R$ and $S$ be relations. Then $R = S$ if and only if $R$ and $S$ have the same domain $X$ and codomain $Y$, and
+\[ \forall x \in X,\, \forall y \in Y,\, (x \mathrel{R} y \Leftrightarrow x \mathrel{S} y) \]
+That is, two relations with the same domain and codomain are equal precisely when they relate the same pairs of elements.
+\end{axiom}
+
+\begin{example}
+\label{exLeqOnRFromAddingSquare}
+Recall the relation $R$ on $\mathbb{R}$ that we defined above for $a,b \in \mathbb{R}$ by letting $a \mathrel{R} b$ if and only if $a+x^2=b$ for some $x \in \mathbb{R}$. To see that $R = {\le}$, note that $a + (b-a) = b$, and that $b-a$ is the square of a real number if and only if $b-a \ge 0$, which occurs if and only if $a \le b$.
+\end{example}
+
+\begin{exercise}
+Let $R$ and $S$ be relations on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by letting
+\[ a \mathrel{R} b ~ \Leftrightarrow ~ b-a \in \mathbb{Q} \quad \text{and} \quad a \mathrel{S} b ~ \Leftrightarrow ~ \exists n \in \mathbb{Z},~ (n \ne 0) \wedge n(b-a) \in \mathbb{Z} \]
+Prove that $R=S$.
+\end{exercise}
+
+The true reason why \Cref{axRelationEquality} is powerful is that it allows us to reason about relations entirely set theoretically by working with their \textit{graphs}---the sets of pairs of elements that they relate---rather than with the particular formulae defining the relation.
+
+\begin{definition}
+\index{graph!of a relation}
+\label{defRelationGraph}
+Let $R$ be a relation from a set $X$ to a set $Y$. The \textbf{graph} of $R$ is the set $\mathrm{Gr}(R)$\nindex{graphRelation}{$\mathrm{Gr}(R)$}{graph of a relation} \inlatex{mathrm\{Gr\}\{R\}}\lindexmmc{mathrm}{$\mathrm{Aa}, \mathrm{Bb}, \dots$} of pairs $(x,y) \in X \times Y$ for which $x \mathrel{R} y$. That is
+\[ \mathrm{Gr}(R) = \{ (x,y) \in X \times Y \mid x \mathrel{R} y \} \subseteq X \times Y \]
+\end{definition}
+
+\begin{example}
+The graph of the relation $\le$ on $[3]$ is
+\[ \{ (1,1), (1,2), (1,3), (2,2), (2,3), (3,3) \} \]
+Likewise, the graph of the relation $\le$ viewed as a relation from $[2]$ to $[4]$ is
+\[ \{ (1,1), (1,2), (1,3), (1,4), (2,2), (2,3), (2,4) \} \]
+This demonstrates that the graph of a relation is sensitive to the domain (and codomain) of the relation.
+\end{example}
+
+\begin{example}
+\label{exCircleRelation}
+Consider the relation $C$ from $\mathbb{R}$ to $\mathbb{R}$ defined by $x \mathrel{C} y \Leftrightarrow x^2+y^2=1$. Then
+\[ \mathrm{Gr}(C) = \{ (x,y) \in \mathbb{R} \times \mathbb{R} \mid x^2+y^2=1 \} \]
+Plotting $\mathrm{Gr}(C)$ on a standard pair of axes yields a circle with radius $1$ centred at the point $(0,0)$, shown below with a unit grid.
+\begin{center}
+\begin{tikzpicture}
+\foreach \i in {-1,1} {
+    \draw[lightgray] (-3.3,{2*\i}) -- (3.3,{2*\i}) ;
+    \draw[lightgray] ({2*\i},-3.3) -- ({2*\i},3.3) ;
+}
+\draw[-latex] (-3.3,0) -- (3.3,0) node[right] {$x$} ;
+\draw[-latex] (0,-3.3) -- (0,3.3) node[right] {$y$} ;
+\draw[blue] (0,0) circle[radius=2] ;
+\end{tikzpicture}
+\end{center}
+Note that $\mathrm{Gr}(C)$ is \textit{not} the graph of a function $f : [0,1] \to \mathbb{R}$, since for example both $(0,1)$ and $(0,{-1})$ are elements of $\mathrm{Gr}(C)$, the value $f(0)$ would not be uniquely defined.
+\end{example}
+
+\begin{exercise}
+Let $R$ be the relation on $\mathbb{Z}$ defined for $x,y \in \mathbb{Z}$ by letting $x \mathrel{R} y$ if and only if $x^2=y^2$. Describe its graph $\mathrm{Gr}(R) \subseteq \mathbb{Z} \times \mathbb{Z}$.
+\end{exercise}
+
+\begin{exercise}
+Let $f : X \to Y$ be a function, and define the relation $R_f$ from $X$ to $Y$ as in \Cref{exRelationExamples}. Prove that $\mathrm{Gr}(R_f) = \mathrm{Gr}(f)$---that is, the graph of the \textit{relation} $R_f$ is equal to the graph of the \textit{function} $f$.
+\end{exercise}
+
+\begin{definition}
+\label{defEmptyRelation}
+\label{defDiscreteRelation}
+\index{empty relation}
+\index{discrete relation}
+\index{relation!empty}
+\index{relation!discrete}
+The \textbf{discrete relation} from a set $X$ to a set $Y$ is the relation $D_{X,Y}$ defined by letting $x \mathrel{D_{X,Y}} y$ be true for all $x,y \in X$.
+
+The \textbf{empty relation} from a set $X$ to a set $Y$ is the relation $\varnothing_{X,Y}$\nindex{OXY}{$\varnothing_{X,Y}$}{empty relation} \inlatex{varnothing} defined by letting $x \mathrel{\varnothing_{X,Y}} y$ be false for all $x,y \in X$.
+\end{definition}
+
+\begin{exercise}
+\label{exGraphOfEmptyAndDiscreteRelations}
+Let $X$ and $Y$ be sets. Describe the graphs $\mathrm{Gr}(D_{X,Y})$ and $\mathrm{Gr}(\varnothing_{X,Y})$.
+\end{exercise}
+
+It turns out that, for fixed sets $X$ and $Y$, relations from $X$ to $Y$ correspond with subsets of $X \times Y$---see \Cref{thmRelationsAsSubsets} below. This fact is so convenient that many (if not most) authors actually define `relation from $X$ to $Y$' to mean `subset of $X \times Y$'.
+
+\begin{theorem}
+\label{thmRelationsAsSubsets}
+Let $X$ and $Y$ be sets. Every subset $G \subseteq X \times Y$ is the graph of a unique relation $R$ from $X$ to $Y$.
+\end{theorem}
+\begin{cproof}
+Fix $G \subseteq X \times Y$. Define a relation $R$ by
+\[ \forall x \in X,\, \forall y \in Y,\, x \mathbin{R} y \Leftrightarrow (x,y) \in G \]
+Then certainly $G = \mathrm{Gr}(R)$, since for all $x \in X$ and $y \in Y$ we have
+\[ (x,y) \in G \quad \Leftrightarrow \quad x \mathrel{R} y \quad \Leftrightarrow \quad (x,y) \in \mathrm{Gr}(R) \]
+
+Moreover, if $S$ is a relation from $X$ to $Y$ such that $G=\mathrm{Gr}(S)$, then, for all $x \in X$ and $y \in Y$ 
+\[ x \mathrel{S} y \Leftrightarrow (x,y) \in \mathrm{Gr}(S) \Leftrightarrow (x,y) \in G \Leftrightarrow x \mathrel{R} y \]
+so $S=R$.
+
+Hence there is exactly one relation from $X$ to $Y$ whose graph is $G$.
+\end{cproof}
+
+\Cref{thmRelationsAsSubsets} suggests that, for the purposes of defining relations and proving that relations are equal, we may work entirely set theoretically with the graphs of the relations.
+
+\begin{strategy}[Relations as graphs]
+\label{strRelationsAndGraphs}
+In order to specify a relation $R$, it suffices to specify its domain $X$, its codomain $Y$, and its graph $\mathrm{Gr}(R) \subseteq X \times Y$. Furthermore, in order to prove that two relations $R$ and $S$ are equal, it suffices to prove that they have the same domain and codomain, and that their graphs are equal.
+\end{strategy}
+
+\begin{example}
+Consider the set $G = \{ (2m+i, 2n+i) \mid m,n \in \mathbb{Z},~ i \in \{ 0,1 \} \}$. Since $G \subseteq \mathbb{Z} \times \mathbb{Z}$, it is the graph of a (unique) relation $R$ on $\mathbb{Z}$, which is necessarily defined for $a,b \in \mathbb{Z}$ by letting $a \mathrel{R} b$ if and only if there are integers $m$ and $n$, and $i \in \{0,1\}$, such that $a=2m+i$ and $b=2n+i$. But this says precisely that $a$ and $b$ both leave the same remainder (namely $i$) when divided by $2$, so that $R$ can be described by saying that, for all $a,b \in \mathbb{Z}$, we have $a \mathrel{R} b$ if and only if $a$ and $b$ are both even or both odd.
+\end{example}
+
+\begin{definition}
+\label{defDiagonalSubset}
+\index{diagonal subset}
+\index{subset!diagonal}
+Let $X$ be a set. The \textbf{diagonal subset} of $X \times X$ is the set $\Delta_X$ \inlatex{Delta\_X} defined by $\Delta_X = \{ (x,x) \mid x \in X \}$.
+\end{definition}
+
+To see why $\Delta_X$ is called the `diagonal' subset, try plotting $\Delta_{\mathbb{R}} \subseteq \mathbb{R} \times \mathbb{R}$ on a standard pair of axes (like in \Cref{exCircleRelation}).
+
+\begin{exercise}
+Let $X$ be a set. Prove that $\Delta_X = \mathrm{Gr}(=)$.
+\end{exercise}
+
+\subsection*{Properties of homogeneous relations}
+
+Most of the relations of interest to us in this book are homogeneous---that is, relations \textit{on} a set. In fact, they broadly fall into one of two categories: \textit{equivalence relations}, which are relations that `behave like $=$'; and \textit{order relations}, which are relations that `behave like $\le$'. We will study equivalence relations in \Cref{secEquivalenceRelationsPartitions} and order relations in \Cref{secOrderRelations}, but examples of such relations pop up throughout the book. (In fact, we have already seen several!)
+
+Our task for the rest of this section is to isolate the properties that a relation must satisfy in order to be classified as an equivalence relation or an order relation.
+
+To aid with intuition, we will illustrate these properties with diagrams: given a relation $R$, the fact that $a \mathrel{R} b$ will be represented diagramatically as follows:
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) \relnode{a}{$a$} ;
+\draw (3,0) \relnode{b}{$b$} ;
+\draw[-latex] (a) -- (b) ;
+\end{tikzpicture}
+\end{center}
+
+A \textit{reflexive} relation is one that relates every element of its domain to itself.
+
+\begin{definition}
+\label{defReflexiveRelation}
+\index{reflexive relation}
+\index{relation!reflexive}
+A relation $R$ on a set $X$ is \textbf{reflexive} if $a \mathrel{R} a$ for all $a \in X$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) \relnode{a}{$a$} ;
+\draw[-latex] (a) to[loop] (a) ;
+\end{tikzpicture}
+\end{center}
+
+\begin{example}
+\label{exEqualityIsReflexive}
+Given any set $X$, the equality relation $=$ on $X$ is reflexive, since $a = a$ for all $a \in X$.
+\end{example}
+
+\begin{example}
+\label{exDifferenceOfRealsInQIsReflexive}
+%% BEGIN EXTRACT %%
+Let $R$ be the relation on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by $a \mathrel{R} b$ if and only if $b-a \in \mathbb{Q}$. Then $R$ is reflexive, since for all $a \in \mathbb{R}$, we have $a-a = 0 \in \mathbb{Q}$, so that $a \mathrel{R} a$.
+%% END EXTRACT %%
+\end{example}
+
+\begin{exercise}
+\label{exSubsetIsReflexive}
+Let $X$ be a set. Prove that $\subseteq$ is a reflexive relation on $\mathcal{P}(X)$, but $\subsetneqq$ is not.
+\end{exercise}
+
+\begin{exercise}
+\label{exDivisibilityIsReflexive}
+Prove that the relation `$x$ divides $y$' on $\mathbb{Z}$ is reflexive.
+\end{exercise}
+
+The next exercise demonstrates that when determining if a relation is reflexive, we must be careful to specify its domain.
+
+\begin{exercise}
+\label{exReflexivitySensitiveToDomainOfRelation}
+Let $G = \{ (1,1), (2,2), (3,3) \}$. Let $R$ be the relation on $[3]$ whose graph is $G$, and let $S$ be the relation on $[4]$ whose graph is $G$. Prove that $R$ is reflexive, but $S$ is not.
+\end{exercise}
+
+Symmetric relations are those for which the \textit{direction} of the relation doesn't matter: two elements are either each related to the other, or not related at all.
+
+\begin{definition}
+\label{defSymmetricRelation}
+\index{symmetric relation}
+\index{relation!symmetric}
+A relation $R$ on a set $X$ is \textbf{symmetric} if, for all $a,b \in X$, if $a \mathrel{R} b$, then $b \mathrel{R} a$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) \relnode{a}{$a$} ;
+\draw (3,0) \relnode{b}{$b$} ;
+\draw[-latex] (a) to[bend left] (b) ;
+\draw[-latex, dashed] (b) to[bend left] (a) ;
+\end{tikzpicture}
+\end{center}
+
+\begin{example}
+\label{exEqualityIsSymmetric}
+Given any set $X$, the equality relation $=$ on $X$ is symmetric, since for all $a,b \in X$, if $a=b$, then $b=a$.
+\end{example}
+
+\begin{example}
+\label{exDifferenceOfRealsInQIsSymmetric}
+Let $R$ be the relation on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by $a \mathrel{R} b$ if and only if $b-a \in \mathbb{Q}$. Then $R$ is symmetric.
+
+To see this, let $a,b \in \mathbb{R}$ and assume that $a \mathrel{R} b$. Then $b-a \in \mathbb{Q}$, so that $b-a = \dfrac{p}{q}$ for some $p,q \in \mathbb{Z}$ with $q \ne 0$. But then
+\[ a-b = -(b-a) = \dfrac{-p}{q} \]
+so that $a-b \in \mathbb{Q}$. Hence $b \mathrel{R} a$, as required.
+\end{example}
+
+\begin{exercise}
+Find all subsets $U \subseteq \mathbb{Z}$ such that the relation `$x$ divides $y$' on $U$ is symmetric.
+\end{exercise}
+
+We showed in \Cref{exReflexivitySensitiveToDomainOfRelation} that reflexivity of a relation is sensitive to its domain. The next exercise demonstrates that symmetry is \textit{not} sensitive to the domain---that is, it is an \textit{intrinsic} property of the relation.
+
+\begin{exercise}
+\label{exSymmetryNotSensitiveToDomainOfRelation}
+Let $R$ and $S$ be relations such that $\mathrm{Gr}(R) = \mathrm{Gr}(S)$. Note that the domain of $R$ might be different from the domain of $S$. Prove that $R$ is symmetric if and only if $S$ is symmetric.
+\end{exercise}
+
+A condition related to symmetry, but in a sense opposite to it, is \textit{antisymmetry}. It says that the only way that two elements of a set can each be related to the other is if they are equal.
+
+\begin{definition}
+\index{antisymmetric relation}
+\index{relation!antisymmetric}
+Let $X$ be a set. A relation $R$ on $X$ is \textbf{antisymmetric} if, for all $a,b \in X$, if $a \mathrel{R} b$ and $b \mathrel{R} a$, then $a=b$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) \relnode{a}{$a$} ;
+\draw (3,0) \relnode{b}{$b$} ;
+\draw[-latex] (a) to[bend left] (b) ;
+\draw[-latex] (b) to[bend left] (a) ;
+\draw (4.5,0) node {$\Rightarrow$} ;
+\draw (6,0) node {$a=b$} ;
+\end{tikzpicture}
+\end{center}
+
+A word of warning here is that `antisymmetric' does not mean the same thing as `not symmetric'---indeed, we we will see, equality is both symmetric and antisymmetric, and many relations are neither symmetric nor antisymmetric. [Even more confusingly, there is a notion of \textit{asymmetric relation}, which also does not mean `not symmetric'.]
+
+\begin{example}
+Given any set $X$, the equality relation $=$ on $X$ is antisymmetric, since for all $a,b \in X$, if $a=b$ and $b=a$, then $a=b$.
+\end{example}
+
+\begin{example}
+The order relation $\le$ on $\mathbb{R}$ is antisymmetric, since for all $a,b \in \mathbb{R}$, if $a \le b$ and $b \le a$, then $a=b$.
+\end{example}
+
+\begin{exercise}
+\label{exDivisibilityIsOrIsNotAntisymmetric}
+Prove that the relation `$x$ divides $y$' on $\mathbb{N}$ is antisymmetric, but not on $\mathbb{Z}$.
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a set. Prove that $\subseteq$ is an antisymmetric relation on $\mathcal{P}(X)$.
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a set and let $R$ be a relation on $X$. Prove that $R$ is both symmetric and antisymmetric if and only if $\mathrm{Gr}(R) \subseteq \Delta_X$, where $\Delta_X$ is the diagonal subset of $X \times X$ (see \Cref{defDiagonalSubset}). Deduce that the only reflexive, symmetric and antisymmetric relation on a set $X$ is the equality relation on $X$.
+\end{exercise}
+
+The last property we will study in some detail is \textit{transitivity}. Transitive relations are those for which we can skip over intermediate related elements---for example, we can deduce $0 < 3$ from the facts that $0 < 1$ and $1 < 2$ and $2 < 3$.
+
+\begin{definition}
+\label{defTransitiveRelation}
+\index{relation!transitive}
+\index{transitive relation}
+A relation $R$ on a set $X$ is \textbf{transitive} if, for all $a,b,c \in X$, if $a \mathrel{R} b$ and $b \mathrel{R} c$, then $a \mathrel{R} c$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) \relnode{a}{$a$} ;
+\draw (3,0) \relnode{b}{$b$} ;
+\draw (6,0) \relnode{c}{$c$} ;
+\draw[-latex] (a) to (b) ;
+\draw[-latex] (b) to (c) ;
+\draw[-latex, dashed] (a) to[bend left] (c) ;
+\end{tikzpicture}
+\end{center}
+
+\begin{example}
+\label{exEqualityIsTransitive}
+Given any set $X$, the equality relation $=$ on $X$ is transitive since, for all $a,b,c \in X$, if $a=b$ and $b=c$, then $a=c$.
+\end{example}
+
+\begin{example}
+\label{exDifferenceOfRealsInQIsTransitive}
+Let $R$ be the relation on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by $a \mathrel{R} b$ if and only if $b-a \in \mathbb{Q}$. Then $R$ is transitive.
+
+To see this, let $a,b,c \in \mathbb{R}$ and assume that $a \mathrel{R} b$ and $b \mathrel{R} c$. Then $b-a \in \mathbb{Q}$ and $c-b \in \mathbb{Q}$, so there exist $p,q,r,s \in \mathbb{Z}$ with $q,s \ne 0$ such that
+\[ b-a = \dfrac{p}{q} \quad \text{and} \quad c-b = \dfrac{r}{s} \]
+It follows that 
+\[ c-a = (c-b) + (b-a) = \dfrac{p}{q} + \dfrac{r}{s} = \dfrac{ps+qr}{qs} \]
+so that $c-a \in \mathbb{Q}$. Hence $a \mathrel{R} c$, as required.
+\end{example}
+
+\begin{exercise}
+Let $X$ be a set. Prove that $\subseteq$ is a transitive relation on $\mathcal{P}(X)$.
+\end{exercise}
+
+\begin{exercise}
+\label{exDivisibilityIsTransitive}
+Prove that the relation `$x$ divides $y$' on $\mathbb{Z}$ is transitive.
+\end{exercise}
+
+Like symmetry, transitive is an intrinsic property of relations---that is, transitivity is not sensitive to the domain of the relation---as the next exercise demonstrates.
+
+\begin{exercise}
+\label{exTransitivityNotSensitiveToDomainOfRelation}
+Let $R$ and $S$ be relations such that $\mathrm{Gr}(R) = \mathrm{Gr}(S)$. Note that the domain of $R$ might be different from the domain of $S$. Prove that $R$ is transitive if and only if $S$ is transitive.
+\end{exercise}
+
+A fundamental property of transitive relations is that we can prove two elements $a$ and $b$ are related by finding a chain of related elements starting at $a$ and finishing at $b$. This is the content of the following proposition.
+
+\begin{proposition}
+\label{propTransitiveChain}
+Let $R$ be a relation on a set $X$. Then $R$ is transitive if and only if, for any finite sequence $x_0, x_1, \dots, x_n$ of elements of $X$ such that $x_{i-1} \mathrel{R} x_i$ for all $i \in [n]$, we have $x_0 \mathrel{R} x_n$.
+\end{proposition}
+\begin{cproof}
+For the sake of abbreviation, let $p(n)$ be the assertion that, for any $n \ge 1$ and any sequence $x_0, x_1, \dots, x_n$ of elements of $X$ such that $x_{i-1} \mathrel{R} x_i$ for all $i \in [n]$, we have $x_0 \mathrel{R} x_n$.
+
+We prove the two directions of the proposition separately.
+\begin{itemize}
+\item ($\Rightarrow$) Suppose $R$ is transitive. For $n \ge 1$. We prove $p(n)$ is true for all $n \ge 1$ by induction.
+\begin{itemize}
+\item (\textbf{Base case}) When $n=1$ this is immediate, since we assume that $x_0 \mathrel{R} x_1$.
+\item (\textbf{Induction step}) Fix $n \ge 1$ and suppose $p(n)$ is true. Let $x_0, \dots, x_n, x_{n+1}$ is a sequence such that $x_{i-1} \mathrel{R} x_i$ for all $i \in [n+1]$. We need to prove that $x_0 \mathrel{R} x_{n+1}$.
+
+By the induction hypothesis we know that $x_0 \mathrel{R} x_n$. By definition of the sequence we have $x_n \mathrel{R} x_{n+1}$. By transitivity, we have $x_0 \mathrel{R} x_{n+1}$.
+\end{itemize}
+So by induction, we have proved the $\Rightarrow$ direction.
+\item ($\Leftarrow$) Suppose $p(n)$ is true for all $n \ge 1$. Then in particular $p(2)$ is true, which is precisely the assertion that $R$ is transitive.
+\end{itemize}
+So we're done.
+\end{cproof}
+
+That is, \Cref{propTransitiveChain} states that for a transitive relation $R$ on a set $X$, if $x_0, x_1, \dots, x_n \in X$, then
+\[ x_0 \mathrel{R} x_1 \mathrel{R} \cdots \mathrel{R} x_n \quad \Rightarrow \quad x_0 \mathrel{R} x_n \]
+where `$x_0 \mathrel{R} x_1 \mathrel{R} \cdots  \mathrel{R} x_n$' abbreviates the assertion that $x_i \mathrel{R} x_{i+1}$ for each $i < n$.
+
+\index{relation|)}

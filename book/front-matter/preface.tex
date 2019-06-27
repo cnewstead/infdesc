@@ -1,0 +1,91 @@
+Hello, and thank you for taking the time to read this quick introduction to the book! I would like to begin with an apology and a warning:
+\begin{center}
+\Large \color{red} \bf This book is still under development!
+\end{center}
+That is to say, there are some sections that are incomplete, as well as other sections which are currently much more terse than I would like them to be.
+
+The most recent version is freely available for download from the following website:
+\begin{center}
+\url{\bookurl}
+\end{center}
+As the book is undergoing constant changes, I advise that you do not print it in its entirety---if you must print anything, then I suggest that you do it a few pages at a time, as required.
+
+This book was designed with \textit{inquiry} and \textit{communication} in mind, as they are central to a good mathematical education. One of the upshots of this is that there are many exercises throughout the book, requiring a more active approach to learning, rather than passive reading. These exercises are a fundamental part of the book, and should be completed even if not required by the course instructor. Another upshot of these design principles is that solutions to exercises are not provided---a student seeking feedback on their solutions should speak to someone to get such feedback, be it another student, a teaching assistant or a course instructor.
+
+\subsection*{Navigating the book}
+
+This book need not, and emphatically \textit{should not}, be read from front to back. The order of material is chosen so that material appearing later depends only on material appearing earlier (with a couple of exceptions, which are pointed out in the text).
+
+The majority of introductory pure mathematics courses cover, at a minimum, symbolic logic, sets, functions and relations. This material is the content of \Cref{ptFundamentals}. Such courses usually cover one or more additional topics from pure mathematics, with exactly \textit{which} topics depending on what the course is designing students for. With this in mind, \Cref{ptTopics} serves as an introduction to a range of areas of pure mathematics, including number theory, combinatorics, set theory, real analysis, probability theory and order theory.
+
+It is not necessary to cover all of \Cref{ptFundamentals} before proceeding to topics in \Cref{ptTopics}. In fact, interspersing material from \Cref{ptTopics} can be a useful way of motivating many of the abstract concepts that arise in \Cref{ptFundamentals}.
+
+The following table shows dependencies between sections. Previous sections within the same chapter as a section should be considered `essential' prerequisites unless indicated otherwise.
+
+\begin{center}
+\begin{tabular}{c|ccc}
+Section & Essential & Recommended & Useful \\ \hline
+\ref{secPropositionalLogic} & \ref{chGettingStarted} &  &  \\
+\ref{secSets} & \ref{secLogicalEquivalence} &  &  \\
+\ref{secPeanosAxioms} & \ref{secLogicalEquivalence} & \ref{secFunctions} & \ref{secInjectionsSurjections} \\
+\ref{secRelations} & \ref{secSets} & \ref{secFunctions} & \ref{secInjectionsSurjections}, \ref{secWeakInduction} \\
+\ref{secDivision} & \ref{secLogicalEquivalence} & \ref{secSets}, \ref{secStrongInduction} & \ref{secFunctions} \\
+\ref{secModularArithmetic} &  & \ref{secEquivalenceRelationsPartitions} &  \\
+\ref{secFiniteSets} & \ref{secInjectionsSurjections}, \ref{secStrongInduction} & \ref{secEquivalenceRelationsPartitions} &  \\
+\ref{secCountableUncountableSets} & \ref{secFiniteSets} &  &  \\
+\ref{secCardinalArithmetic} & \ref{secCountingPrinciples} &  &  \\
+\ref{secInequalitiesMeans} & \ref{secPeanosAxioms}, \ref{secSets} &  & \ref{secEquivalenceRelationsPartitions} \\
+\ref{secCompletenessConvergence} & \ref{secFunctions} & \ref{secInequalitiesMeans} &  \\
+\ref{secSeriesSums} & \ref{secFunctions} & \ref{secInequalitiesMeans} & \ref{secModularArithmetic}, \ref{secCountableUncountableSets} \\
+\ref{secDiscreteProbabilitySpaces} & \ref{secCountingPrinciples} & \ref{secCountableUncountableSets}, \ref{secSeriesSums} &  \\
+\ref{secOrdersLattices} & \ref{secEquivalenceRelationsPartitions} &  &  \\
+\ref{secStructuralInduction} & \ref{secStrongInduction}, \ref{secInjectionsSurjections} & \ref{secCountableUncountableSets} & \ref{secOrdersLattices}
+\end{tabular}
+\end{center}
+
+Prerequisites are cumulative. For example, in order to cover \Cref{secCardinalArithmetic}, you should first cover \Cref{chGettingStarted,chSetsFunctions,chMathematicalInduction} and \Cref{secFiniteSets,secCountingPrinciples,secCountableUncountableSets,secCardinality}.
+
+\todo{Example courses}
+
+\subsection*{What the numbers, colours and symbols mean}
+
+Broadly speaking, the material in the book is broken down into enumerated items that fall into one of five categories: definitions, results, remarks, examples and exercises. In \Cref{apxWriting}, we also have proof extracts. To improve navigability, these categories are distinguished by name, colour and symbol, as indicated in the following table.
+
+\begin{center}
+\begin{tabular}{lcl}
+\textbf{Category} & \textbf{Symbol} & \textbf{Colour} \\ \hline
+Definitions & \defintrosymbol & {\fontfamily{bch}\color{defcol} \textbf{Red}} \\
+Results & \thmintrosymbol & {\fontfamily{bch}\color{thmcol} \textbf{Blue}} \\
+Remarks & \tipintrosymbol & {\fontfamily{bch}\color{tipcol} \textbf{Purple}} \\
+\end{tabular}
+\hspace{20pt}
+\begin{tabular}{lcl}
+\textbf{Category} & \textbf{Symbol} & \textbf{Colour} \\ \hline
+Examples & \exintrosymbol & {\fontfamily{bch}\color{excol} \textbf{Teal}} \\
+Exercises & \printrosymbol & {\fontfamily{bch}\color{prcol} \textbf{Gold}} \\
+Proof extracts & \quoteintrosymbol & {\fontfamily{bch}\color{excol} \textbf{Teal}}
+\end{tabular}
+\end{center}
+These items are enumerated according to their section---for example, \Cref{thmUniquenessofLimits} is in \Cref{secCompletenessConvergence}. Definitions and theorems (important results) appear in a \fbox{box}.
+
+You will also encounter the symbols $\square$ and \nonproofqedsymbol{} whose meanings are as follows:
+
+\begin{itemize}
+\item[$\square$] \textbf{End of proof.} It is standard in mathematical documents to identify when a proof has ended by drawing a small square or by writing `\textit{Q.E.D.}' (The latter stands for \textit{quod erat demonstrandum}, which is Latin for \textit{which was to be shown}.)
+\item[\nonproofqedsymbol] \textbf{End of item.} This is \textit{not} a standard usage, and is included only to help you to identify when an item has finished and the main content of the book continues.
+\end{itemize}
+
+Some subsections are labelled with the symbol \optmarksymbol{}. This indicates that the material in that subsection can be skipped without dire consequences.
+
+\subsection*{Licence}
+
+This book is licensed under the Creative Commons Attribution-ShareAlike 4.0 (\textsc{cc by-sa 4.0}) licence. This means you're welcome to share this book, provided that you give credit to the author and that any copies or derivatives of this book are released under the same licence. The content of the licence can be read in its full glory at the end of the book, and by following the following URL:
+\begin{center}
+\url{http://creativecommons.org/licenses/by-sa/4.0/}
+\end{center}
+
+\subsection*{Comments and corrections}
+
+Any feedback, be it from students, teaching assistants, instructors or any other readers, would be very much appreciated. Particularly useful are corrections of typographical errors, suggestions for alternative ways to describe concepts or prove theorems, and requests for new content (e.g.\ if you know of a nice example that illustrates a concept, or if there is a relevant concept you wish were included in the book).
+
+Such feedback can be sent to the author by email (\url{\authoremail}).

@@ -1,0 +1,506 @@
+\section{Countable and uncountable sets}
+\secbegin{secCountableUncountableSets}
+
+In \Cref{secFiniteSets}, we defined what it means for a set to be `finite' in order to capture the idea that its elements can be listed in such a way that the list has a start and an end. We did so by observing that a list of the elements of a finite set is essentially the same thing as a bijection $f : [n] \to X$ for some $n \in \mathbb{N}$, with the element $f(k) \in X$ playing the role of the $k^{\text{th}}$ element of the list.
+
+We are now interested in \textit{infinite} sets. We certainly can't expect a list of all the elements of an infinite set to end, so the question now is: can its elements be listed if we allow the list to be infinite? We will call such sets \textit{countable sets}.
+
+It is perhaps surprising that not every set is countable: some sets are `too big' for their elements to be listed! We will prove that such \textit{uncountable} sets exist later in this section.
+
+The precise definition of what it means for a set $X$ to be countable (\Cref{defCountable}) captures the idea that we can list the elements of $X$ one-by-one such that, even if the list goes on forever, each element of $X$ appears \textit{at some finite stage} in the list. The list might or might not be finite; it has a start, but it might not have an end.
+
+To illustrate, consider the following list of the elements of $\mathbb{N}$:
+\[ 0,~ 1,~ 2,~ 3,~ 4,~ \dots,~ n,~ n+1,~ \dots \]
+The list does not end, since $\mathbb{N}$ is infinite (\Cref{thmNIsInfinite}), but nevertheless every natural number appears at some finite stage along the list.
+
+As another example, consider the set $\mathbb{Z}$ of all integers. We might wish to list the elements of $\mathbb{Z}$ in the usual way:
+\[ \dots,~ -(n+1),~ -n,~ \dots,~ -3,~ -2,~ -1,~ 0,~ 1,~ 2,~ 3,~ \dots,~ n,~ n+1,~ \dots \]
+This does not fulfil our criterion that the list must have a start: it is infinite in both directions. However, it is still possible to list them, by slotting the negative integers in-between the non-negative integers:
+\[ 0,~ -1,~ 1,~ -2,~ 2,~ -3,~ 3,~ \dots,~ -n,~ n,~ -(n+1),~ n+1,~ \dots\]
+This is not how we would usually think about listing the integers, but we have nonetheless found a way of doing it so that every integer appears at some finite stage on the list.
+
+But specifying a list of the elements of an infinite set $X$, such that every element of $X$ appears at some finite stage on the list, is equivalent to specifying a bijection $f : \mathbb{N} \to X$, where the element $f(k) \in X$ plays the role of the $k^{\text{th}}$ element of the list---that is, the elements of $X$ can be listed as
+\[  f(0),~ f(1),~ f(2),~ \dots,~ f(n),~ f(n+1),~ \]
+
+This motivates the following definition.
+
+\begin{definition}
+\label{defCountable}
+\index{countable set}
+\index{enumeration!of a countably infinite set}
+A set $X$ is \textbf{countably infinite} if there exists a bijection $f : \mathbb{N} \to X$. The bijection $f$ is called an \textbf{enumeration} of $X$. We say $X$ is \textbf{countable} if it is finite or countably infinite.
+\end{definition}
+
+Some authors prefer to use `countable' to mean `countably infinite', in which case they would say `finite or countable' to mean `countable'.
+
+\begin{example}
+\label{exNIsCountable}
+The set $\mathbb{N}$ is countably infinite, since by \Cref{exIdentityBijection}, the identity function $\mathrm{id}_{\mathbb{N}} : \mathbb{N} \to \mathbb{N}$ is a bijection. This enumeration yields the usual list of natural numbers
+\[ 0,~ 1,~ 2,~ 3,~ \dots,~ n,~ n+1,~ \dots \]
+\end{example}
+
+\begin{example}
+\label{exZIsCountable}
+The function $f : \mathbb{Z} \to \mathbb{N}$ defined for $x \in \mathbb{Z}$ by
+\[ f(x) = \begin{cases} 2x & \text{if } x \ge 0 \\ -(2x+1) & \text{if } x < 0 \end{cases} \]
+is a bijection. Indeed, it has an inverse is given by
+\[ f^{-1}(x) = \begin{cases} \frac{x}{2} & \text{if } x \text{ is even} \\ -\frac{x+1}{2} & \text{if } x \text{ is odd} \end{cases} \]
+Hence the set of integers $\mathbb{Z}$ is countably infinite. The corresponding list of integers is given by
+\[ 0,\ {-1},\ 1,\ {-2},\ 2,\ {-3},\ 3,\ {-4},\ 4,\ \dots \]
+which is exactly the list we presented earlier! The fact that $f$ is a bijection ensures that each integer appears on this list exactly once.
+\end{example}
+
+\begin{exercise}
+\label{exPositiveIntegersCountablyInfinite}
+Prove that the set of all positive integers is countably infinite.
+\end{exercise}
+
+\begin{exercise}
+\label{exEvenOddNaturalNumbersCountablyInfinite}
+Prove that the set of all even natural numbers is countably infinite, and that the set of all odd natural numbers is countably infinite.
+\end{exercise}
+
+Since the inverse of a bijection is a bijection, we may also prove that a set $X$ is countable by finding a bijection $X \to \mathbb{N}$.
+
+\begin{exercise}
+Prove that the function $p : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ defined by $p(x,y) = 2^x(2y+1)-1$ is a bijection. Deduce that $\mathbb{N} \times \mathbb{N}$ is countable.
+\hintlabel{exNCrossNIsCountable}{%
+The fundamental theorem of arithmetic (\Cref{thmFTA}) implies that, for all $n \in \mathbb{N}$, we can express $n+1$ uniquely as a power of $2$ multiplied by an odd number. 
+}
+\end{exercise}
+
+\subsection*{Closure properties of countable sets}
+
+Proving that a set is infinite by finding an explicit bijection with the set of natural numbers can be overly burdensome, so we will now develop some \textit{closure properties} of countable sets. This will allow us to prove that a $X$ set is countable by relating it to sets that we already know are countable, without having to find a bijection $f : \mathbb{N} \to X$ every time.
+
+\begin{proposition}
+\label{propCountablyInfiniteFromBijection}
+Let $f : X \to Y$ be a bijection. Prove that $X$ is countably infinite if and only if $Y$ is countably infinite.
+\end{proposition}
+
+\begin{cproof}
+Suppose $X$ is countably infinite. Then there is a bijection $g : \mathbb{N} \to X$. But then $f \circ g : \mathbb{N} \to X$ is a composite of bijections, so is bijective, meaning that $Y$ is countably infinite.
+
+Conversely, suppose $Y$ is countably infinite. Then there is a bijection $h : \mathbb{N} \to Y$. But then $f^{-1} \circ h : \mathbb{N} \to X$ is a composite of bijections, so is bijective, meaning that $X$ is countably infinite.
+\end{cproof}
+
+\begin{exercise}
+Prove if $X$ and $Y$ are countably infinite sets, then $X \times Y$ is countably infinite.
+\hintlabel{exProductOfTwoCountableSetsIsCountable}{%
+Use \Cref{exCartesianProductOfBijections}, together with the definition of countably infinite sets, to construct a bijection $\mathbb{N} \times \mathbb{N} \to X \times Y$. Then apply \Cref{exNCrossNIsCountable} and \Cref{propCountablyInfiniteFromBijection}.
+}
+\end{exercise}
+
+\Cref{exProductOfTwoCountableSetsIsCountable} allows us to prove that the product of finitely many countably infinite sets are countably infinite---this is an analogue of (the independent version of) the multiplication principle (\Cref{lemMultiplicationPrincipleIndependent}) for countably infinite sets.
+
+\begin{proposition}[The product of finitely many countable sets is countable]
+\label{propFiniteProductOfCountableSetsIsCountable}
+Let $n \ge 1$ and let $X_1, \dots, X_n$ be countably infinite sets. Then the product $\displaystyle \prod_{i=1}^n X_i$ is countably infinite.
+\end{proposition}
+\begin{cproof}
+We proceed by induction on $n \ge 1$.
+\begin{itemize}
+\item (\textbf{Base case}) When $n=1$ the assertion is trivial: if $X_1$ is countably infinite then $X_1$ is countably infinite.
+\item (\textbf{Induction step}) Fix $n \ge 1$ and suppose that for any sets $X_1, \dots, X_n$, the product $\prod_{i=1}^n X_i$ is countably infinite. Fix sets $X_1, \dots, X_{n+1}$. Then $\prod_{i=1}^n X_i$ is countably infinite by the induction hypothesis, and $X_{n+1}$ is countably infinite by assumption, so by \Cref{exProductOfTwoCountableSetsIsCountable}, the set
+\[ \left( \prod_{i=1}^n X_i \right) \times X_{n+1} \]
+is countably infinite. But by \Cref{exProductOfSuccNSets} there is a bijection 
+\[ \prod_{i=1}^{n+1} X_i \to \left( \prod_{i=1}^n X_i \right) \times X_{n+1} \]
+and so by \Cref{exProductOfTwoCountableSetsIsCountable} we have that $\prod_{i=1}^{n+1} X_i$ is countably infinite, as required.
+\end{itemize}
+By induction, we're done.
+\end{cproof}
+
+We often just want to know whether a set is \textit{countable}, rather than countably infinite. This might be because we only seek an upper bound on how large the set is; or it might because we already know that the set is infinite, so proving that it is countable suffices.
+
+The following theorem allows us to prove that a set $X$ is countable---that is, finite or countably infinite---by either surjecting $\mathbb{N}$ onto $X$, or injecting $X$ into $\mathbb{N}$. Using the intuition of \Cref{secFiniteSets}, where we compared the sizes of finite sets using injections and surjections, this says that a set is countable if and only if $X$ is at most as large as $\mathbb{N}$.
+
+%% Note for future: injection case doesn't require X inhabited.
+\begin{theorem} \label{thmCountableFromInjSurj}
+Let $X$ be an inhabited set. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $X$ is countable;
+\item There exists a surjection $f : \mathbb{N} \to X$;
+\item There exists an injection $f : X \to \mathbb{N}$.
+\end{enumerate}
+\end{theorem}
+\begin{cproof}
+We'll prove (i)$\Leftrightarrow$(ii) and (i)$\Leftrightarrow$(iii).
+\begin{itemize}
+\item (i)$\Rightarrow$(ii). Suppose $X$ is countable. If $X$ is countably infinite, then there exists a bijection $f : \mathbb{N} \to X$, which is a surjection. If $X$ is finite then there exists a bijection $g : [m] \to X$, where $m = |X| \ge 1$. Define $f : \mathbb{N} \to X$ by
+\[ f(n) = \begin{cases} g(n) & \text{ if } 1 \le n \le m \\ g(1) & \text{ if } n=0 \text{ or } n > m \end{cases} \]
+Then $f$ is surjective: if $x \in X$ then there exists $n \in [m]$ such that $g(n)=x$, and then  $f(n)=g(n)=x$.
+\item (ii)$\Rightarrow$(i). Suppose there exists a surjection $f : \mathbb{N} \to X$. To prove that $X$ is countable, it suffices to prove that if $X$ is infinite then it is countably infinite. So suppose $X$ is infinite, and define a sequence recursively by
+\begin{itemize}
+\item $a_0=0$;
+\item Fix $n \in \mathbb{N}$ and suppose $a_0, \dots, a_n$ have been defined. Define $a_{n+1}$ to be the least natural number for which $f(a_{n+1}) \not \in \{ f(a_0), f(a_1), \dots, f(a_n) \}$.
+\end{itemize}
+Define $g : \mathbb{N} \to X$ by $g(n)=f(a_n)$ for all $n \in \mathbb{N}$. Then
+\begin{itemize}
+\item $g$ is injective, since if $m \le n$ then $f(a_m) \ne f(a_n)$ by construction of the sequence $(a_n)_{n \in \mathbb{N}}$.
+\item $g$ is surjective. Indeed, given $x \in X$, by surjectivity there exists $m \in \mathbb{N}$ which is least such that $f(m)=x$, and we must have $a_n=m$ for some $n \le m$ by construction of the sequence $(a_n)_{n \in \mathbb{N}}$. So $x = f(a_n) = g(n)$, and hence $g$ is surjective.
+\end{itemize}
+So $g$ is a bijection, and $X$ is countable.
+\item (i)$\Rightarrow$(iii). Suppose $X$ is countable. If $X$ is countably infinite, then there exists a bijection $f : \mathbb{N} \to X$, so $f^{-1} : X \to \mathbb{N}$ is bijective and hence injective. If $X$ is finite then there exists a bijection $g : [m] \to X$, where $m=|X| \ge 1$. Then $g^{-1} : X \to [m]$ is injective. Let $i : [m] \to \mathbb{N}$ be defined by $i(k)=k$ for all $k \in [m]$. Then $i \circ g^{-1}$ is injective; indeed, for $x,x' \in X$ we have
+\[ i(g^{-1}(x))=i(g^{-1}(x')) \Rightarrow g^{-1}(x)=g^{-1}(x') \Rightarrow x=x' \]
+The first implication is by definition of $i$, and the second is by injectivity of $g^{-1}$. So there exists an injection $X \to \mathbb{N}$.
+\item (iii)$\Rightarrow$(i). Suppose there exists an injection $f : X \to \mathbb{N}$. To prove that $X$ is countable, it suffices to prove that if $X$ is infinite then it is countably infinite. Define a sequence $(a_n)_{n \in \mathbb{N}}$ recursively as follows:
+\begin{itemize}
+\item Let $a_0$ be the least element of $f[X]$;
+\item Fix $n \in \mathbb{N}$ and suppose $a_0, \dots, a_n$ have been defined. Let $a_{n+1}$ be the least element of $f[X] \setminus \{ a_0, \dots, a_n \}$. This exists since $f$ is injective, so $f[X]$ is infinite. 
+\end{itemize}
+Define $g : \mathbb{N} \to X$ by, for each $n \in \mathbb{N}$, letting $g(n)$ be the unique value of $x$ for which $f(x)=a_n$. Then
+\begin{itemize}
+\item $g$ is injective. By construction $a_m \ne a_n$ whenever $m \ne n$. Let $x,y \in X$ be such that $f(x)=a_m$ and $f(y)=a_n$. Since $f$ is injective, we must have $x \ne y$, and so $g(m) = x \ne y = g(n)$.
+\item $g$ is surjective. Fix $x \in X$. Then $f(x) \in f[X]$, so there exists $m \in \mathbb{N}$ such that $f(x)=a_m$. Hence $g(m)=x$.
+\end{itemize}
+So $g$ is a bijection, and $X$ is countably infinite.
+\end{itemize}
+Hence the equivalences have been proved.
+\end{cproof}
+
+In fact, we needn't even use $\mathbb{N}$ as the domain of the surjection or the codomain of the injection; we can in fact use any countable set $C$.
+
+\begin{exercise}
+\label{exCountabilityFromInjectionsAndSurjections}
+Let $X$ be an inhabited set. The following are equivalent:
+\begin{enumerate}[(i)]
+\item \label{itmInjectionSurjectionCountableSets} $X$ is countable;
+\item \label{itmInjectionIntoCountableSet} There exists an injection $f : X \to C$ for some countable set $C$;
+\item \label{itmSurjectionFromCountableSet} There exists a surjection $f : C \to X$ for some countable set $C$.
+\end{enumerate}
+\hintlabel{exCountableFromInjSurjC}{%
+For \ref{itmInjectionIntoCountableSet}$\Rightarrow$\ref{itmInjectionSurjectionCountableSets}, use the fact that the composite of two injections is injective. Likewise for \ref{itmSurjectionFromCountableSet}$\Rightarrow$\ref{itmInjectionSurjectionCountableSets}.
+}
+\end{exercise}
+
+\Cref{exCountableFromInjSurjC} is useful for proving the countability of many other sets: as we build up our repertoire of countable sets, all we need to do in order to prove a set $X$ is countable is find a surjection from a set we already know is countable to $X$, or an injection from $X$ into a set we already know is countable.
+
+This proof technique yields an incredibly short proof of the following counterintuitive result, which can be interpreted to mean that there are exactly as many rational numbers as there are natural numbers.
+
+\begin{theorem}
+\label{thmRationalsAreCountable}
+The set $\mathbb{Q}$ of rational numbers is countable.
+\end{theorem}
+
+\begin{cproof}
+Define a function $q : \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \}) \to \mathbb{Q}$ by letting $q(a,b) = \frac{a}{b}$ for all $a,b \in \mathbb{Z}$ with $b \ne 0$.
+
+By \Cref{exZIsCountable} and \Cref{exProductOfTwoCountableSetsIsCountable}, the set $\mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$ is countable.
+
+The function $q$ is surjective by definition of $\mathbb{Q}$---indeed, to say $x \in \mathbb{Q}$ is precisely to say that $x = \dfrac{a}{b} = q(a,b)$ for some $(a,b) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$.
+
+By \Cref{exCountableFromInjSurjC}, it follows that $\mathbb{Q}$ is countable.
+\end{cproof}
+
+\begin{exercise} \label{exFiniteSubsetsCountableFixedSize}
+Let $X$ be a countable set. Prove that $\binom{X}{k}$ is countable for each $k \in \mathbb{N}$.
+\begin{backhint}
+\hintref{exFiniteSubsetsCountableFixedSize}
+Suppose $X=\mathbb{N}$. By \Cref{propFiniteProductOfCountableSetsIsCountable}, the set $\mathbb{N}^k$ is countable. By \Cref{thmCountableFromInjSurj}(c), it suffices to find an injection $\binom{\mathbb{N}}{k} \to \mathbb{N}^k$.
+\end{backhint}
+\end{exercise}
+
+\begin{theorem}[The union of countably many countable sets is countable]
+\label{thmCountableUnionOfCountableSetIsCountable}
+Let $\{ X_n \mid n \in \mathbb{N} \}$ be a family of countable sets. Then the set $X$ defined by
+\[ X = \bigcup_{n \in \mathbb{N}} X_n \]
+is countable.
+\end{theorem}
+
+\begin{cproof}
+We may assume that the sets $X_n$ are all inhabited, since the empty set does not contribute to the union.
+
+For each $n \in \mathbb{N}$ there is a surjection $f_n : \mathbb{N} \to X_n$. Define $f : \mathbb{N} \times \mathbb{N} \to X$ by $f(m,n)=f_m(n)$ for all $m,n \in \mathbb{N}$. Then $f$ is surjective: if $x \in X$ then $x \in X_m$ for some $m \in \mathbb{N}$. Since $f_m$ is surjective, it follows that $x=f_m(n)$ for some $n \in \mathbb{N}$. But then $x=f(m,n)$. Since $\mathbb{N} \times \mathbb{N}$ is countable, it follows from \Cref{exCountableFromInjSurjC} that $X$ is countable.
+\end{cproof}
+
+\begin{example}
+\label{exCountableSubsetsOfCountableSetIsCountable}
+Let $X$ be a countable set. The set of all finite subsets of $X$ is countable. Indeed, the set of all finite subsets of $X$ is equal to $\displaystyle \bigcup_{k \in \mathbb{N}} \binom{X}{k}$, which is a union of countably many countable sets by \Cref{exFiniteSubsetsCountableFixedSize}, so is countable by \Cref{thmCountableUnionOfCountableSetIsCountable}.
+\end{example}
+
+\subsection*{Uncountable sets}
+
+We have now seen plenty of examples of countable sets. It is not immediately obvious that not every set is countable. How do we \textit{know} that there are sets out there whose elements can't be listed?
+
+We prove in \Cref{thmCantorForN} that there exists an uncountable set, namely the power set of the natural numbers. The proof is deceptively simple, but the implications are important.
+
+\begin{theorem}
+\label{thmCantorForN}
+$\mathcal{P}(\mathbb{N})$ is uncountable.
+\end{theorem}
+
+\begin{cproof}
+We proved in \Cref{exRussellSubset} that no function $f : \mathbb{N} \to \mathcal{P}(\mathbb{N})$ is surjective. Specifically, given $f : \mathbb{N} \to \mathcal{P}(\mathbb{N})$, we can show that the element
+\[ B = \{ k \in \mathbb{N} \mid k \not\in f(k) \} \in \mathcal{P}(\mathbb{N}) \]
+is not equal to $f(n)$ for any $n \in \mathbb{N}$. It follows from \Cref{exCountabilityFromInjectionsAndSurjections}\ref{itmSurjectionFromCountableSet} that $\mathcal{P}(\mathbb{N})$ is uncountable.
+\end{cproof}
+
+The argument used in \Cref{thmCantorForN} is an example of \textit{Cantor's diagonal argument}, and is typical .
+
+\begin{theorem}
+\label{thmCantorDiagonalGeneral}
+Let $X$ be a set, and assume that for every function $f : \mathbb{N} \to X$, there is:
+\begin{enumerate}[(i)]
+\item A family of logical formulae $p_n(x)$ with $x \in X$, one for each $n \in \mathbb{N}$; and
+\item An element $b \in X$;
+\end{enumerate}
+such that $\forall n \in \mathbb{N},~ [p_n(b) \Leftrightarrow \neg p_n(f(n))]$. Then $X$ is uncountable.
+\end{theorem}
+
+\begin{cproof}
+We prove that no function $f : \mathbb{N} \to X$ is surjective. So let $f : \mathbb{N} \to X$ be an arbitrary function and let $p_n(x)$ and $b \in X$ be as in the statement of the theorem.
+
+To see that $f$ is not surjective, assume towards a contradiction that $b=f(k)$ for some $k \in \mathbb{N}$.
+\begin{itemize}
+\item If $p_k(b)$ is true, then $p_k(f(k))$ is true since $b=f(k)$, and $\neg p_k(f(k))$ is true since $p_k(b) \Rightarrow \neg p_k(f(k))$. This is a contradiction.
+\item If $\neg p_k(b)$ is true, then $\neg p_k(f(k))$ is false since $b=f(k)$, and so $p_k(b)$ is true since $[\neg p_k(f(k))] \Rightarrow p_k(b)$. This is a contradiciton. 
+\end{itemize}
+In both cases we arrive at a contradiction. So $b \ne f(k)$ for any $k \in \mathbb{N}$, and so $f$ is not surjective.
+
+Hence $X$ is uncountable by \Cref{exCountabilityFromInjectionsAndSurjections}\ref{itmSurjectionFromCountableSet}.
+\end{cproof}
+
+\begin{strategy}[Cantor's diagonal argument]
+\label{strCantorDiagonal}
+\index{Cantor's diagonal argument}
+In order to prove that a set $X$ is uncountable, it suffices to prove that no function $f : \mathbb{N} \to X$ is surjective using the following argument: given a function $f : \mathbb{N} \to X$, find an element $b \in X$ that `disagrees' with each value $f(n)$ about some statement involving $n$.
+\end{strategy}
+
+\begin{example}
+In the proof of \Cref{thmCantorForN}, we proved that $\mathcal{P}(\mathbb{N})$ is uncountable as follows. Given $f : \mathbb{N} \to \mathcal{P}(\mathbb{N})$, we needed to find an element $B \in \mathcal{P}(\mathbb{N})$---that is, a subset $B \subseteq \mathbb{N}$---that `disagreed' with each value $f(n)$ about something involving $n$.
+
+Keep in mind that, for each $n \in \mathbb{N}$, the element $f(n) \in \mathcal{P}(\mathbb{N})$ is a subset of $\mathbb{N}$, so it makes sense to ask whether $n$ is an element of $f(n)$ or not.
+
+With this in mind, for each $n \in \mathbb{N}$, we forced $B$ to disagree with $f(n)$ about whether $n$ is an element. That is
+\[ n \in B \quad \Leftrightarrow \quad n \not\in f(n) \]
+In the language of \Cref{thmCantorDiagonalGeneral}, the statement $p_n(U)$ (for $n \in \mathbb{N}$ and $U \in \mathcal{P}(\mathbb{N})$ is the statement `$n \in U$'; for each $n \in \mathbb{N}$, this statement is true with $U=B$ if and only if it is false with $U=f(n)$.
+
+The definition $B = \{ k \in \mathbb{N} \mid k \not\in f(k) \}$ forces $n \in B \Leftrightarrow n \not\in f(n)$ to be true for all $n \in \mathbb{N}$, and so Cantor's diagonal argument applies.
+\end{example}
+
+Cantor's diagonal argument can also be used to prove that $\mathbb{R}$ is uncountable by considering the decimal expansions of real numbers (\Cref{defBaseBExpansionOfRealNumber}).
+
+\begin{theorem}
+\label{thmRIsUncountable}
+$\mathbb{R}$ is uncountable.
+\end{theorem}
+
+\begin{cproof}
+Let $f : \mathbb{N} \to \mathbb{R}$ be an arbitrary function. We prove that $f$ is not surjective.
+
+For each $n \in \mathbb{N}$, let the decimal expansion of $f(n) \in \mathbb{R}$ be $x_0^n \,.\, x_1^n x_2^n x_3^n \dots$---that is
+\[ f(n) = \sum_{i \ge 0} x_i^n \cdot 10^{-i} \]
+[The superscript `$n$' here is a label, not an exponent.]
+
+We define $b \in \mathbb{R}$ by forcing the decimal expansions of $b$ and $f(n)$ to differ in the $n^{\text{th}}$ place for each $n \in \mathbb{N}$. Specifically, for each $n \in \mathbb{N}$ let
+\[ b_n = \begin{cases} 0 & \text{if } x_n^n \ne 0 \\ 1 & \text{if } x_n^n = 0 \end{cases} \]
+and let $b = b_0. b_1 b_2 b_3 \dots{} = \sum_{i \ge 0} b_i \cdot 10^{-i}$.
+
+Note that $b$ does not have recurring 9s, so it is a valid decimal expansion of a real number. Moreover $b \ne f(n)$ for any $n \in \mathbb{N}$ by uniqueness of decimal expansions of real numbers (\Cref{thmBaseBExpansionsOfReals}), since $b_n \ne x_n^n$.
+
+Hence $f$ is not surjective, so that $\mathbb{R}$ is uncountable.
+\end{cproof}
+
+\begin{exercise}
+Use Cantor's diagonal argument to prove that the set $\mathbb{N}^{\mathbb{N}}$ of all functions $\mathbb{N} \to \mathbb{N}$ is uncountable.
+\end{exercise}
+
+Using Cantor's diagonal argument every time we want to prove that a set is uncountable can be cumbersome. However, just like with, \Cref{thmCountableFromInjSurj}, we can prove that sets are uncountable by relating them to other sets that we already know are uncountable.
+
+\begin{theorem}
+\label{thmUncountableFromInjSurj}
+Let $X$ be a set. The following are equivalent:
+\begin{enumerate}[(a)]
+\item $X$ is uncountable;
+\item There exists a surjection $f : X \to U$ for some uncountable set $U$;
+\item There exists an injection $f : U \to X$ for some uncountable set $U$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}
+For (i)$\Rightarrow$(ii) and (i)$\Rightarrow$(iii), take $U=X$ and $f=\mathrm{id}_X$.
+
+For (ii)$\Rightarrow$(i), suppose that there is a surjection $f : X \to U$ for some uncountable set $U$. Then
+
+For (iii)$\Rightarrow$(i), suppose there is an injection $f : U \to X$ for some uncountable set $U$. If $X$ were countable, there would be an injection $g : X \to \mathbb{N}$ by \Cref{thmCountableFromInjSurj}(iii); but then $g \circ f : U \to \mathbb{N}$ would be an injection, contradicting the fact that $U$ is uncountable.
+\end{cproof}
+
+\begin{proposition}
+\label{propBinarySequencesAreUncountable}
+The set $\{0,1\}^{\mathbb{N}}$ of all functions $\mathbb{N} \to \{0,1\}$ is uncountable.
+\end{proposition}
+
+\begin{cproof}
+Define $F : \mathcal{P}(\mathbb{N}) \to \{0,1\}^{\mathbb{N}}$ for $U \subseteq \mathbb{N}$ by letting $F(U) = \chi_U : \mathbb{N} \to \{0,1\}$ be the characteristic function of $U$ (\Cref{defCharacteristicFunction}).
+
+Given $U, V \subseteq \mathbb{N}$, we have
+\[ F(U) = F(V) \quad \Rightarrow \quad \chi_U = \chi_V \quad \Rightarrow \quad U = V \]
+by \Cref{thmCharacteristicFunctionsCharacteriseSubsets}. But then $F$ is injective, and $\mathcal{P}(\mathbb{N})$ is uncountable by Cantor's theorem, so that $\{0,1\}^{\mathbb{N}}$ is uncountable by \Cref{thmUncountableFromInjSurj}.
+\end{cproof}
+
+\begin{exercise}
+Prove that if a set $X$ has an uncountable subset, then $X$ is uncountable.
+\end{exercise}
+
+\begin{exercise}
+\label{exPowerSetFiniteOrUncountable}
+Let $X$ be a set. Prove that $\mathcal{P}(X)$ is either finite or uncountable.
+\begin{backhint}
+\hintref{exPowerSetFiniteOrUncountable}
+We have already proved this when $X$ is finite. When $X$ is countably infinite, use \Cref{thmCantorForN}. When $X$ is uncountably infinite, find an injection $X \to \mathcal{P}(X)$ and find a way to apply \Cref{exCountableFromInjSurjC}.
+\end{backhint}
+\end{exercise}
+
+\subsection*{Detecting countability}
+
+We have now seen several examples of countable and uncountable sets. But being able to prove that a set is countable, or that a set is uncountable, only gets us so far---it will be beneficial to gain some intuition for how to detect whether a set is countable or uncountable.
+
+We now work towards proving the following heuristic:
+
+\begin{center}
+\textit{A set is countable if each of its elements has a finite description.}
+\end{center}
+
+Before we make this precise, let's see this heuristic in action. Consider some of the sets that we have already seen are countable:
+\begin{itemize}
+\item The set $\mathbb{N}$ is countable; every natural number can be expressed as a finite string of digits, so has a finite description---for example, $7$ or $15213$.
+\item The set $\mathbb{Z}$ is countable; every integer has a finite description as a finite string of digits, possibly modified by a minus sign---for example, $7$ or $-15213$.
+\item The set $\mathbb{Q}$ is countable; every rational number has a finite description as a pair of integers (which themselves have finite descriptions), one atop the other, separated by a horizontal line---for example, $\frac{7}{1}$ or $\frac{-15213}{21128}$.
+\item The set of all \textit{finite} subsets of $\mathbb{N}$ is countable; every finite subset of $\mathbb{N}$ has a finite expression in list notation by writing an open curly bracket `$\{$', followed by a finite number of natural numbers (which themselves have finite expressions) separated by commas, and finally writing a closed curly bracket `$\}$'---for example $\{ 15, 0, 281 \}$ or $\{ \}$.
+\end{itemize}
+
+Now consider some of the sets that we know (or have been told) are uncountable:
+\begin{itemize}
+\item The set $\mathcal{P}(\mathbb{N})$ is uncountable; intuitively, the infinite subsets of $\mathbb{N}$ cannot be expressed finitely in a uniform way.
+\item The set $\mathbb{R}$ is uncountable; intuitively, there is no uniform way of finitely describing real numbers---for example, decimal expansions are no good since they are infinite.
+\end{itemize}
+
+\begin{definition}
+\label{defKleeneStar}
+\index{Kleene star}
+\index{word}
+\index{empty word}
+\index{length!of a word}
+\index{alphabet}
+\nindex{Sigmastar}{$\Sigma^*$}{Kleene star}
+Let $\Sigma$ be a set. A \textbf{word} over $\Sigma$ is an expression of the form $a_1 a_2 \dots a_n$, where $n \in \mathbb{N}$ and $a_i \in \Sigma$ for all $i \in [n]$. The natural number $n$ is called the \textbf{length} of the word. The unique word of length $0$ is called the \textbf{empty word}, and is denoted by $\varepsilon$ \inlatex{varepsilon}.
+
+The set $\Sigma$ is called the \textbf{alphabet}. The set of all words over $\Sigma$ is denoted by $\Sigma^*$ \inlatex{Sigma\^{}*}; the operation $(-)^{\star}$ is called the \textbf{Kleene star}.
+\end{definition}
+
+Formally, $\Sigma^*$ is defined to be the union $\displaystyle\bigcup_{n \in \mathbb{N}} \Sigma^n$, where the sets $\Sigma^n$ are recursively defined by
+\[ \Sigma^0 = \{ \varepsilon \} \quad \text{and} \quad \Sigma^{n+1} = \{ wa \mid w \in \Sigma^n,~ a \in \Sigma \} \text{ for all } n \ge 0 \]
+That is, given $n \in \mathbb{N}$, the elements of $\Sigma^n$ are precisely the words over $\Sigma$ of length $n$.
+
+\begin{example}
+\label{exSomeExamplesOfFiniteStrings}
+The elements of $\{ 0,1 \}^*$ are precisely the finite binary strings:
+\[ \{ 0,1 \}^* = \{ \varepsilon,~ 0,~ 1,~ 00,~ 01,~ 10,~ 11,~ 000,~ 001,~ 010,~ 011,~ \dots \} \]
+Likewise, the elements of $\{ 0,1,2,3,4,5,6,7,8,9 \}^*$ are the finite strings of the base-$10$ digits. Keep in mind, though, that formally the elements of this string are \textit{words} and not \textit{numbers}, and that two words may correspond with the same natural number---for example $123$ and $00123$ are distinct elements of $\{ 0,1,2,3,4,5,6,7,8,9 \}^*$, despite the fact that they both \textit{represent} the same natural number.
+\end{example}
+
+\begin{exercise}
+Let $\Sigma = \{ 0,1,2,3,4,5,6,7,8,9,{\div},{-} \}$. Describe which words over $\Sigma$ immediately represent rational numbers (in the sense of treating the digit symbols as numbers and the symbols $\div$ and $-$ as arithmetic operations). Find some examples of elements of $\Sigma^*$ that do not represent rational numbers.
+\hintlabel{exWordsRepresentingRationalNumbers}{%
+How many `$\div$' symbols can a string from $\Sigma^*$ have if the string is to represent a rational number? Where in a word over $\Sigma$ can a $\div$ symbol appear?
+}
+\end{exercise}
+
+\begin{exercise}
+Let $\Sigma$ be an alphabet. Prove that if $\Sigma$ is countable, then $\Sigma^*$ is countable.
+\hintlabel{exIfAlphabetCountableThenSetOfWordsCountable}{%
+Prove by induction that $\Sigma^n$ is countable for all $n \in \mathbb{N}$, and then apply \Cref{thmCountableUnionOfCountableSetIsCountable}.
+}
+\end{exercise}
+
+As hinted by \Cref{exSomeExamplesOfFiniteStrings}, we can use words over sets to make precise what we mean by `finite description'.
+
+The idea is that finitely describing the elements of a set $X$ amounts to defining a function $D : X \to \Sigma^*$ for some set $\Sigma$; given $x \in X$, the word $D(x) \in \Sigma^*$ can be thought of as a finite description of the element $x \in X$.
+
+But $D$ cannot be any old function---if two elements of $X$ have the same description, then they should be equal. That is
+\[ \forall x,y \in X,~ D(x) = D(y) \Rightarrow x=y \]
+But this says exactly that $D$ must be injective!
+
+\begin{definition}
+\label{defFiniteDescription}
+\index{finite description}
+Let $X$ be a set and let $\Sigma$ be an alphabet. A \textbf{finite description} of the elements of $X$ over $\Sigma$ is an injection $D : X \to \Sigma^*$.
+\end{definition}
+
+\begin{example}
+\label{exFiniteDescriptionOfFiniteSubsetsOfN}
+Let $\mathcal{F}(\mathbb{N})$ be the set of all finite subsets of $\mathbb{N}$. We already know that this set is countable by \Cref{exCountableSubsetsOfCountableSetIsCountable}; now we exhibit a finite description of its elements.
+
+Let $\Sigma = \left\{ 0,1,2,3,4,5,6,7,8,9,\boxed{\{},\boxed{\}},\boxed{,} \right\}$---that is, the elements of the alphabet $\Sigma$ are the digits $0$ through $9$, an open curly bracket, a closed curly bracket and a comma. (The curly brackets and comma are boxed to distinguish them from the same symbols used in the list notation describing $\Sigma$.)
+
+Define $D : \mathcal{F}(\mathbb{N}) \to \Sigma^*$ by letting $D(U)$ be the expression of the finite set $U \subseteq \mathbb{N}$ in list notation, with its elements listed in increasing order. This ensures well-definedness of $D$---for example
+\[ \{1,2,3\} = \{2,3,1\} \quad \text{but} \quad D(\{1,2,3\}) = D(\{2,3,1\}) = \{1,2,3\} \] 
+
+But then $D$ is injective: given finite subsets $U, V \subseteq \mathbb{N}$, if $D(U) = D(V)$, then $U$ and $V$ have identical expressions in list notation---this means that they have the same elements, so they are equal!
+\end{example}
+
+\begin{example}
+\label{exTrivialFiniteDescription}
+Every set has a trivial finite description, taking the set itself to be the alphabet. Indeed, the function $D : X \to X^*$ defined by $D(x) = x$ for all $x \in X$ is evidently an injection!
+\end{example}
+
+\Cref{exTrivialFiniteDescription} raises the point that if we want to prove that a set is countable by showing that its elements have finite descriptions, then we must place some restrictions on the alphabets that we may use. For example, the alphabet that we used in \Cref{exFiniteDescriptionOfFiniteSubsetsOfN} is finite---it has $13$ elements.
+
+\begin{exercise}
+\label{exFiniteDescriptionOfQ}
+Give an explicit finite description of the rational numbers over a finite alphabet.
+\end{exercise}
+
+\begin{exercise}
+\label{exFiniteDescriptionOfCofiniteSubsetsOfN}
+Let $\mathcal{C}(\mathbb{N})$ be the set of all \textit{cofinite} subsets of $\mathbb{N}$; that is
+\[ \mathcal{C}(\mathbb{N}) = \{ U \subseteq \mathbb{N} \mid \mathbb{N} \setminus U \text{ is finite} \} \]
+Give an explicit finite description of the elements of $\mathcal{C}(\mathbb{N})$ over a finite alphabet.
+\end{exercise}
+
+\begin{theorem}
+\label{thmCountableIffFiniteDescription}
+Let $X$ be a set. Then $X$ is countable if and only if there is a finite description of the elements of $X$ over a countable alphabet.
+\end{theorem}
+
+\begin{cproof}
+If $X$ is countable, then we may take $X$ itself to be our alphabet! The function $D : X \to X^*$ defined by $D(x) = x$ for all $x \in X$ is evidently injective.
+
+Conversely, if there is an injection $D : X \to \Sigma^*$ for some countable alphabet $\Sigma$, then $\Sigma^*$ is countable by \Cref{exIfAlphabetCountableThenSetOfWordsCountable}, and so $X$ is countable by \Cref{exCountabilityFromInjectionsAndSurjections}\ref{itmInjectionIntoCountableSet}.
+\end{cproof}
+
+\begin{example}
+In light of \Cref{thmCountableIffFiniteDescription}, we may deduce from \Cref{exFiniteDescriptionOfFiniteSubsetsOfN} and \Cref{exFiniteDescriptionOfQ,exFiniteDescriptionOfCofiniteSubsetsOfN} that $\mathcal{F}(\mathbb{N})$, $\mathbb{Q}$ and $\mathcal{C}(\mathbb{N})$ are all countable sets.
+\end{example}
+
+\begin{exercise}
+Prove that the set of all polynomials with rational coefficients is countable.
+\end{exercise}
+
+\begin{exercise}
+Consider the following argument that claims to be a proof that $\mathcal{P}(\mathbb{N})$ is uncountable. (It isn't.)
+\begin{quote}
+Let $\Sigma = \left\{ \mathbb{N},x,U,V,\boxed{\mid},\boxed{\in},\boxed{\{},\boxed{\}} \right\}$---again, we have boxed some symbols to emphasise that they are elements of $\Sigma$.
+
+Define $D : \mathcal{P}(\mathbb{N}) \to \Sigma^*$ by
+\[ D(U) = \{ x \in \mathbb{N} \mid x \in U \} \quad \text{and} \quad D(V) = \{ x \in \mathbb{N} \mid x \in V \} \]
+for all $U, V \subseteq \mathbb{N}$. Then $\Sigma$ is finite, and $D$ is injective since for all $U,V \subseteq \mathbb{N}$ we have
+\[ D(U) = D(V) ~ \Rightarrow ~ \{ x \in \mathbb{N} \mid x \in U \} = \{ x \in \mathbb{N} \mid x \in V \} ~ \Rightarrow ~ U = V \]
+Since $D$ is a finite description of the subsets of $\mathbb{N}$ over a finite alphabet, it follows from \Cref{thmCountableIffFiniteDescription} that $\mathcal{P}(\mathbb{N})$ is countable. \hfill $\Box$
+\end{quote}
+This proof cannot be valid, since we know that $\mathcal{P}(\mathbb{N})$ is uncountable. Where in the proof did we go wrong?
+\hintlabel{exBadProofThatPowerSetOfNIsCountable}{%
+Is $\Sigma$ \textit{really} finite? Is $D$ \textit{really} well-defined?
+}
+\end{exercise}
+
+\begin{exercise}
+Suppose we were to attempt to prove that $\mathcal{P}(\mathbb{N})$ is countable using the same argument as \Cref{exFiniteDescriptionOfFiniteSubsetsOfN}. Where does the proof fail?
+\end{exercise}
+
+\begin{exercise}
+Prove that, for every countable set $X$, there is a finite description of the elements of $X$ over a \textit{finite} alphabet.
+\hintlabel{exCountableIffFiniteDescriptionFiniteAlphabet}{%
+Start by proving that there is a finite description of the elements of $\mathbb{N}^*$ over a finite alphabet $\Phi$. This defines an injection $\mathbb{N}^* \to \Phi^*$. Now given a countable alphabet $\Sigma$, use the injection $\Sigma \to \mathbb{N}$ given by \Cref{thmCountableFromInjSurj} to construct an injection $\Sigma^* \to \mathbb{N}^*$, and therefore an injection $\Sigma^* \to \Phi^*$. Finally, use this to turn finite descriptions over $\Sigma$ into finite descriptions over $\Phi$.
+}
+\end{exercise}

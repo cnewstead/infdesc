@@ -1,0 +1,311 @@
+\section{Prime numbers}
+\secbegin{secPrimes}
+
+Thinking of divisibility as a way of \textit{breaking down} an integer, for example $12 = 2 \times 2 \times 3$, our goal now is to show that there are particular integers that are \textit{atomic}---they are the building blocks of the integers, in the sense that:
+\begin{itemize}
+\item Every integer can be broken into a product of these atomic integers\dots{}
+\item \dots{}and these atomic integers cannot themselves be broken down any further\dots{}
+\item \dots{}\textit{and} there is an essentially unique way to write an integer as a product of these atomic integers.
+\end{itemize}
+
+There are a couple of fairly vague terms used here: `atomic' and `essentially unique'. But as always, we will make these terms precise when we need to.
+
+\subsection*{Primes and irreducibles}
+
+There are two ways that we might want to characterise the so-called \textit{atomic} integer that we just mentioned.
+\begin{itemize}
+\item One way that an integer might be atomic is if it allows us to break down products of integers---this leads to the notion of \textit{prime} (\Cref{defPrime}).
+\item Another way is that an integer might be atomic is if it cannot be split up as a product of more than one integer (in a nontrivial way)---this leads to the notion of \textit{irreducible} (\Cref{defReducible}).
+\end{itemize}
+Conveniently, as we will show in \Cref{thmPrimeIffIrred}, these two notions coincide. But the fact that they coincide is not obvious, and uses essential properties of the integers that do not hold in more general structures.
+
+The definition of \textit{prime} that we are about to give comes from abstract algebra (specifically, from ring theory). It might seem strange, but we will soon be able to show that the more familiar definition---that is, having exactly two positive divisors---is equivalent to this one.
+
+\begin{definition}
+\label{defPrime}
+\index{prime}
+An integer $p$ is (\textbf{ring theoretically}) \textbf{prime} if $p$ is a nonzero nonunit and, for all $a,b \in \mathbb{Z}$, if $p \mid ab$ then $p \mid a$ or $p \mid b$.
+\end{definition}
+
+\begin{example}
+$2$ is prime. To see this, suppose it isn't. Then there exist $a,b \in \mathbb{Z}$ such that $2 \mid ab$ but $2$ divides neither $a$ nor $b$. Thus $a$ and $b$ are both odd, meaning that $ab$ is odd\dots{} but this contradicts the assumption that $2 \mid ab$.
+
+However, $18$ is not prime. Indeed, $18 \mid 12 \times 15$ but $18$ divides neither $12$ nor $15$.
+\end{example}
+
+\begin{exercise}
+Using \Cref{defPrime}, prove that $3$ and $5$ are prime, and that $4$ is not prime.
+\end{exercise}
+
+\begin{example}
+Let $k \in \mathbb{Z}$ with $0<k<5$. We'll show that $5 \mid \binom{5}{k}$.
+
+Well, by \Cref{thmBinomAsFactorialByInduction} we know that
+\[ 5! = \binom{5}{k}k!(5-k)! \]
+By \Cref{defFactorialRecursive}, we have
+\[ \underbrace{5 \times 4!}_{=5!} = \binom{5}{k} \times \underbrace{1 \times \cdots \times k}_{=k!} \times \underbrace{1 \times \cdots \times (5-k)}_{=(5-k)!} \]
+Since $5$ is prime, it must divide one of the factors on the right-hand side of this equation. Thus, either $5$ divides $\binom{5}{k}$, or it divides $\ell$ for some $1 \le \ell \le k$ or $1 \le \ell \le 5-k$. But $k<5$ and $5-k<5$, so it cannot divide any of these values of $\ell$---if it did, it would imply $5 \le \ell \le k$ or $5 \le \ell \le 5-k$, which is nonsense. Hence $5$ must divide $\binom{5}{k}$.
+\end{example}
+
+\begin{exercise}
+Let $p \in \mathbb{Z}$ be a positive prime and let $0 < k < p$. Show that $p \mid \binom{p}{k}$.
+\hintlabel{exPrimeDivBinomCoeff}{%
+Use the factorial formula for binomial coefficients (\Cref{thmBinomAsFactorialByInduction}).
+}
+\end{exercise}
+
+We now arrive at our second notion of \textit{atomic}, capturing the idea that it should not be possible to break an atomic integer into smaller parts.
+
+\begin{definition}
+\label{defReducible}
+\index{irreducible number}
+\index{reducible number}
+An integer $a$ is \textbf{irreducible} if $a$ is a nonzero nonunit and, for all $m,n \in \mathbb{Z}$, if $a=mn$, then either $m$ or $n$ is a unit. Otherwise, $a$ is \textbf{reducible}.
+\end{definition}
+
+The notion of \textit{irreducible} captures more closely the more familiar notion of `prime', as the next result shows.
+
+\begin{proposition}
+\label{propFactorsOfIrred}
+Let $p \in \mathbb{Z}$ be a nonzero nonunit. Then $p$ is irreducible if and only if the only divisors of $p$ are $p$, $-p$, $1$ and $-1$.
+\end{proposition}
+\begin{cproof}
+Suppose $p$ is irreducible and that $a \mid p$. Then $p = ab$ for some $b \in \mathbb{Z}$. Since $p$ is irreducible, either $a$ or $b$ is a unit. If $a$ is a unit then $b = \pm p$, and if $b$ is a unit then $a = \pm p$. So the only divisors of $p$ are $\pm 1$ and $\pm p$.
+
+Conversely, suppose that the only divisors of $p$ are $\pm 1$ and $\pm p$, and let $a,b \in \mathbb{Z}$ with $p=ab$. We want to prove that $a$ or $b$ is a unit. Since $a \mid p$, we have $a \in \{ 1, -1, p, -p \}$. If $a = \pm 1$, then $a$ is a unit; if $a=\pm p$, then $b = \pm 1$, so that $b$ is a unit. In any case, either $a$ or $b$ is a unit, and hence $p$ is irreducible.
+\end{cproof}
+
+\begin{example}
+A couple of examples of reducible and irreducible numbers are:
+\begin{itemize}
+\item $2$ is irreducible: if $2=mn$ then either $m$ or $n$ is even, otherwise we'd be expressing an even number as the product of two odd numbers. We may assume $m$ is even, say $m=2k$; then $2=2kn$, so $kn=1$ and hence $n$ is a unit.
+\item $20$ is reducible since $20 = 4 \times 5$ and neither $4$ nor $5$ is a unit.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Let $p \in \mathbb{Z}$. Prove that if $p$ is ring theoretically prime, then $p$ is irreducible.
+\hintlabel{exPrimeImpliesIrred}{%
+Assume $p=mn$ for some $m,n \in \mathbb{Z}$. Prove that $m$ or $n$ is a unit.
+}
+\end{exercise}
+
+\begin{lemma}
+\label{lemFTAExists}
+Let $a \in \mathbb{Z}$ be a nonzero nonunit. Then there are irreducibles $p_1, \dots, p_n$ such that $a = p_1 \times \cdots \times p_n$.
+\end{lemma}
+\begin{cproof}
+We may assume $a>0$, since if $a<0$ we can just multiply by $-1$.
+
+We proceed by strong induction on $a \ge 2$. The base case has $a=2$ since we consider only nonunits.
+\begin{itemize}
+\item (\textbf{Base case}) We have shown that $2$ is irreducible, so setting $p_1=2$ yields a product of primes.
+\item (\textbf{Induction step}) Let $a \ge 2$ and suppose that each integer $k$ with $2 \le k \le a$ has an expression as a product of irreducibles. If $a+1$ is irreducible then we're done; otherwise we can write $a+1=st$, where $s,t \in \mathbb{Z}$ are nonzero nonunits. We may assume further that $s$ and $t$ are positive. Moreover, $s<a+1$ and $t<a+1$ since $s,t \ge 2$.
+
+By the induction hypothesis, $s$ and $t$ have expressions as products of irreducibles. Write
+\[ s = p_1 \times \cdots \times p_m \quad \text{and} \quad t = q_1 \times \cdots \times q_n \]
+This gives rise to an expression of $a$ as a product of irreducibles:
+\[ a = st = \underbrace{p_1 \times \cdots \times p_m}_{= s} ~\times~ \underbrace{q_1 \times \cdots \times q_n}_{= t} \]
+\end{itemize}
+The result follows by induction.
+\end{cproof}
+
+\begin{theorem}
+\label{thmPrimeIffIrred}
+Let $p \in \mathbb{Z}$. Then $p$ is ring theoretically prime if and only if $p$ is irreducible.
+\end{theorem}
+\begin{cproof}
+We prove the two directions separately.
+\begin{itemize}
+\item \textbf{Prime $\Rightarrow$ irreducible.} This was \Cref{exPrimeImpliesIrred}.
+\item \textbf{Irreducible $\Rightarrow$ prime.} Suppose $p$ is irreducible. Let $a,b \in \mathbb{Z}$ and suppose $p \mid ab$. We need to show that $p \mid a$ or $p \mid b$. It suffices to show that if $p \nmid a$ then $p \mid b$.
+
+So suppose $p \nmid a$. Let $d = \mathrm{gcd}(p,a)$. Since $d \mid p$ and $p$ is irreducible, we must have $d=1$ or $d=p$ by \Cref{propFactorsOfIrred}. Since $p \nmid a$ and $d \mid a$, we must therefore have $d=1$.
+
+By B\'{e}zout's lemma (\Cref{thmBezout}), there exist $u,v \in \mathbb{Z}$ such that $au+pv=1$. Multiplying by $b$ gives $abu+pbv=b$. Since $p \mid ab$, there exists $k \in \mathbb{Z}$ such that $pk=ab$. Then
+\[ b = abu+pbv = pku+pbv = p(ku+bv) \]
+so $p \mid b$, as required.
+\end{itemize}
+So we're done.
+\end{cproof}
+
+Since primes and irreducibles are the same thing in $\mathbb{Z}$, we will refer to them as `primes', unless we need to emphasise a particular aspect of them.
+
+\subsection*{Prime factorisation}
+
+Having described prime numbers in two ways, each of which emphasises their nature of being `unbreakable' by multiplication, we will extend \Cref{lemFTAExists} to prove that every integer can be expressed as a product of primes in an essentially unique way.
+
+\begin{theorem}[Fundamental theorem of arithmetic]
+\label{thmFTA}
+\index{fundamental theorem of arithmetic}
+Let $a \in \mathbb{Z}$ be a nonzero nonunit. There exist primes $p_1, \dots, p_k \in \mathbb{Z}$ such that
+\[ a = p_1 \times \cdots \times p_k \]
+Moreover, this expression is essentially unique: if $a=q_1 \times \cdots \times q_{\ell}$ is another expression of $a$ as a product of primes, then $k = \ell$ and, re-ordering the $q_i$ if necessary, for each $i$ there is a unit $u_i$ such that $q_i=u_ip_i$.
+\end{theorem}
+\begin{cproof}
+We showed that such a factorisation exists in \Cref{lemFTAExists}, with the word `prime' replaced by the word `irreducible'. It remains to prove (essential) uniqueness.
+
+Let $k$ be least such that there is an expression of $a$ as a product of $k$ primes, namely $a = p_1 \times \cdots \times p_k$. Let $a = q_1 \times \cdots \times q_{\ell}$ be any other such expression. We prove by induction on $k$ that $\ell = k$ and, after re-ordering if necessary, for each $i$ there is a unit $u_i$ such that $q_i = u_ip_i$.
+
+\begin{itemize}
+\item (\textbf{Base case}) If $k=1$ then $a=p_1$ is itself prime. Then we have $p_1 = q_1 \times \cdots \times q_{\ell}$. Since $p_1$ is prime, $p_1 \mid q_j$ for some $j$; by relabelling $q_1$ and $q_j$ we may assume that $j = 1$, so that $p_1 \mid q_1$. By irreducibility of $q_1$ we have $q_1 = u_1p_1$ for some unit $u_1$.
+\item (\textbf{Induction step}) Let $k \ge 1$ and suppose that any integer which can be expressed as a product of $k$ primes is (essentially) uniquely expressible in such a way. Suppose $a$ has an expression as a product of $k+1$ primes, and that $k+1$ is the least such number. Suppose also that
+\[ a = p_1 \times \cdots \times p_k \times p_{k+1} = q_1 \times \cdots \times q_{\ell} \]
+Note that $\ell \ge k+1$. Since $p_{k+1}$ is prime we must have $p_{k+1} \mid q_j$ for some $j$; by relabelling $q_j$ and $q_{\ell}$ if necessary, we may assume that $j=\ell$, so that $p_{k+1} \mid q_{\ell}$. As before, $q_{\ell} = u_{k+1}p_{k+1}$ for some unit $u_{k+1}$. Dividing through by $p_{k+1}$ gives
+\[ p_1 \times \cdots \times p_k = q_1 \times \cdots \times q_{\ell-1} \times u_{k+1} \]
+Replacing $q_{\ell-1}$ by $q_{\ell-1}u_{k+1}$, which is still prime, we can apply the induction hypothesis to obtain $k=\ell-1$, so $k+1=\ell$, and, after reordering if necessary $q_i=u_ip_i$ for all $i \le k$. Since this also holds for $i=k+1$, the induction step is complete.
+\end{itemize}
+The result follows by induction.
+\end{cproof}
+
+\begin{example} \label{exFTAExamples}
+Here are some examples of numbers written as products of primes:
+\begin{itemize}
+\item $12 = 2 \times 2 \times 3$. We could also write this as $2 \times 3 \times 2$ or $(-2) \times (-3) \times 2$, and so on.
+\item $53 = 53$ is an expression of $53$ as a product of primes.
+\item $-1000 = 2 \times 5 \times (-2) \times 5 \times 2 \times 5$.
+\item We can view any unit as a product of \textit{no} primes. (Don't dwell on this point for too long as it will not arise very often!)
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+\label{exNumbersAsProductsOfPrimes}
+Express the following numbers as products of primes:
+\[ 16 \qquad {-240} \qquad 5050 \qquad 111111 \qquad {-123456789} \]
+\end{exercise}
+
+To make things slightly more concise, we introduce a standard way of expressing a number as a product of primes:
+
+\begin{definition}
+The \textbf{canonical prime factorisation}\index{prime!canonical prime factorisation}\index{canonical prime factorisation} of a nonzero integer $a$ is the expression in the form
+\[ a = u p_1^{j_1} \cdots p_r^{j_r} \]
+where $r \ge 0$ and:
+\begin{itemize} \vspace{5pt}
+\item $u = 1$ if $a>0$, and $u = -1$ if $a<0$;
+\item The numbers $p_i$ are all positive primes;
+\item $p_1 < p_2 < \cdots < p_r$;
+\item $j_i \ge 1$ for all $i$.
+\end{itemize}
+
+\vspace{5pt}
+We call $j_i$ the \textbf{multiplicity}\index{multiplicity!of a prime} of $p_i$ in $a$, and we call $u$ the \textbf{sign}\index{sign} of $a$.
+\end{definition}
+
+Typically we omit $u$ if $u=1$ (unless $a=1$), and just write a minus sign ($-$) if $u=-1$.
+
+\begin{example}
+The canonical prime factorisations of the integers given in \Cref{exFTAExamples} are:
+\begin{itemize}
+\item $12 = 2^2 \cdot 3$.
+\item $53 = 53$.
+\item $-1000 = -2^3 \cdot 5^3$.
+\item $1=1$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Write out the canonical prime factorisations of the numbers from \Cref{exNumbersAsProductsOfPrimes}, which were:
+\[ 16 \qquad {-240} \qquad 5050 \qquad 111111 \qquad {-123456789} \]
+\end{exercise}
+
+The following exercise provides another tool for computing greatest common divisors of pairs of integers by looking at their prime factorisations.
+
+\begin{exercise}
+\label{exGCDfromFTA}
+Let $p_1,p_2,\dots,p_r$ be distinct primes, and let $k_i,\ell_i \in \mathbb{N}$ for all $1 \le i \le r$. Define
+\[ m = p_1^{k_1} \times p_2^{k_2} \times \cdots \times p_r^{k_r} \quad \text{and} \quad n = p_1^{\ell_1} \times p_2^{\ell_2} \times \cdots \times p_r^{\ell_r} \]
+Prove that
+\[ \mathrm{gcd}(m,n) = p_1^{u_1} \times p_2^{u_2} \times \cdots \times p_r^{u_r} \]
+where $u_i = \mathrm{min} \{ k_i, \ell_i \}$ for all $1 \le i \le r$.
+\end{exercise}
+
+\begin{example}
+We use \Cref{exGCDfromFTA} to compute the greatest common divisor of $17640$ and $6468$.
+
+First we compute the prime factorisations of $17640$ and $6468$:
+\[ 17640 = 2^3 \cdot 3^2 \cdot 5 \cdot 7^2 \quad \text{and} \quad 6468 = 2^2 \cdot 3 \cdot 7^2 \cdot 11 \]
+It now follows from \Cref{exGCDfromFTA} that
+\begin{align*}
+\mathrm{gcd}(17640,6468) = 2^2 \cdot 3^1 \cdot 5^0 \cdot 7^2 \cdot 11^0 \\
+&= 4 \cdot 3 \cdot 1 \cdot 49 \cdot 1 \\
+&= 588
+\end{align*}
+\end{example}
+
+\Cref{exGCDfromFTA} allows us to provide a concise proof of the following result.
+
+\begin{corollary}
+\label{corCoprimeToPrimeIffNotDivisibleByPrime}
+Let $p \in \mathbb{Z}$ be prime, let $a \in \mathbb{Z}$ be nonzero, and let $k \ge 1$. Then $a \perp p^k$ if and only if $p \nmid a$.
+\end{corollary}
+
+\begin{cproof}
+By the fundamental theorem of arithmetic, we can write
+\[ a = p^j \times p_1^{j_1} \times \cdots \times p_r^{j_r} \]
+where $p_1, \dots, p_r$ are the primes other than $p$ appearing in the prime factorisation of $a$, and $j,j_i \in \mathbb{N}$ for all $1 \le i \le r$. Note that $p \mid a$ if and only if $j \ge 1$.
+
+Furthermore we have
+\[ p^k = p^k \times p_1^0 \times \cdots \times p_r^0 \]
+
+By \Cref{exGCDfromFTA} it follows that
+\[ \mathrm{gcd}(a,p^k) = p^{\mathrm{min}\{ j,k \}} \times p_1^0 \times \cdots \times p_r^0 = p^{\mathrm{min} \{ j,k \}} \]
+Now:
+\begin{itemize}
+\item If $\mathrm{min} \{ j, k \} = 0$ then $j = 0$, in which case $p \nmid a$, and $\mathrm{gcd}(a,p^k) = p^0 = 1$;
+\item If $\mathrm{min} \{ j, k \} > 0$ then $j \ge 1$, in which case $p \mid a$, and $p \mid \mathrm{gcd}(a,p^k)$, so $\mathrm{gcd}(a,p^k) \ne 1$.
+\end{itemize}
+In particular, $p \nmid a$ if and only if $a \perp p^k$.
+\end{cproof}
+
+\subsection*{Distribution of primes}
+
+So far we have seen several examples of prime numbers; to name a few, we've seen $2$, $3$, $5$ and $53$. It might seem like the prime numbers go on forever, but proving this is less than obvious.
+
+\begin{exercise}
+\label{exConstructPrimeNotInList}
+Let $P$ be an inhabited finite set of positive prime numbers and let $m$ be the product of all the elements of $P$. That is, for some $n \ge 1$ let
+\[ P = \{ p_1, \dots, p_n \} \quad \text{and} \quad m = p_1 \times \cdots \times p_n \]
+where each $p_k \in P$ is a positive prime. Using the fundamental theorem of arithmetic, show that $m+1$ has a positive prime divisor which is not an element of $P$.
+\end{exercise}
+
+\begin{theorem}
+There are infinitely many primes.
+\end{theorem}
+\begin{cproof}
+We prove that there are infinitely many \textit{positive} prime numbers---the result then follows immediately. Let $P$ be the set of all positive prime numbers. Then $P$ is inhabited, since $2 \in P$, for example. If $P$ were finite, then by \Cref{exConstructPrimeNotInList}, there would be a positive prime which is not an element of $P$---but $P$ contains all positive primes, so that is impossible. Hence there are infinitely many positive primes.
+\end{cproof}
+
+This is one proof of many and is attributed to Euclid, who lived around 2300 years ago. We might hope that a proof of the infinitude of primes gives some insight into how the primes are \textit{distributed}. That is, we might ask questions like: how frequently do primes occur? How fast does the sequence of primes grow? How likely is there to be a prime number in a given set of integers?
+
+As a starting point, Euclid's proof gives an algorithm for writing an infinite list of primes:
+\begin{itemize}
+\item Let $p_1 = 2$; we know that $2$ is prime;
+\item Given $p_1, \dots, p_n$, let $p_{n+1}$ be the smallest positive prime factor of $p_1 \times \cdots \times p_n + 1$.
+\end{itemize}
+The first few terms produced would be:
+\begin{itemize}
+\item $p_1 = 2$ by definition;
+\item $2+1=3$, which is prime, so $p_2=3$;
+\item $2 \times 3 + 1 = 7$, which is prime, so $p_3 = 7$;
+\item $2 \times 3 \times 7 + 1 = 43$, which is prime, so $p_4 = 43$;
+\item $2 \times 3 \times 7 \times 43 + 1 = 1807 = 13 \times 139$, so $p_5 = 13$;
+\item $2 \times 3 \times 7 \times 43 \times 13 + 1 = 23479 = 53 \times 443$, so $p_6 = 53$;
+\item \dots{}and so on.
+\end{itemize}
+
+The sequence obtained, called the \textit{Euclid--Mullin sequence}, is a bit bizarre:
+\[ 2, 3, 7, 43, 13, 53, 5, 6221671, 38709183810571, 139, 2801, 11, 17, 5471, \dots \]
+Big primes like $38709183810571$ often appear before small primes like $11$. It remains unknown whether or not every positive prime number appears in this list!
+
+The chaotic nature of this sequence makes it difficult to extract information about how the primes are distributed: the numbers $p_1 \times \cdots \times p_n + 1$ grow very quickly---indeed, it must be the case that $p_1 \times \cdots \times p_n + 1 > 2^n$ for all $n$---so the upper bounds for the sequence grow at least exponentially.
+
+Another proof of the infinitude of primes that gives a (slightly) tighter bound can be obtained using the following exercise.
+
+\begin{exercise}
+\label{exPrimesUsingFactorials}
+Let $n \in \mathbb{Z}$ with $n>2$. Prove that the set $\{ k \in \mathbb{Z} \mid n<k<n! \}$ contains a prime number.
+\begin{backhint}
+\hintref{exPrimesUsingFactorials}
+What are the prime factors of $n!-1$?
+\end{backhint}
+\end{exercise}

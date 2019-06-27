@@ -1,0 +1,503 @@
+\section{Alternating sums}
+\secbegin{secAlternatingSums}
+\index{alternating sum|(}
+\index{sum!alternating|(}
+
+Using the addition principle, together with double counting, turned out to be very useful for proving combinatorial identities involving sums in \Cref{secCountingPrinciples}. In this section, we turn our attention to \textit{alternating sums}, which are sums whose terms alternate between positive and negative. As we will see later, sums of this kind can be used to computing sizes of unions of not-necessarily-disjoint sets---this has all manner of uses and applications.
+
+An example of such a sum is the following.
+\[ \binom{6}{0} - \binom{6}{1} + \binom{6}{2} - \binom{6}{3} + \binom{6}{4} - \binom{6}{5} + \binom{6}{6} \]
+We can express such sums more succinctly by observing that, given $k \in \mathbb{N}$, we have
+\[ (-1)^k = \begin{cases} 1 & \text{if $k$ is even} \\ -1 & \text{if $k$ is odd} \end{cases} \]
+For example, the sum above could be expressed as $\displaystyle \sum_{k=0}^6 (-1)^k \dbinom{6}{k}$. It so happens that this sum evaluates to zero:
+\[ 1 - 6 + 15 - 20 + 15 - 6 + 1 ~=~ 0 \]
+
+The goal of the following exercise is to demonstrate how\dots{} \textit{annoying}\dots{} it is to prove identities involving alternating sums using induction.
+
+\begin{exercise}
+Prove by induction that $\displaystyle \sum_{k=0}^n (-1)^k \dbinom{n}{k} = 0$ for all $n \in \mathbb{N}$.
+\hintlabel{exAlternatingSumOfBinomialCoefficientsByInduction}{%
+You will need to use the recursive definition of binomial coefficients
+}
+\end{exercise}
+
+Evidently we need a better approach.
+
+If you stare at the equation in \Cref{exAlternatingSumOfBinomialCoefficientsByInduction} for long enough, you should be able to convince yourself that
+\[ \sum_{k=0}^n (-1)^k \binom{n}{k} ~=~ \sum_{\text{even } k} \binom{n}{k} - \sum_{\text{odd } k} \binom{n}{k} \]
+and it suffices to prove that $\displaystyle\sum_{\text{even } k} \dbinom{n}{k} = \sum_{\text{odd } k} \dbinom{n}{k}$. This will be our strategy in the proof of \Cref{propAlternatingSumOfBinomialCoefficientsByBijection}, which serves as our prototype for the abstract material to come.
+
+For the sake of readability, we left implicit that $k$ is varying over (the even or odd elements of) the set $\{ 0, 1, \dots, n \}$ in each sum---we shall adopt this practice throughout this section.
+
+\begin{proposition}
+\label{propAlternatingSumOfBinomialCoefficientsByBijection}
+Let $n \in \mathbb{N}$. Then $\displaystyle \sum_{k=0}^n (-1)^k \dbinom{n}{k} = 0$.
+\end{proposition}
+
+\begin{cproof}
+As we observed, it sufficies to prove
+\[ \sum_{\text{even } k} \binom{n}{k} = \sum_{\text{odd } k} \binom{n}{k} \]
+
+So define
+\[ \mathcal{E} = \{ U \subseteq [n] \mid |U| \text{ is even} \} \quad \text{and} \quad \mathcal{O} = \{ U \subseteq [n] \mid |U| \text{ is odd} \} \]
+That is, $\mathcal{E}$ is the set of all even-sized subsets of $[n]$, and $\mathcal{O}$ is the set of all odd-sized subsets of $[n]$.
+
+Note that the sets $\dbinom{[n]}{k}$ for even $k \le n$ partition $\mathcal{E}$, and the sets $\dbinom{[n]}{k}$ for odd $k \le n$ partition $\mathcal{O}$. So by the addition principle, we have
+\[ |\mathcal{E}| = \left| \bigcup_{\text{even } k} \dbinom{[n]}{k} \right| = \sum_{\text{even } k} \dbinom{n}{k} \quad \text{and} \quad |\mathcal{O}| = \left| \bigcup_{\text{odd } k} \dbinom{[n]}{k} \right| = \sum_{\text{odd } k} \dbinom{n}{k} \]
+
+It suffices to show that $|\mathcal{E}| = |\mathcal{O}|$. To do this, define a function $f : \mathcal{E} \to \mathcal{O}$ for $U \in \mathcal{E}$ by
+\[ f(U) = \begin{cases} U \cup \{ n \} & \text{if $n \not\in U$} \\ U \setminus \{ n \} & \text{if $n \in U$} \end{cases} \]
+That is, $f$ puts $n$ into a subset if it wasn't already there, and removes it if it was. Then:
+\begin{itemize}
+\item \textbf{$f$ is well-defined.} Given $U \in \mathcal{E}$, note that $|f(U)| = |U| \pm 1$; since $|U|$ is even, we have that $|f(U)|$ is odd, so that $f(U) \in \mathcal{O}$.
+\item \textbf{$f$ is bijective.} Define $g : \mathcal{O} \to \mathcal{E}$ by letting
+\[ g(V) = \begin{cases} V \cup \{ n \} & \text{if $n \not\in V$} \\ V \setminus \{ n \} & \text{if $n \in V$} \end{cases} \]
+for all $V \in \mathcal{O}$. The proof that $g$ is well-defined is identical to that of $f$. Moreover, given $U \in \mathcal{E}$, we have:
+\begin{itemize}
+\item If $n \in U$, then $f(U) = U \setminus \{ n \}$, so that $g(f(U)) = (U \setminus \{ n \}) \cup \{ n \} = U$.
+\item If $n \not\in U$, then $f(U) = U \cup \{ n \}$, so that $g(f(U)) = (U \cup \{ n \}) \setminus \{ n \} = U$.
+\end{itemize}
+Hence $g(f(U)) = U$ for all $U \in \mathcal{E}$. An identical computation reveals that $f(g(V)) = V$ for all $V \in \mathcal{O}$, and so $g$ is an inverse for $f$.
+\end{itemize}
+
+Putting all of this together, it follows form the fact that $f : \mathcal{E} \to \mathcal{O}$ is a bijection that $|\mathcal{E}| = |\mathcal{O}|$, and so
+\[ \sum_{k=0}^n (-1)^k \binom{n}{k} ~=~ \sum_{\text{even } k} \binom{n}{k} - \sum_{\text{odd } k } \binom{n}{k} ~=~ |\mathcal{E}| - |\mathcal{O}| ~=~ 0 \]
+as required.
+\end{cproof}
+
+Wait a minute---didn't I say this would be a \textit{better} approach than induction? That proof felt like a lot of work. The reason for working through this proof is that it highlights the ideas that we will use throughout this section. These ideas will allow us to derive a general proof strategy, called the \textit{involution principle} (\Cref{strInvolutionPrinciple}), which greatly simplifies proofs of results of this nature---indeed, we will prove \Cref{propAlternatingSumOfBinomialCoefficientsByBijection} again using the involution principle in \Cref{exAlternatingSumOfBinomialsByInvolution}.
+
+With that said, \Cref{propAlternatingSumOfBinomialCoefficientsByBijection} highlights the following general strategy for proving that an alternating sum evaluates to zero.
+
+\begin{strategy}[Proving that an alternating sum evaluates to zero]
+\label{strPrimitiveInvolutionPrinciple}
+Let $a_0,a_1,\dots,a_n \in \mathbb{N}$. In order to prove that $\displaystyle \sum_{k=0}^n (-1)^k a_k = 0$, it suffices to find:
+\begin{enumerate}[(i)]
+\item A partition $U_0, U_2, \dots$ of a set $\mathcal{E}$, with $|U_k| = a_k$ for all even $k$;
+\item A partition $U_1, U_3, \dots$ of a set $\mathcal{O}$, with $|U_k| = a_k$ for all odd $k$; and
+\item A bijection $\mathcal{E} \to \mathcal{O}$.
+\end{enumerate}
+\end{strategy}
+
+\begin{exercise}
+\label{exAlternatingSumOfKTimesBinomialCoefficientByPrimitiveInvolutionPrinciple}
+Use \Cref{strPrimitiveInvolutionPrinciple} to prove that
+\[ \displaystyle \sum_{k=0}^n (-1)^k \cdot k \cdot \binom{n}{k} = 0 \]
+for all $n \ge 2$.
+\end{exercise}
+
+Unfortunately \Cref{strPrimitiveInvolutionPrinciple} is still somewhat limited. For a start, it tells us nothing about how to evaluate an alternating sum that \textit{doesn't} end up being equal to zero. Also, it ignores a key clue from the proof of \Cref{propAlternatingSumOfBinomialCoefficientsByBijection}: namely, the function $f : \mathcal{E} \to \mathcal{O}$ and its inverse $g : \mathcal{O} \to \mathcal{E}$ were defined identically. They are both restrictions of a function $h : \mathcal{P}([n]) \to \mathcal{P}([n])$ defined in the same way:
+\[ h(U) = \begin{cases} U \cup \{ n \} & \text{if $n \not\in U$} \\ U \setminus \{ n \} & \text{if $n \in U$} \end{cases} \]
+This function has the property that $h(h(U)) = U$ for all $U \subseteq [n]$ (that is, $h$ is an \textit{involution}), and $h$ restricts to a bijection between the set of even-sized subsets of $[n]$ and the set of odd-sized subsets of $[n]$ (that is, $h$ \textit{swaps parity}).
+
+This property of being a parity-swapping involution will be the key to deriving the involution principle.
+
+\subsection*{Involutions}
+
+An involution is a function that is its own inverse.
+
+\begin{definition}
+\label{defInvolution}
+\index{involution}
+Let $X$ be a set. An \textbf{involution} of $X$ is a function $h : X \to X$ such that $h \circ h = \mathrm{id}_X$.
+\end{definition}
+
+\begin{example}
+Consider the function $h : \mathbb{R} \to \mathbb{R}$ defined by $h(x) = 1-x$ for each $x \in \mathbb{R}$. Then $h$ is an involution, since for all $x \in \mathbb{R}$ we have $h(h(x)) = 1-(1-x) = x$.
+\end{example}
+
+\begin{exercise}
+Given a set $X$, prove that the relative complement function $r : \mathcal{P}(X) \to \mathcal{P}(X)$, defined by $r(U) = X \setminus U$ for all $U \subseteq X$, is an involution.
+\end{exercise}
+
+\begin{exercise}
+Prove that every involution is a bijection.
+\end{exercise}
+
+\begin{exercise}
+Let $h : X \to X$ be an involution and let $a \in X$. Prove that $h$ either fixes $a$---that is, $h(a)=a$---or swaps it with another element $b \in X$---that is, $h(a)=b$ and $h(b)=a$.
+\end{exercise}
+
+The involution that we used in the proof of \Cref{propAlternatingSumOfBinomialCoefficientsByBijection} was an instance of \textit{toggling} an element in a subset---that is, removing it if it is there, and putting it in if it is not.
+
+Toggling is so useful that we assign special notation.
+
+\begin{definition}
+\label{defToggle}
+\index{toggle}
+\nindex{toggle}{$\oplus$}{toggle}
+Let $X$ be a set. The \textbf{toggle} operation $\oplus$ \inlatex{oplus}\lindexmmc{oplus}{$\oplus$} is defined by letting
+\[ U \oplus a = \begin{cases} U \cup \{ a \} & \text{if } a \not\in U \\ U \setminus \{ a \} & \text{if } a \in U \end{cases} \]
+for each $U \subseteq X$ and each $a \in X$.
+\end{definition}
+
+\begin{example}
+Taking $X = [3]$ and $a = 3$, we have:
+\[
+\begin{matrix}
+\varnothing \oplus 3 = \{ 3 \} & \{ 1 \} \oplus 3 = \{ 1, 3 \} & \{ 2 \} \oplus 3 = \{ 2, 3 \} & \{ 1, 2 \} \oplus 3 = \{ 1, 2, 3 \} \\
+~&~&~&~ \\
+\{ 3 \} \oplus 3 = \varnothing & \{ 1,3 \} \oplus 3 = \{ 1 \} & \{ 2, 3 \} \oplus 3 = \{ 2 \} & \{ 1, 2, 3 \} \oplus 3 = \{ 1, 2 \}
+\end{matrix}
+\]
+\end{example}
+
+The next two exercises are generalisations of facts that we showed in the proof of \Cref{propAlternatingSumOfBinomialCoefficientsByBijection}.
+
+\begin{exercise}
+\label{exToggleIsInvolution}
+Let $X$ be a set and let $a \in X$. Prove that the function $T_a : \mathcal{P}(X) \to \mathcal{P}(X)$ defined by $T_a(U) = U \oplus a$ for all $U \subseteq X$ is an involution.
+\end{exercise}
+
+\begin{exercise}
+\label{exToggleSwapsParity}
+Let $X$ be a finite set and let $a \in X$. Prove that, for all $U \subseteq X$, if $|U|$ is even then $|U \oplus a|$ is odd, and if $|U|$ is odd then $|U \oplus a|$ is even.
+\end{exercise}
+
+The property of the toggle operation that you proved in \Cref{exToggleSwapsParity} is an instance of \textit{parity-swapping}. While toggling swaps the parity of the size of a subset, we can generalise the notion of parity more generally, provided we have a notion of what it means for an element of a set to be `even' or `odd'.
+
+A first attempt to define `even' and `odd' might be to simply partition a set $X$ as $X = E \cup O$, for disjoint subsets $E, O \subseteq X$---the elements of $E$ will be deemed to be `even' and the elements of $O$ will be deemed to be `odd'. But it will be helpful later on to go one step further than this: we will partition $X$ into finitely many pieces, indexed by natural numbers, and the natural number will determine the parities of the elements of $X$.
+
+\begin{definition}
+\label{defParity}
+\index{even!parity}
+\index{odd!parity}
+\index{parity}
+\nindex{xsupplus}{$X^+$}{set of even-parity elements}
+\nindex{xsupminus}{$X^-$}{set of odd-parity elements}
+Let $X$ be a set and let $\mathcal{U} = \{ U_0, U_1, \dots, U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$. The \textbf{parity} of an element $a \in X$ (relative to $\mathcal{U}$) is the parity---\textit{even} or \textit{odd}---of the unique $k \in \{ 0, 1, \dots, n \}$ such that $a \in U_k$.
+
+Write $X^+ = \{ a \in X \mid a \text{ has even parity} \}$ \inlatexnb{X\^{}+} and $X^- = \{ a \in X \mid a \text{ has odd parity} \}$ \inlatexnb{X\^{}-}.
+\end{definition}
+
+Note that, with notation as in \Cref{defParity}, we have partitions of $X^+$ and $X^-$ as
+\[ X^+ = \bigcup_{\text{even } k} U_k \quad \text{and} \quad X^- = \bigcup_{\text{odd } k} U_k \]
+
+\begin{example}
+\label{exPartitionOfPowerSetOfFiniteSet}
+Let $X$ be a finite set, and consider the partition of $\mathcal{P}(X)$ given by $U_k = \dbinom{X}{k}$ for all $0 \le k \le n$. With respect to this partition, an element $U \in \mathcal{P}(X)$ has even parity if and only if $|U|$ is even, and odd parity if and only if $|U|$ is odd.
+
+For example, we have
+\[ \mathcal{P}([2])^+ = \{ \varnothing, \{ 1, 2 \} \} \quad \text{and} \quad \mathcal{P}([2])^{-} = \{ \{ 1 \}, \{ 2 \} \} \]
+\end{example}
+
+\begin{example}
+\label{exPartitionOfFunctionsFromNToN}
+Let $m,n \in \mathbb{N}$ and let $X$ be the set of all functions $[n] \to [n]$. For each $k \le n$, define
+\[ X_k = \{ f : [n] \to [n] \mid |\{ a \in [n] \mid f(a) = a \}| = k \} \]
+That is, for each $k \le n$, the set $X_k$ is the set of all functions $f : [n] \to [n]$ that fix exactly $k$ elements of $[n]$.
+
+A function $f : [n] \to [n]$ has even parity with respect to this partition if it fixes an even number of elements, and odd parity if it fixes an odd number of elements.
+\end{example}
+
+\begin{definition}
+\label{defParitySwappingFunction}
+Let $X$ be a set and let $\{ U_0, U_1, \dots U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$. A function $f : X \to X$ \textbf{swaps parity} (or is \textbf{parity-swapping}) if, for all $a \in X$, if $a$ has even parity then $f(a)$ has odd parity, and if $a$ has odd parity then $f(a)$ has even parity.
+\end{definition}
+
+\begin{example}
+With parity defined as in \Cref{exPartitionOfPowerSetOfFiniteSet}, the result of \Cref{exToggleIsInvolution} says precisely that, for every set $X$ and element $a \in X$, the toggle function $T_a : \mathcal{P}(X) \to \mathcal{P}(X)$ swaps parity, where $T_a$ is defined by $T_a(U) = U \oplus a$ for all $U \subseteq X$.
+\end{example}
+
+\begin{exercise}
+Let $X$ be a finite set. Under what conditions does the involution $r : \mathcal{P}(X) \to \mathcal{P}(X)$ given by $r(U) = X \setminus U$ for all $U \subseteq X$ swap parity?
+\end{exercise}
+
+\begin{exercise}
+Let $n \in \mathbb{N}$ and let $X$ be the set of all functions $[n] \to [n]$, partitioned as in \Cref{exPartitionOfFunctionsFromNToN}, so that a function $f : [n] \to [n]$ has even parity if it fixes an even number of elements, and odd parity if it fixes an odd number of elements. Find a parity-swapping function $X \to X$.
+\end{exercise}
+
+The next two following technical results will be used fundamentally in the proof of \Cref{thmInvolutionPrinciple}.
+
+\begin{lemma}
+\label{lemParitySwappingInvolutionInducesBijectionFromEvenToOdd}
+Let $X$ be a finite set, let $\{ U_0, U_1, \dots, U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$, and let $h : X \to X$ be a parity-swapping involution. Then $h$ induces a bijection $f : X^+ \to X^-$ defined by $f(x)=h(x)$ for all $x \in X^+$.
+\end{lemma}
+
+\begin{cproof}
+First note that the definition $f : X^+ \to X^-$ by letting $f(x)=h(x)$ for all $x \in X^+$ is well-defined since $h$ swaps parity. Indeed, if $x \in X^+$, then $x$ has even parity, so that $f(x) = h(x)$ has odd parity, meaning that $f(x) \in X^-$.
+
+To see that $f$ is a bijection, define a function $g : X^- \to X^+$ by $g(x) = h(x)$ for all $x \in X^-$. Again, $g$ is well-defined since $h$ swaps parity.
+
+Finally note that $g$ is an inverse for $f$---given $x \in X^+$, we have
+\[ g(f(x)) = h(h(x)) = x \]
+and likewise $f(g(x)) = x$ for all $x \in X^-$.
+
+Since $f$ has an inverse, it is a bijection.
+\end{cproof}
+
+\begin{lemma}
+\label{lemParitySwappingInvolutionGivesZero}
+Let $X$ be a finite set, let $\{ U_1, U_2, \dots, U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$, and let $h : X \to X$ be a parity-swapping involution. Then
+\[ \sum_{k=1}^n (-1)^k |U_k| = 0 \]
+\end{lemma}
+
+\begin{cproof}
+By \Cref{lemParitySwappingInvolutionInducesBijectionFromEvenToOdd} we know that $h : X \to X$ restricts to a bijection $X^+ \to X^-$, and so we have $|X^+| = |X^-|$. By the addition principle, we have
+\[ \sum_{k=0}^n (-1)^k |U_k| ~=~ \sum_{\text{even } k} |U_k| - \sum_{\text{odd } k} |U_k| ~=~ |X^+| - |X^-| ~=~ 0\]
+as required.
+\end{cproof}
+
+\Cref{lemParitySwappingInvolutionGivesZero} gets us well on our way to deriving the involution principle. In fact, it already makes \Cref{strPrimitiveInvolutionPrinciple} obsolete: we can now prove that an alternating sum is equal to zero simply by finding a parity-swapping involution from a suitably partitioned set to itself!
+
+But in practice, it might not be easy (or even possible) to define a parity-swapping involution $h : X \to X$ on the whole set $X$. In such cases, we do the best that we can: define $h$ on some subset $D \subseteq X$, and worry about what is left over afterwards.
+
+\begin{theorem}
+\label{thmInvolutionPrinciple}
+Let $X$ be a finite set, let $\{ U_1, U_2, \dots, U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$, let $D \subseteq X$, let $h : D \to D$ be a parity-swapping involution, and let $F_k = U_k \setminus D$ for each $k \in [n]$. Then
+\[ \sum_{k=1}^n (-1)^k |U_k| = \sum_{k=1}^n (-1)^k |F_k| \]
+\end{theorem}
+
+\begin{cproof}
+Note first that the sets $U_k \cap D$ for $k \in [n]$ partition $D$, with the elements of $D$ having the same parities as they did when they were considered as elements of $X$.
+
+It follows from \Cref{lemParitySwappingInvolutionGivesZero} that
+\[ \sum_{k=1}^n |U_k \cap D| = 0 \]
+
+Moreover $|U_k| = |U_k \cap D| + |U_k \setminus D|$ for each $k \in [n]$ by the addition principle. Since $F_k = U_k \setminus D$ for each $k \in [n]$, we have
+\[ \sum_{k=1}^n (-1)^k |U_k| ~=~ \underbrace{\sum_{k=1}^n (-1)^k |U_k \cap D|}_{=0} + \sum_{k=1}^n (-1)^k |U_k \setminus D| ~=~ \sum_{k=1}^n (-1)^k |F_k| \]
+as required.
+\end{cproof}
+
+We have suggestively used the letter $D$ to refer to where the involution is \underline{d}efined, and the letter $F$ to refer to the elements where the involution \underline{f}ails.
+
+\begin{strategy}[Involution principle]
+\label{strInvolutionPrinciple}
+\index{involution principle}
+Let $a_1,a_2,\dots,a_n \in \mathbb{N}$. In order to evaluate an alternating sum $\displaystyle \sum_{k=1}^n (-1)^k a_k$, it suffices to follow the following steps:
+\begin{enumerate}[(i)]
+\item Find a set $X$ with a partition $\{ U_1, U_2, \dots, U_n \}$, such that $|U_k| = a_k$ for all $k \in [n]$.
+\item Find a parity-swapping involution $h : D \to D$ for some subset $D \subseteq X$---often it is easiest to specify the values of $h$ first, and take $D$ to be the set of elements of $X$ for which the specification makes sense.
+\item Evaluate $\displaystyle \sum_{k=1}^n (-1)^k |F_k|$, where $F_k = U_k \setminus D$ for all $k \in [n]$---that is, count the elements of each $U_k$ where the involution \textit{failed} to be well-defined, and add them positively or negatively according to their parity.
+\end{enumerate}
+It will often be the case that many of the sets $F_k$ are empty, simplifying matters greatly.
+\end{strategy}
+
+This is rather abstract, so let's see some examples of the involution principle in action.
+
+\begin{example}
+\label{exAlternatingSumOfBinomialsByInvolution}
+Here is a succinct proof that $\displaystyle \sum_{k=0}^n (-1)^k \dbinom{n}{k} = 0$ for all $n \in \mathbb{N}$ using the involution principle.
+
+Let $n \in \mathbb{N}$ and define $U_k = \dbinom{[n]}{k}$ for all $0 \le k \le n$---these sets form a partition of $\mathcal{P}([n])$, and $|U_k| = \dbinom{n}{k}$ for each $0 \le k \le n$.
+
+By \Cref{exToggleIsInvolution}, the function $h : \mathcal{P}([n]) \to \mathcal{P}([n])$ defined by $h(U) = U \oplus n$ is a parity-swapping involution. By the involution principle (\Cref{strInvolutionPrinciple}) with $D=\mathcal{P}([n])$, we have $U_k \setminus D = \varnothing$ for each $0 \le k \le n$, and hence
+\[ \sum_{k=0}^n (-1)^k \dbinom{n}{k} = 0 \]
+as required.
+\end{example}
+
+\begin{exercise}
+Repeat \Cref{exAlternatingSumOfKTimesBinomialCoefficientByPrimitiveInvolutionPrinciple} using the involution principle---that is, use the involution principle to prove that
+\[ \sum_{k=0}^n (-1)^k \cdot k \cdot \binom{n}{k} = 0 \]
+for all $n \ge 2$.
+\end{exercise}
+
+\begin{exercise}
+Use the involution principle to prove that
+\[ \sum_{k=0}^n (-1)^k \dbinom{n}{k} \dbinom{k}{\ell} = 0 \]
+for all $n,\ell \in \mathbb{N}$ with $\ell < n$.
+\hintlabel{exAlternatingSumOfProductOfBinomialsByInvolution}{%
+Consider selecting a committee from a population of size $n$, with a subcommittee of size exactly $\ell$; toggle whether the oldest member of the population that is not on the subcommittee is or is not on the committee. If you prefer mathematical objects, consider the set of pairs $(A, B)$, where $A \subseteq B \subseteq [n]$ and $|A| = \ell$; toggle the least element of $[n] \setminus A$ in the set $B$.
+}
+\end{exercise}
+
+The next example is slightly more involved, because we find an involution that is not defined on the whole set being counted. This generalises the result of \Cref{exAlternatingSumOfBinomialsByInvolution}.
+
+\begin{proposition}
+Let $n,r \in \mathbb{N}$ with $r \le n$. Then $\displaystyle \sum_{k=0}^r (-1)^k \dbinom{n}{k} = (-1)^r \dbinom{n-1}{r}$.
+\end{proposition}
+
+\begin{cproof}
+Let $X$ be the set of subsets of $[n]$ of size $\le r$, and for each $0 \le k \le r$, let $U_k = \dbinom{[n]}{k}$. Note that the sets $U_k$ partition $X$ for $0 \le k \le r$.
+
+Define $h(U) = U \oplus n$ for all $U \in X$. Since $h$ is defined by toggling $n$, it is a parity-swapping involution.
+
+The only way that $h$ can fail to be well-defined is if $|h(U)| > r$. Since $|U \oplus n| = |U| \pm 1$ for all $U \in X$, the only way we can have $|h(U)| > r$ is if $|U| = r$ and $n \not\in U$, in which case $h(U) = U \cup \{ n \}$ has size $r+1$.
+
+Hence $F_k = \varnothing$ for all $k<r$, and $F_r = \{ U \subseteq [n] \mid |U| = r \text{ and } n \not\in U \}$. Specifying an element of $F_r$ is therefore equivalent to specifying a subset of $[n-1]$ of size $r$, so that $|F_r| = \dbinom{n-1}{r}$.
+
+Putting this all together, we obtain
+\[ \sum_{k=0}^r (-1)^k \dbinom{n}{k} ~=~ \sum_{k=0}^r (-1)^k |F_k| ~=~ (-1)^r \dbinom{n-1}{r} \]
+as required.
+\end{cproof}
+
+The next example is slightly more colourful.
+
+\begin{example}
+\label{exAlternatingSumCats}
+Let $a,b,r \in \mathbb{N}$ with $a \le r \le b$. We prove that
+\[ \sum_{k=0}^r (-1)^k \dbinom{a}{k} \dbinom{b}{r-k} = \dbinom{b-a}{r} \]
+
+Consider a population of $b$ animals, of which exactly $a$ are cats. A government of exactly $r$ animals must be formed, and a Feline Affairs Committee---which is a branch of the government---must be chosen from amongst the cats. The Feline Affairs Committee may have any size, but its size is bounded by the size of the government.
+
+Let $X$ be the set of all pairs $(G, C)$, where $G$ is a government and $C \subseteq G$ is the Feline Affairs Committee.
+
+For $k \le r$, let $U_k$ be the set of all government--committee pairs $(G, C)$ such that $|C|=k$---that is, such that exactly $k$ cats sit on the Feline Affairs Committee. Note that parity is determined by the number of cats on the Feline Affairs Committee: indeed, $(G,C)$ has even parity if $|C|$ is even, and odd parity if $|C|$ is odd.
+
+Given a government--committee pair $(G, C)$, let $h(G,C) = (G, C \oplus x)$, where $x \in G$ is the youngest cat on the government. That is, if the youngest cat on the government is on the Feline Affairs Committee, then that cat is removed from the committee; and if the youngest cat on the government is not on the Feline Affairs Committee, then that cat is added to the committee.
+
+Evidently $h$ is an involution, and it swaps parity since it adds or removes one cat to or from the Feline Affairs Committee.
+
+The only way that $h$ can fail to be well-defined is if there are no cats on the government, in which case $k=0$. Thus by the involution principle
+\[ \sum_{k=0}^r (-1)^k \dbinom{a}{k} \dbinom{b}{r-k} = (-1)^0 \cdot \left| \bigg\{ (G,\varnothing) \in X ~\Big|~ G \text{ contains no cats} \bigg\} \right| \]
+But there are exactly $b-a$ non-cats in the animal population, so that
+\[ \left| \bigg\{ (G,\varnothing) \in X ~\Big|~ G \text{ contains no cats} \bigg\} \right| = \dbinom{b-a}{r} \]
+and hence we have $\displaystyle\sum_{k=0}^r (-1)^k \dbinom{a}{k} \dbinom{b}{r-k} = \dbinom{b-a}{r}$, as required.
+\end{example}
+
+If you dislike reasoning about animals, \Cref{exAlternatingSumCats} could be reformulated by taking:
+\begin{itemize}
+\item $X = \{ (A, B) \mid A \subseteq B \cap [a],~ B \subseteq [b],~ |B|=r \}$;
+\item $U_k = \{ (A, B) \in X \mid |A| = k \}$ for all $k \le r$; and
+\item $h(A,B) = h(A \oplus x, B)$, where $x$ is the least element of $B \cap [a]$.
+\end{itemize}
+You are encouraged to verify the details!
+
+\begin{exercise}
+Let $n \in \mathbb{N}$ and consider the set
+\[ X = \{ (k,i) \mid k \le n,~ i \in [k] \} \]
+For example, if $n=3$ then $X = \{ (1,1), (2,1), (2,2), (3,1), (3,2), (3,3) \}$.
+
+\begin{enumerate}[(a)]
+\item Prove that $|X| = \displaystyle \sum_{k=0}^n k$.
+\item Use the involution principle to prove that
+\[ \sum_{k=0}^n (-1)^k k = \begin{cases} \dfrac{n}{2} & \text{if $n$ is even} \\ -\dfrac{n-1}{2} & \text{if $n$ is odd } \end{cases} \]
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Inclusion--exclusion principle}
+
+Our final application of the involution principle will be to prove the \textit{inclusion--exclusion principle}, which is used for computing the sizes of unions of sets that are not necessarily pairwise disjoint.
+
+We saw in \Cref{propUnionOfFiniteSetsIsFinite} how to compute the size of a union of two not-necessarily-disjoint sets:
+\[ |X \cup Y| = |X| + |Y| - |X \cap Y| \]
+So far so good. But what if we have three or four sets instead of just two?
+
+\begin{exercise}
+\label{exSizeOfUnionOf3Or4Sets}
+Let $X,Y,Z$ be sets. Show that
+\[ |X \cup Y \cup Z| = |X| + |Y| + |Z| - |X \cap Y| - |X \cap Z| - |Y \cap Z| + |X \cap Y \cap Z| \]
+Let $W$ be another set. Derive a similar formula for $|W \cup X \cup Y \cup Z|$.
+\end{exercise}
+
+The inclusion--exclusion principle is a generalisation of \Cref{exSizeOfUnionOf3Or4Sets} to arbitary finite collections of finite sets, but it is stated in a slightly different way in order to make the proof more convenient.
+
+\begin{theorem}[Inclusion--exclusion principle]
+\label{thmInclusionExclusion}
+\index{inclusion--exclusion principle}
+Let $n \in \mathbb{N}$, let $X_i$ be a finite set for each $i \in [n]$, and let $X = X_1 \cup X_2 \cup \cdots \cup X_n$. Then
+\[ \sum_{I \subseteq [n]} (-1)^{|I|} |X_I| = 0 \]
+where $X_I = \{ a \in X \mid a \in X_i \text{ for all } i \in I \}$. 
+\end{theorem}
+
+The statement of \Cref{thmInclusionExclusion} looks fairly abstract, so before we prove it, let's examine its content. The sum is over all subsets $I \subseteq [n]$, and then the power $(-1)^{|I|}$ is equal to $1$ if $I$ has an even number of elements, and $-1$ if $I$ has an odd number of elements. Moreover, if $I$ is inhabited then $X_I$ is the intersection of the sets $X_i$ for $i \in I$---for example $X_{\{2,3,5\}} = X_2 \cap X_3 \cap X_5$; on the other hand, a careful examination of the definition of $X_I$ reveals that $X_{\varnothing} = X$.
+
+Thus when $n=3$, the sum $\sum_{I \subseteq [3]} (-1)^{|I|} |X_I|$ can be evaluated as
+\[ |X| - |X_1| - |X_2| - |X_3| + |X_1 \cap X_2| + |X_1 \cap X_3| + |X_2 \cap X_3| - |X_1 \cap X_2 \cap X_3| \]
+The theorem says that this sum is equal to zero, and solving for $|X| = |X_1 \cup X_2 \cup X_3|$ yields an equivalent equation to that in \Cref{exSizeOfUnionOf3Or4Sets}.
+
+\begin{cproof}[of \Cref{thmInclusionExclusion}]
+We will prove the inclusion--exclusion principle using the involution principle.
+
+First we introduce some notation:
+\begin{itemize}
+\item Define $S = \{ (I, a) \mid I \subseteq [n],~ a \in X_I \}$. We can think of an element $(I, a) \in S$ as being an element $a \in X$ together with a label $I$ indicating that $a \in X_i$ for all $i \in I$.
+\item For each $0 \le k \le n$, define $S_k = \{ (I, a) \in S \mid |I| = k \}$.
+\item For each $a \in X$, let $i_a = \mathrm{min} \{ k \in [n] \mid a \in X_k \}$.
+\end{itemize}
+
+Note that the sets $S_0, S_1, S_2, \dots, S_n$ form a partition of $S$, so we can consider the parity of an element $(I,a) \in S$---namely, the parity of $(I,a)$ is even if $|I|$ is even, and odd if $|I|$ is odd.
+
+Define a function $f : S \to S$ by letting
+\[ f(I,a) = (I \oplus i_a, a) \]
+for each $I \subseteq [n]$ and each $a \in X_I$. Then:
+\begin{itemize}
+\item $f$ is an involution since by \Cref{exToggleIsInvolution} we have
+\[ f(f(I,a)) = f(I \oplus i_a, a) = ((I \oplus i_a) \oplus i_a, a) = (I, a) \]
+\item $f$ is parity-swapping, since $|I \oplus i_a|$ and $|I|$ have opposite parity for each $a \in X$.
+\end{itemize}
+
+By the involution principle, we have
+\[ \sum_{k=0}^n (-1)^k |S_k| = 0 \]
+
+Now for fixed $I \subseteq [n]$, let $T_I = \{ (I, a) \mid a \in X \}$. Then for each $0 \le k \le n$, the sets $T_I$ for $|I| = k$ partition $S_k$, and moreover $(-1)^k = (-1)^{|I|}$, so that by the addition principle we have
+\[ \sum_{k=0}^n (-1)^k |S_k| ~=~ \sum_{k=0}^n ~ \sum_{I \in \binom{[n]}{k}} ~(-1)^{|I|} |T_I| ~=~ \sum_{I \subseteq [n]} (-1)^{|I|} |T_I| ~=~ 0 \]
+
+Finally note that, for each $I \subseteq [n]$, the function $g_I : X_I \to T_I$ defined by $g_I(a) = (I,a)$ for all $a \in X_I$ is a bijection, with inverse given by $g_I^{-1}(I,a) = a$ for all $(I,a) \in T_I$.
+
+Hence $|X_I| = |T_I|$, and the result is proved.
+\end{cproof}
+
+It is more common to see the inclusion--exclusion principle stated in one two equivalent forms, stated here as \Cref{corIEPSizeOfUnion,corIEPSizeOfComplement}.
+
+\begin{corollary}
+\label{corIEPSizeOfUnion}
+Let $X_1, X_2, \dots, X_n$ be sets. Then
+\[ \left| \bigcup_{i=1}^n X_i \right| ~=~ \sum_{k=1}^n \left( \sum_{1 \le i_1 < i_2 < \cdots < i_k \le n} (-1)^{k-1} |X_{i_1} \cap X_{i_2} \cap \cdots \cap X_{i_k}| \right) \]
+\end{corollary}
+
+\begin{cproof}
+Moving all terms to the left-hand side of the equation and observing that $-(-1)^{k-1} = (-1)^k$, the statement is equivalent to
+\[ \left| \bigcup_{i=1}^n X_i \right| ~-~ \sum_{k=1}^n \left( \sum_{1 \le i_1 < i_2 < \cdots < i_k \le n} (-1)^k |X_{i_1} \cap X_{i_2} \cap \cdots \cap X_{i_k}| \right) ~=~ 0 \]
+But using the notation of \Cref{thmInclusionExclusion}, we have
+\[
+\left| \bigcup_{i=1}^n X_i \right| = |X| = (-1)^{|\varnothing|} |X_{\varnothing}|
+\]
+and for all $1 \le i_1 < i_2 < \cdots < i_k \le n$, we have
+\[
+(-1)^k |X_{i_1} \cap X_{i_2} \cap \cdots \cap X_{i_k}| = (-1)^{|\{i_1,i_2,\dots,i_k\}|} |X_{\{i_1,i_2,\dots,i_k\}}|
+\]
+and so we see that this is just a restatement of \Cref{thmInclusionExclusion}.
+\end{cproof}
+
+\begin{corollary}
+\label{corIEPSizeOfComplement}
+Let $X$ be a set and let $U_1, U_2, \dots, U_n \subseteq X$. Then
+\[
+\left| X \setminus \bigcup_{i=1}^n U_i \right| = |X| ~+~ \sum_{k=1}^n \left( \sum_{1 \le i_1 < i_2 < \cdots < i_k \le n} (-1)^k |U_{i_1} \cap U_{i_2} \cap \cdots \cap U_{i_k}| \right)
+\]
+\end{corollary}
+
+\begin{cproof}
+Since $\bigcup_{i=1}^n U_i \subseteq X$, we have
+\[
+\left| X \setminus \bigcup_{i=1}^n U_i \right| = |X| - \left| \bigcup_{i=1}^n U_i \right|
+\]
+The result then follows immediately from \Cref{corIEPSizeOfUnion}.
+\end{cproof}
+
+\begin{strategy}[Finding the size of a union by inclusion--exclusion]
+In order to find the size of a union of $\bigcup_{i=1}^n X_i$, it suffices to:
+\begin{itemize}
+\item Add the sizes of the individual sets $X_i$;
+\item Subtract the sizes of the double-intersections $X_i \cap X_j$;
+\item Add the sizes of the triple-intersections $X_i \cap X_j \cap X_k$;
+\item Subtract the sizes of the quadruple-intersections $X_i \cap X_j \cap X_k \cap X_{\ell}$;
+\item \dots and so on \dots
+\end{itemize}
+Continue alternating until the intersection of all the sets is covered.
+\end{strategy}
+
+\begin{example}
+We count how many subsets of $[12]$ contain a multiple of $3$. Precisely, we count the number of elements of the set
+\[ X_3 \cup X_6 \cup X_9 \cup X_{12} \]
+where $X_k = \{ S \subseteq [12] \mid k \in S \}$. We will apply the inclusion--exclusion principle:
+\begin{enumerate}[(i)]
+\item An element $S \in X_3$ is precisely a set of the form $\{ 3 \} \cup S'$, where $S' \subseteq [12] \setminus \{ 3 \}$. Since $[12] \setminus \{ 3 \}$ has $11$ elements, there are $2^{11}$ such subsets. So $|X_3| = 2^{11}$, and likewise $|X_6| = |X_9| = |X_{12}| = 2^{11}$.
+\item An element $S \in X_3 \cap X_6$ is a set of the form $\{3,6\} \cup S'$, where $S' \subseteq [12] \setminus \{ 3, 6 \}$. Thus there are $2^{10}$ such subsets, so $|X_3 \cap X_6| = 2^{10}$. And likewise
+\[ |X_3 \cap X_9| = |X_3 \cap X_{12}| = |X_6 \cap X_9| = |X_6 \cap X_{12}| = |X_9 \cap X_{12}| = 2^{10} \]
+\item Reasoning as in the last two cases, we see that
+\[ |X_3 \cap X_6 \cap X_9| = |X_3 \cap X_6 \cap X_{12}| = |X_3 \cap X_9 \cap X_{12}| = |X_6 \cap X_9 \cap X_{12}| = 2^9 \]
+\item \dots{}and $|X_3 \cap X_6 \cap X_9 \cap X_{12}| = 2^8$.
+\end{enumerate}
+Thus the number of subsets of $[12]$ which contain a multiple of $3$ is
+\[ \underbrace{4 \times 2^{11}}_{\text{by (i)}} \quad - \quad \underbrace{6 \times 2^{10}}_{\text{by (ii)}}  \quad + \quad \underbrace{4 \times 2^9}_{\text{by (iii)}} \quad - \quad \underbrace{2^8}_{\text{by (iv)}}  \]
+which is equal to $3840$.
+\end{example}
+
+\begin{exercise}
+How many natural numbers less than $1000$ are multiples of $2$, $3$, $5$ or $7$?
+\end{exercise}
+
+\index{alternating sum|)}
+\index{sum!alternating|)}

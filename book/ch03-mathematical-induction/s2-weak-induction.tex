@@ -1,0 +1,489 @@
+\section{Weak induction}
+\secbegin{secWeakInduction}
+\index{induction!weak|(}
+
+Just as recursion exploited the structure of the natural numbers to \textit{define expressions} involving natural numbers, induction exploits the very same structure to \textit{prove results} about natural numbers.
+
+\begin{theorem}[Weak induction principle]
+\label{thmWeakInduction}
+\index{induction!on $\mathbb{N}$ (weak)}
+\index{weak induction principle}
+Let $p(n)$ be logical formula with free variable $n \in \mathbb{N}$, and let $n_0 \in \mathbb{N}$. If
+\begin{enumerate}[(i)] 
+\item $p(n_0)$ is true; and
+\item For all $n \ge n_0$, if $p(n)$ is true, then $p(n+1)$ is true;
+\end{enumerate}
+then $p(n)$ is true for all $n \ge n_0$.
+\end{theorem}
+
+\begin{cproof}
+Define $X = \{ n \in \mathbb{N} \mid p(n_0 + n) \text{ is true} \}$; that is, given a natural number $n$, we have $n \in X$ if and only if $p(n_0 + n)$ is true. Then
+\begin{itemize}
+\item $0 \in X$, since $n_0 + 0 = n_0$ and $p(n_0)$ is true by (i).
+\item Let $n \in \mathbb{N}$ and assume $n \in X$. Then $p(n_0+n)$ is true. Since $n_0 + n \ge n_0$ and $p(n_0+n)$ is true, we have $p(n_0+n+1)$ is true by (ii). But then $n_0+n+1 \in X$.
+\end{itemize}
+
+So by \Cref{defNotionOfNaturalNumbers}(iii) we have $\mathbb{N} \subseteq X$. Hence $p(n_0 + n)$ is true for all $n \in \mathbb{N}$. But this is equivalent to saying that $p(n)$ is true for all $n \ge n_0$.
+\end{cproof}
+
+\begin{strategy}[Proof by {(weak)} induction]
+\index{proof!by weak induction}
+In order to prove a proposition of the form $\forall n \in \mathbb{N},\, p(n)$, it suffices to prove that $p(0)$ is true and that, for all $n \in \mathbb{N}$, if $p(n)$ is true, then $p(n+1)$ is true.
+\end{strategy}
+
+Some terminology has evolved for proofs by induction, which we mention now:
+\begin{itemize}
+\item The proof of $p(n_0)$ is called the \textbf{base case};
+\item The proof of $\forall n \ge n_0,\, (p(n) \Rightarrow p(n+1))$ is called the \textbf{induction step};
+\item In the induction step, the assumption $p(n)$ is called the \textbf{induction hypothesis};
+\item In the induction step, the proposition $p(n+1)$ is called the \textbf{induction goal}.
+\end{itemize}
+
+The following diagram illustrates the weak induction principle.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[fill=indstepcol] (6,-1) rectangle (8,1);
+\draw (0,0) node[diamond, draw, text width=27, text centered, fill=indbasecol] {$n_0$};
+\draw (2,0) node[circle, draw, text width=27, text centered, fill=white] {$n_0+1$};
+\draw (3.5,0) node {$\cdots$};
+\draw (5,0) node[circle, draw, text width=27, text centered, fill=white] {$n-1$};
+\draw (7,0) node[circle, draw, text width=27, text centered, fill=white] {$n$};
+\draw (9.5,0) node[circle, draw, dashed, text width=27, text centered, fill=white](nplusone) {$n+1$};
+\draw[->] (8,0) -- (nplusone);
+\end{tikzpicture}
+\end{center}
+
+To interpret this diagram:
+\begin{itemize}
+\item The shaded diamond represents the base case $p(n_0)$;
+\item The square represents the induction hypothesis $p(n)$;
+\item The dashed circle represents the induction goal $p(n+1)$;
+\item The arrow represents the implication we must prove in the induction step.
+\end{itemize}
+
+We will use analogous diagrams to illustrate the other induction principles in this section.
+
+\begin{proposition}
+\label{propSumConsecInduction}
+Let $n \in \mathbb{N}$. Then $\displaystyle\sum_{k=1}^n k = \frac{n(n+1)}{2}$
+\end{proposition}
+
+\begin{cproof}
+We proceed by induction on $n \ge 0$.
+
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove $\displaystyle\sum_{k=1}^0 k = \frac{0(0+1)}{2}$.
+
+This is true, since $\dfrac{0(0+1)}{2} = 0$, and $\displaystyle\sum_{k=1}^0 k = 0$ by \Cref{defSumOfRealNumbers}.
+
+\item (\textbf{Induction step}) Let $n \ge 0$ and suppose that $\displaystyle\sum_{k=1}^n k = \dfrac{n(n+1)}{2}$; this is the induction hypothesis.
+
+We need to prove that $\displaystyle\sum_{k=1}^{n+1} k = \frac{(n+1)(n+2)}{2}$; this is the induction goal.
+
+We proceed by calculation:
+\begin{align*}
+\sum_{k=1}^{n+1} k &= \left( \sum_{k=1}^n k \right) + (n+1) && \text{by \Cref{defSumOfRealNumbers}} \\
+&= \frac{n(n+1)}{2} + (n+1) && \text{by induction hypothesis}\\
+&= (n+1)\left( \frac{n}{2} + 1 \right) && \text{factorising} \\
+&= \frac{(n+1)(n+2)}{2} && \text{rearranging}
+\end{align*}
+\end{itemize}
+The result follows by induction. 
+\end{cproof}
+
+Before moving on, let's reflect on the proof of \Cref{propSumConsecInduction} to highlight some effective ways of writing a proof by induction.
+
+\begin{itemize}
+\item We began the proof by indicating that it was a proof by induction. While it is clear in this section that most proofs will be by induction, that will not always be the case, so it is good practice to indicate the proof strategy at hand.
+\item The base case and induction step are clearly labelled in the proof. This is not strictly \textit{necessary} from a mathematical perspective, but it helps the reader to navigate the proof and to identify what the goal is at each step.
+\item We began the induction step by writing, `Let $n \ge n_0$ and suppose that [\dots{}\textit{induction hypothesis goes here}\dots{}]'. This is typically how your induction step should begin, since the proposition being proved in the induction step is of the form $\forall n \ge n_0,\, (p(n) \Rightarrow \cdots)$.
+\item Before proving anything in the base case or induction step, we wrote out what it was that we were trying to prove in that part of the proof. This is helpful because it helps to remind us (and the person reading the proof) what we are aiming to achieve.
+\end{itemize}
+
+Look out for these features in the proof of the next proposition, which is also by induction on $n \ge 0$.
+
+\begin{proposition}
+The natural number $n^3-n$ is divisible by $3$ for all $n \in \mathbb{N}$.
+\end{proposition}
+
+\begin{cproof}
+We proceed by induction on $n \ge 0$.
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove that $0^3-0$ is divisible by $3$. Well
+\[ 0^3-0 = 0 = 3 \times 0 \]
+so $0^3-0$ is divisible by $3$.
+
+\item (\textbf{Induction step}) Let $n \in \mathbb{N}$ and suppose that $n^3-n$ is divisible by $3$. Then $n^3-n = 3k$ for some $k \in \mathbb{Z}$.
+
+We need to prove that $(n+1)^3 - (n+1)$ is divisible by $3$; in other words, we need to find some natural number $\ell$ such that
+\[ (n+1)^3 - (n+1) = 3\ell \]
+We proceed by computation.
+\begin{align*}
+& (n+1)^3 - (n+1) && \\
+&= (n^3 + 3n^2 + 3n + 1) - n - 1 && \text{expand brackets}\\
+&= n^3 - n + 3n^2 + 3n + 1 - 1 && \text{rearrange terms} \\
+&= n^3 - n + 3n^2 + 3n && \text{since $1 - 1 = 0$} \\
+&= 3k + 3n^2 + 3n && \text{by induction hypothesis} \\
+&= 3(k+n^2+n) && \text{factorise}
+\end{align*}
+Thus we have expressed $(n+1)^3-(n+1)$ in the form $3\ell$ for some $\ell \in \mathbb{Z}$; specifically, $\ell=k+n^2+n$.
+\end{itemize}
+
+The result follows by induction.
+\end{cproof}
+
+\begin{exercise}
+\label{exSumOfPowersOf2}
+Prove by induction that $\displaystyle \sum_{k=0}^n 2^k = 2^{n+1} - 1$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+The following proposition has a proof by induction in which the base case is not zero.
+
+\begin{proposition}
+\label{propWeakInductionNonzeroBaseCaseExample}
+For all $n \ge 4$, we have $3n < 2^n$.
+\end{proposition}
+
+\begin{cproof}
+We proceed by induction on $n \ge 4$.
+\begin{itemize}
+\item (\textbf{Base case}) $p(4)$ is the statement $3 \cdot 4 < 2^4$. This is true, since $12 < 16$.
+
+\item (\textbf{Induction step}) Suppose $n \ge 4$ and that $3n < 2^n$. We want to prove $3(n+1) < 2^{n+1}$. Well,
+\begin{align*}
+3(n+1) &= 3n+3 && \text{expanding} \\
+&< 2^n + 3   && \text{by induction hypothesis} \\
+&< 2^n + 2^4 && \text{since $3 < 16 = 2^4$} \\
+&\le 2^n + 2^n && \text{since $n \ge 4$} \\
+&= 2 \cdot 2^n && \text{simplifying} \\
+&= 2^{n+1} && \text{simplifying}
+\end{align*}
+So we have proved $3(n+1) < 2^{n+1}$, as required.
+\end{itemize}
+The result follows by induction.
+\end{cproof}
+
+Note that the proof in \Cref{propWeakInductionNonzeroBaseCaseExample} says nothing about the truth or falsity of $p(n)$ for $n=0,1,2,3$. In order to assert that these cases are false, you need to show them individually; indeed:
+\begin{itemize}
+\item $3 \times 0 = 0$ and $2^0 = 1$, hence $p(0)$ is true;
+\item $3 \times 1 = 3$ and $2^1 = 2$, hence $p(1)$ is false;
+\item $3 \times 2 = 6$ and $2^2 = 4$, hence $p(2)$ is false;
+\item $3 \times 3 = 9$ and $2^3 = 8$, hence $p(3)$ is false.
+\end{itemize}
+So we deduce that $p(n)$ is true when $n=0$ or $n \ge 4$, and false when $n \in \{ 1, 2, 3 \}$.
+
+\begin{exercise}
+\label{exNPowerFiveLessThanFivePowerN}
+Find all natural numbers $n$ such that $n^5 < 5^n$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $(1+x)^{123\;456\;789} \ge 1 + 123\;456\;789\;x$ for all real $x \ge -1$.
+\hintlabel{exBernoullisInequality}{%
+Proving this by induction on $x$ only demonstrates that it is true for \textit{integers} $x \ge -1$, not \textit{real numbers} $x \ge -1$. Try proving a more general fact by induction on a different variable, and deducing this as a special case. (Do you \textit{really} think there is anything special about the natural number $123\;456\;789$?)}
+\end{exercise}
+
+Sometimes a `proof' by induction might appear to be complete nonsense. The following is a classic example of a `fail by induction':
+
+\begin{example}
+\label{exHorseInductionFail}
+The following argument supposedly proves that every horse is the same colour.
+\begin{itemize}
+\item (\textbf{Base case}) Suppose there is just one horse. This horse is the same colour as itself, so the base case is immediate.
+\item (\textbf{Induction step}) Suppose that every collection of $n$ horses is the same colour. Let $X$ be a set of $n+1$ horses. Removing the first horse from $X$, we see that the last $n$ horses are the same colour by the induction hypothesis. Removing the last horse from $X$, we see that the first $n$ horses are the same colour. Hence all the horses in $X$ are the same colour.
+\end{itemize}
+By induction, we're done.
+\end{example}
+
+\begin{exercise}
+Write down the statement $p(n)$ that \Cref{exHorseInductionFail} attempted to prove for all $n \ge 1$. Convince yourself that the proof of the base case is correct, then write down---with quantifiers---exactly the proposition that the induction step is meant to prove. Explain why the argument in the induction step failed to prove this proposition.
+\end{exercise}
+
+There are several ways to avoid situations like that of \Cref{exHorseInductionFail} by simply putting more thought into writing the proof. Some tips are:
+
+\begin{itemize}
+\item State $p(n)$ explicitly. In the statement `all horses are the same colour' it is not clear exactly what the induction variable is. However, we could have said:
+\begin{center}
+Let $p(n)$ be the statement `every set of $n$ horses has the same colour'.
+\end{center}
+
+\item Refer explicitly to the base case $n_0$ in the induction step. In \Cref{exHorseInductionFail}, our induction hypothesis simply stated `assume every set of $n$ horses has the same colour'. Had we instead said:
+\begin{center}
+Let $n \ge 1$ and assume every set of $n$ horses has the same colour.
+\end{center}
+We may have spotted the error in what was to come.
+\end{itemize}
+
+What follows are a couple more examples of proofs by weak induction.
+
+\begin{proposition}
+For all $n \in \mathbb{N}$, we have $\displaystyle \sum_{k=0}^n k^3 = \left( \sum_{k=0}^n k \right)^2$.
+\end{proposition}
+
+\begin{cproof}
+We proved in \Cref{propWeakInductionNonzeroBaseCaseExample} that $\displaystyle\sum_{k=0}^n k = \frac{n(n+1)}{2}$ for all $n \in \mathbb{N}$, thus it suffices to prove that
+\[ \sum_{k=0}^n k^3 = \frac{n^2(n+1)^2}{4} \]
+for all $n \in \mathbb{N}$.
+
+We proceed by induction on $n \ge 0$.
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove that $\displaystyle 0^3 = \frac{0^2(0+1)^2}{4}$. This is true since both sides of the equation are equal to $0$.
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and suppose that $\displaystyle \sum_{k=0}^n k^3 = \frac{n^2(n+1)^2}{4}$. We need to prove that $\displaystyle \sum_{k=0}^{n+1} k^3 = \frac{(n+1)^2(n+2)^2}{4}$. This is true since:
+\begin{align*}
+\sum_{i=0}^{n+1} k^3 & = \sum_{i=0}^n k^3 + (n+1)^3 && \text{by definition of sum} \\
+&= \frac{n^2(n+1)^2}{4} + (n+1)^3 && \text{by induction hypothesis} \\
+&= \frac{n^2(n+1)^2 + 4(n+1)^3}{4} && \text{(\textit{algebra})} \\
+&= \frac{(n+1)^2(n^2 + 4(n+1))}{4} && \text{(\textit{algebra})} \\
+&= \frac{(n+1)^2(n+2)^2}{4} && \text{(\textit{algebra})}
+\end{align*}
+\end{itemize}
+By induction, the result follows.
+\end{cproof}
+
+In the next proposition, we prove the correctness of a well-known formula for the sum of an \textit{arithmetic progression} of real numbers.
+
+\begin{proposition}
+Let $a,d \in \mathbb{R}$. Then
+\[ \sum_{k=0}^n (a+kd) = \frac{(n+1)(2a+nd)}{2} \]
+for all $n \in \mathbb{N}$.
+\end{proposition}
+
+\begin{cproof}
+We proceed by induction on $n \ge 0$.
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove that $\displaystyle\sum_{k=0}^0 (a+kd) = \frac{(0+1)(2a+0d)}{2}$. This is true, since
+\[ \sum_{k=0}^0 (a+kd) = a + 0d = a = \frac{2a}{2} = \frac{1 \cdot (2a)}{2} = \frac{(0+1)(2a+0d)}{2} \]
+
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and suppose that $\displaystyle\sum_{k=0}^n (a+kd) = \frac{(n+1)(2a+nd)}{2}$. We need to prove:
+\[ \sum_{k=0}^{n+1} (a+kd) = \frac{(n+2)(2a+(n+1)d)}{2} \]
+This is true, since
+\begin{align*}
+&\sum_{k=0}^{n+1} (a+kd) && \\
+&= \sum_{k=0}^n (a+kd) + (a+(n+1)d) && \text{by definition of sum} \\
+&= \frac{(n+1)(2a+nd)}{2} + (a + (n+1)d) && \text{by induction hypothesis} \\
+&= \frac{(n+1)(2a+nd) + 2a + 2(n+1)d}{2} && \text{(\textit{algebra})} \\
+&= \frac{(n+1) \cdot 2a + (n+1) \cdot nd + 2a + 2(n+1)d}{2} && \text{(\textit{algebra})} \\
+&= \frac{2a(n+1+1) + (n+1)(nd + 2d)}{2} && \text{(\textit{algebra})} \\
+&= \frac{2a(n+2) + (n+1)(n+2)d}{2} && \text{(\textit{algebra})} \\
+&= \frac{(n+2)(2a + (n+1)d)}{2} && \text{(\textit{algebra})}
+\end{align*}
+\end{itemize}
+By induction, the result follows.
+\end{cproof}
+
+The following exercises generalises \Cref{exSumOfPowersOf2} to prove the correctness of a formula for the sum of a \textit{geometric progression} of real numbers.
+
+\begin{exercise}
+\label{exFormulaForGeometricProgression}
+Let $a,r \in \mathbb{R}$ with $r \ne 1$. Then
+\[ \sum_{k=0}^n ar^n = \frac{a(1-r^{n+1})}{1-r} \]
+for all $n \in \mathbb{N}$.
+\end{exercise}
+
+When attempting the following exercise, you might find that your induction step requires an auxiliary result, which itself has a proof by induction.
+
+\begin{exercise}
+Prove by induction that $7^n - 2 \cdot 4^n + 1$ is divisible by $18$ for all $n \in \mathbb{N}$.
+\hintlabel{exInductionEmbeddedInIductionStep}{%
+Observe that $7^{n+1} - 2 \cdot 4^{n+1} + 1 = 4(7^n - 2 \cdot 4^n + 1) + 3(7^n - 1)$ for all $n \in \mathbb{N}$.
+}
+\end{exercise}
+
+\subsection*{Binomials and factorials}
+
+Proof by induction turns out to be a very useful way of proving facts about binomial coefficients $\binom{n}{k}$ and factorials $n!$.
+
+\begin{example}
+\label{exSumOfBinomialCoefficients}
+We prove that $\sum_{i=0}^n \binom{n}{i} = 2^n$ by induction on $n$.
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove $\binom{0}{0} = 1$ and $2^0=1$. These are both true by the definitions of binomial coefficients and exponents.
+\item (\textbf{Induction step}) Fix $n \ge 0$ and suppose that
+\[ \sum_{i=0}^n \binom{n}{i} = 2^n \]
+We need to prove
+\[ \sum_{i=0}^{n+1} \binom{n+1}{i} = 2^{n+1} \]
+This is true, since
+
+\begin{align*}
+&\sum_{i=0}^{n+1} \binom{n+1}{i} && \\
+&= \binom{n+1}{0} + \sum_{i=1}^{n+1} \binom{n+1}{i} && \text{splitting the sum} \\
+&= 1 + \sum_{j=0}^n \binom{n+1}{j+1} && \text{letting $j=i-1$} \\
+&= 1 + \sum_{j=0}^n \left(\binom{n}{j} + \binom{n}{j+1}\right) && \text{by \Cref{defBinomialCoefficientRecursive}} \\
+&= 1 + \sum_{j=0}^n \binom{n}{j} + \sum_{j=0}^n \binom{n}{j+1} && \text{separating the sums}
+\end{align*}
+
+Now $\sum_{j=0}^n \binom{n}{j} = 2^n$ by the induction hypothesis. Moreover, reindexing the sum using $k=j+1$ yields
+\[ \sum_{j=0}^n \binom{n}{j+1} = \sum_{k=1}^{n+1} \binom{n}{k} = \sum_{k=1}^n \binom{n}{k} + \binom{n}{n+1} \]
+By the induction hypothesis, we have
+\[ \sum_{k=1}^n \binom{n}{k} = \sum_{k=0}^n \binom{n}{k} - \binom{n}{0} = 2^n-1 \]
+and $\binom{n}{n+1} = 0$, so that $\sum_{j=0}^n \binom{n}{j+1} = 2^n-1$.
+
+Putting this together, we have
+\begin{align*}
+1 + \sum_{j=0}^n \binom{n}{j} + \sum_{j=0}^n \binom{n}{j+1}
+&= 1 + 2^n + (2^n-1) \\
+&= 2 \cdot 2^n \\
+&= 2^{n+1}
+\end{align*}
+so the induction step is finished.
+\end{itemize}
+By induction, we're done.
+\end{example}
+
+\begin{exercise}
+\label{exAlternatingSumOfBinomialCoefficientsIsZero}
+Prove by induction on $n \ge 1$ that
+\[ \sum_{i=0}^n (-1)^i \binom{n}{i} = 0 \]
+\end{exercise}
+
+\begin{theorem}
+\label{thmBinomAsFactorialByInduction}
+Let $n,k \in \mathbb{N}$. Then
+\[ \binom{n}{k} =
+\begin{cases}
+\dfrac{n!}{k!(n-k)!} & \text{if } k \le n \\
+0 & \text{if } k > n
+\end{cases} \]
+\end{theorem}
+\begin{cproof}
+We proceed by induction on $n$.
+\begin{itemize}
+\item (\textbf{Base case}) When $n=0$, we need to prove that $\binom{0}{k} = \frac{0!}{k!(-k)!}$ for all $k \le 0$, and that $\binom{0}{k} = 0$ for all $k>0$.
+
+If $k \le 0$ then $k=0$, since $k \in \mathbb{N}$. Hence we need to prove
+\[ \binom{0}{0} = \frac{0!}{0!0!} \]
+But this is true since $\binom{0}{0}=1$ and $\frac{0!}{0!0!} = \frac{1}{1 \times 1} = 1$.
+
+If $k>0$ then $\binom{0}{k} = 0$ by \Cref{defBinomialCoefficientRecursive}.
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and suppose that $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ for all $k \le n$ and $\binom{n}{k} = 0$ for all $k > n$.
+
+We need to prove that, for all $k \le n+1$, we have
+\[ \binom{n+1}{k} = \frac{(n+1)!}{k!(n+1-k)!} \]
+and that $\binom{n+1}{k} = 0$ for all $k > n+1$.
+
+So fix $k \in \mathbb{N}$. There are four possible cases: either (i) $k=0$, or (ii) $0 < k \le n$, or (iii) $k=n+1$, or (iv) $k>n+1$. In cases (i), (ii) and (iii), we need to prove the factorial formula for $\binom{n+1}{k}$; in case (iv), we need to prove that $\binom{n+1}{k} = 0$.
+
+\begin{enumerate}[(i)]
+\item Suppose $k=0$. Then $\binom{n+1}{0} = 1$ by \Cref{defBinomialCoefficientRecursive}, and
+\[ \frac{(n+1)!}{k!(n+1-k)!} = \frac{(n+1)!}{0!(n+1)!} = 1 \]
+since $0!=1$. So $\binom{n+1}{0} = \frac{(n+1)!}{0!(n+1)!}$.
+\item If $0 < k \le n$ then $k=\ell+1$ for some natural number $\ell < n$. Then $\ell+1 \le n$, so we can use the induction hypothesis to apply factorial formula to both $\binom{n}{\ell}$ and $\binom{n}{\ell+1}$. Hence
+\begin{align*}
+&\binom{n+1}{k} && \\
+&= \binom{n+1}{\ell+1} && \text{since $k=\ell+1$} \\
+&= \binom{n}{\ell} + \binom{n}{\ell+1} && \text{by \Cref{defBinomialCoefficientRecursive}} \\
+&= \frac{n!}{\ell!(n-\ell)!} + \frac{n!}{(\ell+1)!(n-\ell-1)!} && \text{by induction hypothesis}
+\end{align*}
+Now note that
+\[ \frac{n!}{\ell!(n-\ell)!} = \frac{n!}{\ell!(n-\ell)!} \cdot \frac{\ell+1}{\ell+1} = \frac{n!}{(\ell+1)!(n-\ell)!} \cdot (\ell+1) \]
+and
+\begin{center}
+$\dfrac{n!}{(\ell+1)!(n-\ell-1)!} = \dfrac{n!}{(\ell+1)!(n-\ell-1)!} \cdot \dfrac{n-\ell}{n-\ell} = \dfrac{n!}{(\ell+1)!(n-\ell)!} \cdot (n-\ell)$
+\end{center}
+
+Piecing this together, we have
+\begin{align*}
+&\frac{n!}{\ell!(n-\ell)!} + \frac{n!}{(\ell+1)!(n-\ell-1)!} && \\
+&= \frac{n!}{(\ell+1)!(n-\ell)!} \cdot [(\ell+1) + (n-\ell)] \\
+&= \frac{n!(n+1)}{(\ell+1)!(n-\ell)!} && \\
+&= \frac{(n+1)!}{(\ell+1)!(n-\ell)!}
+\end{align*}
+so that $\binom{n+1}{\ell+1} = \frac{(n+1)!}{(\ell+1)!(n-\ell)!}$. Now we're done; indeed,
+\[ \frac{(n+1)!}{(\ell+1)!(n-\ell)!} = \frac{(n+1)!}{k!(n+1-k)!} \]
+since $k=\ell+1$.
+\item If $k=n+1$, then
+\begin{align*}
+\binom{n+1}{k} &= \binom{n+1}{n+1} && \text{since $k=n+1$} \\
+&= \binom{n}{n} + \binom{n}{n+1} && \text{by \Cref{defBinomialCoefficientRecursive}} \\
+&= \frac{n!}{n!0!} + 0 && \text{by induction hypothesis} \\
+&= 1
+\end{align*}
+and $\frac{(n+1)!}{(n+1)!0!}=1$, so again the two quantities are equal.
+\item If $k>n+1$, then $k=\ell+1$ for some $\ell > n$, and so by \Cref{defBinomialCoefficientRecursive} and the induction hypothesis we have
+\[ \binom{n+1}{k} = \binom{n+1}{\ell+1} \overset{\text{IH}}{=} \binom{n}{\ell}+\binom{n}{\ell+1} = 0+0 = 0 \]
+
+\end{enumerate}
+\end{itemize}
+\end{cproof}
+
+On first reading, this proof is long and confusing, especially in the induction step where we are required to split into four cases. We will give a much simpler proof in \Cref{secCountingPrinciples} (see \Cref{thmBinomAsFactorial}), where we prove the statement \textit{combinatorially} by putting the elements of two sets in one-to-one correspondence.
+
+We can use \Cref{thmBinomAsFactorialByInduction} to prove useful identities involving binomial coefficients.
+
+\begin{example}
+Let $n,k,\ell \in \mathbb{N}$ with $\ell \le k \le n$ then \[ \binom{n}{k}\binom{k}{\ell} = \binom{n}{\ell}\binom{n-\ell}{k-\ell} \]
+Indeed:
+\begin{align*}
+& \binom{n}{k} \binom{k}{\ell} && \\
+&= \frac{n!}{k!(n-k)!} \cdot \frac{k!}{\ell!(k-\ell!)} && \text{by \Cref{thmBinomAsFactorialByInduction}} \\
+&= \frac{n!k!}{k!\ell!(n-k)!(k-\ell)!} && \text{combine fractions} \\
+&= \frac{n!}{\ell!(n-k)!(k-\ell)!} && \text{cancel } k!\\
+&= \frac{n!(n-\ell)!}{\ell!(n-k)!(k-\ell)!(n-\ell)!} && \text{multiply by } \frac{(n-\ell)!}{(n-\ell)!} \\
+&= \frac{n!}{\ell!(n-\ell!)} \cdot \frac{(n-\ell)!}{(k-\ell)!(n-k)!} && \text{separate fractions} \\
+&= \frac{n!}{\ell!(n-\ell!)} \cdot \frac{(n-\ell)!}{(k-\ell)!((n-\ell)-(k-\ell))!} && \text{rearranging} \\
+&= \binom{n}{\ell} \binom{n-\ell}{k-\ell} && \text{by \Cref{thmBinomAsFactorialByInduction}}
+\end{align*}
+\end{example}
+
+\begin{exercise}
+Prove that $\binom{n}{k} = \binom{n}{n-k}$ for all $n,k \in \mathbb{N}$ with $k \le n$.
+\end{exercise}
+
+A very useful application of binomial coefficients in elementary algebra is to the binomial theorem.
+
+\begin{theorem}[Binomial theorem]
+\label{thmBinomialTheorem}
+Let $n \in \mathbb{N}$ and $x,y \in \mathbb{R}$. Then
+\[ (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k} \]
+\end{theorem}
+\begin{cproof}
+In the case when $y=0$ we have $y^{n-k}=0$ for all $k<n$, and so the equation reduces to
+\[ x^n = x^ny^{n-n} \]
+which is true, since $y^0=1$. So for the rest of the proof, we will assume that $y \ne 0$.
+
+We will now reduce to the case when $y=1$; and extend to arbitrary $y \ne 0$ afterwards.
+
+We prove $(1+x)^n = \sum_{k=0}^n \binom{n}{k} x^k$ by induction on $n$.
+\begin{itemize}
+\item (\textbf{Base case}) $(1+x)^0=1$ and $\binom{0}{0} x^0 = 1 \cdot 1 = 1$, so the statement is true when $n=0$.
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and suppose that
+\[ (1+x)^n = \sum_{k=0}^n \binom{n}{k} x^k \]
+
+We need to show that $(1+x)^{n+1} = \sum_{k=0}^{n+1} \binom{n+1}{k} x^k$. Well,
+
+\begin{align*} \hspace{-30pt}
+& (1+x)^{n+1} && \\
+&= (1+x)(1+x)^n && \text{by laws of indices} \\
+&= (1+x) \cdot \sum_{k=0}^n \binom{n}{k} x^k && \text{by induction hypothesis} \\
+&= \sum_{k=0}^n \binom{n}{k} x^k + x \cdot \sum_{k=0}^n \binom{n}{k} x^{k}&& \text{by expanding $(x+1)$} \\
+&= \sum_{k=0}^n \binom{n}{k} x^k + \sum_{k=0}^n \binom{n}{k} x^{k+1} && \text{distributing $x$} \\
+&= \sum_{k=0}^n \binom{n}{k} x^k + \sum_{k=1}^{n+1} \binom{n}{k-1} x^k && \text{$k \to k-1$ in second sum} \\
+&= \binom{n}{0}x^0 + \sum_{k=1}^n \left( \binom{n}{k} + \binom{n}{k-1} \right) x^k + \binom{n}{n}x^{n+1} && \text{splitting the sums} \\
+&= \binom{n}{0}x^0 + \sum_{k=1}^n \binom{n+1}{k} x^k + \binom{n}{n}x^{n+1} && \text{by \Cref{defBinomialCoefficientRecursive}} \\
+&= \binom{n+1}{0}x^0 + \sum_{k=1}^n \binom{n+1}{k} x^k + \binom{n+1}{n+1}x^{n+1} && \text{see $(*)$ below} \\
+&= \sum_{k=0}^{n+1} \binom{n+1}{k} x^k &&
+\end{align*}
+The step labelled $(*)$ holds because
+\[ \binom{n}{0} = 1 = \binom{n+1}{0} \qquad \text{and} \qquad \binom{n}{n} = 1 = \binom{n+1}{n+1} \]
+\end{itemize}
+By induction, we've shown that $(1+x)^n = \sum_{i=0}^n \binom{n}{k} x^k$ for all $n \in \mathbb{N}$.
+
+When $y \ne 0$ is not necessarily equal to $1$, we have that
+\[ (x+y)^n = y^n \cdot \left( 1 + \frac{x}{y} \right)^n = y^n \cdot \sum_{k=0}^n \binom{n}{k} \left( \frac{x}{y} \right)^k = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k} \]
+The middle equation follows by what we just proved; the leftmost and rightmost equations are simple algebraic rearrangements.
+\end{cproof}
+
+\begin{example}
+In \Cref{exSumOfBinomialCoefficients} we saw that
+\[ \sum_{k=0}^n \binom{n}{k} = 2^n \]
+This follows quickly from the binomial theorem, since
+\[ 2^n = (1+1)^n = \sum_{k=0}^n \binom{n}{k} \cdot 1^k \cdot 1^{n-k} = \sum_{k=0}^n \binom{n}{k} \]
+Likewise, in \Cref{exAlternatingSumOfBinomialCoefficientsIsZero} you proved that the alternating sum of binomial coefficients is zero; that is, for $n \in \mathbb{N}$, we have
+\[ \sum_{k=0}^n (-1)^k \binom{n}{k} = 0 \]
+The proof is greatly simplified by applying the binomial theorem. Indeed, by the binomial theorem, we have
+\[ 0 = 0^n = (-1+1)^n = \sum_{k=0}^n \binom{n}{k}(-1)^k1^{n-k} = \sum_{k=0}^n (-1)^k \binom{n}{k} \]
+Both of these identities can be proved much more elegantly, quickly and easily using \textit{enumerative combinatorics}. This will be the topic covered in \Cref{secCountingPrinciples}.
+\end{example}
+
+\index{induction!weak|)}

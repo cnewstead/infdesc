@@ -1,0 +1,86 @@
+\begin{chapex}
+\label{cqTranslatePropositionalFormulaeToEnglish}
+For fixed $n \in \mathbb{N}$, let $p$ represent the proposition `$n$ is even', let $q$ represent the proposition `$n$ is prime' and let $r$ represent the proposition `$n = 2$'. For each of the following propositional formulae, translate it into plain English and determine whether it is true for all $n \in \mathbb{N}$, true for some values of $n$ and false for some values of $n$, or false for all $n \in \mathbb{N}$.
+
+\begin{enumerate}[(a)]
+\item $(p \wedge q) \Rightarrow r$
+\item $q \wedge (\neg r) \Rightarrow (\neg p)$
+\item $((\neg p) \vee (\neg q)) \vee (\neg r)$
+\item $(p \wedge q) \wedge (\neg r)$
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+For each of the following plain English statements, translate it into a symbolic propositional formula. The propositional variables in your formulae should represent the simplest propositions that they can.
+\begin{enumerate}[(a)]
+\item Guinea pigs are quiet, but they're loud when they're hungry.
+\item It doesn't matter that $2$ is even, it's still a prime number.
+\item $\sqrt{2}$ can't be an integer because it is a rational number.
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+Let $p$ and $q$ be propositions, and assume that $p \Rightarrow (\neg q)$ is true and that $(\neg q) \Rightarrow p$ is false. Which of the following are true, and which are false?
+\begin{enumerate}[(a)]
+\item $q$ being false is necessary for $p$ to be true.
+\item $q$ being false is sufficient for $p$ to be true.
+\item $p$ being true is necessary for $q$ to be false.
+\item $p$ being true is sufficient for $p$ to be false.
+\end{enumerate}
+\end{chapex}
+
+% Variables and quantifiers %
+
+\begin{chapex}
+Find a statement in plain English, involving no variables at all, that is equivalent to the logical formula $\forall a \in \mathbb{Q},\, \forall b \in \mathbb{Q},\, (a < b \Rightarrow \exists c \in \mathbb{R},\, [a < c < b ~\wedge~ \neg (c \in \mathbb{Q})])$. Then prove this statement, using the structure of the logical formula as a guide.
+\end{chapex}
+
+\begin{chapex}
+Find a purely symbolic logical formula that is equivalent to the following statement, and then prove it: ``\textit{No matter which integer you may choose, there will be an integer greater than it.}''
+\end{chapex}
+
+
+
+% Logical equivalence %
+
+\begin{chapex}
+Prove that
+\[
+p \Leftrightarrow q \equiv (p \Rightarrow q) \wedge ((\neg p) \Rightarrow (\neg q))
+\]
+How might this logical equivalence help you to prove statements of the form `$p$ if and only if $q$'?
+\end{chapex}
+
+\begin{chapex}
+Prove using truth tables that $p \Rightarrow q \not\equiv q \Rightarrow p$. Give an example of propositions $p$ and $q$ such that $p \Rightarrow q$ is true but $q \Rightarrow p$ is false.
+\end{chapex}
+
+\begin{chapex}
+A new logical operator $\uparrow$ is defined by the following rules:
+\begin{enumerate}[(i)]
+\item If a contradiction can be derived from the assumption that $p$ is true, then $p \uparrow q$ is true;
+\item If a contradiction can be derived from the assumption that $q$ is true, then $p \uparrow q$ is true;
+\item If $r$ is any proposition, and if $p \uparrow q$, $p$ and $q$ are all true, then $r$ is true.
+\end{enumerate}
+
+This question explores this curious new logical operator.
+\begin{enumerate}[(a)]
+\item Prove that $p \uparrow p \equiv \neg p$, and deduce that $((p \uparrow p) \uparrow (p \uparrow p)) \equiv p$.
+\item Prove that $p \vee q \equiv (p \uparrow p) \uparrow (q \uparrow q)$ and $p \wedge q \equiv (p \uparrow q) \uparrow (p \uparrow q)$.
+\item Find a propositional formula using only the logical operator $\uparrow$ that is equivalent to $p \Rightarrow q$.
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be $\mathbb{Z}$ or $\mathbb{Q}$, and define a logical formula $p$ by:
+$$\forall x \in X,\, \exists y \in X,\, (x<y \wedge [\forall z \in X,\, \neg (x<z \wedge z<y)])$$
+Write out $\neg p$ as a maximally negated logical formula. Prove that $p$ is true when $X = \mathbb{Z}$, and $p$ is false when $X = \mathbb{Q}$.
+\end{chapex}
+
+\begin{chapex}
+Use \Cref{defUniqueExistentialQuantifier} to write out a maximally negated logical formula that is equivalent to $\neg \exists! x \in X,\, p(x)$. Describe the strategy that this equivalence suggests for proving that there is not a unique $x \in X$ such that $p(x)$ is true, and use this strategy to prove that, for all $a \in \mathbb{R}$, if $a \ne -1$ then there is not a unique $x \in \mathbb{R}$ such that $x^4-2ax^2+a^2-1=0$.
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a set and let $p(x)$ be a predicate. Find a logical formula representing the statement `there are exactly two elements $x \in X$ such that $p(x)$ is true'. Use the structure of this logical formula to describe how a proof should be structured, and use this structure to prove that there are exactly two real numbers $x$ such that $x^2=1$.
+\end{chapex}

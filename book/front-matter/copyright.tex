@@ -1,0 +1,42 @@
+{\small
+~
+
+\vfill
+
+\thispagestyle{empty}
+\ifadaptedelse{%
+Original work \textcopyright{} 2019 Clive Newstead, All Rights Reserved.\\
+Adaptations \textcopyright{} {\the\year} {\adaptername}, All Rights Reserved.%
+}{%
+\textcopyright{} 2019 Clive Newstead\\
+All Rights Reserved.%
+}
+
+\ifadaptedelse{%
+Adaptation of Version 
+\arabic{versionmajor}.\arabic{versionminor}%
+\ifnumgreater{\value{versionpatch}}{0}{.\arabic{versionpatch}}{}%
+\ifnumless{\value{versionpatch}}{0}{ (preview)}{}%
+}{%
+Preview of First Edition, 2019 (forthcoming)
+}
+
+ISBN 978-1-950215-00-3 (paperback)\\
+ISBN 978-1-950215-01-0 (hardback)
+
+\begin{minipage}{0.75\textwidth}
+\small
+A free PDF copy of \textit{An Infinite Descent into Pure Mathematics} can be obtained from the book's website:\\
+\url{https://infinitedescent.xyz}
+\end{minipage}
+
+\begin{minipage}{0.75\textwidth}
+\small
+This book, its figures and its \TeX{} source are released under a Creative Commons Attribution--ShareAlike 4.0 International Licence. The full text of the licence is replicated at the end of the book, and can be found on the Creative Commons website:\\
+\url{https://creativecommons.org/licenses/by/4.0/legalcode}
+\end{minipage}
+
+\iforiginal{%
+0 ~ 2 ~ 4 ~ 6 ~ 8 ~ 10 ~ 9 ~ 7 ~ 5 ~ 3 ~ 1
+}
+}

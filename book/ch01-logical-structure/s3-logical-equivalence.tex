@@ -1,0 +1,633 @@
+\section{Logical equivalence}
+\secbegin{secLogicalEquivalence}
+
+We motivate the content of this section with an example.
+
+\begin{example}
+\label{exNoEvenPrimeGreaterThanTwo}
+Consider the following two logical formulae, where $P$ denotes the set of all prime numbers.
+\begin{enumerate}[(1)]
+\item $\forall n \in P,\, (n > 2 \Rightarrow [\exists k \in \mathbb{Z},\, n=2k+1])$;
+\item $\neg \exists n \in P,\, (n > 2 \wedge [\exists k \in \mathbb{Z},\, n=2k])$.
+\end{enumerate}
+The logical formula (1) translates to `every prime number greater than two is odd', and the logical formula (2) translates to `there does not exist an even prime number greater than two'. These statements are evidently \textit{equivalent}---they mean the same thing---but they suggest different proof strategies:
+
+\begin{enumerate}[(1)]
+\item Fix a prime number $n$, assume that $n>2$, and then prove that $n = 2k+1$ for some $k \in \mathbb{Z}$.
+\item Assume that there is some prime number $n$ such that $n>2$ and $n=2k$ for some $k \in \mathbb{Z}$, and derive a contradiction.
+\end{enumerate}
+
+While statement (1) more directly translates the plain English statement `every prime number greater than two is odd', it is the proof strategy suggested by (2) that is easier to use. Indeed, if $n$ is a prime number such that $n>2$ and $n=2k$ for some $k \in \mathbb{Z}$, then $2$ is a divisor of $n$ other than $1$ and $n$ (since $1<2<n$), contradicting the assumption that $n$ is prime.
+\end{example}
+
+The notion of \textit{logical equivalence}, captures precisely the sense in which the logical formulae in (1) and (2) in \Cref{exNoEvenPrimeGreaterThanTwo} `mean the same thing'. Being able to transform a logical formula into a different (but equivalent) form allows us to identify a wider range of feasible proof strategies.
+
+\begin{definition}
+\label{defLogicalEquivalence}
+\index{logical equivalence}
+\index{equivalence!logical}
+\nindex{logical equivalence}{$\equiv$}{logical equivalence}
+Let $p$ and $q$ be logical formulae. We say that $p$ and $q$ are \textbf{logically equivalent}, and write $p \equiv q$ \inlatex{equiv}\lindexmmc{equiv}{$\equiv$}, if $q$ can be derived from $p$ and $p$ can be derived from $q$.
+\end{definition}
+
+\subsection*{Logical equivalence of propositional formulae}
+
+While \Cref{defLogicalEquivalence} defines logical equivalence between arbitrary logical formulae, we will start by focusing our attention on logical equivalence between \textit{propositional} formulae, like those we saw in \Cref{secPropositionalLogic}.
+
+First, let's look at a couple of examples of what proofs of logical equivalence might look like. Be warned---they're not very nice to read! But there is light at the end of the tunnel. After struggling through \Cref{exConjunctionDistributesOverDisjunction,exImplicationInTermsOfDisjunction} and \Cref{exPAndQImpliesRIffPImpliesRAndQImpliesR}, we will introduce a very quick and easy tool for proving propositional formulae are logically equivalent.
+
+\begin{example}
+\label{exConjunctionDistributesOverDisjunction}
+We demonstrate that $p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)$, where $p$, $q$ and $r$ are propositional variables.
+
+\begin{itemize}
+\item First assume that $p \wedge (q \vee r)$ is true. Then $p$ is true and $q \vee r$ is true by definition of conjunction. By definition of disjunction, either $q$ is true or $r$ is true.
+\begin{itemize}
+\item If $q$ is true, then $p \wedge q$ is true by definition of conjunction.
+\item If $r$ is true, then $p \wedge r$ is true by definition of conjunction.
+\end{itemize}
+In both cases we have that $(p \wedge q) \vee (p \wedge r)$ is true by definition of disjunction.
+
+\item Now assume that $(p \wedge q) \vee (p \wedge r)$ is true. Then either $p \wedge q$ is true or $p \wedge r$ is true, by definition of disjunction.
+\begin{itemize}
+\item If $p \wedge q$ is true, then $p$ is true and $q$ is true by definition of conjunction.
+\item If $p \wedge r$ is true, then $p$ is true and $r$ is true by definition of conjunction.
+\end{itemize}
+In both cases we have that $p$ is true, and that $q \vee r$ is true by definition of disjunction. Hence $p \wedge (q \vee r)$ is true by definition of conjunction.
+\end{itemize}
+
+Since we can derive $(p \wedge q) \vee (p \wedge r)$ from $p \wedge (q \vee r)$ and vice versa, it follows that
+\[ p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)\]
+as required.
+\end{example}
+
+\begin{example}
+\label{exImplicationInTermsOfDisjunction}
+We prove that $p \Rightarrow q \equiv (\neg p) \vee q$, where $p$, $q$ and $r$ are propositional variables.
+
+\begin{itemize}
+\item First assume that $p \Rightarrow q$ is true. By the law of exluded middle (\Cref{axLEM}), either $p$ is true or $\neg p$ is true---we derive $(\neg p) \vee q$ in each case.
+\begin{itemize}
+\item If $p$ is true, then since $p \Rightarrow q$ is true, it follows from \elimrule{\Rightarrow} that $q$ is true, and so $(\neg p) \vee q$ is true by \introrulesub{\vee}{2};
+\item If $\neg p$ is true, then $(\neg p) \vee q$ is true by \introrulesub{\vee}{1}.
+\end{itemize}
+In both cases, we see that $(\neg p) \vee q$ is true.
+
+\item Now assume that $(\neg p) \vee q$ is true. To prove that $p \Rightarrow q$ is true, it suffices by \introrule{\Rightarrow} to assume that $p$ is true and derive $q$. So assume $p$ is true. Since $(\neg p) \vee q$ is true, we have that either $\neg p$ is true or $q$ is true.
+\begin{itemize}
+\item If $\neg p$ is true, then we obtain a contradiction from the assumption that $p$ is true, and so $q$ is true by the principle of explosion (\Cref{axPrincipleOfExplosion}).
+\item If $q$ is true\dots{} well, then $q$ is true---there is nothing more to prove!
+\end{itemize}
+In both cases we have that $q$ is true. Hence $p \Rightarrow q$ is true.
+\end{itemize}
+
+We have derived $(\neg p) \vee q$ from $p \Rightarrow q$ and vice versa, and so the two formulae are logically equivalent.
+\end{example}
+
+\begin{exercise}
+\label{exPAndQImpliesRIffPImpliesRAndQImpliesR}
+Let $p$, $q$ and $r$ be propositional variables. Prove that the propositional formula $(p \vee q) \Rightarrow r$ is logically equivalent to $(p \Rightarrow r) \wedge (q \Rightarrow r)$.
+\end{exercise}
+
+Working through the derivations each time we want to prove logical equivalence can become cumbersome even for small examples like \Cref{exConjunctionDistributesOverDisjunction,exImplicationInTermsOfDisjunction} and \Cref{exPAndQImpliesRIffPImpliesRAndQImpliesR}.
+
+The following theorem reduces the problem of proving logical equivalence between \textit{propositional} formulae to the purely algorithmic task of checking when the formulae are true and when they are false in a (relatively) small list of cases. We will streamline this process even further using \textit{truth tables} (\Cref{defTruthTable}).
+
+\begin{theorem}
+\label{thmLogicalEquivalentIffSameTruthValues}
+Two propositional formulae are logically equivalent if and only if their truth values are the same under any assignment of truth values to their constituent propositional variables.
+\end{theorem}
+
+\begin{cidea}
+A formal proof of this fact is slightly beyond our reach at this point, although we will be able to prove it formally by \textit{structural induction}, introduced in \Cref{secStructuralInduction}.
+
+The idea of the proof is that, since propositional formulae are built up from simpler propositional formulae using logical operators, the truth value of a more complex propositional formula is determined by the truth values of its simpler subformulae. If we keep `chasing' these subformulae, we end up with just propositional variables.
+
+For example, the truth value of $(p \Rightarrow r) \wedge (q \Rightarrow r)$ is determined by the truth values of $p \Rightarrow r$ and $q \Rightarrow r$ according to the rules for the conjunction operator $\wedge$. In turn, the truth value of $p \Rightarrow r$ is determined by the truth values of $p$ and $r$ according to the implication operator $\Rightarrow$, and the truth value of $q \Rightarrow r$ is determined by the truth values of $q$ and $r$ according to the implication operator again. It follows that the truth value of the whole propositional formula $(p \Rightarrow r) \wedge (q \Rightarrow r)$ is determined by the truth values of $p,q,r$ according to the rules for $\wedge$ and $\Rightarrow$.
+
+If some assignment of truth values to propositional variables makes one propositional formula true but another false, then it must be impossible to derive one from the other---otherwise we'd obtain a contradiction. Hence both propositional formulae must have the same truth values no matter what assignment of truth values is given to their constituent propositional variables.
+\end{cidea}
+
+We now develop a systematic way of checking the truth values of a propositional formula under each assignment of truth values to its constituent propositional variables.
+
+\begin{definition}
+\label{defTruthTable}
+\index{truth table}
+The \textbf{truth table} of a propositional formula is the table with one row for each possible assignment of truth values to its constituent propositional variables, and one column for each subformula (including the propositional variables and the propositional formula itself). The entries of the truth table are the truth values of the subformulae.
+\end{definition}
+
+\begin{example}
+\label{exNegationConjunctionDisjunctionImplicationTruthTable}
+The following are the truth tables for $\neg p$, $p \wedge q$, $p \vee q$ and $p \Rightarrow q$.
+
+\begin{center}
+\begin{tabular}{c|c}
+$p$ & $\neg p$ \\ \hline
+\TT & \FF \\
+\FF & \TT \\
+\multicolumn{2}{c}{\phantom{\TT}\phantom{\FF}} \\
+\multicolumn{2}{c}{\phantom{\TT}\phantom{\FF}}
+\end{tabular}
+%
+\hspace{15pt}
+%
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p \wedge q$ \\ \hline
+\TT & \TT & \TT \\
+\TT & \FF & \FF \\
+\FF & \TT & \FF \\
+\FF & \FF & \FF
+\end{tabular}
+%
+\hspace{15pt}
+%
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p \vee q$ \\ \hline
+\TT & \TT & \TT \\
+\TT & \FF & \TT \\
+\FF & \TT & \TT \\
+\FF & \FF & \FF
+\end{tabular}
+%
+\hspace{15pt}
+%
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p \Rightarrow q$ \\ \hline
+\TT & \TT & \TT \\
+\TT & \FF & \FF \\
+\FF & \TT & \TT \\
+\FF & \FF & \TT
+\end{tabular}
+\end{center}
+\end{example}
+
+In \Cref{exNegationConjunctionDisjunctionImplicationTruthTable} we have used the symbol \TT{} \inlatex{checkmark}\lindexmmc{checkmark}{$\checkmark$} to mean `true' and \FF{} \inlatex{times}\lindexmmc{times}{$\times$} to mean `false'. Some authors adopt other conventions, such as $T,F$ or $\top,\bot$ \inlatex{top,\textbackslash{}bot}\lindexmmc{top}{$\top$}\lindexmmc{bot}{$\bot$} or $1,0$ or $0,1$---the possibilites are endless!
+
+\begin{exercise}
+Use the definitions of $\wedge$, $\vee$ and $\Rightarrow$ to justify the truth tables in \Cref{exNegationConjunctionDisjunctionImplicationTruthTable}.
+\hintlabel{exJustifyBasicTruthTables}{Note that you may need to use the law of excluded middle (\Cref{axLEM}) and the principle of explosion (\Cref{axPrincipleOfExplosion}).}
+\end{exercise}
+
+The next example shows how the truth tables for the individual logical operators (as in \Cref{exNegationConjunctionDisjunctionImplicationTruthTable}) may be combined to form a truth table for a more complicated propositional formula that involves three propositional variables.
+
+\begin{example}
+\label{exFirstExampleOfTruthTable}
+The following is the truth table for $(p \wedge q) \vee (p \wedge r)$.
+\begin{center}
+\begin{tabular}{ccc|cc|c}
+$p$ & $q$ & $r$ & $p \wedge q$  & $p \wedge r$ & $(p \wedge q) \vee (p \wedge r)$\\ \hline
+\TT & \TT & \TT & \TT           & \TT          & \TT \\
+\TT & \TT & \FF & \TT           & \FF          & \TT \\
+\TT & \FF & \TT & \FF           & \TT          & \TT \\
+\TT & \FF & \FF & \FF           & \FF          & \FF \\
+\FF & \TT & \TT & \FF           & \FF          & \FF \\
+\FF & \TT & \FF & \FF           & \FF          & \FF \\
+\FF & \FF & \TT & \FF           & \FF          & \FF \\
+\FF & \FF & \FF & \FF           & \FF          & \FF \\
+\multicolumn{3}{c}{\upbracefill} & \multicolumn{2}{c}{\upbracefill} & \multicolumn{1}{c}{\upbracefill} \\
+\multicolumn{3}{c}{\begin{minipage}{40pt}\centering\scriptsize propositional\\ variables\end{minipage}} & \multicolumn{2}{c}{\begin{minipage}{40pt}\centering\scriptsize intermediate\\ subformulae\end{minipage}} & \multicolumn{1}{c}{\scriptsize main formula}
+\end{tabular}
+\end{center}
+Some comments about the construction of this truth table are pertinent:
+\begin{itemize}
+\item The propositional variables appear first. Since there are three of them, there are $2^3=8$ rows. The column for $p$ contains four \TT{}s followed by four \FF{}s; the column for $q$ contains two \TT{}s, two \FF{}s, and then repeats; and the column for $r$ contains one \TT{}, one \FF{}, and then repeats.
+\item The next group of columns are the next-most complicated subformulae. Each is constructed by looking at the relevant columns further to the left and comparing with the truth table for conjunction.
+\item The final column is the main formula itself, which again is constructed by looking at the relevant columns further to the left and comparing with the truth table for disjunction.
+\end{itemize}
+Our choices of where to put the vertical bars and what order to put the rows in were not the only choices that could have been made, but when constructing truth tables for more complex logical formulae, it is useful to develop a system and stick to it.
+\end{example}
+
+Returning to \Cref{thmLogicalEquivalentIffSameTruthValues}, we obtain the following strategy for proving that two propositional formulae are logically equivalent.
+
+\begin{strategy}[Logical equivalence using truth tables]
+\label{strTruthTable}
+In order to prove that propositional formulae are logically equivalent, it suffices to show that they have identical columns in a truth table.
+\end{strategy}
+
+\begin{example}
+In \Cref{exConjunctionDistributesOverDisjunction} we proved that $p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)$. We prove this again using truth tables. First we construct the truth table for $p \wedge (q \vee r)$:
+\begin{center}
+\begin{tabular}{ccc|c|c}
+$p$ & $q$ & $r$ & $q \vee r$ & $p \wedge (q \vee r)$ \\ \hline
+\TT & \TT & \TT & \TT & \TT \\
+\TT & \TT & \FF & \TT & \TT \\
+\TT & \FF & \TT & \TT & \TT \\
+\TT & \FF & \FF & \FF & \FF \\
+\FF & \TT & \TT & \TT & \FF \\
+\FF & \TT & \FF & \TT & \FF \\
+\FF & \FF & \TT & \TT & \FF \\
+\FF & \FF & \FF & \FF & \FF
+\end{tabular}
+\end{center}
+Note that the column for $p \wedge (q \vee r)$ is identical to that of $(p \wedge q) \vee (p \wedge r)$ in \Cref{exFirstExampleOfTruthTable}. Hence the two formulae are logically equivalent.
+\end{example}
+
+To avoid having to write out two truth tables, it can be helpful to combine them into one. For example, the following truth table exhibits that $p \wedge (q \vee r)$ is logically equivalent to $(p \wedge q) \vee (p \wedge r)$:
+
+\begin{center}
+\begin{tabular}{ccc||c|c||cc|c}
+$p$ & $q$ & $r$ & $q \vee r$ & $p \wedge (q \vee r)$ & $p \wedge q$  & $p \wedge r$ & $(p \wedge q) \vee (p \wedge r)$\\ \hline
+\TT & \TT & \TT & \TT & \TT & \TT           & \TT          & \TT \\
+\TT & \TT & \FF & \TT & \TT & \TT           & \FF          & \TT \\
+\TT & \FF & \TT & \TT & \TT & \FF           & \TT          & \TT \\
+\TT & \FF & \FF & \FF & \FF & \FF           & \FF          & \FF \\
+\FF & \TT & \TT & \TT & \FF & \FF           & \FF          & \FF \\
+\FF & \TT & \FF & \TT & \FF & \FF           & \FF          & \FF \\
+\FF & \FF & \TT & \TT & \FF & \FF           & \FF          & \FF \\
+\FF & \FF & \FF & \FF & \FF & \FF           & \FF          & \FF
+\end{tabular}
+\end{center}
+
+In the following exercises, we use truth tables to repeat the proofs of logical equivalence from \Cref{exImplicationInTermsOfDisjunction} and \Cref{exPAndQImpliesRIffPImpliesRAndQImpliesR}.
+
+\begin{exercise}
+\label{exImplicationInTermsOfDisjunctionWithTruthTables}
+Use a truth table to prove that $p \Rightarrow q \equiv (\neg p) \vee q$.
+\end{exercise}
+
+\begin{exercise}
+\label{exPAndQImpliesRIffPImpliesRAndQImpliesRWithTruthTables}
+Let $p$, $q$ and $r$ be propositional variables. Use a truth table to prove that the propositional formula $(p \vee q) \Rightarrow r$ is logically equivalent to $(p \Rightarrow r) \wedge (q \Rightarrow r)$.
+\end{exercise}
+
+\subsection*{Some proof strategies}
+
+We are now in good shape to use logical equivalence to derive some more sophisticated proof strategies.
+
+\begin{theorem}[Law of double negation]
+\label{thmDoubleNegation}
+Let $p$ be a propositional variable. Then $p \equiv \neg \neg p$.
+\end{theorem}
+
+\begin{cproof}
+The proof is almost trivialised using truth tables. Indeed, consider the following truth table.
+\begin{center}
+\begin{tabular}{c|c|c}
+$p$ & $\neg p$ & $\neg \neg p$ \\ \hline
+\TT & \FF & \TT \\
+\FF & \TT & \FF
+\end{tabular}
+\end{center}
+The columns for $p$ and $\neg \neg p$ are identical, and so $p \equiv \neg \neg p$.
+\end{cproof}
+
+The law of double negation is important because it suggests a second way that we can prove statements by contradiction. Indeed, it says that proving a proposition $p$ is equivalent to proving $\neg \neg p$, which amounts to assuming $\neg p$ and deriving a contradiction.
+
+\begin{strategy}[Proof by contradiction (indirect version)]
+\label{strProofByContradictionIndirect}
+\index{contradiction!(indirect) proof by}
+\index{proof!by contradiction (indirect)}
+In order to prove a proposition $p$ is true, it suffices to assume that $p$ is false and derive a contradiction.
+\end{strategy}
+
+At first sight, \Cref{strProofByContradictionIndirect} looks very similar to \Cref{strProvingNegationsDirect}, but there is an important difference:
+\begin{itemize}
+\item \Cref{strProvingNegationsDirect} says that to prove that a proposition is \textit{false}, it suffices to assume that it is \textit{true} and derive a contradiction;
+\item \Cref{strProofByContradictionIndirect} says that to prove that a proposition is \textit{true}, it suffices to assume that it is \textit{false} and derive a contradiction.
+\end{itemize}
+
+The former is a \textit{direct} proof technique, since it arises directly from the definition of the negation operator; the latter is an \textit{indirect} proof technique, since it arises from a logical equivalence, namely the law of double negation.
+
+\begin{example}
+We prove that if $a$, $b$ and $c$ are non-negative real numbers satisfying $a^2+b^2=c^2$, then $a+b \ge c$.
+
+Indeed, let $a,b,c \in \mathbb{R}$ with $a,b,c \ge 0$, and assume that $a^2+b^2=c^2$. Towards a contradiction, assume that it is not the case that $a+b \ge c$. Then we must have $a+b < c$. But then
+\[ (a+b)^2 = (a+b)(a+b) < (a+b) c < c \cdot c = c^2\]
+and so
+\[ c^2 > (a+b)^2 = a^2+2ab+b^2 = c^2+2ab \ge c^2\]
+This implies that $c^2 > c^2$, which is a contradiction. So it must be the case that $a + b \ge c$, as required.
+\end{example}
+
+The next proof strategy we derive concerns proving implications.
+
+\begin{definition}
+\label{defContrapositive}
+\index{contrapositive}
+The \textbf{contrapositive} of a proposition of the form $p \Rightarrow q$ is the proposition $\neg q \Rightarrow \neg p$.
+\end{definition}
+
+\begin{theorem}[Law of contraposition]
+\label{thmLawOfContraposition}
+Let $p$ and $q$ be propositional variables. Then $p \Rightarrow q \equiv (\neg q) \Rightarrow (\neg p)$.
+\end{theorem}
+
+\begin{cproof}
+We build the truth tables for $p \Rightarrow q$ and $(\neg q) \Rightarrow (\neg p)$.
+
+\begin{center}
+\begin{tabular}{cc||c||cc|c}
+$p$ & $q$ & $p \Rightarrow q$ & $\neg q$ & $\neg p$ & $(\neg q) \Rightarrow (\neg p)$ \\ \hline
+\TT & \TT & \TT & \FF & \FF & \TT \\
+\TT & \FF & \FF & \TT & \FF & \FF \\
+\FF & \TT & \TT & \FF & \TT & \TT \\
+\FF & \FF & \TT & \TT & \TT & \TT
+\end{tabular}
+\end{center}
+
+The columns for $p \Rightarrow q$ and $(\neg q) \Rightarrow (\neg p)$ are identical, so they are logically equivalent.
+\end{cproof}
+
+\Cref{thmLawOfContraposition} suggests the following proof strategy.
+
+\begin{strategy}[Proof by contraposition]
+\label{strProofByContraposition}
+\index{contraposition!proof by}
+\index{proof!by contraposition}
+In order to prove a proposition of the form $p \Rightarrow q$, it suffices to assume that $q$ is false and derive that $p$ is false.
+\end{strategy}
+
+\begin{example}
+Fix two natural numbers $m$ and $n$. We will prove that if $mn > 64$, then either $m>8$ or $n>8$.
+
+By contraposition, it suffices to assume that it is \textit{not} the case that $m > 8$ or $n > 8$, and derive that it is not the case that $mn > 64$.
+
+So assume that neither $m>8$ nor $n>8$. Then $m \le 8$ and $n \le 8$, so that $mn \le 64$, as required.
+\end{example}
+
+\begin{exercise}
+Use the law of contraposition to prove that $p \Leftrightarrow q \equiv (p \Rightarrow q) \wedge ((\neg p) \Rightarrow (\neg q))$, and use the proof technique that this equivalence suggests to prove that an integer is even if and only if its square is even.
+\hintlabel{exIntegerEvenIffSquareEven}{%
+Express this statement as $\forall n \in \mathbb{Z},\, (n \text{ is even}) \Leftrightarrow (n^2 \text{ is even})$, and note that the negation of `$x$ is even' is `$x$ is odd'.
+}
+\end{exercise}
+
+It feels good to invoke impressive-sounding results like \textit{proof by contraposition}, but in practice, the logical equivalence between \textit{any} two different propositional formulae suggests a new proof technique, and not all of these techniques have names. And indeed, the proof strategy in the following exercise, while useful, has no slick-sounding name---at least, not one that would be widely understood.
+
+\begin{exercise}
+Prove that $p \vee q \equiv (\neg p) \Rightarrow q$. Use this logical equivalence to suggest a new strategy for proving propositions of the form $p \vee q$, and use this strategy to prove that if two integers sum to an even number, then either both integers are even or both are odd.
+\end{exercise}
+
+\subsection*{Negation}
+
+In pure mathematics it is common to ask whether or not a certain property holds of a mathematical object. For example, in \Cref{secCompletenessConvergence}, we will look at convergence of sequences of real numbers: to say that a sequence $x_0,x_1,x_2,\dots$ of real numbers \textit{converges}\label{pConvergencePreliminary} (\Cref{defConvergenceOfSequence}) is to say
+\[ \exists a \in \mathbb{R},\, \forall \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+This is already a relatively complicated logical formula. But what if we wanted to prove that a sequence \textit{does not} converge? Simply assuming the logical formula above and deriving a contradiction might work sometimes, but it is not particularly enlightening.
+
+Our next goal is to develop a systematic method for negating complicated logical formulae. With this done, we will be able to negate the logical formula expressing `the sequence $x_0, x_1, x_2, \dots$ converges' as follows
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \forall N \in \mathbb{N},\, \exists n \in \mathbb{N},\, [n \ge N \wedge |x_n-a| \ge \varepsilon])\]
+
+Granted, this is still a complicated expression, but when broken down element by element, it provides useful information about how it may be proved.
+
+The rules for negating conjunctions and disjunctions are instances of \textit{de Morgan's laws}, which exhibit a kind of duality between $\wedge$ and $\vee$.
+
+\begin{theorem}[de Morgan's laws for logical operators]
+\label{thmDeMorganLogicalOperators}
+\index{de Morgan's laws!for logical operators}
+Let $p$ and $q$ be logical formulae. Then:
+\begin{enumerate}[(a)]
+\item $\neg (p \wedge q) \equiv (\neg p) \vee (\neg q)$; and
+\item $\neg (p \vee q) \equiv (\neg p) \wedge (\neg q)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of (a)]
+Consider the following truth table.
+\begin{center}
+\begin{tabular}{cc||c|c||cc|c}
+$p$ & $q$ & $p \wedge q$ & $\neg (p \wedge q)$ & $\neg p$ & $\neg q$ & $(\neg p) \vee (\neg q)$ \\ \hline
+\TT & \TT & \TT & \FF & \FF & \FF & \FF \\
+\TT & \FF & \FF & \TT & \FF & \TT & \TT \\
+\FF & \TT & \FF & \TT & \TT & \FF & \TT \\
+\FF & \FF & \FF & \TT & \TT & \TT & \TT \\
+\end{tabular}
+\end{center}
+The columns for $\neg (p \wedge q)$ and $(\neg p) \vee (\neg q)$ are identical, so they are logically equivalent.
+\end{cproof}
+
+\begin{exercise}
+Prove \Cref{thmDeMorganLogicalOperators}(b) thrice: once using the definition of logical equivalence directly (like we did in \Cref{exConjunctionDistributesOverDisjunction,exImplicationInTermsOfDisjunction} and \Cref{exPAndQImpliesRIffPImpliesRAndQImpliesR}), once using a truth table, and once using part (a) together with the law of double negation.
+\end{exercise}
+
+\begin{example}
+We often use de Morgan's laws for logical operators without thinking about it. For example to say that `neither $3$ nor $7$ is even' is equivalent to saying `$3$ is odd and $7$ is odd'. The former statement translates to
+\[ \neg [(3 \text{ is even}) \vee (7 \text{ is even})]\]
+while the second statement translates to
+\[ [\neg (3 \text{ is even})] \wedge [\neg (7 \text{ is even})]\]
+\end{example}
+
+\begin{exercise}
+\label{exNegationOfImplication}
+Prove that $\neg (p \Rightarrow q) \equiv p \wedge (\neg q)$ twice, once using a truth table, and once using \Cref{exImplicationInTermsOfDisjunctionWithTruthTables} together with de Morgan's laws and the law of double negation.
+\end{exercise}
+
+De Morgan's laws for logical operators generalise to statements about quantifiers, expressing a similar duality between $\forall$ and $\exists$ as we have between $\wedge$ and $\vee$.
+
+\begin{theorem}[de Morgan's laws for quantifiers]
+\label{thmDeMorganQuantifiers}
+\index{de Morgan's laws!for quantifiers}
+let $p(x)$ be a logical formula with free variable $x$ ranging over a set $X$. Then:
+\begin{enumerate}[(a)]
+\item $\neg \forall x \in X,\, p(x) \equiv \exists x \in X,\, \neg p(x)$; and
+\item $\neg \exists x \in X,\, p(x) \equiv \forall x \in X,\, \neg p(x)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}
+Unfortunately, since these logical formulae involve quantifiers, we do not have truth tables at our disposal, so we must assume each formula and derive the other.
+
+We start by proving the equivalence in part (b), and then we derive (a) as a consequence.
+
+\begin{itemize}
+\item Assume $\neg \exists x \in X,\, p(x)$. To prove $\forall x \in X,\, \neg p(x)$, fix some $x \in X$. If $p(x)$ were true, then we'd have $\exists x \in X,\, p(x)$, which contradicts our main assumption; so we have $\neg p(x)$. But then $\forall x \in X,\, \neg p(x)$ is true.
+
+\item Assume $\forall x \in X,\, \neg p(x)$. For the sake of contradiction, assume $\exists x \in X,\, p(x)$ were true. Then we obtain some $a \in X$ for which $p(a)$ is true. But $\neg p(a)$ is true by the assumption that $\forall x \in X,\, \neg p(a)$, so we obtain a contradiction. Hence $\neg \exists x \in X,\, p(x)$ is true.
+\end{itemize}
+
+This proves that $\neg \exists x \in X,\, p(x) \equiv \forall x \in X,\, \neg p(x)$.
+
+Now (a) follows from (b) using the law of double negation (\Cref{thmDoubleNegation}):
+\[ \exists x \in X,\, \neg p(x) \equiv \neg\neg \exists x \in X,\, \neg p(x) \overset{(b)}{\equiv} \neg \forall x \in X,\, \neg \neg p(x) \equiv \neg \forall x \in X,\, p(x)\]
+as required.
+\end{cproof}
+
+The proof strategy suggested by the logical equivalence in \Cref{thmDeMorganQuantifiers}(b) is so important that it has its own name.
+
+\begin{strategy}[Proof by counterexample]
+\label{strCounterexample}
+\index{counterexample}
+\index{proof!by counterexample}
+To prove that a proposition of the form $\forall x \in X,\, p(x)$ is false, it suffices to find a single element $a \in X$ such that $p(a)$ is false. The element $a$ is called a \textbf{counterexample} to the proposition $\forall x \in X,\, p(x)$.
+\end{strategy}
+
+\begin{example}
+We prove by counterexample that not every integer is divisible by a prime number. Indeed, let $x = 1$. The only integral factors of $1$ are $1$ and $-1$, neither of which are prime, so that $1$ is not divisible by any primes.
+\end{example}
+
+\begin{exercise}
+Prove by counterexample that not every rational number can be expressed as $\dfrac{a}{b}$ where $a \in \mathbb{Z}$ is even and $b \in \mathbb{Z}$ is odd.
+\hintlabel{exNotEveryRationalIsEvenDividedByOdd}{%
+Find a rational number all of whose representations as a ratio of two integers have an even denominator.
+}
+\end{exercise}
+
+We have now seen how to negate the logical operators $\neg$, $\wedge$, $\vee$ and $\Rightarrow$, as well as the quantifiers $\forall$ and $\exists$. 
+
+\begin{definition}
+\label{defMaximallyNegatedLogicalFormula}
+\index{negation!maximal}
+\index{logical formula!maximally negated}
+A logical formula is \textbf{maximally negated} if the only instances of the negation operator $\neg$ appear immediately before a predicate (or other proposition not involving logical operators or quantifiers).
+\end{definition}
+
+\begin{example}
+The following propositional formula is maximally negated:
+\[ [p \wedge (q \Rightarrow (\neg r))] \Leftrightarrow (s \wedge (\neg t))\]
+Indeed, all instances of $\neg$ appear immediately before propositional variables.
+
+However the following propositional formula is \textit{not} mmaximally negated:
+\[ (\neg \neg q) \Rightarrow q\]
+Here the subformula $\neg \neg q$ contains a negation operator immediately before another negation operator ($\neg \neg q$). However by the law of double negation, this is equivalent to $q \Rightarrow q$, which is maximally negated trivially since there are no negation operators to speak of.
+\end{example}
+
+\begin{exercise}
+Determine which of the following logical formulae are maximally negated.
+\begin{enumerate}[(a)]
+\item $\forall x \in X,\, (\neg p(x)) \Rightarrow \forall y \in X, \neg (r(x,y) \wedge s(x,y))$;
+\item $\forall x \in X,\, (\neg p(x)) \Rightarrow \forall y \in X, (\neg r(x,y)) \vee (\neg s(x,y))$;
+\item $\forall x \in \mathbb{R},\, [x > 1 \Rightarrow (\exists y \in \mathbb{R},\, [x < y \wedge \neg (x^2 \le y)])]$;
+\item $\neg \exists x \in \mathbb{R},\, [x > 1 \wedge (\forall y \in \mathbb{R},\, [x < y \Rightarrow x^2 \le y])]$.
+\end{enumerate}
+\end{exercise}
+
+The following theorem allows us to replace logical formulae by maximally negated ones, which in turn suggests proof strategies that we can use for proving that complicated-looking propositions are \textit{false}.
+
+\begin{theorem}
+\label{thmLogicalFormulaEquivalentToMaximallyNegated}
+Every logical formula (built using only the logical operators and quantifiers we have seen so far) is logically equivalent to a maximally negated logical formula.
+\end{theorem}
+
+\begin{cidea}
+Much like \Cref{thmLogicalEquivalentIffSameTruthValues}, a precise proof of \Cref{thmLogicalFormulaEquivalentToMaximallyNegated} requires some form of induction argument, so instead we will give an idea of the proof.
+
+Every logical formula we have seen so far is built from predicates using the logical operators ${\wedge}, {\vee}, {\Rightarrow}$ and $\neg$ and the quantifiers $\forall$ and $\exists$---indeed, the logical operator $\Leftrightarrow$ was defined in terms of $\wedge$ and $\Rightarrow$, and the quantifier $\exists$ was defined in terms of the quantifiers $\forall$ and $\exists$ and the logical operators $\wedge$ and $\Rightarrow$.
+
+But the results in this section allow us to push negations `inside' each of these logical operators and quantifiers, as summarised in the following table.
+\begin{center}
+\begin{tabular}{rcll}
+Negation outside & & Negation inside & Proof \\ \hline
+$\neg (p \wedge q)$ &$\equiv$& $(\neg p) \vee (\neg q)$ & \Cref{thmDeMorganLogicalOperators}(a) \\
+$\neg (p \vee q)$ &$\equiv$& $(\neg p) \wedge (\neg q)$ &  \Cref{thmDeMorganLogicalOperators}(b) \\
+$\neg (p \Rightarrow q)$ &$\equiv$& $p \wedge (\neg q)$ & \Cref{exNegationOfImplication} \\
+$\neg (\neg p)$ &$\equiv$& $p$ & \Cref{thmDoubleNegation} \\
+$\neg \forall x \in X,\, p(x)$ &$\equiv$& $\exists x \in X,\, \neg p(x)$ & \Cref{thmDeMorganQuantifiers}(a) \\
+$\neg \exists x \in X,\, p(x)$ &$\equiv$& $\forall x \in X,\, \neg p(x)$ & \Cref{thmDeMorganQuantifiers}(b)
+\end{tabular}
+\end{center}
+
+Repeatedly applying these rules to a logical formula eventually yields a logically equivalent, maximally negated logical formula.
+\end{cidea}
+
+\begin{example}
+Recall the logical formula from page \pageref{pConvergencePreliminary} expressing the assertion that a sequence $x_0, x_1, x_2, \dots$ of real numbers converges:
+\[ \exists a \in \mathbb{R},\, \forall \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+We will maximally negate this to obtain a logical formula expressing the assertion that the sequence does not converge.
+
+Let's start at the beginning. The negation of the formula we started with is:
+\[ \neg \exists a \in \mathbb{R},\, \forall \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+The key to maximally negating a logical formula is to ignore information that is not immediately relevant. Here, the expression that we are negating takes the form $\neg \exists a \in \mathbb{R},\, (\text{stuff})$. It doesn't matter what the `stuff' is just yet; all that matters is that we are negating an existentially quantified statement, and so de Morgan's laws for quantifiers tells us that this is logically equivalent to $\forall a \in \mathbb{R},\, \neg (\text{stuff})$. We apply this rule and just re-write the `stuff', to obtain:
+\[ \forall a \in \mathbb{R},\, \neg \forall \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+Now we are negating a universally quantified statement, $\neg \forall \varepsilon \in \mathbb{R},\, (\text{stuff})$ which, by de Morgan's laws for quantifiers, is equivalent to $\exists \varepsilon \in \mathbb{R},\, (\text{stuff})$:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, \neg (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+At this point, the statement being negated is of the form $(\text{stuff}) \Rightarrow (\text{junk})$, which by \Cref{exNegationOfImplication} negates to $(\text{stuff}) \wedge \neg (\text{junk})$. Here, `stuff' is $\varepsilon > 0$ and `junk' is $\exists N \in \mathbb{N}, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n - a| < \varepsilon]$. So performing this negation yields:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \neg \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+Now we are negating an existentially quantified formula again, so using de Morgan's laws for quantifiers gives:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \forall N \in \mathbb{N},\, \neg \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+The formula being negated here is univerally quantified, so using de Morgan's laws for quantifiers \textit{again} gives:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \forall N \in \mathbb{N},\, \exists n \in \mathbb{N},\, \neg [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
+%
+We're almost there! The statement being negated here is an implication, so applying the rule $\neg (p \Rightarrow q) \equiv p \wedge (\neg q)$ again yields:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \forall N \in \mathbb{N},\, \exists n \in \mathbb{N},\, [n \ge N \wedge \neg (|x_n - a| < \varepsilon)])\]
+%
+At this point, strictly speaking, the formula is maximally negated, since the statement being negated does not involve any other logical opreators or quantifiers. However, since $\neg (|x_n-a| < \varepsilon)$ is equivalent to $|x_n - a| \ge \varepsilon$, we can go one step further to obtain:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \wedge \forall N \in \mathbb{N},\, \exists n \in \mathbb{N},\, [n \ge N \wedge |x_n - a| \ge \varepsilon])\]
+%
+This is as negated as we could ever dream of, and so we stop here.
+\end{example}
+
+\begin{exercise}
+Find a maximally negated propositional formula that is logically equivalent to $\neg (p \Leftrightarrow q)$.
+\hintlabel{exMaximallyNegateBiconditional}{%
+Start by expressing $\Leftrightarrow$ in terms of $\Rightarrow$ and $\wedge$, as in \Cref{defBiconditional}.
+}
+\end{exercise}
+
+\begin{exercise}
+Maximally negate the following logical formula, then prove that it is true or prove that it is false.
+\[ \exists x \in \mathbb{R},\, [x > 1 \wedge (\forall y \in \mathbb{R},\, [x < y \Rightarrow x^2 \le y])]\]
+\end{exercise}
+
+\subsection*{Tautologies}
+
+The final concept that we introduce in this chapter is that of a \textit{tautology}, which can be thought of as the opposite of a contradiction. The word `tautology' has other implications when used colloquially, but in the context of symbolic logic it has a precise definition.
+
+\begin{definition}
+\label{defTautology}
+\index{tautology}
+A \textbf{tautology} is a proposition or logical formula that is true, no matter how truth values are assigned to its component propositional variables and predicates.
+\end{definition}
+
+The reason we are interested in tautologies is that tautologies can be used as assumptions at any point in a proof, for any reason.
+
+\begin{strategy}[Assuming tautologies]
+Let $p$ be a proposition. Any tautology may be assumed in any proof of $p$.
+\end{strategy}
+
+\begin{example}
+The law of excluded middle (\Cref{axLEM}) says precisely that $p \vee (\neg p)$ is a tautology. This means that when proving any result, we may split into cases based on whether a proposition is true or false, just as we did in \Cref{propIfProductEvenThenSomeFactorEven}.
+\end{example}
+
+\begin{example}
+The formula $p \Rightarrow (q \Rightarrow p)$ is a tautology.
+
+A direct proof of this fact is as follows. In order to prove $p \Rightarrow (q \Rightarrow p)$ is true, it suffices to assume $p$ and derive $q \Rightarrow p$. So assume $p$. Now in order to prove $q \Rightarrow p$, it suffices to assume $q$ and derive $p$. So assume $q$. But we're already assuming that $p$ is true! So $q \Rightarrow p$ is true, and hence $p \Rightarrow (q \Rightarrow p)$ is true.
+
+A proof using truth tables is as follows:
+\begin{center}
+\begin{tabular}{cc|c|c}
+$p$ & $q$ & $q \Rightarrow p$ & $p \Rightarrow (q \Rightarrow p)$ \\ \hline
+\TT & \TT & \TT & \TT \\
+\TT & \FF & \TT & \TT \\
+\FF & \TT & \FF & \TT \\
+\FF & \FF & \TT & \TT
+\end{tabular}
+\end{center}
+We see that $p \Rightarrow (q \Rightarrow p)$ is true regardless of the truth values of $p$ and $q$.
+\end{example}
+
+\begin{exercise}
+\label{exTautologies}
+Prove that each of the following is a tautology:
+\begin{enumerate}[(a)]
+\item $[(p \Rightarrow q) \wedge (q \Rightarrow r)] \Rightarrow (p \Rightarrow r)$;
+\item $[p \Rightarrow (q \Rightarrow r)] \Rightarrow [(p \Rightarrow q) \Rightarrow (p \Rightarrow r)]$;
+\item $\exists y \in Y,\, \forall x \in X,\, p(x,y) \Rightarrow \forall x \in X,\, \exists y \in Y,\, p(x,y)$;
+\item $[\neg (p \wedge q)] \Leftrightarrow [(\neg p) \vee (\neg q)]$;
+\item $(\neg \forall x \in X,\, p(x)) \Leftrightarrow (\exists x \in X,\, \neg p(x))$.
+\end{enumerate}
+For each, try to interpret what it means, and how it might be useful in a proof.
+\end{exercise}
+
+You may have noticed parallels between de Morgan's laws for logical operators and quantifiers, and parts (d) and (e) of \Cref{exTautologies}, respectively. They almost seem to say the same thing, except that in \Cref{exTautologies} we used `$\Leftrightarrow$' and in \Cref{thmDeMorganLogicalOperators,thmDeMorganQuantifiers} we used `$\equiv$'. There is an important difference, though: if $p$ and $q$ are logical formulae, then $p \Rightarrow q$ is itself a logical formula, which we may study as a mathematical object in its own right. However, $p \equiv q$ is not a logical formula: it is an assertion \textit{about} logical formulae, namely that the logical formulae $p$ and $q$ are equivalent.
+
+There is, nonetheless, a close relationship between $\Leftrightarrow$ and $\equiv$---this relationship is summarised in the following theorem.
+
+\begin{theorem}
+Let $p$ and $q$ be logical formulae.
+\begin{enumerate}[(a)]
+\item $q$ can be derived from $p$ if and only if $p \Rightarrow q$ is a tautology;
+\item $p \equiv q$ if and only if $p \Leftrightarrow q$ is a tautology.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}
+For (a), note that a derivation of $q$ from $p$ is sufficient to establish the truth of $p \Rightarrow q$ by the introduction rule for conjunction \introrule{\Rightarrow}, and so if $q$ can be derived from $p$, then $p \Rightarrow q$ is a tautology. Conversely, if $p \Rightarrow q$ is a tautology, then $q$ can be derived from $p$ using the elimination rule for conjunction \elimrule{\Rightarrow} together with the (tautological) assumption that $p \Rightarrow q$ is true.
+
+Now (b) follows from (a), since logical equivalence is defined in terms of derivation in each direction, and $\Leftrightarrow$ is simply the conjunction of two implications.
+\end{cproof}
+
+\textit{Aaand breathe!} All this new notation can be overwhelming at first, but it will be worth it in the end. This chapter was all about teaching you a new language---new symbols, new terminology---because without it, our future pursuits will be impossible. If you're stuck now, then don't worry: you'll soon get the hang of it, especially when we start using this new language in context. You can, of course, refer back to the results in this chapter for reference at any point in the future.

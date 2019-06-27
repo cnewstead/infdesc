@@ -1,0 +1,195 @@
+% If you intend to adapt the material in this textbook
+% in any way, then you must set the \adaptername and
+% \adapteremail commands on lines 13 and 14 of this file
+% to your full name and email address, respectively.
+%
+% Example usage:
+% \newcommand{\adaptername}{Testcase McGee}
+% \newcommand{\adapteremail}{testcase.mcgee@example.web}
+%
+% Any duplications, derivations or adaptations of this work
+% must be released under the same licence.
+
+\newcommand{\adaptername}{} % Your full name
+\newcommand{\adapteremail}{} % Your email address
+
+\documentclass[10pt]{book}
+
+% Book version
+% Set versionpatch to -1 for 'preview' versions
+\newcounter{versionmajor}\setcounter{versionmajor}{0}
+\newcounter{versionminor}\setcounter{versionminor}{3}
+\newcounter{versionpatch}\setcounter{versionpatch}{-1}
+
+% Contact and website information
+\newcommand{\authoremail}{clive@infinitedescent.xyz}
+\newcommand{\bookurl}{https://infinitedescent.xyz}
+
+% Page layout
+% 0:6x9, 1:a4, 2:usletter, 3:tablet, 4:phone
+\newcounter{bookformat}
+\setcounter{bookformat}{0}
+
+% Includes
+\input{book/includes/_includes.tex}
+
+% Uncomment to remove hyperlinks (useful for print versions)
+% \hypersetup{draft}
+
+\begin{document}
+
+% Uncomment to display cover spread
+% \includepdf[pages=-,fitpaper=true,noautoscale=false]{book/media/spread.pdf}
+
+\frontmatter
+
+% Title page
+\newgeometry{centering,bindingoffset={0in}}
+\input{book/front-matter/titlepage.tex}
+\restoregeometry
+\clearpage
+
+% Copyright page
+\newpage
+\input{book/front-matter/copyright.tex}
+
+% Table of contents
+\bookmark[page=3,level=0]{Contents}
+\tableofcontents
+
+% Preface
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\markboth{Preface}{Preface}
+    \input{book/front-matter/preface.tex}
+
+% Acknowledgements
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\markboth{Acknowledgements}{Acknowledgements}
+    \input{book/front-matter/acknowledgements.tex}
+
+\mainmatter
+
+\setcounter{chapter}{-1}
+\numberitemswithin{chapter}
+
+\chapter{Getting started}
+\markboth{Chapter \thechapter.\ Getting started}{Chapter \thechapter.\ Getting started}
+    \label{chGettingStarted}
+    \input{book/ch00-getting-started/_getting-started.tex}
+
+\numberitemswithin{section}
+
+\part{Fundamentals}
+\label{ptFundamentals}
+
+\chapter{Logical structure}
+    \label{chLogicalStructure}
+    \input{book/ch01-logical-structure/_logical-structure.tex}
+
+\chapter{Sets and functions}
+    \label{chSetsFunctions}
+    \input{book/ch02-sets-functions/_sets-functions.tex}
+
+\chapter{Mathematical induction}
+    \label{chMathematicalInduction}
+    \input{book/ch03-mathematical-induction/_mathematical-induction.tex}
+
+\chapter{Relations}
+    \label{chRelations}
+    \input{book/ch04-relations/_relations.tex}
+
+\part{Topics}
+\label{ptTopics}
+
+\chapter{Number theory}
+    \label{chNumberTheory}
+    \input{book/ch05-number-theory/_number-theory.tex}
+
+\chapter{Enumerative combinatorics}
+    \label{chCombinatorics}
+    \input{book/ch06-enumerative-combinatorics/_enumerative-combinatorics.tex}
+
+% \chapter{Abstract algebra}
+%     \label{chAbstractAlgebra}
+%     \input{book/chxx-abstract-algebra/_abstract-algebra.tex}
+    
+\chapter{Real numbers}
+    \label{chRealNumbers}
+    \input{book/ch07-real-numbers/_real-numbers.tex}
+    
+\chapter{Infinity}
+    \label{chInfinity}
+    \input{book/ch08-infinity/_infinity.tex}
+    
+\chapter{Probability and measure}
+    \label{chProbabilityMeasure}
+    \input{book/ch09-probability-measure/_probability-measure.tex}
+    
+\chapter{Order and induction}
+    \label{chOrderInduction}
+    \input{book/ch10-order-induction/_order-induction.tex}
+
+\appendix
+\begin{appendices}
+\renewcommand{\sectionmark}[1]{\markboth{\leftmark}{Section \thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{\rightmark}}
+
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
+
+\chapter{Proof-writing}
+    \label{apxWriting}
+    \renewcommand\chaptername{Proof-writing}
+    \input{book/cha-proof-writing/_proof-writing.tex}
+
+\chapter{Mathematical miscellany}    
+    \label{apxMiscellany}
+    \renewcommand\chaptername{Mathematical miscellany}
+    \input{book/chb-miscellany/_miscellany.tex}
+
+\chapter{Hints for selected exercises}
+    \markboth{Appendix \thechapter.\ Hints to selected exercises}{Appendix \thechapter.\ Hints to selected exercises}
+    \label{apxHints}
+    \renewcommand\chaptername{Hints to selected exercises}
+    \input{book/chc-hints/_hints.tex}
+
+\chapter{Typesetting mathematics with \LaTeX{}}
+    \markboth{Appendix \thechapter.\ Typesetting mathematics with \LaTeX{}}{Typesetting mathematics using \LaTeX{}}
+    \label{apxLaTeX}
+    \renewcommand\chaptername{Typesetting mathematics with \LaTeX{}}
+    \input{book/chd-latex/_latex.tex}
+
+\end{appendices}
+
+\backmatter
+
+{%
+\part*{Indices}
+\addcontentsline{toc}{part}{Indices}
+
+\renewcommand{\chaptername}{Indices}
+\newpage
+\addcontentsline{toc}{chapter}{Index of topics}
+\printindex
+
+\addcontentsline{toc}{chapter}{Index of vocabulary}
+\printindex[vocabulary]
+
+\addcontentsline{toc}{chapter}{Index of notation}
+\printindex[notation]
+
+\addcontentsline{toc}{chapter}{Index of \LaTeX{} commands}
+\printindex[latex]%
+}
+
+\clearpage\newpage\clearpage
+\chapter*{Licence}
+\addcontentsline{toc}{part}{Licence}
+    \renewcommand{\chaptermark}[1]{\markboth{Licence}{Licence}}
+    \renewcommand{\sectionmark}[1]{\markboth{Licence}{Licence}}
+    \renewcommand\chaptername{Licence}
+    \input{book/licence/_licence.tex}
+
+\end{document}

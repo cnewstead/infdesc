@@ -1,0 +1,278 @@
+\section{Elements of proof-writing}
+\label{secElementsOfProofWriting}
+
+Prior to taking a first course in pure mathematics, most people's exposure to the subject has a \textit{computational} focus: the problems are questions that have a single correct answer, and the solutions consist of supplying the correct answer together with some explanation of how it was obtained (`showing your work'). Typically this amounts to a step-by-step sequence of calculations, algebraic manipulations and applications of formulae that result in the desired answer.
+
+Pure mathematics has a different flavour: the task we face is to use the knowledge we have already established in order to discover new properties of the objects we are studying, and then communicate our discoveries in the form of a proof.
+
+A given (true) statement may have many possible proofs, and the proofs may be qualitatively different from one another in many ways. Factors that may differ from one proof to another include length, verbosity, detail, motivation, proof strategies used, balance of words and notation, \dots{}---the list goes on.
+
+To complicate matters further, it might be that a proof is suitable in one setting but not another. For example, a detailed proof that $2+2=4$ using the definitions of `$2$', `$4$' and `$+$' is appropriate when studying the set of natural numbers from an axiomatic perspective (see \Cref{propTwoPlusTwoEqualsFour}), but this level of detail would not be appropriate when using the fact that $2+2=4$ in a counting argument (as in \Cref{secCountingPrinciples}).
+
+With all of this going on, it is difficult to know what is expected of us when we are asked to prove something.
+
+The goal of this section is to shed some light on the following question:
+\vspace{-10pt}
+\begin{center}
+\textit{What makes for an effective proof?}
+\end{center}
+\vspace{-10pt}
+
+Learning how to write a proof is like learning any new style of writing: it is an iterative process with a cycle of practice, feedback and reflection. Writing a good proof requires patience and sincere effort, but the ends very much justify the means.
+
+This section should not be read in isolation: it should be read either \textit{after} working through a few chapters in the main part of the book, or as a reference for proof-writing in parallel with the rest of the book.
+
+\subsection*{Proofs as prose}
+
+Someone with little mathematical background might look at a calculus textbook and ask `where are all the numbers?', surprised by the sheer quantity of letters and symbols that appear.  In the same vein, someone with little exposure to pure mathematics might look at this book and ask `where are all the equations?'---it can be surprising to look at a mathematical text and see so many\dots{} \textit{words}.
+
+This is because we---pure mathematicians---use proofs as a tool for communicating our ideas, and we simply \textit{need} to use words in order to make ourselves comprehensible to one another. Furthermore, in order to convince the wider mathematical community that our results are correct, another mathematician should be able to read and understand the proofs that we write, and then be able to communicate our arguments to other mathematicians.
+
+This brings us to the first, and perhaps most important, writing principle for proofs.
+
+\begin{writingprinciple}
+\label{wpFullSentences}
+Mathematical proofs should be written (and read) as prose---in particular, it should be possible to read a proof aloud using full sentences.
+\end{writingprinciple}
+
+To illustrate, consider the following proof that the composite of two injective functions is injective.
+
+\begin{extract}
+\label{xtrInjectiveNoProse}
+$X,Y,Z$ sets, $f : X \to Y$, $g : Y \to Z$, $f$ injective, $g$ injective, $a,b \in X$:
+\begin{align*}
+g(f(a)) &= g(f(b)) && \text{def $\circ$} \\
+f(a) &= f(b) && \text{$\because$ $g$ injective} \\
+a &= b && \text{$\because$ $f$ injective}
+\end{align*}
+$\therefore$ $g \circ f$ injective
+\end{extract}
+
+This proof has many assets: it is correct, all of the variables used are quantified, and the steps are justified. But try reading it aloud. You will soon see that this proof does not read as prose---at least not easily.
+
+For a short proof like this, that may be inconsequential, but for a more extended proof, or in a fully fledged mathematical paper (or textbook), it will not do. It is the duty of the proof-writer---that's you!---to make the reader feel as if they are being spoken to.
+
+With this in mind, compare \Cref{xtrInjectiveNoProse} with \Cref{xtrInjectiveWithProse} below.
+
+\begin{restatable}{extract}{rxtrInjectiveWithProse}
+\label{xtrInjectiveWithProse}
+Let $X$, $Y$ and $Z$ be sets, let $f : X \to Y$ and $g : Y \to Z$, and assume that $f$ and $g$ are injective. Let $a,b \in X$ and assume that $(g \circ f)(a) = (g \circ f)(b)$. Then
+\begin{align*}
+& g(f(a)) = g(f(b)) && \text{by definition of $\circ$} \\
+& \Rightarrow f(a) = f(b) && \text{by injectivity of $g$} \\
+& \Rightarrow a = b && \text{by injectivity of $f$}
+\end{align*}
+Hence $g \circ f$ is injective, as required.
+\end{restatable}
+
+Despite the fact that \Cref{xtrInjectiveWithProse} is not written exclusively using words, it is much easier to read it as prose, substituting phrases for the notation where needed---we will see more of this in \Cref{wpPurposeOfNotation}.
+
+Here is a transcription of how \Cref{xtrInjectiveWithProse} might be read aloud, with all the variables' letter names spelt out in italics.
+
+\begin{quote}
+Let \textit{ex}, \textit{wye} and \textit{zed} be sets, let \textit{ef} be a function from \textit{ex} to \textit{wye} and \textit{gee} be a function from \textit{wye} to \textit{zed}, and assume that \textit{ef} and \textit{gee} are injective. Let \textit{a} and \textit{bee} be elements of \textit{ex} and assume that \textit{gee} \textit{ef} of \textit{a} is equal to \textit{gee} \textit{ef} of \textit{bee}. Then \textit{gee} of \textit{ef} of \textit{a} equals \textit{gee} of \textit{ef} of \textit{bee} by definition of function composition, so \textit{ef} of \textit{a} equals \textit{ef} of \textit{bee} by injectivity of \textit{gee}, and so \textit{a} equals \textit{bee} by injectivity of \textit{ef}. Hence \textit{gee} \textit{ef} is injective, as required.
+\end{quote}
+
+\begin{exercise}
+Consider the following proof that the product of two odd integers is odd.
+\begin{quote}
+$a,b \in \mathbb{Z}$ both odd $\Rightarrow$ $a=2k+1$, $b=2\ell+1$, $k,\ell \in \mathbb{Z}$
+\[ ab = (2k+1)(2\ell+1) = 4k\ell+2k+2\ell+1 = 2(2k\ell+k+\ell)+1\]
+$2k\ell + k + \ell \in \mathbb{Z}$ $\therefore$ $ab$ odd
+\end{quote}
+Rewrite the proof so that it is easier to read it as prose. Read it aloud, and transcribe what you read.
+\end{exercise}
+
+\subsection*{Us, ourselves and we}
+
+Different fields of study have different conventions about how their results should be communicated, and these conventions change over time. One such convention in mathematics, at least in recent decades, is the use of the first person plural (`we show that\dots{}').
+
+There are several theories for why this practice has developed; for example, it is more modest than the first person singular (`I show that\dots{}'), and it implies that the reader is included in the proof process. But the \textit{reasons} for using the first person plural are largely irrelevant for us---what matters is that this is the convention that prevails.
+
+Some texts, particularly older ones, may deviate from this practice, such as by using the third person impersonal (`one shows that\dots{}') or the passive voice (`it is shown that\dots{}').
+
+But although not universal, the first person plural is certainly the most commonplace, and so we shall adopt it.
+
+\begin{writingprinciple}
+\label{wpFirstPersonPlural}
+It is customary for mathematical proofs to be written in the first person plural.
+\end{writingprinciple}
+
+Open almost any page in this textbook and you will see the first person plural everywhere. The next extract was taken almost at random to illustrate.
+
+\begin{extract}[\xtrsource{\Cref{thmBezout}}]
+\xtremph{We proved in} \Cref{thmGCDsExist} that a greatest common divisor of $a$ and $b$ is a least element of the set
+\[ X = \{ au+bv \mid u,v \in \mathbb{Z},\ au+bv > 0 \} \]
+So let $u,v \in \mathbb{Z}$ be such that $au+bv=d$. Then
+\[ a(ku) + b(kv) = k(au+bv) = kd = c \]
+and so letting $x=ku$ and $y=kv$, \xtremph{we see that} the equation $ax+by=c$ has a solution $(x,y) \in \mathbb{Z} \times \mathbb{Z}$.
+\end{extract}
+
+Some publishers require that mathematical variables not appear immediately after a punctuation mark, such as a comma or full stop. The first person plural comes to the rescue in the form of the phrase `we have', which can usually be inserted after the offending punctuation mark in order to separate it from a statement that begins with a variable.
+
+\begin{extract}[\xtrsource{\Cref{exDifferenceOfRealsInQIsReflexive}}]
+\label{xtrDifferenceOfRealsInQIsReflexive}
+Let $R$ be the relation on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by $a \mathrel{R} b$ if and only if $b-a \in \mathbb{Q}$. Then $R$ is reflexive, since for all $a \in \mathbb{R}$, \xtremph{we have} $a-a = 0 \in \mathbb{Q}$, so that $a \mathrel{R} a$.
+\end{extract}
+
+Without the phrase `we have', this would have read as follows, violating the convention that variables should not follow punctuation marks.
+\begin{quote}
+\dots{} for all $a \in \mathbb{R}$, $a-a = 0 \in \mathbb{Q}$, so \dots{}
+\end{quote}
+
+\subsection*{Mathematical notation}
+
+What sets mathematics apart from most other areas of study is its heavy use of notation. Even in this introductory book, so much new notation is introduced that it can quickly become overwhelming. When writing a proof, it is sometimes important to take a step back and remember the reason why it is used.
+
+\begin{writingprinciple}
+\label{wpPurposeOfNotation}
+Mathematical notation should be used in moderation with the goal of improving readability and precision.
+\end{writingprinciple}
+
+The material covered in this textbook introduces a huge quantity of new notation, and it can be tempting to overuse it in proofs. Of course, how much notation is too much or too little is largely a matter of taste, but there is a balance to be struck.
+
+To illustrate, what follows are three proofs that for all $a \in \mathbb{Z}$, if $a^2$ is divisible by $3$, then $a$ is divisible by $3$.
+
+The first proof can be read as prose, as long as you're willing to try hard enough to translate notation on the fly, but it is very heavy on the notation. Quantifiers and logical operators are \textit{everywhere}.
+
+\begin{extract}
+\label{xtrThreeDividesSquareImpliesThreeDividesOriginalTooMuchNotation}
+Let $a \in \mathbb{Z}$ and assume $3 \mid a^2$. Then $\exists k \in \mathbb{Z},~a^2=3k$ by \Cref{defDivision}. Also $\exists q, r \in \mathbb{Z},~ 0 \le r < 3 \wedge a = 3q+r$ by \Cref{thmDivisionTheorem}. Now
+\begin{itemize}
+\item $r=0 \Rightarrow a^2=(3q)^2=3(3q^2) \Rightarrow \exists k \in \mathbb{Z},~a^2=3k$ \TT
+\item $r=1 \Rightarrow a^2=(3q+1)^2=3(3q^2+2q)+1 \Rightarrow \neg \exists k \in \mathbb{Z},~a^2=3k$ $\leadsto$ contradiction by \Cref{thmDivisionTheorem}
+\item $r=2 \Rightarrow a^2=(3q+2)^2=3(3q^2+4q+1)+1 \Rightarrow \neg \exists k \in \mathbb{Z},~a^2=3k$ $\leadsto$ contradiction by \Cref{thmDivisionTheorem}
+\end{itemize}
+Now $(r=0 \vee r=1 \vee r=2) \wedge (r \ne 1 \wedge r \ne 2) \Rightarrow r=0 \Rightarrow 3 \mid a$, as required.
+\end{extract}
+
+On the other extreme, the next proof is very easy to read as prose, but its sheer verbosity makes the actual mathematics harder to follow.
+
+\begin{extract}
+\label{xtrThreeDividesSquareImpliesThreeDividesOriginalTooLittleNotation}
+Suppose the square of an integer $a$ is divisible by three. Then $a^2$ can be expressed as three multiplied by another integer $k$ by definition of division. Furthermore, by the division theorem, $a$ can itself be expressed as three multiplied by the quotient $q$ of $a$ upon division by three, plus the remainder $r$ upon division by three; and the remainder $r$ is greater than equal to zero and is less than three.
+
+Now if the remainder $r$ is zero, then $a^2=(3q)^2=3(3q^2)$, which is consistent with our assumption that $a^2$ is three multiplied by an integer, since $3q^2$ is an integer. If the remainder $r$ is one, then $a^2=(3q+1)^2=3(3q^2+2q)+1$, which implies by the division theorem that $a^2$ cannot be expressed as three multiplied by an integer, contradicting our assumption. If the remainder $r$ is equal to two, then $a^2=(3q+2)^2=3(3q^2+4q+1)+1$, which again implies by the division theorem that $a^2$ cannot be expressed as three multiplied by an integer, contradicting our assumption again.
+
+Since the only case that did not lead to a contradiction was that in which the remainder $r$ was equal to zero, it follows that $a$ is divisible by three.
+\end{extract}
+
+The next extract strikes a better balance. It uses enough words to make reading it as prose easier than in \Cref{xtrThreeDividesSquareImpliesThreeDividesOriginalTooMuchNotation}, but it uses enough notation to keep it much more concise and navigable than \Cref{xtrThreeDividesSquareImpliesThreeDividesOriginalTooLittleNotation}.
+
+\begin{extract}
+\label{xtrThreeDividesSquareImpliesThreeDividesOriginalJustRightNotation}
+Let $a \in \mathbb{Z}$ and assume that $3 \mid a^2$. Then $a^2=3k$ for some $k \in \mathbb{Z}$ by \Cref{defDivision}. Moreover, by the division theorem (\Cref{thmDivisionTheorem}), there exist $q,r \in \mathbb{Z}$ with $0 \le r < 3$ such that $a=3q+r$. Now
+
+\begin{itemize}
+\item If $r=0$, then $a^2=(3q)^2 = 3(3q^2)$. Letting $k=3q^2$, we see that this is consistent with our assumption that $3 \mid a$.
+\item If $r=1$, then $a^2 = (3q+1)^2 = 3(3q^2+2q)+1$. By the division theorem, it follows that $3 \nmid a^2$, contradicting our assumption.
+\item If $r=2$, then $a^2 = (3q+2)^2 = 3(3q^2+4q)+1$. By the division theorem again, it follows that $3 \nmid a^2$, contradicting our assumption.
+\end{itemize}
+Since $r=0$ in the only case that is consistent with our assumption, it follows that $a=3q$, and so $3 \mid a$, as required.
+\end{extract}
+
+Observe that one of the main differences between the notation-heavy \Cref{xtrThreeDividesSquareImpliesThreeDividesOriginalTooMuchNotation} and the more reasonable \Cref{xtrThreeDividesSquareImpliesThreeDividesOriginalJustRightNotation} is that the latter does not use logical operators or quantifiers---they are replaced by their corresponding English translations.
+
+While logical operators and quantifiers---particularly $\Rightarrow$, $\Leftrightarrow$ and $\forall$---do have their place in proofs, it is often best to tread lightly. The role of symbolic logic is to help you to figure out how to prove a proposition, and how to word its proof (more in this later); but the proof in the end should not typically contain much in the way of logical notation.
+
+Think of logical notation as being like an engine in a car, a circuit board in a computer, or an internal organ in a guinea pig---they make it work, but you don't want to see them!
+
+In line with \Cref{wpFullSentences}, when we use mathematical notation, we should be careful to make sure that what we write can still be read as prose. To illustrate, let's recall \Cref{xtrInjectiveWithProse}.
+
+\rxtrInjectiveWithProse*
+
+The uses of notation are highlighted in the following transcription.
+
+\begin{quote}
+Let \textit{ex}, \textit{wye} and \textit{zed} be sets, let \xtremph{\textit{ef} be a function from \textit{ex} to \textit{wye}} and \xtremph{\textit{gee} be a function from \textit{wye} to \textit{zed}}, and assume that \textit{ef} and \textit{gee} are injective. Let \xtremph{\textit{a} and \textit{bee} be elements of \textit{ex}} and assume that \xtremph{\textit{gee} \textit{ef} of \textit{a} is equal to \textit{gee} \textit{ef} of \textit{bee}}. Then \xtremph{\textit{gee} of \textit{ef} of \textit{a} equals \textit{gee} of \textit{ef} of \textit{bee}} by definition of \xtremph{function composition}, \xtremph{so} \, \xtremph{\textit{ef} of \textit{a} equals \textit{ef} of \textit{bee}} by injectivity of \textit{gee}, \xtremph{and so} \, \xtremph{\textit{a} equals \textit{bee}} by injectivity of \textit{ef}. Hence \xtremph{\textit{gee} \textit{ef}} is injective, as required.
+\end{quote}
+
+Observe that the kind of phrase that is read aloud depends on how the notation is being used within a larger sentence. For example, consider the following extract.
+
+\begin{extract}
+Let $n \in \mathbb{Z}$ and suppose that $n$ is even. Then $n=2k$ for some $k \in \mathbb{Z}$.
+\end{extract}
+
+Read aloud, we would say something like:
+\begin{quote}
+Let \xtremph{\textit{en} be an integer} and suppose that \textit{en} is even. Then \textit{en} equals two \textit{kay} for some \xtremph{integer \textit{kay}}.
+\end{quote}
+Despite the fact that `$n \in \mathbb{N}$' and `$k \in \mathbb{N}$' here differ only in the letter that is used, they are read aloud differently because they are playing different roles in the sentence---the former is used as a verb phrase, and the latter as a noun phrase.
+
+\begin{exercise}
+Consider the following notation-heavy proof that $X \cap (Y \cup Z) \subseteq (X \cap Y) \cup (X \cap Z)$ for all sets $X$, $Y$ and $Z$.
+\begin{quote}
+Let $X$, $Y$ and $Z$ be sets and let $a \in X \cap (Y \cup Z)$. Then
+\[ a \in X \wedge a \in Y \cup Z ~ \Rightarrow ~ a \in X \wedge (a \in Y \vee a \in Z) \]
+\begin{itemize}
+\item \textbf{Case 1:} $a \in Y \Rightarrow (a \in X \wedge a \in Y) \Rightarrow a \in X \cap Y \Rightarrow a \in (X \cap Y) \cup (X \cap Z)$.
+\item \textbf{Case 2:} $a \in Z \Rightarrow (a \in X \wedge a \in Z) \Rightarrow a \in X \cap Y \Rightarrow a \in (X \cap Y) \cup (X \cap Z)$.
+\end{itemize}
+$\therefore \forall a,~ a \in X \cap (Y \cup Z) \Rightarrow a \in (X \cap Y) \cup (X \cap Z)$
+
+$\therefore$ $X \cap (Y \cup Z) \subseteq (X \cap Y) \cup (X \cap Z)$.
+\end{quote}
+Read the proof aloud and transcribe what you said. Then rewrite the proof with a more appropriate balance of notation and text.
+\end{exercise}
+
+\subsection*{How much detail to provide}
+
+\todo{How much detail to provide}
+
+\todo{Citing definitions and previously-proved results}
+
+\subsection*{The Greek alphabet}
+
+Greek letters are often used as variables in mathematical texts---sometimes the 26 letters in the Latin alphabet just aren't enough! The Greek alphabet has 24 letters and, like the Latin alphabet, it has two cases.
+
+\begin{center}
+\begin{tabular}{l|cc}
+\textbf{Name} & \textbf{Upper} & \textbf{Lower}  \\ \hline
+\small Alpha   & $\mathrm{A}$ & $\alpha$ \\
+\small Beta    & $\mathrm{B}$ & $\beta$ \\
+\small Gamma   & $\Gamma$     & $\gamma$ \\
+\small Delta   & $\Delta$     & $\delta$ \\
+\small Epsilon & $\mathrm{E}$ & $\varepsilon$ or $\text{\straightepsilon}$ \\
+\small Zeta    & $\mathrm{Z}$ & $\zeta$ \\
+\small Eta     & $\mathrm{H}$ & $\eta$ \\
+\small Theta   & $\Theta$     & $\theta$ \\
+\small Iota    & $\mathrm{I}$ & $\iota$ \\
+\small Lambda  & $\Lambda$    & $\lambda$ \\
+\small Kappa   & $\mathrm{K}$ & $\kappa$ \\
+\small Mu      & $\mathrm{M}$ & $\mu$ 
+\end{tabular}
+%
+\hspace{20pt}
+%
+\begin{tabular}{l|cc}
+\textbf{Name} & \textbf{Upper} & \textbf{Lower}  \\ \hline
+\small Nu      & $\mathrm{N}$ & $\nu$ \\
+\small Xi      & $\Xi$        & $\xi$ \\
+\small Omicron & $\mathrm{O}$ & $\omicron$ \\
+\small Pi      & $\Pi$        & $\pi$ \\
+\small Rho     & $\mathrm{P}$ & $\rho$ \\
+\small Sigma   & $\Sigma$     & $\sigma$ \\
+\small Tau     & $\mathrm{T}$ & $\tau$ \\
+\small Upsilon & $\Upsilon$   & $\upsilon$ \\
+\small Phi     & $\Phi$       & $\varphi$ or $\phi$ \\
+\small Chi     & $\mathrm{X}$ & $\chi$ \\
+\small Psi     & $\Psi$       & $\psi$ \\
+\small Omega   & $\Omega$     & $\omega$
+\end{tabular}
+\end{center}
+
+Note that several of the upper-case Greek letters are identical to upper-case Latin letters---in mathematics, these are not typically distinguished so that, for example, the letter `H' will always be interpreted as an upper-case Latin letter \textit{aitch}, rather than an upper-case Greek letter \textit{eta}. For the same reason, the lower-case Greek letter \textit{omicron} is not distinguished from the lower-case Latin letter \textit{o}.
+
+\begin{latextip}
+In order to use Greek letters as mathematical variables using \LaTeX{}:
+\begin{itemize}
+\item For the upper-case letters that are identical to a letter in the Latin alphabet, use the \texcodebs{mathrm} command together with the Latin letter. For example, upper-case \textit{rho} can be input as \texcodebs{mathrm\{P\}}, even though \textit{rho} corresponds phonemically with the Latin letter \textit{R}.
+\item For the upper-case letters that are not identical to a letter in the Latin alphabet, the \LaTeX{} command is given by their Greek name with an upper-case first letter. For example, the command \texcodebs{Gamma} produces the ouput $\Gamma$.
+\item For the lower-case letters (except \textit{epsilon} and \textit{phi}---see below), the \LaTeX{} command is given by their Greek name in lower case. For example, the command \texcodebs{eta} produces the output $\eta$.
+\end{itemize}
+The variant forms of \textit{epsilon} and \textit{phi}, respectively $\varepsilon$ (\texcodebs{varepsilon}) and $\varphi$ (\texcodebs{varphi}), are preferred over $\text{\straightepsilon}$ (\texcodebs{epsilon}) and $\phi$ (\texcodebs{phi}). This is to better distinguish them from the symbols $\in$ (element symbol) and $\varnothing$ (empty set), respectively.
+\end{latextip}
+
+\subsection*{Handwriting}
+
+\todo{}

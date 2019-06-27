@@ -1,0 +1,375 @@
+%
+% Custom theorem environments
+%
+
+% Styles
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{thmcol}\fontfamily{bch}\bfseries\hspace{-\thmsymbolwidth}\thmintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont
+]{infdescthm}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{thmcol}\fontfamily{bch}\bfseries\hspace{-\thmsymbolwidth}\thmintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont={\fixthmbox\normalfont},
+    shaded={bgcolor=thmbgcol, rulecolor=thmbdcol, rulewidth=0.25pt}
+]{infdescimptthm}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{defcol}\fontfamily{bch}\bfseries\hspace{-\defsymbolwidth}\defintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont
+]{infdescdef}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{defcol}\fontfamily{bch}\bfseries\hspace{-\defsymbolwidth}\defintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont={\fixthmbox\normalfont},
+    shaded={bgcolor=defbgcol, rulecolor=defbdcol, rulewidth=0.25pt}
+]{infdescimptdef}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{excol}\fontfamily{bch}\bfseries\hspace{-\exsymbolwidth}\exintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    qed={\exqedsymbol}
+]{infdescex}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{excol}\fontfamily{bch}\bfseries\hspace{-\exsymbolwidth}\exintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont={\fixthmbox\normalfont},
+    shaded={bgcolor=exbgcol, rulecolor=exbdcol, rulewidth=0.25pt}
+]{infdescimptex}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{excol}\fontfamily{bch}\bfseries\hspace{-\quotesymbolwidth}\quoteintrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    qed={\quoteqedsymbol}
+]{infdescquote}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{prcol}\fontfamily{bch}\bfseries\hspace{-\prsymbolwidth}\printrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    qed={\exqedsymbol}
+]{infdescpr}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{prcol}\fontfamily{bch}\bfseries\hspace{-\prsymbolwidth}\printrosymbol},
+    headpunct={{\par\nobreak}\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont={\fixthmbox\normalfont},
+    shaded={bgcolor=prbgcol, rulecolor=prbdcol, rulewidth=0.25pt}
+]{infdescimptpr}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{midgray}\fontfamily{bch}\bfseries},
+    headpunct={.},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont
+]{infdescchapex}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{tipcol}\fontfamily{bch}\bfseries\hspace{-\tipsymbolwidth}\tipintrosymbol},
+    headpunct={\par\nobreak\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    qed={\tipqedsymbol}
+]{infdesctip}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{tipcol}\fontfamily{bch}\bfseries\hspace{-\tipsymbolwidth}\tipintrosymbol},
+    headpunct={\par\nobreak\\},
+    notefont={\mdseries},
+    notebraces={(}{)},
+    bodyfont={\fixthmbox\normalfont},
+    shaded={bgcolor=tipbgcol, rulecolor=tipbdcol, rulewidth=0.25pt}
+]{infdescimpttip}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{pfcol}\fontfamily{bch}\bfseries\itshape},
+    headpunct={\par\nobreak\\},
+    notefont={\mdseries},
+    notebraces={}{},
+    bodyfont=\normalfont,
+    qed={\color{pfcol}$\Box$}
+]{infdescpf}
+
+\declaretheoremstyle[
+    spaceabove=6pt,
+    spacebelow=6pt,
+    headfont={\color{pfcol}\fontfamily{bch}\bfseries\itshape},
+    headpunct={\par\nobreak\\},
+    notefont={\mdseries},
+    notebraces={}{},
+    bodyfont=\normalfont
+]{infdescpfnoqed}
+
+
+
+% Results
+
+\declaretheorem[style=infdescimptthm, numberwithin=section, Refname={Theorem,Theorems}, name=Theorem]{theorem}
+\declaretheorem[style=infdescimptthm, sibling=theorem, Refname={Theorem,Theorems}, name={Theorem\assumesAC{thmcolac}}]{theoremac}
+\declaretheorem[style=infdescimptthm, numberwithin=chapter, Refname={Theorem,Theorems}, name=Theorem]{chtheorem}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={theorem,theorems}, Refname={Theorem,Theorems}, name=Theorem]{itheorem}
+\declaretheorem[style=infdescimptthm, numbered=no, refname={theorem,theorems}, Refname={Theorem,Theorems}, name=Theorem]{theorem*}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={theorem,theorems}, Refname={Theorem,Theorems}, name={\optmark{Theorem}}]{otheorem}
+
+\declaretheorem[style=infdescthm, sibling=theorem, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name=Lemma]{lemma}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name={Lemma\assumesAC{thmcolac}}]{lemmaac}
+\declaretheorem[style=infdescthm, sibling=chtheorem, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name=Lemma]{chlemma}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name=Lemma]{ilemma}
+\declaretheorem[style=infdescthm, numbered=no, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name=Lemma]{lemma*}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={lemma,lemmas}, Refname={Lemma,Lemmas}, name={\optmark{Lemma}}]{olemma}
+
+\declaretheorem[style=infdescthm, sibling=theorem, refname={proposition,propositions}, Refname={Proposition,Propositions}, name=Proposition]{proposition}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={proposition,propositions}, Refname={Proposition,Propositions}, name={Proposition\assumesAC{thmcolac}}]{propositionac}
+\declaretheorem[style=infdescthm, sibling=chtheorem, refname={proposition,propositions}, Refname={Proposition,Propositions}, name=Proposition]{chproposition}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={proposition,propositions}, Refname={Proposition,Propositions}, name=Proposition]{iproposition}
+\declaretheorem[style=infdescthm, numbered=no, refname={proposition,propositions}, Refname={Proposition,Propositions}, name=Proposition]{proposition*}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={proposition,propositions}, Refname={Proposition,Propositions}, name={\optmark{Proposition}}]{oproposition}
+
+\declaretheorem[style=infdescthm, sibling=theorem, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name=Corollary]{corollary}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name={Corollary\assumesAC{thmcolac}}]{corollaryac}
+\declaretheorem[style=infdescthm, sibling=chtheorem, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name=Corollary]{chcorollary}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name=Corollary]{icorollary}
+\declaretheorem[style=infdescthm, numbered=no, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name=Corollary]{corollary*}
+\declaretheorem[style=infdescthm, sibling=theorem, refname={corollary,corollaries}, Refname={Corollary,Corollaries}, name={\optmark{Corollary}}]{ocorollary}
+
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axiom,axioms}, Refname={Axiom,Axioms}, name=Axiom]{axiom}
+\declaretheorem[style=infdescimptthm, sibling=chtheorem, refname={axiom,axioms}, Refname={Axiom,Axioms}, name=Axiom]{chaxiom}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axiom,axioms}, Refname={Axiom,Axioms}, name=Axiom]{iaxiom}
+\declaretheorem[style=infdescimptthm, numbered=no, refname={axiom,axioms}, Refname={Axiom,Axioms}, name=Axiom]{axiom*}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axiom,axioms}, Refname={Axiom,Axioms}, name={\optmark{Axiom}}]{oaxiom}
+
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axioms,axioms}, Refname={Axioms,Axioms}, name=Axioms]{axioms}
+\declaretheorem[style=infdescimptthm, sibling=chtheorem, refname={axioms,axioms}, Refname={Axioms,Axioms}, name=Axioms]{chaxioms}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axioms,axioms}, Refname={Axioms,Axioms}, name=Axioms]{iaxioms}
+\declaretheorem[style=infdescimptthm, numbered=no, refname={axioms,axioms}, Refname={Axioms,Axioms}, name=Axioms]{axioms*}
+\declaretheorem[style=infdescimptthm, sibling=theorem, refname={axioms,axioms}, Refname={Axioms,Axioms}, name={\optmark{Axioms}}]{oaxioms}
+
+
+
+% Definitions
+
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name={Definition}]{definition}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name={Definition\assumesAC{defcolac}}]{definitionac}
+\declaretheorem[style=infdescimptdef, sibling=chtheorem, refname={definition,definitions}, Refname={Definition,Definitions}, name={Definition}]{chdefinition}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{idefinition}
+\declaretheorem[style=infdescimptdef, numbered=no, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{definition*}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name={\optmark{Definition}}]{odefinition}
+
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={construction,constructions}, Refname={Construction,Constructions}, name=Construction]{construction}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={construction,constructions}, Refname={Construction,Constructions}, name={Construction\assumesAC{defcolac}}]{constructionac}
+\declaretheorem[style=infdescimptdef, sibling=chtheorem, refname={construction,constructions}, Refname={Construction,Constructions}, name=Construction]{chconstruction}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={construction,constructions}, Refname={Construction,Constructions}, name=Construction]{iconstruction}
+\declaretheorem[style=infdescimptdef, numbered=no, refname={construction,constructions}, Refname={Construction,Constructions}, name=Construction]{construction*}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={construction,constructions}, Refname={Construction,Constructions}, name={\optmark{Construction}}]{oconstruction}
+
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{predefinition}
+\declaretheorem[style=infdescimptdef, sibling=chtheorem, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{chpredefinition}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{ipredefinition}
+\declaretheorem[style=infdescimptdef, numbered=no, refname={definition,definitions}, Refname={Definition,Definitions}, name=Definition]{predefinition*}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={definition,definitions}, Refname={Definition,Definitions}, name={\optmark{Definition}}]{opredefinition}
+
+\declaretheorem[style=infdescdef, sibling=theorem, refname={notation,notations}, Refname={Notation,Notations}, name=Notation]{notation}
+\declaretheorem[style=infdescdef, sibling=chtheorem, refname={notation,notations}, Refname={Notation,Notations}, name=Notation]{chnotation}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={notation,notations}, Refname={Notation,Notations}, name=Notation]{inotation}
+\declaretheorem[style=infdescdef, numbered=no, refname={notation,notations}, Refname={Notation,Notations}, name=Notation]{notation*}
+\declaretheorem[style=infdescdef, sibling=theorem, refname={notation,notations}, Refname={Notation,Notations}, name={\optmark{Notation}}]{onotation}
+
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={vocabulary,vocabulary}, Refname={Vocabulary,Vocabulary}, name={Vocabulary}]{vocabulary}
+\declaretheorem[style=infdescimptdef, sibling=chtheorem, refname={vocabulary,vocabulary}, Refname={Vocabulary,Vocabulary}, name={Vocabulary}]{chvocabulary}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={vocabulary,vocabulary}, Refname={Vocabulary,Vocabulary}, name=Vocabulary]{ivocabulary}
+\declaretheorem[style=infdescimptdef, numbered=no, refname={vocabulary,vocabulary}, Refname={Vocabulary,Vocabulary}, name=Vocabulary]{vocabulary*}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={vocabulary,vocabulary}, Refname={Vocabulary,Vocabulary}, name={\optmark{Vocabulary}}]{ovocabulary}
+
+\declaretheorem[style=infdescdef, sibling=theorem, refname={assumption,assumptions}, Refname={Assumption,Assumptions}, name=Assumption]{assumption}
+\declaretheorem[style=infdescdef, sibling=chtheorem, refname={assumption,assumptions}, Refname={Assumption,Assumptions}, name=Assumption]{chassumption}
+\declaretheorem[style=infdescimptdef, sibling=theorem, refname={assumption,assumptions}, Refname={Assumption,Assumptions}, name=Assumption]{iassumption}
+\declaretheorem[style=infdescdef, numbered=no, refname={assumption,assumptions}, Refname={Assumption,Assumptions}, name=Assumption]{assumption*}
+\declaretheorem[style=infdescdef, sibling=theorem, refname={assumption,assumptions}, Refname={Assumption,Assumptions}, name={\optmark{Assumption}}]{oassumption}
+
+
+
+% Exercises and examples
+
+\declaretheorem[style=infdescex, sibling=theorem, refname={example,examples}, Refname={Example,Examples}, name=Example]{example}
+\declaretheorem[style=infdescex, sibling=theorem, refname={example,examples}, Refname={Example,Examples}, name={Example\assumesAC{excolac}}]{exampleac}
+\declaretheorem[style=infdescex, sibling=chtheorem, refname={example,examples}, Refname={Example,Examples}, name=Example]{chexample}
+\declaretheorem[style=infdescimptex, sibling=theorem, refname={example,examples}, Refname={Example,Examples}, name=Example]{iexample}
+\declaretheorem[style=infdescex, numbered=no, refname={example,examples}, Refname={Example,Examples}, name=Example]{example*}
+\declaretheorem[style=infdescex, sibling=theorem, refname={example,examples}, Refname={Example,Examples}, name={\optmark{Example}}]{oexample}
+
+\declaretheorem[style=infdescpr, sibling=theorem, refname={exercise,exercises}, Refname={Exercise,Exercises}, name={Exercise}]{exercise}
+\declaretheorem[style=infdescpr, sibling=theorem, refname={exercise,exercises}, Refname={Exercise,Exercises}, name={Exercise\assumesAC{excolac}}]{exerciseac}
+\declaretheorem[style=infdescpr, sibling=chtheorem, refname={exercise,exercises}, Refname={Exercise,Exercises}, name={Exercise}]{chexercise}
+\declaretheorem[style=infdescimptpr, sibling=theorem, refname={exercise,exercises}, Refname={Exercise,Exercises}, name=Exercise]{iexercise}
+\declaretheorem[style=infdescpr, numbered=no, refname={exercise,exercises}, Refname={Exercise,Exercises}, name=Exercise]{exercise*}
+\declaretheorem[style=infdescpr, sibling=theorem, refname={exercise,exercises}, Refname={Exercise,Exercises}, name={\optmark{Exercise}}]{oexercise}
+
+\declaretheorem[style=infdescpr, sibling=theorem, refname={discussion,discussions}, Refname={Discussion,Discussions}, name=Discussion]{discussion}
+\declaretheorem[style=infdescpr, sibling=chtheorem, refname={discussion,discussions}, Refname={Discussion,Discussions}, name=Discussion]{chdiscussion}
+\declaretheorem[style=infdescimptpr, sibling=theorem, refname={discussion,discussions}, Refname={Discussion,Discussions}, name=Discussion]{idiscussion}
+\declaretheorem[style=infdescpr, numbered=no, refname={discussion,discussions}, Refname={Discussion,Discussions}, name=Discussion]{discussion*}
+\declaretheorem[style=infdescpr, sibling=theorem, refname={discussion,discussions}, Refname={Discussion,Discussions}, name={\optmark{Discussion}}]{odiscussion}
+
+\declaretheorem[style=infdescpr, sibling=theorem, refname={problem,problems}, Refname={Problem,Problems}, name=Problem]{problem}
+\declaretheorem[style=infdescpr, sibling=chtheorem, refname={problem,problems}, Refname={Problem,Problems}, name=Problem]{chproblem}
+\declaretheorem[style=infdescimptpr, sibling=theorem, refname={problem,problems}, Refname={Problem,Problems}, name=Problem]{iproblem}
+\declaretheorem[style=infdescpr, numbered=no, refname={problem,problems}, Refname={Problem,Problems}, name=Problem]{problem*}
+\declaretheorem[style=infdescpr, sibling=theorem, refname={problem,problems}, Refname={Problem,Problems}, name={\optmark{Problem}}]{oproblem}
+
+\declaretheorem[style=infdescquote, sibling=theorem, refname={extract,extracts}, Refname={Extract,Extracts}, name=Extract]{extract}
+\declaretheorem[style=infdescquote, sibling=theorem, refname={extract,extracts}, Refname={Extract,Extracts}, name={Extract\assumesAC{excolac}}]{extractac}
+\declaretheorem[style=infdescquote, sibling=chtheorem, refname={extract,extracts}, Refname={Extract,Extracts}, name=Extract]{chextract}
+\declaretheorem[style=infdescquote, numbered=no, refname={extract,extracts}, Refname={Extract,Extracts}, name=Extract]{extract*}
+\declaretheorem[style=infdescquote, sibling=theorem, refname={extract,extracts}, Refname={Extract,Extracts}, name={\optmark{Extract}}]{oextract}
+
+% End-of-chapter exercises
+
+\declaretheorem[style=infdescchapex, numberwithin=chapter, refname={question, questions}, Refname={Question, Questions}, name={}]{chapex}
+
+% Command for referring to exercises in other chapters
+\newcommand{\CrefCQ}[2]{%
+    \Cref*{#1} \Cref{#2}%
+}
+
+% Tips and special remarks
+
+\declaretheorem[style=infdesctip, numbered=no, name=Problem-solving tip]{problemtip}
+\declaretheorem[style=infdesctip, numbered=no, name={Proof tip}]{prooftip}
+\declaretheorem[style=infdesctip, numbered=no, name={Writing tip}]{writingtip}
+\declaretheorem[style=infdesctip, numbered=no, name={\LaTeX{} tip}]{latextip}
+\declaretheorem[style=infdesctip, numbered=no, name=Formatting tip]{formattip}
+\declaretheorem[style=infdesctip, numbered=no, name=Goal]{goal}
+\declaretheorem[style=infdesctip, numbered=no, name=Aside]{aside}
+\declaretheorem[style=infdesctip, numbered=no, name=Common error]{commonerror}
+
+\declaretheorem[style=infdesctip, sibling=theorem, refname={convention,conventions}, Refname={Convention,Conventions}, name=Convention]{convention}
+\declaretheorem[style=infdesctip, sibling=chtheorem, refname={convention,conventions}, Refname={Convention,Conventions}, name=Convention]{chconvention}
+
+\declaretheorem[style=infdesctip, sibling=theorem, refname={remark,remarks}, Refname={Remark,Remarks}, name=Remark]{remark}
+\declaretheorem[style=infdesctip, sibling=chtheorem, refname={remark,remarks}, Refname={Remark,Remarks}, name=Remark]{chremark}
+
+% Proofs and strategies
+
+\declaretheorem[style=infdescpf, numbered=no, name=Proof]{cproof}
+\declaretheorem[style=infdescpf, numbered=no, name=Sketch of proof]{csketch}
+\declaretheorem[style=infdescpfnoqed, numbered=no, name=Idea of proof]{cidea}
+
+\declaretheorem[style=infdescimpttip, sibling=theorem, refname={strategy,strategies}, Refname={Strategy,Strategies}, name={Strategy}]{strategy}
+\declaretheorem[style=infdescimpttip, sibling=theorem, refname={strategy,strategies}, Refname={Strategy,Strategies}, name={Strategy\assumesAC{tipcolac}}]{strategyac}
+\declaretheorem[style=infdescimpttip, sibling=chtheorem, refname={strategy,strategies}, Refname={Strategy,Strategies}, name={Strategy}]{chstrategy}
+\declaretheorem[style=infdesctip, numbered=no, refname={strategy,strategies}, Refname={Strategy,Strategies}, name={Strategy}]{strategy*}
+
+\declaretheorem[style=infdescimpttip, refname={deadly sin,deadly sins}, Refname={Deadly Sin, Deadly Sins}, name={Deadly Sin}]{deadlysin}
+\renewcommand*{\thedeadlysin}{the \Ordinalstring{deadlysin}}
+
+\declaretheorem[style=infdescimpttip, sibling=theorem, refname={writing principle, writing principles}, Refname={Writing Principle, Writing Principles}, name={Writing Principle}]{writingprinciple}
+
+% Uniformly change numbering depth
+\newcommand{\numberitemswithin}[1]{%
+\numberwithin{theorem}{#1}%
+\numberwithin{proposition}{#1}%
+\numberwithin{lemma}{#1}%
+\numberwithin{corollary}{#1}%
+\numberwithin{definition}{#1}%
+\numberwithin{notation}{#1}%
+\numberwithin{axiom}{#1}%
+\numberwithin{example}{#1}%
+\numberwithin{exercise}{#1}%
+\numberwithin{discussion}{#1}%
+\numberwithin{problem}{#1}%
+\numberwithin{strategy}{#1}%
+}
+
+
+
+% Hints and solutions to exercises
+% Source: LaTeX Stack Exchange
+% Post URL: https://tex.stackexchange.com/a/415986/
+% Author: user31729
+
+\newcommand{\hintref}[1]{{\color{excol}\fontfamily{bch}\bfseries Hint for \Cref{#1}}\\}
+
+\newwrite\collectedcontentfile
+\AtBeginDocument{%
+  % Automatically open the file at the beginning of the document
+  \immediate\openout\collectedcontentfile=\jobname.cll
+}
+
+\NewEnviron{backhint}{
+  \immediate\write\collectedcontentfile{%
+    \expandafter\unexpanded\expandafter{\BODY}^^J
+  }%
+}
+
+\newcommand{\printhints}{%
+  % Closing the file
+  \immediate\closeout\collectedcontentfile% 
+  \InputIfFileExists{\jobname.cll}{}{}
+}
+
+\newcommand{\hintlabel}[2]{\label{#1}
+\begin{backhint}
+\hintref{#1}
+#2
+\end{backhint}%
+}
+
+\newcommand{\hintsection}[1]{%
+\begin{backhint}
+\subsection*{#1}
+\end{backhint}%
+}

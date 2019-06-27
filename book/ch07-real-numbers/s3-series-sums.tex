@@ -1,0 +1,743 @@
+\section{Series and sums}
+\secbegin{secSeriesSums}
+
+A \textit{series} can be thought of as the result of adding up all of the terms in a sequence. The uses of series inside and outside of mathematics is widespread, particularly in analysis and statistics. In fact, we will use series repeatedly when we study probability theory in \Cref{chProbabilityMeasure}!
+
+Unfortunately the definition of a series is not quite as simple as `the result of adding up all of the terms in a sequence'. For a start, we haven't defined what means to add up infinitely many numbers, and sometimes this might not even be possible---for example, you might encounter problems if you try adding up all of the terms in the constant sequence $(1,1,1,\dots)$.
+
+The definition of a series, then, is that of a \textit{formal} sum (see \Cref{defSeries}). The word `formal' here means that it is an expression that \textit{represents} a sum, but is not actually evaluated. So for example
+\[ 1 + 1 + 1 + \cdots \]
+is a series.
+
+We will then separately define what it means for it to be possible to evaluate an infinite sum represented by a series (\Cref{defSumPartialSum}); this definition implies that the series $1+1+1+\cdots$ is not summable, for example.
+
+\begin{definition}
+\label{defSeries}
+\index{series}
+A (\textbf{real}) \textbf{series} is a formal sum of a sequence $(a_n)_{n \ge 0}$, denoted by
+\[ \sum_{n \ge 0} a_n \quad \text{\inlatex{sum\_\{n \textbackslash{}ge 0\}}} \]
+or by $\displaystyle \sum_{n=0}^{\infty} a_n$ \inlatex{sum\_\{n=0\}\^{}\{\textbackslash{}infty\}}, or even by $a_0 + a_1 + a_2 + \cdots$.
+\end{definition}
+
+As with sequences, it is possible for a series to be indexed from a different starting number, like in the next example.
+
+\begin{example}
+The sequence $(\frac{1}{k})_{k \ge 1}$ defines the series
+\[ \sum_{k \ge 1} \dfrac{1}{k} = \dfrac{1}{1} + \dfrac{1}{2} + \dfrac{1}{3} + \dfrac{1}{4} + \cdots \]
+We will soon see that this series \textit{diverges} (\Cref{thmHarmonicSeriesDiverges}), since adding these terms together one by one yields unboundedly larger and larger real numbers.
+\end{example}
+
+Series in isolation are not particularly useful or interesting. They become so by defining what it means to evaluate them---at least, when it is possible to do so.
+
+\begin{definition}
+\label{defSumPartialSum}
+\index{sum!of a series}
+\index{partial sum}
+Let $N \in \mathbb{N}$. The $N^{\text{th}}$ \textbf{partial sum} of a series $\displaystyle \sum_{n \ge 0} a_n$ is the real number $s_N = \displaystyle \sum_{n=0}^N a_n$.
+
+We say that the series \textbf{converges} if the sequence of partial sums $(s_N)_{N \ge 0}$ converges; in this case, the \textbf{sum} of the series is the real number $\lim\limits_{N \to \infty} (s_N)$, also written $\displaystyle \sum_{n \ge 0} a_n$.
+
+If the sequence of partial sums $(s_N)_{N \ge 0}$ diverges, then we say the series \textbf{diverges}.
+\end{definition}
+
+\begin{example}
+Consider the series
+\[ S = \sum_{n \ge 2} \dbinom{n}{2}^{-1} \]
+We prove that $S$ converges and its sum is $2$.
+
+To see this, note that for all $n \ge 2$, we have by \Cref{thmBinomAsFactorialByInduction} that
+\[ \dbinom{n}{2}^{-1} = \left( \dfrac{n(n-1)}{2} \right)^{-1} = \dfrac{2}{n(n-1)} = \dfrac{2}{n-1} - \dfrac{2}{n} \]
+Therefore, for all $N \ge 2$, the $N^{\text{th}}$ partial sum of $S$ is given by
+\[ s_N = \sum_{n=2}^N \dbinom{n}{2}^{-1} = \left( \dfrac{2}{1} - \dfrac{2}{2} \right) + \left( \dfrac{2}{2} - \dfrac{2}{3} \right) + \cdots + \left( \dfrac{2}{N-1} - \dfrac{2}{N} \right) = 2 - \dfrac{2}{N} \]
+It follows that $S = \displaystyle \lim_{N \to \infty} (s_N) = 2$, as required.
+\end{example}
+
+\begin{exercise}
+Prove that the series $\displaystyle \sum_{n \ge 3} \dbinom{n}{3}^{-1}$ converges, and find its sum.
+\hintlabel{exSumOfReciprocalsOfNChoose3}{%
+Begin by observing that $\displaystyle \dbinom{n}{3}^{-1} = \dfrac{3}{n-2} - \dfrac{6}{n-1} + \dfrac{3}{n}$.
+}
+\end{exercise}
+
+\begin{example}
+\label{exConstantSeriesOfOneDiverges}
+We prove that the series $\displaystyle \sum_{n \ge 0} 1$ diverges. Indeed, for all $N \in \mathbb{N}$, we have
+\[ \sum_{n=0}^N ~=~ \underbrace{1 + 1 + \cdots + 1}_{N+1 \text{ times}} ~=~ N+1 \]
+Thus the sequence of partial sums is unbounded, so does not converge to a real number.
+\end{example}
+
+\begin{exercise}
+\label{exAlternatingSeriesOfOneDiverges}
+Prove that the series $\sum_{n \ge 0} (-1)^n$ diverges.
+\end{exercise}
+
+The underlying reason why the series in \Cref{exConstantSeriesOfOneDiverges} and \Cref{exAlternatingSeriesOfOneDiverges} diverge is that their terms do not get smaller and smaller. We will prove in \Cref{thmIfSeriesConvergentThenTermsTendToZero} that in order for a series to converge, its terms must tend to zero.
+
+\begin{theorem}[Sum of geometric series]
+\label{thmGeometricSeries}
+\index{geometric series}
+\index{series!geometric}
+Let $r \in (-1, 1)$. Then $\displaystyle\sum_{n \ge 0} r^n = \frac{1}{1-r}$.
+\end{theorem}
+
+\begin{cproof}
+Given $N \in \mathbb{N}$, the $N^{\text{th}}$ partial sum $s_N$ of the series is given by by
+\[ s_N = \sum_{n=0}^N r^n = 1 + r + r^2 + \cdots + r^N \]
+Note that
+\[ rs_N = \sum_{n=0}^n r^{n+1} = r+r^2+\cdots+r^{N+1} = s_{N+1}-1 \]
+and hence
+\[ (1-r)s_N = s_N-rs_N = s_N-(s_{N+1}-1) = 1-(s_{N+1}-s_N) = 1-r^{N+1} \]
+and hence dividing by $1-r$, which is permissible since $r \ne 1$, yields
+\[ s_N = \frac{1-r^{N+1}}{1-r} \]
+Since $|r|<1$, we have $(r^{N+1}) \to 0$ by \Cref{propPowerOfRTendsToZero}, and so
+\[ \sum_{n \ge 0} r^n ~=~ \lim_{N \to \infty} \frac{1-r^{N+1}}{1-r} ~=~ \frac{1-0}{1-r} ~=~ \frac{1}{1-r} \]
+as claimed.
+\end{cproof}
+
+\begin{exercise}
+Prove that the series $\displaystyle \sum_{n \ge 0} r^n$ diverges for all $r \in \mathbb{R} \setminus (-1,1)$.
+\end{exercise}
+
+The next result allows us to add two series together by adding their terms, and to multiply a series by a constant by multiplying their terms by the constant.
+
+\begin{theorem}[Linearity of summation]
+\label{thmLinearityOfSummation}
+Let $\displaystyle \sum_{n \ge 0} a_n$ and $\displaystyle \sum_{n \ge 0} b_n$ be convergent series. Then
+\begin{enumerate}[(a)]
+\item The series $\displaystyle \sum_{n \ge 0} (a_n+b_n)$ is convergent, and its sum is $\displaystyle \sum_{n \ge 0} a_n + \sum_{n \ge 0} b_n$;
+\item For all $c \in \mathbb{R}$, the series $\displaystyle \sum_{n \ge 0} c a_n$ is convergent, and its sum is $\displaystyle c \sum_{n \ge 0} a_n$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of {(a)}]
+For (a), note that the partial sums of $\displaystyle \sum_{n \ge 0} (a_n+b_n)$ are given by
+\[ \sum_{n=0}^N (a_n + b_n) = \sum_{n=0}^N a_n + \sum_{n=0}^N b_n \]
+so we may apply \Cref{thmLimitsPreserveArithmeticOperations}(a) to obtain
+\begin{align*}
+& \sum_{n \ge 0} (a_n + b_n) && \\
+&= \lim_{N \to \infty} \left( \sum_{n=0}^N (a_n + b_n) \right) && \\
+&= \lim_{N \to \infty} \left( \sum_{n=0}^N a_n + \sum_{n=0}^N b_n \right) \\
+&= \lim_{N \to \infty} \left( \sum_{n=0}^N a_n \right) + \lim_{N \to \infty} \left( \sum_{n=0}^N b_n \right) && \\
+&= \sum_{n \ge 0} a_n + \sum_{n \ge 0} b_n
+\end{align*}
+as required.
+\end{cproof}
+
+\begin{exercise}
+Prove part (b) of \Cref{thmLinearityOfSummation}, and deduce that if $\displaystyle \sum_{n \ge 0} a_n$ and $\displaystyle \sum_{n \ge 0} b_n$ are convergent series, then $\displaystyle \sum_{n \ge 0} (a_n - b_n)$ converges, and its sum is equal to $\displaystyle \sum_{n \ge 0} a_n - \sum_{n \ge 0} b_n$.
+\end{exercise}
+
+\subsection*{Expansions of real numbers in number bases}
+
+We now take a brief detour away from the general theory of series to discuss an application, namely expansions of real numbers in number bases.
+
+You are likely familiar with decimal expansions of real numbers, for example
+\[ \frac{1}{2} = 0.5, \quad \dfrac{1}{7} = 0.142857142857\dots{}, \quad \sqrt{2} = 1.414213562373\dots{} \]
+
+A decimal expansion is really a series in disguise. For example
+\[ 0.142857\dots{} = 1 \cdot \frac{1}{10} + 4 \cdot \frac{1}{10^2} + 2 \cdot \frac{1}{10^3} + 8 \cdot \frac{1}{10^4} + 5 \cdot \frac{1}{10^5} + 7 \cdot \frac{1}{10^6} + \cdots \]
+
+Thus when we write out a decimal expansion of a (non-negative, say) real number $x$ as $x=x_0.x_1x_2x_3\dots{}$, what we are really saying is that
+\[ x = x_0 + \sum_{i \ge 1} x_i \cdot 10^{-i} \]
+where $x_0 \in \mathbb{N}$ and $x_i \in \{ 0,1,2,3,4,5,6,7,8,9 \}$ for all $i \ge 1$.
+
+We can apply this to other number bases. For example, the binary (base-$2$) expansion of $\frac{1}{2}$ is $0.1$ since $\frac{1}{2} = 1 \cdot 2^{-1}$, and the binary expansion of $\frac{1}{3}$ is $0.010101\dots{}$ since
+\[ 0.010101\dots{}_{(2)} ~=~ \sum_{n \ge 1} \frac{1}{2^{2n}} ~=~ \frac{1}{4} \sum_{k \ge 0} \frac{1}{4^k} ~=~ \frac{1}{4} \cdot \frac{1}{1-\frac{1}{4}} ~=~ \frac{1}{3} \]
+
+Our goal is to give a precise definition of the base-$b$ expansion of a real number for an arbitrary number base $b > 1$.
+
+In order to do this, we must prove that they are well-defined---that is, every real number has a unique base-$b$ expansion. But wait! It's not true! Expansions are not \textit{quite} unique---for example, we have
+\[ 0.999\dots{} ~=~ \sum_{i \ge 1} 9 \cdot 10^{-i} = \dfrac{9}{10} \sum_{k \ge 0} \dfrac{1}{10^k} ~=~ \dfrac{9}{10} \cdot \dfrac{1}{1-\frac{1}{10}} ~=~ 1 ~=~ 1.000\dots{} \]
+
+Conveniently, the only problem with uniqueness occurs with recurring $0$s and recurring $9$s: every number that has a decimal expansion with recurring $9$s also has one with recurring $0$s. More generally, in a base $b>0$, recurring `$b-1$'s may be replaced by recurring $0$s.
+
+We are now ready to proceed.
+
+\begin{theorem}
+\label{thmBaseBExpansionsOfReals}
+Let $b \in \mathbb{N}$ with $b > 1$. For all $x \in [0,\infty)$, there is a unique series $\displaystyle \sum_{i \ge 0} \dfrac{x_i}{b^i}$, such that:
+\begin{enumerate}[(i)]
+\item $x_0 \in \mathbb{N}$, and $x_i \in \{ 0, 1, \dots, b-1 \}$ for all $i \ge 1$;
+\item The series $\displaystyle \sum_{i \ge 0} \dfrac{x_i}{b^i}$ converges, and its sum is equal to $x$; and
+\item The sequence $(x_i)$ is not eventually equal to $b-1$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of existence]
+Fix $x \ge 0$. Define integers $x_i$ and real numbers $y_i \in [0,1)$ for $i \in \mathbb{N}$ recursively as follows:
+\begin{itemize}
+\item Let $x_0 \in \mathbb{N}$ be such that $x_0 \le x < x_0+1$, and let $y_0 = x-x_0$---note that $0 \le y_0 < 1$, as required.
+\item Given $i \in \mathbb{N}$, let $x_{i+1} \in \mathbb{Z}$ such that $x_{i+1} \le by_i < x_{i+1}+1$, and let $y_{i+1} = by_i-x_{i+1}$---note $0 \le y_{i+1} < 1$ as required.
+\end{itemize}
+
+For all $n \in \mathbb{N}$ we have
+\[ x - \sum_{i=0}^n \dfrac{x_i}{b^i} ~=~ \dfrac{y_n}{b^n} \]
+We can prove this by induction:
+\begin{itemize}
+\item (\textbf{Base case}) We have $x - \dfrac{x_0}{b^0} = x-x_0 = y_0 = \dfrac{y_0}{b^0}$ by construction.
+\item (\textbf{Induction step}) Fix $n \ge 0$ and suppose that $x - \displaystyle\sum_{i=0}^n \dfrac{x_i}{b^i} = \dfrac{y_n}{b^n}$. Then
+\[ x - \sum_{i=0}^{n+1} \dfrac{x_i}{b^i} = \dfrac{y_n}{b^n} - \dfrac{x_{n+1}}{b^{n+1}} = \dfrac{by_n - x_{n+1}}{b^{n+1}} = \dfrac{y_{n+1}}{b^{n+1}} \]
+as required.
+\end{itemize}
+
+We now verify the conditions in the statement of the theorem.
+\begin{itemize}
+\item Condition (i) is satisfied by construction of the sequence $(x_i)$: indeed, we defined $x_i$ to be integers for all $i \in \mathbb{N}$, and if $i \ge 1$ then the fact that $x_i \in \{ 0,1,\dots,b-1 \}$ follows from the facts that $x_i \le by_{i-1} < x_i+1$ and $y_i \in [0,1)$.
+\item To see that (ii) holds, note that for all $n \in \mathbb{N}$ we have
+\[ 0 \le x - \sum_{i=0}^n \dfrac{x_i}{b^i} = \dfrac{y_n}{b^n} < \dfrac{1}{b^n} \]
+But $(\frac{1}{b^n}) \to 0$ by \Cref{propPowerOfRTendsToZero}, and so $\sum_{i=0}^n \dfrac{x_i}{b^i}$ converges to $x$.
+
+\item To prove (iii), suppose there is some $n \in \mathbb{N}$ such that $x_i = b-1$ for all $i > n$. Then
+\begin{align*}
+y_n &= b^n\left( x-\sum_{i=0}^n \dfrac{x_i}{b^i} \right) && \text{as we proved above} \\
+&= b^n \left( \sum_{i \ge 0} \frac{x_i}{b^i} - \sum_{i=0}^n \frac{x_i}{b^i} \right) && \text{by condition (ii)} \\
+&= b^n \sum_{i \ge n+1} \frac{x_i}{b^i} && \text{simplifying} \\
+&= b^n \sum_{i \ge n+1} \frac{b-1}{b^i} && \text{since $x_i = b-1$ for all $i > n$} \\
+&= b^n \sum_{j \ge 0} \frac{b-1}{b^{j+n+1}} && \text{substituting $j=i-n-1$} \\
+&= b^n \cdot \dfrac{b-1}{b^{n+1}} \sum_{j \ge 0} \frac{1}{b^j} && \text{rearranging} \\
+&= b^n \cdot \frac{b-1}{b^{n+1}} \cdot \frac{1}{1-\frac{1}{b}} && \text{by \Cref{thmGeometricSeries}} \\
+&= 1 && \text{simplifying}
+\end{align*}
+But this contradicts the fact that $y_n \in [0,1)$. So we do indeed have that $(x_i)$ is not eventually equal to $b-1$.
+\end{itemize}
+
+This completes the proof of existence.
+\end{cproof}
+
+\begin{exercise}
+Prove the `uniqueness' part of \Cref{thmBaseBExpansionsOfReals}---that is, prove that for all $x \in [0,\infty)$, if
+\[ \sum_{i \ge 0} \dfrac{u_i}{b^i} \quad \text{and} \quad \sum_{i \ge 0} \dfrac{v_i}{b^i} \]
+are two series satisfying conditions (i)--(iii) of \Cref{thmBaseBExpansionsOfReals}, then $u_i=v_i$ for all $i \in \mathbb{N}$.
+\hintlabel{exUniquenessOfBaseBExpansion}{%
+Proceed by contraposition: suppose $j \in \mathbb{N}$ is least such that $u_j \ne v_j$---without loss of generality $u_j < v_j$---then
+\[ 0 ~=~ \sum_{i \ge 0} \dfrac{v_i}{b^i} - \sum_{i \ge 0} \dfrac{u_i}{b^i} ~=~ \dfrac{v_j-u_j}{b^j} + \sum_{i > j} \dfrac{v_i-u_i}{b^i} \]
+Prove that this is nonsense. You will use condition (iii) in \Cref{thmBaseBExpansionsOfReals} somewhere in your proof.
+}
+\end{exercise}
+
+\Cref{thmBaseBExpansionsOfReals} justifies the following definition.
+
+\begin{definition}
+\label{defBaseBExpansionOfRealNumber}
+\index{base-$b$ expansion!of a real number}
+Let $b > 1$. The \textbf{base-$b$ expansion} of a real number $x$ is the unique signed series $\displaystyle \pm \sum_{i \ge 0} \dfrac{x_i}{b^i}$ such that:
+\begin{enumerate}[(i)]
+\item $x_0 \in \mathbb{N}$, and $x_i \in \{ 0, 1, \dots, b-1 \}$ for all $i \ge 1$;
+\item The series $\displaystyle \sum_{i \ge 0} \dfrac{x_i}{b^i}$ converges, and its sum is equal to $|x|$; and
+\item The sequence $(x_i)$ is not eventually equal to $b-1$.
+\end{enumerate}
+To denote the fact that this is the base-$b$ expansion of $x$, we may also write
+\[ x = \pm x_0\,.\,x_1x_2x_3\dots{}_{(b)} \quad \text{or} \quad x = \pm d_rd_{r-1} \dots d_1d_0\,.\,x_1x_2\dots_{(b)} \]
+where $d_rd_{r-1} \dots d_1d_0$ is the base-$b$ expansion of $|x_0|$ (as in \Cref{defBaseBExpansionPreliminary}), and $\pm$ is the sign of $x$ (positive or negative).
+\end{definition}
+
+The recursive definition of the sequence $(x_i)$ in the proof of \Cref{thmBaseBExpansionsOfReals} yields an algorithm for computing base-$b$ expansions.
+
+\begin{strategy}[Finding base-$b$ expansions of real numbers]
+\label{strFindingBaseBExpansions}
+In order to find the base-$b$ expansion of a real number $x$:
+\begin{itemize}
+\item Let $x_0 \in \mathbb{N}$ be such that $x_0 \le |x| < x_0+1$, and define $y_0 = |x|-x_0$.
+\item For $n \in \mathbb{N}$, given $x_n$ and $y_n$, let $x_{n+1} \in \mathbb{N}$ be such that $x_{n+1} \le by_n < x_{n+1}+1$, and let $y_{n+1} = by_n - x_{n+1}$. [Note that the value of $x_{n+1}$ depends only on the value of $y_n$, not on $x_n$.]
+\end{itemize}
+Then $x = \pm x_0.x_1x_2x_3\dots{}_{(b)}$, where $\pm$ is `$+$' if $x \ge 0$, and $-$ if $x<0$.
+\end{strategy}
+
+\begin{example}
+Let's find the decimal expansion of $\frac{1}{3}$.
+\begin{itemize}
+\item $0 \le \frac{1}{3} < 1$, so $x_0 = 0$ and $y_0 = \frac{1}{3} - 0 = \frac{1}{3}$.
+\item $3 \le 10 \cdot \frac{1}{3} < 4$, so $x_1 = 3$ and $y_1 = \frac{10}{3} - 3 = \frac{1}{3}$.
+\item $3 \le 10 \cdot \frac{1}{3} < 4$, so $x_2 = 3$ and $y_2 = \frac{10}{3} - 3 = \frac{1}{3}$.
+\item \dots{}evidently, this pattern repeats. (In fact, this can be proved by induction!)
+\end{itemize}
+So $\frac{1}{3} = 0.33333\dots{}$ .
+\end{example}
+
+\begin{example}
+Now let's find the decimal expansion of $\frac{1}{7}$.
+\begin{itemize}
+\item $0 \le \frac{1}{7} < 1$, so $x_0 = 0$ and $y_0 = \frac{1}{7} - 0 = \frac{1}{7}$.
+\item $1 \le 10 \cdot \frac{1}{7} < 2$, so $x_1 = 1$ and $y_1 = \frac{10}{7}-1 = \frac{3}{7}$.
+\item $4 \le 10 \cdot \frac{3}{7} < 5$, so $x_2 = 4$ and $y_2 = \frac{30}{7}-4 = \frac{2}{7}$.
+\item $2 \le 10 \cdot \frac{2}{7} < 3$, so $x_3 = 2$ and $y_3 = \frac{20}{7}-2 = \frac{6}{7}$.
+\item $8 \le 10 \cdot \frac{6}{7} < 9$, so $x_4 = 8$ and $y_4 = \frac{60}{7}-8 = \frac{4}{7}$.
+\item $5 \le 10 \cdot \frac{4}{7} < 6$, so $x_5 = 5$ and $y_5 = \frac{40}{7}-5 = \frac{5}{7}$.
+\item $7 \le 10 \cdot \frac{5}{7} < 8$, so $x_6 = 7$ and $y_6 = \frac{50}{7}-7 = \frac{1}{7}$.
+\item \dots{}and now it repeats with the same pattern, since $y_6 = y_0$.
+\end{itemize}
+So $\frac{1}{7} = 0.142857142857\dots{}$ .
+\end{example}
+
+\begin{exercise}
+Use \Cref{strFindingBaseBExpansions} to find the decimal expansion of $\frac{1}{6}$.
+\end{exercise}
+
+\begin{exercise}
+Use \Cref{strFindingBaseBExpansions} to find the \textit{binary} expansion of $\frac{1}{7}$.
+\end{exercise}
+
+\begin{exercise}
+Prove that between any two distinct real numbers, there is a rational number.
+\end{exercise}
+
+We will use expansions of real numbers in \Cref{chInfinity} to prove that the set of real numbers is \textit{uncountably infinite}---that is, even though the sets $\mathbb{N}$ of natural numbers and $\mathbb{R}$ of real numbers are both infinite, the size of the infinitude of $\mathbb{R}$ is greater than that of $\mathbb{N}$.
+
+Now let's return to learning about series in the abstract.
+
+\subsection*{Tests for convergence and divergence}
+
+Sometimes all we need to know about a series is whether it converges or diverges. In such cases, it can be very tricky to find an exact value for the sum of the series. We now develop some techniques for determining whether or not a series converges.
+
+\begin{theorem}[Cauchy's convergence test]
+\label{thmCauchyConvergenceTest}
+A series $\displaystyle \sum_{n \ge 0} a_n$ converges if and only if, for all $\varepsilon > 0$, there is some $K \in \mathbb{N}$ such that
+\[ \left| \sum_{n=n_0}^{n_1} a_n \right| < \varepsilon \text{ for all } n_1 \ge n_0 \ge K \]
+\end{theorem}
+
+\begin{cproof}
+Let $(s_N)_{N \ge 0}$ be the sequence of partial sums of the series. By \Cref{thmCauchyImpliesConvergent}, we know that $\displaystyle \sum_{n \ge 0} a_n$ is convergent if and only if $(s_N)_{N \ge 0}$ is a Cauchy sequence.
+
+But the assertion that $(s_N)_{N \ge 0}$ is Cauchy is equivalent to the condition in the statement of this theorem: note that we may replace $K$ by any larger value (in particular, we may assume $K \ge 1$), and so
+\[ \sum_{n=n_0}^{n_1} a_n = s_{n_1} - s_{n_0-1} \]
+as required.
+\end{cproof}
+
+We will use Cauchy's convergence test frequently in our proofs. One example of how Cauchy's convergence test can be put to work is the \textit{term test}, which is very useful for proving that a series \textit{diverges}---in fact, it instantly implies that the series in \Cref{exConstantSeriesOfOneDiverges} and \Cref{exAlternatingSeriesOfOneDiverges} diverge.
+
+\begin{theorem}[Term test]
+\label{thmIfSeriesConvergentThenTermsTendToZero}
+Let $\displaystyle S = \sum_{n \ge 0} a_n$ be a series. If $S$ converges, then $(a_n) \to 0$.
+\end{theorem}
+
+\begin{cproof}
+Fix $\varepsilon > 0$. Since $S$ converges, by Cauchy's convergence test (\Cref{thmCauchyConvergenceTest}) there exists $K \in \mathbb{N}$ such that $\displaystyle \left| \sum_{n=n_0}^{n_1} a_n \right| < \varepsilon$ for all $n_1 \ge n_0 \ge K$.
+
+But then for all $k \ge N$ we have $k+1 \ge k \ge K$, and so
+\[ |a_k| ~=~ \left| \sum_{n=k}^{k+1} a_n \right| ~<~ \varepsilon \]
+so that $(a_k) \to 0$, as required.
+\end{cproof}
+
+\begin{example}
+The series $\displaystyle \sum_{n \ge 0} n$ diverges since the sequence $(n)$ does not tend to zero.
+\end{example}
+
+\begin{exercise}
+Let $a \in \mathbb{R}$. Prove that the series $\sum_{n \ge 0} a$ converges if and only if $a=0$.
+\end{exercise}
+
+\begin{theorem}[Comparison test]
+\label{thmComparisonTest}
+\index{comparison test}
+Let $\sum_{n \ge 0} a_n$ and $\sum_{n \ge 0} b_n$ be series.
+\begin{enumerate}[(a)]
+\item If $\sum_{n \ge 0} a_n$ converges and eventually $0 \le b_n \le a_n$, then $\sum_{n \ge 0} b_n$ converges; and
+\item If $\sum_{n \ge 0} a_n$ diverges and eventually $0 \le a_n \le b_n$, then $\sum_{n \ge 0} b_n$ diverges.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of {(a)}]
+Suppose $\sum_{n \ge 0} a_n$ converges and its sum is equal to $A$. Let $N \in \mathbb{N}$ be sufficiently large that $0 \le b_n \le a_n$ for all $n \ge N$.
+
+For all $L \ge K \ge N$ we have
+\[ \sum_{n=0}^L b_n = \sum_{n=0}^K b_n + \underbrace{\sum_{n=K+1}^L b_n}_{\ge 0} ~ \ge \sum_{n=0}^K b_n \]
+and so the sequence of partial sums of $\sum_{n \ge 0} b_n$ is eventually increasing.
+
+Also for all $M \ge N$ we have
+\[ \sum_{n=0}^M b_n ~=~ \sum_{n=0}^N b_n + \sum_{n = N+1}^M b_n ~\le~ \sum_{n=0}^N b_n + \sum_{n=N+1}^M a_n ~=~ \sum_{n=0}^N (b_n-a_n) + \sum_{n=0}^M a_n \]
+
+Moreover $a_n \ge 0$ for all $n > M$, and so we have
+\[ \sum_{n=0}^M b_n ~\le~ \sum_{n=0}^N (b_n-a_n) + \sum_{n \ge 0} a_n \]
+Thus the sequence of partial sums of $\sum_{n \ge 0} b_n$ is eventually bounded above.
+
+By the monotone convergence theorem (\Cref{thmMonotoneConvergence}), the sequence of partial sums of $\sum_{n \ge 0} b_n$ converges, hence so does the series.
+\end{cproof}
+
+\begin{exercise}
+Prove part (b) of \Cref{thmComparisonTest}.
+\end{exercise}
+
+The next result is a nice example of an \textit{indirect} use of the term test (\Cref{thmIfSeriesConvergentThenTermsTendToZero}): although the terms in the series $\displaystyle \sum_{n \ge 1} \dfrac{1}{n}$ converge to zero, we can manipulate it to bound it below by a series whose terms are unbounded.
+
+\begin{theorem}[Divergence of the harmonic series]
+\label{thmHarmonicSeriesDiverges}
+\index{harmonic series}
+\index{series!harmonic}
+The series $\displaystyle \sum_{n \ge 1} \dfrac{1}{n}$ diverges.
+\end{theorem}
+
+\begin{cproof}
+By rounding up denominators to the next power of $2$, we get
+\[ \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \cdots \ge \frac{1}{1} + \frac{1}{2} + \underbrace{\frac{1}{4} + \frac{1}{4}}_{=1/2} + 
+\underbrace{\frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8}}_{=1/2} + \cdots \]
+This diverges since we're adding $\frac{1}{2}$ infinitely many times.
+
+More precisely, define a sequence $(a_n)_{n \ge 1}$ by letting $a_n = \dfrac{1}{2^k}$ for the least $k \in \mathbb{N}$ with $\dfrac{1}{2^k} \le \dfrac{1}{n}$. Then $0 \le a_n \le \dfrac{1}{n}$ for each $n \in \mathbb{N}$.
+
+Now note that
+\[ \sum_{n \ge 1} a_n ~=~ 1 + \sum_{k \ge 0} \sum_{n=2^k+1}^{2^{k+1}} \dfrac{1}{2^{k+1}} ~=~ 1 + \sum_{k \ge 0} (2^{k+1}-2^k) \cdot \dfrac{1}{2^{k+1}} ~=~ 1 + \sum_{k \ge 0} \frac{1}{2} \]
+which diverges by the term test since $(\frac{1}{2}) \nrightarrow 0$.
+
+Thus $\sum_{r \ge 0} \dfrac{1}{r}$ diverges by the comparison test.
+\end{cproof}
+
+\begin{exercise}
+Prove that $\displaystyle \sum_{n \ge 1} n^{-r}$ diverges for all real $r \ge 1$.
+\end{exercise}
+
+\begin{theorem}[Alternating series test]
+\label{thmAlternatingSeriesTest}
+\index{alternating series test}
+Let $(a_n)$ be a sequence such that $(a_n) \to 0$ and $a_n \ge 0$ for all $n \in \mathbb{N}$. If $(a_n)$ is decreasing---that is, if $a_m \ge a_n$ for all $m,n \in \mathbb{N}$ with $m \le n$---then the series $\displaystyle \sum_{n \ge 0} (-1)^n a_n$ converges.
+\end{theorem}
+
+\begin{cproof}
+Define sequences $(e_N)$ and $(o_N)$ by $e_N = s_{2N}$ and $o_N = s_{2N+1}$ for all $n \in \mathbb{N}$. That is, $(e_N)$ is the sequence of \textit{even} partial sums, and $(o_N)$ is the sequence of \textit{odd} partial sums.
+
+Then for all $N \in \mathbb{N}$, we have
+\[ e_{N+1} ~=~ s_{2N+2} ~=~ s_{2N} - a_{2N+1} + a_{2N+2} ~=~ e_N - (\underbrace{a_{2N+1}-a_{2N+2}}_{\ge 0}) ~\le~ e_N \]
+so that $(e_N)$ is a decreasing sequence, and
+\[ e_N ~=~ a_0 - a_1 + \sum_{k=1}^{N-1} (\underbrace{a_{2k} - a_{2k+1}}_{\ge 0}) + \underbrace{a_{2N}}_{\ge 0} ~\ge~ a_0-a_1 \]
+so that $(e_N)$ is bounded below. By the monotone convergence theorem (\Cref{thmMonotoneConvergence}), the sequence $(e_N)$ converges.
+
+Likewise, for all $N \in \mathbb{N}$, we have
+\[ o_{N+1} ~=~ s_{2N+3} ~=~ s_{2N+1} + a_{2N+2} - a_{2N+1} ~=~ o_N + (\underbrace{a_{2N+2} - a_{2N+1}}_{\ge 0}) ~\ge~ o_N \]
+so that $(o_N)$ is an increasing sequence, and
+\[ o_N ~=~ a_0 + \sum_{k=0}^N (\underbrace{a_{2k+2} - a_{2k+1}}_{\le 0}) - \underbrace{a_{2N+2}}_{\ge 0} ~\le~ a_0 \]
+so that $(o_N)$ is bounded above. By the monotone convergence theorem again, the sequence $(o_N)$ converges.
+
+Moreover for all $N \in \mathbb{N}$ we have
+\[ o_N - e_N = a_{2N+1} \ge 0 \quad \text{and} \quad e_{N+1} - o_N = a_{2N+2} \ge 0 \]
+so that $e_N \le o_N \le e_{N+1}$ for all $N \in \mathbb{N}$.
+
+But then by the squeeze theorem (\Cref{thmSqueeze}), $(e_N)$ and $(o_N)$ converge to the same limit $A \in \mathbb{R}$.
+
+Finally, let $\varepsilon > 0$ and let $K \in \mathbb{N}$ be sufficiently large that $|e_M - A| < \varepsilon$ and $|o_M - A| < \varepsilon$ for all $M \ge K$. Then given $N \ge 2K$, if $N$ is even then
+\[ |s_N - A| = |e_{\frac{N}{2}} - A| < \varepsilon \]
+and if $N$ is odd then
+\[ |s_N - A| = |o_{\frac{N-1}{2}} - A| < \varepsilon \]
+as required. So $(s_N) \to A$, and so the series converges.
+\end{cproof}
+
+\begin{example}
+\label{exAlternatingHarmonicSeries}
+The sequence $(\frac{1}{n})$ is positive and decreasing, so the series
+\[ \sum_{n \ge 1} \dfrac{(-1)^n}{n} = -1 + \dfrac{1}{2} - \dfrac{1}{3} + \dfrac{1}{4} - \dfrac{1}{5} + \cdots \]
+converges.
+\end{example}
+
+\begin{exercise}
+Prove that if $(a_n)$ is a sequence such that $(a_n) \to 0$ and $a_n \le 0$ for all $n \in \mathbb{N}$. Prove that if $(a_n)$ is an increasing sequence, then the series $\displaystyle \sum_{n \ge 0} (-1)^n a_n$ converges.
+\end{exercise}
+
+\begin{exercise}
+Find a decreasing sequence $(a_n)$ of non-negative real numbers such that $\displaystyle \sum_{n \ge 0} (-1)^n a_n$ diverges.
+\hintlabel{exAlmostContradictionToAlternatingSeriesTest}{%
+Read the hypotheses of \Cref{thmAlternatingSeriesTest} very carefully.
+}
+\end{exercise}
+
+\subsection*{Absolute convergence}
+
+\begin{definition}
+\label{defAbsoluteConvergence}
+\index{absolute convergence}
+\index{convergence!absolute}
+A series $\displaystyle \sum_{n \ge 0} a_n$ \textbf{converges absolutely} if the series $\displaystyle \sum_{n \ge 0} |a_n|$ converges.
+\end{definition}
+
+\begin{example}
+\label{exGeometricSeriesConvergesAbsolutely}
+For all $r \in (-1,1)$, the geometric series $\displaystyle \sum_{n \ge 0} r^n$ converges absolutely. Indeed, for all $r \in (-1,1)$ we have $|r| \in (-1,1)$ as well, and so $\displaystyle \sum_{n \ge 0} |r|^n$ converges by \Cref{thmGeometricSeries}. 
+\end{example}
+
+\begin{example}
+Let $\displaystyle \sum_{n \ge 0} a_n$ be a convergent series.
+
+If $a_n \ge 0$ for all $n \in \mathbb{N}$, then the series absolutely, since $|a_n| = a_n$ for all $n \in \mathbb{N}$.
+
+Likewise, if $a_n \le 0$ for all $n \in \mathbb{N}$, then
+\[ \sum_{n \ge 0} |a_n| ~=~ \sum_{n \ge 0} (-a_n) ~=~ -\sum_{n \ge 0} a_n \]
+by linearity of summation, and so again the series converges absolutely.
+\end{example}
+
+\begin{exercise}
+Find a series that converges, but does not converge absolutely.
+\hintlabel{exConvergentNotAbsolutelyConvergentSeries}{%
+We've already proved that such a series exists---go find it!
+}
+\end{exercise}
+
+\begin{exercise}
+Prove \Cref{thmLinearityOfSummation} with `convergent' replaced by `absolutely convergent' throughout.
+\end{exercise}
+
+Absolutely convergent series enjoy some properties that are not enjoyed by series that converge but not absolutely---for example, they do not depend on what order you choose to add up their terms. We will prove this in \Cref{thmIndependenceOfOrdering}.
+
+The \textit{ratio test} is useful for proving that a series converges absolutely.
+
+\begin{theorem}[Ratio test]
+\label{thmRatioTest}
+\index{ratio test}
+Let $(a_n)$ be a sequence of real numbers, and suppose that $\left( \left| \dfrac{a_{n+1}}{a_n} \right| \right) \to \ell \ge 0$.
+\begin{enumerate}[(a)]
+\item If $\ell < 1$, then $\displaystyle \sum_{n \ge 0} a_n$ converges absolutely.
+\item If $\ell > 1$, then $\displaystyle \sum_{n \ge 0} a_n$ diverges.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of {(a)}]
+Assume $\ell < 1$, and pick $\varepsilon$ with $0 < \varepsilon < 1-\ell$. Define $r = \ell + \varepsilon$ and note that $0 < r < 1$.
+
+Since $\left( \left| \dfrac{a_{n+1}}{a_n} \right| \right) \to \ell$, there exists $N \in \mathbb{N}$ such that $\left| \dfrac{a_{n+1}}{a_n} - \ell \right| < \varepsilon$ for all $n \ge N$. But then
+\[ 0 \le \left| \dfrac{a_{n+1}}{a_n} \right| < \ell + \varepsilon = r \]
+
+Note that for all $n \ge N$ we have
+\[ |a_n| = |a_N| \times \left| \dfrac{a_{N+1}}{a_N} \right| \times \cdots \times \dfrac{a_n}{a_{n-1}} < |a_N| r^{n-N} \]
+
+The series $\sum_{n=N}^{\infty} r^{n-N}$ converges by \Cref{thmGeometricSeries} since $r \in (-1,1)$, and so the series $\sum_{n=0}^M |a_n|$ converges by the comparison test, as required.
+\end{cproof}
+
+\begin{exercise}
+Prove part (b) of \Cref{thmRatioTest}.
+\end{exercise}
+
+\begin{example}
+Let $r \in \mathbb{R}$ and consider the series $\sum_{n \ge 1} \dfrac{r^n}{n}$. Then
+\[ \left| \dfrac{~~\frac{r^{n+1}}{n+1}~~}{\frac{r^n}{n}} \right| ~=~ \dfrac{n}{n+1} |r| ~\to~ |r| \]
+By the ratio test, if $|r| < 1$ then the series converges absolutely, and if $|r| > 1$ then the series diverges.
+
+The ratio test tells us notihng about what happens when $|r| = 1$. However, we already know: we proved in \Cref{thmHarmonicSeriesDiverges} that this series diverges when $r=1$, and in \Cref{exAlternatingHarmonicSeries} that it converges when $r=-1$.
+\end{example}
+
+\begin{exercise}
+\label{exExponentialFunctionCoverges}
+Use the ratio test to prove that the series $\sum_{n \ge 0} \dfrac{x^n}{n!}$ converges for all $x \in \mathbb{R}$.
+\end{exercise}
+
+\begin{theorem}[Absolutely convergent series can be reordered]
+\label{thmIndependenceOfOrdering}
+Let $\displaystyle \sum_{n \ge 0} a_n$ be an absolutely convergent series and let $\sigma : \mathbb{N} \to \mathbb{N}$ be a bijection. Then the series $\displaystyle \sum_{n \ge 0} a_{\sigma(n)}$ converges absolutely, and $\displaystyle \sum_{n \ge 0} a_{\sigma(n)} = \sum_{n \ge 0} a_n$.
+\end{theorem}
+
+\begin{cproof}
+Write $A = \displaystyle \sum_{n \ge 0} a_n$. In order to prove $\displaystyle \sum_{n \ge 0} a_{\sigma(n)} = A$, we need to prove that for all $\varepsilon > 0$, there is some $N \in \mathbb{N}$ such that $\left| \displaystyle\sum_{n=0}^K a_{\sigma(n)} - A \right| < \varepsilon$ for all $K \ge N$.
+
+So let $\varepsilon > 0$. Then:
+\begin{enumerate}[(1)]
+\item Since $\displaystyle \sum_{n \ge 0} a_n = A$, there is some $M_1 \in \mathbb{N}$ such that
+\[ \left| \sum_{n=0}^L a_n - A \right| < \dfrac{\varepsilon}{2} \]
+for all $L \ge M_1$.
+\item Since $\displaystyle \sum_{n \ge 0} a_n$ converges absolutely, it follows from Cauchy's convergence test (\Cref{thmCauchyConvergenceTest}) there is some $M_2 \in \mathbb{N}$ such that
+\[ \sum_{n=n_0}^{n_1} |a_n| < \dfrac{\varepsilon}{2} \]
+for all $n_1 \ge n_0 \ge M_2$.
+\end{enumerate}
+
+Let $M$ be the greater of $M_1$ and $M_2$.
+
+Now let $N \in \mathbb{N}$ be such that $\{ 0, 1, \dots, M \} \subseteq \{ \sigma(0), \sigma(1), \dots, \sigma(N) \}$. This ensures that the terms $a_0, a_1, \dots, a_M$ appear amongst the terms $a_{\sigma(0)}, a_{\sigma(1)}, \dots, a_{\sigma(N)}$. Such a value exists since $\sigma$ is a bijection; for example, we can take $N$ to be the greatest value of $\sigma^{-1}(i)$ for $i \le M$. Note that $N \ge M$.
+
+It remains to prove that $\left| \displaystyle\sum_{n=0}^K a_{\sigma(n)} - A \right| < \varepsilon$ for all $K \ge N$.
+
+So let $K \ge N$, let $L = \mathrm{max} \{ \sigma(0), \sigma(1), \dots, \sigma(K) \}$, and let $m_0, m_1, \dots, m_r \in \mathbb{N}$ be such that the terms in the list $a_0, a_1, \dots, a_L$ that remain after the terms $a_{\sigma(0)}, \dots, a_{\sigma(K)}$ have been deleted are precisely the terms $a_{m_0}$, $a_{m_1}$, \dots, $a_{m_r}$. Thus
+\[ \sum_{n=0}^K a_{\sigma(n)} ~=~ \sum_{n=0}^L a_n ~-~ \sum_{i=0}^r a_{m_i} \]
+
+Note in particular that $L \ge K$. Additionally, $m_i \ge N$ for all $i \le r$, since we ensured that the terms $a_0, a_1, \dots, a_M$ appear amongst the terms $a_{\sigma(0)}, a_{\sigma(1)}, \dots, a_{\sigma(N)}$.
+
+By the triangle inequality (\Cref{thmTriangleInequality1D}) we have
+\[ \left| \sum_{n=0}^K a_{\sigma(n)} - A \right| ~=~ \left| \sum_{n=0}^L a_n - A - \sum_{i=0}^r a_{m_i} \right| ~\le~ \left| \sum_{n=0}^L a_n - A \right| + \left| \sum_{i=0}^r a_{m_i} \right|  \]
+
+Now conditions (1) and (2) above give the following:
+\begin{enumerate}[(1)]
+\item $L \ge K \ge N \ge M \ge M_1$, and so $\left| \displaystyle \sum_{n=0}^L a_n - A \right| < \dfrac{\varepsilon}{2}$.
+\item By the triangle inequality again, we have
+\[ \left| \sum_{i=0}^r a_{m_i} \right| ~\le~ \sum_{i=0}^r |a_{m_i}| ~\le~ \sum_{n=N}^L |a_{m_i}| ~<~ \dfrac{\varepsilon}{2} \]
+since $L \ge N \ge M \ge M_2$.
+\end{enumerate}
+
+Putting all of this together, we have
+\[ \left| \sum_{n=0}^K a_{\sigma(n)} - A \right| ~\le~ \left| \sum_{n=0}^L a_n - A \right| + \left| \sum_{i=0}^r a_{m_i} \right| ~<~ \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2} ~=~ \varepsilon\] 
+as required.
+
+By replacing $a_n$ with $|a_n|$ in the above proof, it follows that $\displaystyle \sum_{n \ge 0} |a_{\sigma(n)}|$ converges to the same limit as $\displaystyle \sum_{n \ge 0} |a_n|$. In particular, it converges, and so the series $\displaystyle \sum_{n \ge 0} a_{\sigma(n)}$ converges absolutely.
+\end{cproof}
+
+\begin{example}
+Consider the following geometric series
+\[ \sum_{n \ge 0} \dfrac{(-1)^n}{2^n} ~=~ 1 - \dfrac{1}{2} + \dfrac{1}{4} - \dfrac{1}{8} + \dfrac{1}{16} - \dfrac{1}{32} + \cdots ~=~ \dfrac{1}{1-(-\frac{1}{2})} = \frac{2}{3} \]
+As noted in \Cref{exGeometricSeriesConvergesAbsolutely}, this series converges absolutely. So if we were to add the terms in any other way, then we'd obtain the same result. For example
+\[ 1 + \frac{1}{4} - \frac{1}{2} - \frac{1}{8} + \frac{1}{16} + \frac{1}{64} - \frac{1}{32} - \dfrac{1}{128} + \cdots = \dfrac{2}{3} \]
+Absolute convergence is what allows us to do this.
+\end{example}
+
+\Cref{thmIndependenceOfOrdering} allows us to index absolutely convergent series over sets other than $\mathbb{N}$. This will be useful in \Cref{chProbabilityMeasure}, when the numbers we add are probabilities that are more naturally indexed by the outcomes of a random process than by natural numbers.
+
+\begin{definition}
+\label{defSumOverCountablyInfiniteSet}
+\index{series!indexed by a countably infinite set}
+Let $I = \{ i_n \mid n \in \mathbb{N} \}$ be a set with $i_m \ne i_n$ for all $m,n \in \mathbb{N}$ with $m \ne n$, and let $(a_i)_{i \in I}$ be an $I$-indexed sequence of real numbers---formally $(a_i)_{i \in I}$ is a function $a : I \to \mathbb{R}$, like in \Cref{defSequence}. The \textbf{$I$-indexed series} $\displaystyle \sum_{i \in I} a_i$ is defined by
+\[ \sum_{i \in I} a_i ~=~ \sum_{n \ge 0} a_{i_n} \]
+\end{definition}
+
+Note that, for general sums, the value of $\sum_{i \in I} a_i$ might depend on how the set $I$ is enumerated. However, in practice, we will only use the notation $\sum_{i \in I} a_i$ when either (i) the series $\sum_{n \ge 0} a_{i_n}$ converges absolutely, in which case the terms can be reordered however we like; or (ii) the terms $a_{i_n}$ are all non-negative, in which case the series either converges absolutely, or diverges no matter how the elements of $I$ are ordered.
+
+\begin{example}
+Suppose $(a_k)_{k \in \mathbb{Z}}$ is a sequence of non-negative real numbers. Given $n \in \mathbb{N}$, define
+\[ i_n = \begin{cases} \frac{n}{2} & \text{if $n$ is even} \\ -\frac{n+1}{2} & \text{if $n$ is odd} \end{cases} \]
+Then $\mathbb{Z} = \{ i_n \mid n \in \mathbb{N} \} = \{ 0,{-1},1,{-2},2,\dots{} \}$, and so
+\[ \sum_{k \in \mathbb{Z}} a_k ~=~ a_0 + a_{-1} + a_1 + a_{-2} + a_3 + a_{-3} + \cdots ~\overset{\star}{=}~ \sum_{i \ge 0} a_i + \sum_{i \ge 1} a_{-i} \]
+as expected. The step ($\star$) implicitly used non-negativity of the terms in the sequence: either the sequence diverges, or it converges absolutely, in which case we can shuffle the order of the terms.
+\end{example}
+
+\begin{exercise}
+Let $J = \{ j_n \mid n \in \mathbb{N} \}$ be a set such that, for all $m,n \in \mathbb{N}$, we have $j_m \ne j_n$. Let $(a_j)_{j \in J}$ be a $J$-indexed sequence such that either (i) $\sum_{j \in J} a_j$ is absolutely convergent, or (ii) $a_j \ge 0$ for all $j \in J$. Prove that if there is a bijection $\sigma : I \to J$, then $\sum_{i \in I} a_{\sigma(i)} = \sum_{j \in J} a_j$.
+\hintlabel{exIndexedSumIndependentOfEnumeration}{%
+This exercise looks harder than it is. Write out the definitions of $\sum_{i \in I} a_{f(i)}$ and $\sum_{j \in J} a_j$ and apply \Cref{thmIndependenceOfOrdering}.
+}
+\end{exercise}
+
+Absolutely convergent series can be multiplied using the so-called \textit{Cauchy product}, which is a kind of convolution operation on series.
+
+\begin{theorem}[The Cauchy product]
+\label{thmCauchyProduct}
+Let $\displaystyle \sum_{n \ge 0} a_n$ and $\displaystyle \sum_{n \ge 0} b_n$ be absolutely convergent series. Then the series
+\[ \sum_{n \ge 0} \left( \sum_{k=0}^n a_k b_{n-k} \right) = \left( \sum_{i \ge 0} a_i \right) \left( \displaystyle \sum_{j \ge 0} b_j \right) \]
+\end{theorem}
+
+\begin{cproof}
+By linearity of summation we have
+\[ \left( \sum_{n \ge 0} a_n \right) \left( \sum_{n \ge 0} b_n \right) ~=~ \sum_{i \ge 0} \left(\sum_{j \ge 0} a_i b_j \right) ~=~ \sum_{(i,j) \in \mathbb{N} \times \mathbb{N}} a_i b_j \]
+
+Note that this series converges absolutely. Indeed, given $\varepsilon > 0$, since $\sum_{n \ge 0} a_n$ converges absolutely, there is some $N \in \mathbb{N}$ such that $\sum_{i > N} |a_n| < \dfrac{\varepsilon}{\sum_{j \in \mathbb{N}} |b_j|}$, and then
+\[ \sum_{i > N} \sum_{j=0}^{\infty} |a_i b_j| ~=~ \sum_{i>N} \left( |a_i| \sum_{j=0}^{\infty} |b_j| \right) ~<~ \varepsilon \]
+as required.
+
+Now define $P = \{ (n,k) \in \mathbb{N} \times \mathbb{N} \mid k \le n \}$, and note that
+\[ \sum_{n \ge 0} \left( \sum_{k=0}^n a_k b_{n-k} \right) = \sum_{(n,k) \in P} a_k b_{n-k} \]
+
+The function $\sigma : \mathbb{N} \times \mathbb{N} \to P$ defined by $\sigma(i,j) = (i+j, i)$ is a bijection. Since the series converges absolutely, we may apply \Cref{exIndexedSumIndependentOfEnumeration} to obtain
+\[ \sum_{(n,k) \in P} a_k b_{n-k} ~=~ \sum_{(i,j) \in \mathbb{N} \times \mathbb{N}} a_i b_{(i+j) - i} ~=~ \sum_{(i,j) \in \mathbb{N} \times \mathbb{N}} a_i b_j \]
+as required.
+\end{cproof}
+
+An example of how the Cauchy product can come in handy is to prove the multiplicativity of the \textit{exponential function}, defined in \Cref{defExponentialFunction}.
+
+\begin{definition}
+\label{defExponentialFunction}
+\index{exponential function}
+\index{function!exponential}
+\nindex{exp}{$\mathrm{exp}$}{exponential function}
+The \textbf{exponential function} is the function $\mathrm{exp} : \mathbb{R} \to \mathbb{R}$ defined by
+\[ \mathrm{exp}(x) = \sum_{n \ge 0} \frac{x^n}{n!} \]
+for all $x \in \mathbb{R}$.
+\end{definition}
+
+Note that the exponential function is well-defined by \Cref{exExponentialFunctionCoverges}.
+
+\begin{theorem}[Multiplicativity of the exponential function]
+\label{thmExpIsMultiplicative}
+Let $x,y \in \mathbb{R}$. Then $\mathrm{exp}(x+y) = \mathrm{exp}(x) \mathrm{exp}(y)$.
+\end{theorem}
+
+\begin{cproof}
+First note that the function
+\[ R : \{ (n,k) \in \mathbb{N} \times \mathbb{N} \mid k \le n \} \to \mathbb{N} \times \mathbb{N} \]
+defined by $R(n,k) = (k,n-k)$ is a bijection. Indeed:
+\begin{itemize}
+\item Let $(n,k), (m,\ell) \in \mathbb{N} \times \mathbb{N}$ with $k \le n$ and $\ell \le m$. If $(k,n-k) = (\ell,m-\ell)$ then $k=\ell$, and so $n-k = m-\ell$, so that $m=n$. So $R$ is injective.
+\item Let $(a,b) \in \mathbb{N} \times \mathbb{N}$. Then $b \le a+b$ and $b = (a+b) - b$, and so $(a,b) = R(a+b,a)$. So $R$ is surjective.
+\end{itemize}
+
+Now we proceed by computation:
+\begin{align*}
+& \mathrm{exp}(x+y) \\
+&= \sum_{n \ge 0} \dfrac{(x+y)^n}{n!} && \text{by definition of $\mathrm{exp}$} \\
+&= \sum_{n \ge 0} ~ \sum_{k=0}^n ~ \dfrac{1}{n!} \binom{n}{k} x^k y^{n-k} && \text{by the binomial theorem (\Cref{thmBinomialTheorem})} \\
+&= \sum_{n \ge 0} ~ \sum_{k=0}^n ~ \dfrac{1}{k! (n-k)!} x^k y^{n-k} && \text{by \Cref{thmBinomAsFactorialByInduction}} \\
+&= \sum_{a \ge 0} ~ \sum_{b \ge 0} ~ \dfrac{1}{a! b!} x^a y^b && \text{using the reindexing bijection $R$} \\
+&= \left( \sum_{a \ge 0} \dfrac{x^a}{a!} \right) \left( \sum_{b \ge 0} \dfrac{y^b}{b!} \right) && \text{by linearity of summation} \\
+&= \mathrm{exp}(x) \mathrm{exp}(y) && \text{by definition of $\mathrm{exp}$}
+\end{align*}
+This is as required.
+\end{cproof}
+
+\begin{exercise}
+Let $x \in (-1,1)$. Prove that $\displaystyle \sum_{n \ge 1} nx^{n-1} = \frac{1}{(1-x)^2}$.
+\hintlabel{exDerivativeOfGeometricSeries}{%
+We know that $\dfrac{1}{(1-x)^2} = \left( \dfrac{1}{1-x} \right)^2 = \left( \displaystyle\sum_{n \ge 0} x^n \right)^2$ by \Cref{thmGeometricSeries}. Multiply out this sum and see what happens.
+}
+\end{exercise}
+
+\subsection*{The constant $e$}
+
+We conclude this section by defining $e$, a mathematical constant used heavily in calculus and analysis. We will prove that $e$ is irrational.
+
+\begin{lemma}
+The series $\displaystyle \sum_{n \ge 0} \dfrac{1}{n!}$ converges.
+\end{lemma}
+
+\begin{cproof}
+This follows from the ratio test. Indeed
+\[ \dfrac{1/(n+1)!}{1/n!} = \dfrac{n!}{(n+1)!} = \dfrac{1}{n+1} \to 0 \]
+so by the ratio test (\Cref{thmRatioTest}), the series converges.
+\end{cproof}
+
+\begin{definition}
+\label{defE}
+\index{e@$e$}
+\index{Euler's constant}
+\nindex{e}{$e$}{Euler's constant}
+The real number $e$, also known as \textbf{Euler's constant}, is defined by $e = \mathrm{exp}(1) = \sum_{n \ge 0} \dfrac{1}{n!}$.
+\end{definition}
+
+The number $e$, like its more famous cousin $\pi$, is one of the fundamental constants of mathematics. It might seem arbitrary now, but it has remarkable analytic properties that are beyond the scope of this book.
+
+\begin{example}
+We can prove that $2<e<3$. Indeed $e>2$ since
+\[ e > \frac{1}{0!} + \dfrac{1}{1!} = 1 + 1 = 2 \]
+To see that $e < 3$, note that $n! \ge 2^{n-1}$ for all $n \ge 1$, with strict inequality for $n \ge 2$, and so
+\[ e < \frac{1}{0!} + \sum_{n \ge 1} \dfrac{1}{2^{n-1}} = 1 + \dfrac{1}{1-\frac{1}{2}} = 3 \]
+\end{example}
+
+\begin{exercise}
+Prove that $\mathrm{exp}(x) = e^x$ for all $x \in \mathbb{Q}$.
+\end{exercise}
+
+\begin{theorem}
+$e$ is irrational.
+\end{theorem}
+
+\begin{cproof}
+Towards a contradiction, suppose that $e \in \mathbb{Q}$.
+
+Then $k!e \in \mathbb{Z}$ for some natural number $k \ge 2$. Indeed, letting $e = \dfrac{a}{b}$ for some $a,b \in \mathbb{Z}$ with $b \ne 0$, we obtain $|b|e = \pm a \in \mathbb{N}$, and so we can take $k$ to be the greatest of $2$ and $|b|$.
+
+Now observe that
+\[ k!e ~=~ \sum_{n \ge 0} \dfrac{k!}{n!} ~=~ \sum_{n=0}^k \dfrac{k!}{n!} ~+~ \sum_{n \ge k+1} \dfrac{k!}{n!} \]
+
+Define $c = \displaystyle \sum_{n \ge k+1} \dfrac{k!}{n!}$. We will prove that $c \in \mathbb{Z}$ and $0<c<1$, which is a contradiction.
+
+Note that for all $n \le k$ we have $n!$ divides $k!$, and so $\displaystyle \sum_{n=0}^k \dfrac{k!}{n!} \in \mathbb{Z}$. Therefore
+\[ c ~=~ k!e - \sum_{n=0}^k \dfrac{k!}{n!} ~\in \mathbb{Z} \]
+since this is the difference of two integers.
+
+Now all the terms in the sum $\displaystyle \sum_{n \ge k+1} \dfrac{k!}{n!}$ are positive, and so 
+\[ c ~=~ \sum_{n=k+1} \dfrac{k!}{n!} ~>~ \dfrac{k!}{(k+1)!} ~=~ \dfrac{1}{k+1} ~>~ 0 \]
+
+Furthermore, for all $n \ge k+1$, we have
+\[ \dfrac{k!}{n!} ~=~ \dfrac{1 \times 2 \times \cdots \times k \phantom{{} \times (k+1) \times \cdots \times n}}{1 \times 2 \times \cdots \times k \times (k+1) \times \cdots \times n} ~=~ \dfrac{1}{(k+1) \times \cdots \times n} ~\le~ \dfrac{1}{(k+1)^{n-k}} \]
+
+It follows that
+\begin{align*}
+c = \sum_{n \ge k+1} \dfrac{k!}{n!} &\le \sum_{n \ge k+1} \dfrac{1}{(k+1)^{n-k}} && \text{as we just observed} \\
+&= \sum_{r \ge 0} \dfrac{1}{(k+1)^{r+1}} && \text{substituting $r=n-k-1$} \\
+&= \dfrac{1}{k+1} \sum_{r \ge 0} \dfrac{1}{(k+1)^r} && \text{by linearity} \\
+&= \dfrac{1}{k+1} \cdot \dfrac{1}{1-\frac{1}{k+1}} && \text{by \Cref{thmGeometricSeries}} \\
+&= \dfrac{1}{k} && \text{rearranging} \\
+&< 1 && \text{since $k \ge 2$}
+\end{align*}
+
+But this implies that $0 < c < 1$, which is nonsense since $c \in \mathbb{Z}$.
+
+We have arrived at a contradiction, so it follows that $e$ is irrational.
+\end{cproof}

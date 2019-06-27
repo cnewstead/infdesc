@@ -1,0 +1,618 @@
+\section{Counting principles}
+\secbegin{secCountingPrinciples}
+
+\index{counting|(}
+
+In \Cref{secFiniteSets} we were interested in establishing conditions under which a set is finite, and proving that we may perform certain operations on finite sets---such as unions and cartesian products---without losing the property of finiteness.
+
+In this section, our attention turns to the task of finding the size of a set that is known to be finite. This process is called \textit{counting} and is at the core of the mathematical field of combinatorics.
+
+\subsection*{Binomials and factorials revisited}
+We defined binomial coefficients $\binom{n}{k}$ and factorials $n!$ \textit{recursively} in \Cref{chMathematicalInduction}, and proved elementary facts about them by induction. We will now re-define them \textit{combinatorially}---that is, we give them meaning in terms of sizes of particular finite sets. We will prove that the combinatorial and recursive definitions are equivalent, and prove facts about them using combinatorial arguments.
+
+The reasons for doing so are manifold. The combinatorial definitions allow us to reason about binomials and factorials with direct reference to descriptions of finite sets, which will be particularly useful when we prove identities about them using
+\textit{double counting}.
+% \textit{counting in two ways}.
+Moreover, the combinatorial definitions remove the seemingly arbitrary nature of the recursive definitions---for example, they provide a reason why it makes sense to define $0!=1$ and $\binom{0}{0}=1$.
+
+\begin{definition}
+\label{defXChoosek}
+\nindex{X choose k}{$\binom{X}{k}$}{$k$-element subsets}
+\index{subset!$k$-element subset}
+Let $X$ be a set and let $k \in \mathbb{N}$. A $k$-\textbf{element subset} of $X$ is a subset $U \subseteq X$ such that $|U|=k$. The set of all $k$-element subsets of $X$ is denoted $\binom{X}{k}$ (read: `$X$ choose $k$') \inlatex{binom\{X\}\{k\}}\lindexmmc{binom}{$\binom{n}{k}$}.
+\end{definition}
+
+Intuitively, $\binom{X}{k}$ is the set of ways of picking $k$ elements from $X$, without repetitions, in such a way that order doesn't matter. (If order mattered, the elements would be \textit{sequences} instead of \textit{subsets}.)
+
+\begin{example} \label{exFinSubsetsOf4}
+We find $\binom{[4]}{k}$ for all $k \in \mathbb{N}$.
+\begin{itemize}
+\item $\binom{[4]}{0} = \{\varnothing\}$ since the only set with $0$ elements is $\varnothing$;
+\item $\binom{[4]}{1} = \{ \{1\}, \{2\}, \{3\}, \{4\} \}$;
+\item $\binom{[4]}{2} = \{ \{1,2\}, \{1,3\}, \{1,4\}, \{2,3\}, \{2,4\}, \{3,4\} \}$;
+\item $\binom{[4]}{3} = \{ \{1,2,3\}, \{1,2,4\}, \{1,3,4\}, \{2,3,4\} \}$;
+\item $\binom{[4]}{4} = \{ \{ 1,2,3,4 \} \}$;
+\item If $k \ge 5$ then $\binom{[4]}{k} = \varnothing$, since by \Cref{exSubsetOfFiniteSetIsFinite}, no subset of $[4]$ can have more than $4$ elements.
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+\label{propUnionOfFinSubsetsEqPowerSet}
+If $X$ is a finite set, then $\mathcal{P}(X) = \bigcup_{k \le |X|} \binom{X}{k}$.
+\end{proposition}
+\begin{cproof}
+Let $U \subseteq X$. By \Cref{exSubsetOfFiniteSetIsFinite}, $U$ is finite and $|U| \le |X|$. Thus $U \in \binom{X}{|U|}$, and hence $U \in \bigcup_{k \le |X|} \binom{X}{k}$. This proves that $\mathcal{P}(X) \subseteq \bigcup_{k \le |X|} \binom{X}{k}$.
+
+The fact that $\bigcup_{k \le |X|} \binom{X}{k} \subseteq \mathcal{P}(X)$ is immediate, since elements of $\binom{X}{k}$ are defined to be subsets of $X$, and hence elements of $\mathcal{P}(X)$.
+\end{cproof}
+
+\begin{definition}
+\label{defBinomialCoefficient}
+\index{binomial coefficient}
+Let $n,k \in \mathbb{N}$. Denote by $\binom{n}{k}$\nindex{nchoosek}{$\binom{n}{k}$}{binomial coefficient} (read: `$n$ choose $k$') \inlatex{binom\{n\}\{k\}} the number of $k$-element subsets of $[n]$. That is, we define $\binom{n}{k} = \left|\binom{[n]}{k}\right|$. The numbers $\binom{n}{k}$ are called \textbf{binomial coefficients}.
+\end{definition}
+
+Some authors use the notation ${}_n\mathrm{C}_k$ or ${}^n\mathrm{C}_k$ instead of $\binom{n}{k}$. We avoid this, as it is unnecessarily clunky.
+
+Intuitively, $\binom{n}{k}$ is the number of ways of selecting $k$ things from $n$, without repetitions, in such a way that order doesn't matter.
+
+The value behind this notation is that it allows us to express huge numbers in a concise and meaningful way. For example,
+\[ \binom{4000}{11} = 103\;640\;000\;280\;154\;258\;645\;590\;429\;564\;000 \]
+Although these two numbers are equal, their \textit{expressions} are very different; the expression on the left is meaningful, but the expression on the right is completely meaningless out of context.
+
+\begin{writingtip}
+When expressing the sizes of finite sets described combinatorially, it is best to \textit{avoid} evaluating the expression; that is, leave in the powers, products, sums, binomial coefficients and factorials! The reason for this is that performing the calculations takes the meaning away from the expressions.
+\end{writingtip}
+
+\begin{example} \label{exBinomCalc4}
+In \Cref{exFinSubsetsOf4} we proved that:
+\[ \binom{4}{0} = 1,\ \binom{4}{1} = 4,\ \binom{4}{2} = 6,\ \binom{4}{3} = 4,\ \binom{4}{4} = 1 \]
+and that $\binom{4}{k} = 0$ for all $k \ge 5$.
+\end{example}
+
+\begin{exercise}
+Fix $n \in \mathbb{N}$. Prove that $\binom{n}{0} = 1$, $\binom{n}{1} = n$ and $\binom{n}{n} = 1$.
+\end{exercise}
+
+\begin{definition}
+\label{defPermutationPreliminary}
+\index{permutation}
+Let $X$ be a set. A \textbf{permutation} of $X$ is a bijection $X \to X$. Denote the set of all permutations of $X$ by $\mathrm{Sym}(X)$\nindex{Sym}{$\mathrm{Sym}(X)$}{set of permutations} \inlatex{mathrm\{Sym\}} and write $S_n = \mathrm{Sym}([n])$ for $n \in \mathbb{N}$.
+\end{definition}
+
+\begin{example}
+\label{exPermutationsOfBracket3}
+There are six permutations of the set $[3]$. Representing each $f \in S_3$ by the ordered triple $(f(1),f(2),f(3))$, these permutations are thus given by
+\[ (1,2,3),\ (1,3,2),\ (2,1,3),\ (2,3,1),\ (3,1,2),\ (3,2,1) \]
+For example, $(2,3,1)$ represents the permutation $f : [3] \to [3]$ defined by $f(1)=2$, $f(2)=3$ and $f(3)=1$.
+\end{example}
+
+\begin{exercise}
+List all the permutations of the set $[4]$.
+\end{exercise}
+
+\begin{definition}
+\label{defFactorial}
+\index{factorial}
+Let $n \in \mathbb{N}$. Denote by $n!$\nindex{nfactorial}{$n"!$}{factorial} (read: `$n$ factorial') the number of permutations of a set of size $n$. That is, $n! = |S_n|$. The numbers $n!$ are called \textbf{factorials}.
+\end{definition}
+
+\begin{example}
+\Cref{exPermutationsOfBracket3} shows that $3!=6$.
+\end{example}
+
+\subsection*{Products and partitions}
+
+We saw in \Cref{propProductOfFiniteSetsIsFinite} and \Cref{propUnionOfFiniteSetsIsFinite} that, given two finite sets $X$ and $Y$, the product $X \times Y$ and the union $X \cup Y$ are finite. We also found formulae for their size. The \textit{multiplication principle} (\Cref{strMultiplicationPrinciple}) and \textit{addition principle} (\Cref{strAdditionPrinciple}) generalise these formulae, extending to products and (disjoint) unions of any finite number of finite sets.
+
+\begin{lemma}
+\label{lemMultiplicationPrincipleIndependent}
+\index{counting principle!multiplication principle}
+\index{multiplication principle}
+\index{rule of product}
+Let $\{ X_1, \dots, X_n \}$ be a family of finite sets, with $n \ge 1$. Then $\prod_{i=1}^n X_i$ is finite, and
+\[ \left| \prod_{i=1}^n X_i \right| = |X_1| \cdot |X_2| \cdot \cdots \cdot |X_n| \]
+\end{lemma}
+
+\begin{cproof}
+We proceed by induction on $n$.
+\begin{itemize}
+\item (\textbf{BC}) When $n=1$, an element of $\prod_{i=1}^1 X_i$ is `officially' a sequence $(x_1)$ with $x_1 \in X_1$. This is the same as an element of $X_1$, in the sense that the assignments $(x_1) \mapsto x_1$ and $x_1 \mapsto (x_1)$ define mutually inverse (hence bijective) functions between $\prod_{i=1}^1 X_i$ and $X_1$, and so
+\[ \left| \prod_{i=1}^1 X_i \right| = |X_1| \]
+\item (\textbf{IS}) Fix $n \in \mathbb{N}$, and suppose that
+\[ \displaystyle \left| \prod_{i=1}^n X_i \right| = |X_1| \cdot |X_2| \cdot \cdots \cdot |X_n| \]
+for all sets $X_i$ for $i \in [n]$. This is our induction hypothesis.
+
+Now let $X_1, \dots, X_n, X_{n+1}$ be sets. We define a function
+\[ F : \prod_{i=1}^{n+1} X_i \to \left(\prod_{i=1}^n X_i\right) \times X_{n+1} \]
+by letting $F((x_1, \dots, x_n, x_{n+1})) = ((x_1, \dots, x_n), x_{n+1})$. It is again easy to check that $F$ is a bijection, and hence
+\[ \left| \prod_{i=1}^{n+1} X_i \right| = \left| \prod_{i=1}^n X_i \right| \cdot |X_{n+1}| \]
+by \Cref{propProductOfFiniteSetsIsFinite}. Applying the induction hypothesis, we obtain the desired result, namely
+\[ \left| \prod_{i=1}^{n+1} X_i \right| = |X_1| \cdot |X_2| \cdot \cdots \cdot |X_n| \cdot |X_{n+1}| \]
+\end{itemize}
+By induction, we're done.
+\end{cproof}
+
+\Cref{lemMultiplicationPrincipleIndependent} gives rise to a useful strategy for computing the size of a finite set $X$---see \Cref{strMultiplicationPrincipleIndependent}. Intuitively, by devising a step-by-step procedure for specifying an element of $X$, we are constructing a cartesian product $\prod_{k=1}^n X_k$, where $X_k$ is the set of choices to be made in the $k^{\text{th}}$ step. This establishes a bijection $\prod_{k=1}^n X_k \to X$, which by bijective proof (\Cref{strComparingSizesOfFiniteSets}\ref{strBijectiveProof}) lets us compute $|X|$ as the product of the numbers of choices that can be made in each step.
+
+\begin{strategy}[Multiplication principle {(independent version)}]
+\label{strMultiplicationPrincipleIndependent}
+Let $X$ be a finite set. In order to compute $|X|$, it suffices to find a step-by-step procedure for specifying elements of $X$, such that:
+\vspace{5pt}
+\begin{itemize}
+\item Each element is specified by a unique sequence of choices;
+\item Each step in the procedure is independent of the previous step;
+\item There are finitely many choices to be made at each step.
+\end{itemize}
+\vspace{5pt}
+If there are $n \in \mathbb{N}$ steps and $m_k \in \mathbb{N}$ possible choices in the $k^{\text{th}}$ step, then $|X| = \prod_{k=1}^n m_k$.
+\end{strategy}
+
+\begin{example}
+You go to an ice cream stand selling the following flavours:
+\begin{center} vanilla, strawberry, chocolate, rum and raisin, mint choc chip, toffee crunch \end{center}
+You can have your ice cream in a tub, a regular cone or a \textit{choco-cone}. You can have one, two or three scoops. We will compute how many options you have.
+
+To select an ice cream, you follow the following procedure:
+\begin{itemize}
+\item \textbf{Step 1.} Choose a flavour. There are $6$ ways to do this.
+\item \textbf{Step 2.} Choose whether you'd like it in a tub, regular cone or choco-cone. There are $3$ ways to do this.
+\item \textbf{Step 3.} Choose how many scoops you'd like. There are $3$ ways to do this.
+\end{itemize}
+Hence there are $6 \times 3 \times 3 = 54$ options in total.
+\end{example}
+
+This may feel informal, but really what we are doing is establishing a bijection. Letting $X$ be the set of options, the above procedure defines a bijection
+\[ F \times C \times S \to X \]
+where $F$ is the set of flavours, $C = \{ \text{tub}, \text{regular cone}, \text{choco-cone} \}$ and $S = [3]$ is the set of possible numbers of scoops.
+
+\begin{example}
+\label{exNumSubsetsOfFiniteSet}
+We will prove that $|\mathcal{P}(X)| = 2^{|X|}$ for all finite sets $X$.
+
+Let $X$ be a finite set and let $n=|X|$. Write
+\[ X = \{ x_k \mid k \in [n] \} = \{ x_1, x_2, \dots, x_n \} \]
+Intuitively, specifying an element of $\mathcal{P}(X)$---that is, a subset $U \subseteq X$---is equivalent to deciding, for each $k \in [n]$, whether $x_k \in U$ or $x_k \not \in U$ (`in or out'), which in turn is equivalent to specifying an element of $\{ \text{in}, \text{out} \}^n$.
+
+For example, taking $X=[7]$, the subset $U = \{ 1, 2, 6 \}$ corresponds with the choices
+\[ 1 \text{ in},\ 2 \text{ in},\ 3 \text{ out},\ 4 \text{ out},\ 5 \text{ out},\ 6 \text{ in},\ 7 \text{ out} \]
+and hence the element $(\text{in}, \text{in}, \text{out}, \text{out}, \text{out}, \text{in}, \text{out}) \in \{ \text{in}, \text{out} \}^7$.
+
+This defines a function $i : \mathcal{P}(X) \to \{ \text{in}, \text{out} \}^n$. This function is injective, since different subsets determine different sequences; and it is surjective, since each sequence determines a subset.
+
+The above argument is sufficient for most purposes, but since this is the first bijective proof we have come across, we now give a more formal presentation of the details.
+
+Define a function
+\[ i : \mathcal{P}(X) \to \{ \text{in},\text{out} \}^n \]
+by letting the $k^{\text{th}}$ component of $i(U)$ be `in' if $x_k \in U$ or `out' if $x_k \not \in U$, for each $k \in [n]$.
+
+We prove that $i$ is a bijection.
+\begin{itemize}
+\item \textbf{$i$ is injective.} To see this, take $U,V \subseteq X$ and suppose $i(U) = i(V)$. We prove that $U=V$. So fix $x \in X$ and let $k \in [n]$ be such that $x=x_k$. Then
+\begin{align*}
+x \in U &\Leftrightarrow \text{the $k^{\text{th}}$ component of $i(U)$ is `in'} && \text{by definition of $i$} \\
+&\Leftrightarrow \text{the $k^{\text{th}}$ component of $i(V)$ is `in'} && \text{since $i(U)=i(V)$} \\
+&\Leftrightarrow x \in V && \text{by definition of $i$}
+\end{align*}
+so indeed we have $U=V$, as required.
+\item \textbf{$i$ is surjective.} To see this, let $v \in \{ \text{in},\text{out} \}^n$, and let
+\[ U = \{ x_k \mid \text{the } k^{\text{th}} \text{ component of } v \text{ is `in'} \} \]
+Then $i(U)=v$, since for each $k \in [n]$ we have $x_k \in U$ if and only if the $k^{\text{th}}$ component of $v$ is `in', which is precisely the definition of $i(U)$.
+\end{itemize}
+
+Hence
+\[ |\mathcal{P}(X)| = |\{\text{in},\text{out}\}|^n = 2^n \]
+as required.
+\end{example}
+
+Some authors actually write $2^X$ to refer to the power set of a set $X$. This is justified by \Cref{exNumSubsetsOfFiniteSet}.
+
+\begin{exercise}
+Let $X$ and $Y$ be finite sets, and recall that $Y^X$ denotes the set of functions from $X$ to $Y$. Prove that $|Y^X|=|Y|^{|X|}$.
+\hintlabel{exSizeOfFunctionSet}{%
+Any function $f : X \to Y$ with finite domain can be specified by listing its values. For each $x \in X$, how many choices do you have for the value $f(x)$?
+}
+\end{exercise}
+
+\begin{example}
+We count the number of ways we can shuffle a standard deck of cards in such a way that the colour of the cards alternate between red and black.
+
+A procedure for choosing the order of the cards is as follows:
+\begin{enumerate}[(i)]
+\item Choose the colour of the first card. There are $2$ such choices. This then determines the colours of the remaining cards, since they have to alternate.
+\item Choose the order of the red cards. There are $26!$ such choices.
+\item Choose the order of the black cards. There are $26!$ such choices.
+\end{enumerate}
+By the multiplication principle, there are $2 \cdot (26!)^2$ such rearrangements. This number is huge, and in general there is no reason to write it out. Just for fun, though:
+\[325\;288\;005\;235\;264\;929\;014\;077\;766\;819\;257\;214\;042\;112\;000\;000\;000\;000\]
+\end{example}
+
+\begin{exercise}
+Since September 2001, car number plates on the island of Great Britain have taken the form \texttt{XX\;NN\;XXX}, where each \texttt{X} can be any letter of the alphabet except for `I', `Q' or `Z', and \texttt{NN} is the last two digits of the year. [This is a slight simplification of what is really the case, but let's not concern ourselves with \textit{too} many details!] How many possible number plates are there? Number plates of vehicles registered in the region of Yorkshire begin with the letter `Y'. How many Yorkshire number plates can be issued in a given year?
+\end{exercise}
+
+The multiplication principle in the form of \Cref{strMultiplicationPrincipleIndependent} does not allow for steps later in a procedure to depend on those earlier in the procedure. To see why this is a problem, suppose we want to count the size of the set $X = \{ (a,b) \in [n] \times [n] \mid a \ne b \}$. A step-by-step procedure for specifying such an element is as follows:
+\begin{itemize}
+\item \textbf{Step 1.} Select an element $a \in [n]$. There are $n$ choices.
+\item \textbf{Step 2.} Select an element $b \in [n]$ with $b \ne a$. There are $n-1$ choices.
+\end{itemize}
+We would like to use \Cref{strMultiplicationPrincipleIndependent} to deduce that $|X| = n(n-1)$. Unfortunately, this is not valid because the possible choices available to us in Step 2 depend on the choice made in Step 1. Elements of cartesian products do not depend on one another, and so the set of sequences of choices made cannot necessarily be expressed as a cartesian product of two sets. Thus we cannot apply \Cref{lemMultiplicationPrincipleIndependent}. Oh no!
+
+However, provided that the \textit{number} of choices in each step remains constant, in spite of the choices themselves changing, it turns out that we can still compute the size of the set in question by multiplying together the numbers of choices.
+
+This is what we prove next. We begin with a pairwise version (analogous to \Cref{exSizeOfCartesianProduct}) and then prove the general version by induction (like in \Cref{lemMultiplicationPrincipleIndependent}).
+
+\begin{lemma}
+\label{lemMultiplicationPrinciplePairwise}
+Fix $m,n \in \mathbb{N}$. Let $X$ be a finite set with $|X|=m$, and for each $a \in X$, let $Y_a$ be a finite set with $|Y_a|=n$. Then the set
+\[ P = \{ (a, b) \mid a \in X \text{ and } b \in Y_a \} \]
+is finite and $|P| = mn$.
+\end{lemma}
+
+\begin{cproof}
+Fix bijections $f : [m] \to X$ and $g_a : [n] \to Y_a$ for each $a \in X$. Define $h : [m] \times [n] \to P$ by letting $h(i,j) = (f(i), g_{f(i)}(j))$ for each $(i,j) \in [m] \times [n]$. Then:
+\begin{itemize}
+\item $h$ is well-defined, since for all $i \in [m]$ and $j \in [n]$ we have $f(i) \in X$ and $g_{f(i)}(j) \in Y_{f(i)}$.
+\item $h$ is injective. To see this, fix $(i,j), (k,\ell) \in [m] \times [n]$ and assume that $h(i,j) = h(k,\ell)$. Then $(f(i),g_{f(i)}(j)) = (f(k),g_{f(k)}(\ell))$, so that $f(i)=f(k)$ and $g_{f(i)}(j) = g_{f(k)}(\ell)$. Since $f$ is injective, we have $i=k$---therefore $g_{f(i)}(j) = g_{f(i)}(\ell)$, and then since $g_{f(i)}$ is injective, we have $j=\ell$. Thus $(i,j) = (k,\ell)$, as required.
+\item $h$ is surjective. To see this, let $(a,b) \in P$. Since $f$ is surjective and $a \in X$, we have $a=f(i)$ for some $i \in [m]$. Since $g_a$ is surjective and $b \in Y_a$, we have $b=g_a(j)$ for some $j \in [n]$. But then
+\[ (a,b) = (f(i), g_a(j)) = (f(i), g_{f(i)}(j)) = h(i,j) \]
+so that $h$ is surjective.
+\end{itemize}
+
+Since $h$ is a bijection, we have $|P| = |[m] \times [n]|$ by \Cref{thmFiniteSetsAndJections}(iii), which is equal to $mn$ by \Cref{propProductOfFiniteSetsIsFinite}.
+\end{cproof}
+
+We are now ready to state and prove the theorem giving rise to the multiplication principle in its full generality.
+
+\begin{theorem}
+\label{thmMultPrinciple}
+\index{counting principle!multiplication principle}
+\index{multiplication principle}
+\index{rule of product}
+Let $n \ge 1$ and $m_1,m_2,\dots,m_n \in \mathbb{N}$. Suppose for each $i \in [n]$ that we are given finite sets $X^{(i)}_{a_1,\dots,a_{i-1}}$ with $|X^{(i)}_{a_1,\dots,a_{i-1}}| = m_i$, where $a_j \in X^{(i)}_{a_1,\dots,a_{j-1}}$ for each $j<i$. Define
+\[ P = \{ (a_1,a_2,\dots,a_n) \mid a_1 \in X^{(1)}, ~ a_2 \in X^{(2)}_{a_1}, ~ \dots, ~ a_n \in X^{(n)}_{a_1,\dots,a_{n-1}} \} \]
+Then $P$ is finite and $|P| = m_1 \times m_2 \times \cdots \times m_n$.
+\end{theorem}
+
+\begin{cproof}
+We proceed by induction on $n \ge 1$.
+\begin{itemize}
+\item (\textbf{Base case}) When $n=1$, the statement says that given $m_1 \in \mathbb{N}$ and a finite set $X^{(1)}$ with $|X^{(1)}|=m_1$, then $P = \{ (a_1) \mid a_1 \in X^{(1)} \}$ is finite and $|P| = m_1$. This is true, since the function $X^{(1)} \to P$ defined by $a \mapsto (a)$ is evidently a bijection.
+
+\item (\textbf{Induction step}) Fix $n \ge 1$ and assume that the statement is true for this value of $n$.
+
+Let $m_1, m_2, \dots, m_n, m_{n+1} \in \mathbb{N}$ and suppose that we are given finite sets $X^{(i)}_{a_1,\dots,a_{i-1}}$ for each $i \in [n+1]$ just as in the statement of the theorem, and let
+\[ P = \{ (a_1,a_2,\dots,a_{n+1}) \mid a_1 \in X^{(1)}, ~ a_2 \in X^{(2)}_{a_1}, ~ \dots, ~ a_{n+1} \in X^{(n+1)}_{a_1,\dots,a_{n-1},a_n} \} \]
+We need to prove that $|P| = m_1 \times m_2 \times \cdots \times m_n \times m_{n+1}$.
+
+So define
+\[ Q = \{ (a_1,a_2,\dots,a_n) \mid a_1 \in X^{(1)}, ~ a_2 \in X^{(2)}_{a_1}, ~ \dots, ~ a_n \in X^{(n)}_{a_1,\dots,a_{n-1}} \} \]
+and, given $q = (a_1,\dots,a_n) \in Q$, define $Y_q = X^{(n+1)}_{a_1,\dots,a_n}$. Observe that there is an evident bijection
+\[ \{ (q,a_{n+1}) \mid q \in Q, ~ a_{n+1} \in Y_{q} \} \to P \]
+defined by $((a_1,a_2,\dots,a_n),a_{n+1}) \mapsto (a_1,a_2,\dots,a_n,a_{n+1})$.
+
+Now $|Q|=m_1 \times m_2 \times \cdots \times m_n$, and $|Y_q| = m_{n+1}$ for each $q \in Q$, so it follows from \Cref{lemMultiplicationPrinciplePairwise} that
+\[ |P| = (m_1 \times m_2 \times \cdots \times m_n) \times m_{n+1} = m_1 \times m_2 \times \cdots \times m_n \times m_{n+1} \]
+as required.
+\end{itemize}
+\end{cproof}
+
+\Cref{strMultiplicationPrinciple} summarises how \Cref{thmMultPrinciple} is useful in our proofs.
+
+\begin{strategy}[Multiplication principle]
+\label{strMultiplicationPrinciple}
+Let $X$ be a finite set. In order to compute $|X|$, it suffices to find a step-by-step procedure for specifying elements of $X$, such that:
+\vspace{5pt}
+\begin{itemize}
+\item Each element is specified by a unique sequence of choices;
+\item The choices available in each step depend only on choices made in previous steps;
+\item There are finitely many choices available in each step;
+\item The \textit{number} of choices available in each step does not depend on choices made in previous steps;
+\end{itemize}
+\vspace{5pt}
+If there are $n \in \mathbb{N}$ steps and $m_k \in \mathbb{N}$ possible choices in the $k^{\text{th}}$ step, then $|X| = \prod_{k=1}^n m_k$.
+\end{strategy}
+
+\begin{example}
+We prove that there are six bijections $[3] \to [3]$. We can specify a bijection $f : [3] \to [3]$ according to the following procedure.
+\begin{itemize}
+\item \textbf{Step 1.} Choose the value of $f(1)$. There are $3$ choices.
+\item \textbf{Step 2.} Choose the value of $f(2)$. The values $f(2)$ can take depend on the chosen value of $f(1)$.
+\begin{itemize}
+\item If $f(1)=1$, then $f(2)$ can be equal to $2$ or $3$.
+\item If $f(1)=2$, then $f(2)$ can be equal to $1$ or $3$.
+\item If $f(1)=3$, then $f(2)$ can be equal to $1$ or $2$.
+\end{itemize}
+In each case, there are $2$ choices for the value of $f(2)$.
+\item \textbf{Step 3.} Choose the value of $f(3)$. The values $f(3)$ can take depend on the values of $f(1)$ and $f(2)$. We could split into the (six!) cases based on the values of $f(1)$ and $f(2)$ chosen in Steps 1 and 2; but we won't. Instead, note that $\{f(1),f(2)\}$ has two elements, and by injectivity $f(3)$ must have a distinct value, so that $[3] \setminus \{ f(1),f(2) \}$ has one element. This element must be the value of $f(3)$. Hence there is only possible choice of $f(3)$.
+\end{itemize}
+By the multiplication principle, there are $3 \times 2 \times 1 = 6$ bijections $[3] \to [3]$.
+\end{example}
+
+\begin{exercise}
+Count the number of injections $[3] \to [4]$.
+\hintlabel{exNumberOfInjectionsThreeToFour}{%
+The image (\Cref{defImage}) of an injection $[3] \to [4]$ must be a subset of $[4]$ of size three.
+}
+\end{exercise}
+
+\todo{Rewrite to account for the fact that partitions are now introduced in Section 2.4}
+
+The \textit{addition principle} says that if we can \textit{partition} a set into smaller chunks, then the size of the set is the sum of the sizes of the chunks. We will first make this notion of `partition' precise.
+
+\begin{definition}
+\index{disjoint}
+Sets $X$ and $Y$ are \textbf{disjoint} if $X \cap Y = \varnothing$. More generally, given $n \in \mathbb{N}$, a collection of sets $X_1, X_2, \dots, X_n$ is \textbf{pairwise disjoint} if $X_i \cap X_j = \varnothing$ for all $i,j \in [n]$ with $i \ne j$.
+\end{definition}
+
+\begin{definition}
+\label{defPartitionFinite}
+\index{partition (finite version)}
+A (\textbf{finite}) \textbf{partition} of a set $X$ is, for some $n \in \mathbb{N}$, a collection $\{ U_i \mid i \in [n] \}$ of subsets of $X$ such that:
+\begin{enumerate}[(a)]
+\item Each $U_i$ is inhabited;
+\item The sets $U_1, U_2, \dots, U_n$ are pairwise disjoint; and
+\item $\bigcup_{i = 1}^n U_i = X$.
+\end{enumerate}
+\end{definition}
+
+For the purposes of proving \Cref{thmAdditionPrinciple} and stating the addition principle (\Cref{strAdditionPrinciple}), we may dispense with the requirement that the sets $U_i$ in the partition be inhabited, since if any of them are empty, they contribute a value of $0$ to the sum. Thus when we say `partition' in this section, we will secretly allow the sets in the partition to be empty. Be warned, though---when we discuss partitions in contexts other than the addition principle (for example in \Cref{secRelations}), we will require the sets in the partition to be inhabited.
+
+\begin{theorem}
+\label{thmAdditionPrinciple}
+\index{addition principle}
+\index{rule of sum}
+\index{counting principle!addition principle}
+Let $X$ be a set and let $\{ U_1, \dots, U_n \}$ be a partition of $X$ for some $n \in \mathbb{N}$, such that each set $U_i$ is finite. Then $X$ is finite, and
+\[ |X| = |U_1| + |U_2| + \cdots + |U_n| \]
+\end{theorem}
+
+\begin{exercise}
+Prove \Cref{thmAdditionPrinciple}. The proof follows the same pattern as that of \Cref{lemMultiplicationPrincipleIndependent}. Be careful to make sure you identify where you use the hypothesis that the sets $U_i$ are pairwise disjoint!
+\end{exercise}
+
+\begin{strategy}[Addition principle]
+\label{strAdditionPrinciple}
+Let $X$ be a finite set. In order to compute $|X|$, it suffices to find a partition $U_1, U_2, \dots, U_n$ of $X$; it then follows that $|X| = \sum_{k=1}^n |X_i|$.
+\end{strategy}
+
+\begin{example}
+We will count the number of inhabited subsets of $[7]$ which either contain only even numbers, or contain only odd numbers.
+
+Let $O$ denote the set of inhabited subsets of $[7]$ containing only odd numbers, and let $E$ denote the set of inhabited subsets of $[7]$ containing only even numbers. Note that $\{ O, E \}$ forms a partition of the set we are counting, and so our set has $|O|+|E|$ elements.
+\begin{itemize}
+\item An element of $O$ must be a subset of $\{1,3,5,7\}$. By \Cref{exNumSubsetsOfFiniteSet} there are $2^4=16$ such subsets. Thus the number of \textit{inhabited} subsets of $[7]$ containing only odd numbers is $15$, since we must exclude the empty set. That is, $|O|=15$.
+\item A subset containing only even numbers must be a subset of $\{2,4,6\}$. Again by \Cref{exNumSubsetsOfFiniteSet} there are $2^3=8$ such subsets. Hence there are $7$ inhabited subsets of $[7]$ containing only even numbers. That is, $|E|=7$.
+\end{itemize}
+Hence there are $15+7=22$ inhabited subsets of $[7]$ containing only even or only odd numbers. And here they are:
+\[ \begin{matrix}
+\{ 1 \} & \{ 3 \} & \{ 5 \} & \{ 7 \} & \{ 1, 3 \} & \hspace{20pt} & \{ 2 \} & \{ 4 \} & \{ 6 \} \\
+\{ 1, 5 \} & \{ 1, 7 \} & \{ 3, 5 \} & \{ 3, 7 \} & \{ 5, 7 \} && \{ 2, 4 \} & \{ 2, 6 \} & \{ 4, 6 \} \\
+\{ 1, 3, 5 \} & \{ 1, 3, 7 \} & \{ 1, 5, 7 \} & \{ 3, 5, 7 \} & \{ 1, 3, 5, 7\} && \{ 2, 4, 6 \} && 
+\end{matrix} \]
+\end{example}
+
+\begin{exercise}
+Pick your favourite integer $n > 1000$. For this value of $n$, how many inhabited subsets of $[n]$ contain either only even or only odd numbers? (You need not evaluate exponents.)
+\end{exercise}
+
+We now consider some examples of finite sets which use both the multiplication principle and the addition principle.
+
+\begin{example}
+\label{exCityColour}
+A city has $6n$ inhabitants. The favourite colour of $n$ of the inhabitants is orange, the favourite colour of $2n$ of the inhabitants is pink, and the favourite colour of $3n$ of the inhabitants is turquoise. The city government wishes to form a committee with equal representation from the three colour preference groups to decide how the new city hall should be painted. We count the number of ways this can be done.
+
+Let $X$ be the set of possible committees. First note that
+\[ X = \bigcup_{k=0}^n X_k \]
+where $X_k$ is the set of committees with exactly $k$ people from each colour preference group. Indeed, we must have $k \le n$, since it is impossible to have a committee with more than $n$ people from the orange preference group.
+
+Moreover, if $k \ne \ell$ then $X_k \cap X_{\ell} = \varnothing$, since if $k \ne \ell$ then a committee cannot simultaneously have exactly $k$ people and exactly $\ell$ people from each preference group.
+
+By the addition principle, we have
+\[ |X| = \sum_{k=0}^n |X_k| \]
+We count $X_k$ for fixed $k$ using the following procedure:
+\begin{itemize}
+\item \textbf{Step 1.} Choose $k$ people from the orange preference group to be on the committee. There are $\binom{n}{k}$ choices.
+\item \textbf{Step 2.} Choose $k$ people from the pink preference group to be on the committee. There are $\binom{2n}{k}$ choices.
+\item \textbf{Step 3.} Choose $k$ people from the turquoise preference group to be on the committee. There are $\binom{3n}{k}$ choices.
+\end{itemize}
+By the multiplication principle, it follows that $|X_k| = \binom{n}{k} \binom{2n}{k} \binom{3n}{k}$. Hence
+\[ |X| = \sum_{k=0}^n \binom{n}{k} \binom{2n}{k} \binom{3n}{k} \]
+\end{example}
+
+\begin{exercise}
+\label{exCityColourModified}
+In \Cref{exCityColour}, how many ways could a committee be formed with a \textit{representative} number of people from each colour preference group? That is, the proportion of people on the committee which prefer any of the three colours should be equal to the corresponding proportion of the population of the city.
+\end{exercise}
+
+\subsection*{Pigeonhole principle}
+
+\todo{}
+
+\begin{theorem}[Pigeonhole principle]
+\label{thmPigeonholePrinciple}
+\index{pigeonhole principle}
+Let $q \in \mathbb{N}$, and let $X$ and $Y$ be finite sets with $|X| > q|Y|$. Then for every function $f : X \to Y$, there is some $a \in Y$ such that $|f^{-1}[\{a\}]| > q$.
+\end{theorem}
+
+\begin{cproof}
+Suppose $|f^{-1}[\{a\}]| \le q$ for all $a \in Y$. Then by the addition principle
+\[ |X| ~=~ \left| \bigcup_{a \in Y} f^{-1}[\{a\}] \right| ~=~ \sum_{a \in Y} |f^{-1}[\{a\}]| ~\le~ \sum_{a \in Y} q ~=~ |Y| \cdot q \]
+This contradicts the assumption that $|X| > q|Y|$.
+\end{cproof}
+
+\todo{}
+
+\subsection*{Double counting}
+% \subsection*{Counting in two ways}
+
+\textit{Double counting} (also known as \textit{counting in two ways})
+% \textit{Counting in two ways} (also known as \textit{double counting})
+is a proof technique that allows us to prove that two natural numbers are equal by establishing they are two expressions for the size of the same set. (More generally, by \Cref{thmFiniteSetsAndJections}(iii), we can relate them to the sizes of two sets which are in bijection.)
+
+The proof of \Cref{propSumOfBinomialsIsExp} illustrates this proof very nicely. We proved it already by induction in \Cref{exSumOfBinomialCoefficients}; the combinatorial proof we now provide is much shorter and cleaner.
+
+\begin{proposition} \label{propSumOfBinomialsIsExp}
+Let $n \in \mathbb{N}$. Then $2^n = \displaystyle\sum_{k=0}^n \binom{n}{k}$.
+\end{proposition}
+\begin{cproof}
+We know that $|\mathcal{P}([n])| = 2^n$ by \Cref{exNumSubsetsOfFiniteSet} and that $\mathcal{P}([n]) = \bigcup_{k=0}^n \binom{[n]}{k}$ by \Cref{propUnionOfFinSubsetsEqPowerSet}. Moreover, the sets $\binom{[n]}{k}$ are pairwise disjoint, so by the addition principle it follows that
+\[ 2^n = |\mathcal{P}([n])| = \left|\bigcup_{k=0}^n \binom{[n]}{k}\right| = \sum_{k=0}^n \left| \binom{[n]}{k} \right| = \sum_{k=0}^n \binom{n}{k} \]
+\end{cproof}
+
+\begin{strategy}[Double counting]
+% \begin{strategy}[Counting in two ways]
+\index{double counting}
+% \index{counting in two ways}
+In order to prove that two expressions involving natural numbers are equal, it suffices to define a set $X$ and devise two counting arguments to show that $|X|$ is equal to both expressions.
+\end{strategy}
+
+The next example counts elements of \textit{different} sets and puts them in bijection to establish an identity.
+
+\begin{proposition}
+Let $n,k \in \mathbb{N}$ with $n \ge k$. Then \[ \binom{n}{k} = \binom{n}{n-k} \]
+\end{proposition}
+\begin{cproof}
+First note that $\binom{n}{k} = \left| \binom{[n]}{k} \right|$ and $\binom{n}{n-k} = \left| \binom{[n]}{n-k} \right|$, so it suffices to find a bijection $f : \binom{[n]}{k} \to \binom{[n]}{n-k}$. Intuitively, this bijection arises because choosing $k$ elements from $[n]$ to \textit{put into} a subset is equivalent to choosing $n-k$ elements from $[n]$ to \textit{leave out of} the subset. Specifically, we define
+\[ f(U) = [n] \setminus U \text{ for all } U \in \binom{[n]}{k} \]
+Note first that $f$ is well-defined, since if $U \subseteq [n]$ with $|U|=k$, then $[n] \setminus U \subseteq [n]$ and $|[n] \setminus U| = |[n]|-|U| = n-k$ by \Cref{exSizeOfRelativeComplement}. We now prove $f$ is a bijection:
+\begin{itemize}
+\item \textbf{$f$ is injective.} Let $U, V \subseteq [n]$ and suppose $[n] \setminus U = [n] \setminus V$. Then for all $k \in [n]$, we have
+\begin{align*}
+k \in U &\Leftrightarrow k \not \in [n] \setminus U && \text{by definition of set difference} \\
+&\Leftrightarrow k \not \in [n] \setminus V && \text{since $[n] \setminus U = [n] \setminus V$} \\
+&\Leftrightarrow k \in V && \text{by definition of set difference}
+\end{align*}
+so $U=V$, as required.
+\item \textbf{$f$ is surjective.} Let $V \in \binom{[n]}{n-k}$. Then $|[n] \setminus V| = n-(n-k) = k$ by \Cref{exSizeOfRelativeComplement}, so that $[n] \setminus V \in \binom{[n]}{k}$. But then
+\[ f([n] \setminus V) = [n] \setminus ([n] \setminus V) = V \]
+by \Cref{exSetMinusSetMinus}.
+\end{itemize}
+Since $f$ is a bijection, we have
+\[ \binom{n}{k} = \left| \binom{[n]}{k} \right| = \left| \binom{[n]}{n-k} \right| = \binom{n}{n-k} \]
+as required.
+\end{cproof}
+
+We put a lot of detail into this proof. A slightly less formal proof might simply say that $\binom{n}{k} = \binom{n}{n-k}$ since choosing $k$ elements from $[n]$ to put into a subset is equivalent to choosing $n-k$ elements from $[n]$ to leave out of the subset. This would be fine as long as the members of the intended audience of your proof could reasonably be expected to construct the bijection by themselves.
+
+The proof of \Cref{propBinomCoeffTwoColourBalls} follows this more informal format.
+
+\begin{proposition} \label{propBinomCoeffTwoColourBalls}
+Let $n,k,\ell \in \mathbb{N}$ with $n \ge k \ge \ell$. Then
+\[ \binom{n}{k}\binom{k}{\ell} = \binom{n}{\ell}\binom{n-\ell}{k-\ell} \]
+\end{proposition}
+
+\begin{cproof}
+Let's home in on the left-hand side of the equation. By the multiplication principle, $\binom{n}{k} \binom{k}{\ell}$ is the number of ways of selecting a $k$-element subset of $[n]$ and an $\ell$-element subset of $[k]$. Equivalently, it's the number of ways of selecting a $k$-element subset of $[n]$ and then an $\ell$-element subset \textit{of the $k$-element subset that we just selected}. To make this slightly more concrete, let's put it this way:
+\begin{quote}
+$\binom{n}{k} \binom{k}{\ell}$ is the number of ways of painting $k$ balls red from a bag of $n$ balls, and painting $\ell$ of the red balls blue. This leaves us with $\ell$ blue balls and $k-\ell$ red balls.
+\end{quote}
+Now we need to find an equivalent interpretation of $\binom{n}{\ell} \binom{n-\ell}{k-\ell}$. Well, suppose we pick the $\ell$ elements to be coloured blue first. To make up the rest of the $k$-element subset, we now have to select $k-\ell$ elements, and there are now $n-\ell$ to choose from. Thus
+\begin{quote}
+$\binom{n}{\ell} \binom{n-\ell}{k-\ell}$ is the number of ways of painting $\ell$ balls from a bag of $n$ balls blue, and painting $k-\ell$ of the remaining balls red.
+\end{quote}
+Thus, both numbers represent the number of ways of painting $\ell$ balls blue and $k-\ell$ balls red from a bag of $n$ balls. Hence they are equal.
+\end{cproof}
+
+\begin{exercise}
+Make the proof of \Cref{propBinomCoeffTwoColourBalls} more formal by defining a bijection between sets of the appropriate sizes.
+\end{exercise}
+
+\begin{exercise}
+\label{exPascalIdentity}
+Provide a combinatorial proof that if $n,k \in \mathbb{N}$ with $n \ge k$, then
+\[ \binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1} \]
+
+Deduce that the combinatorial definition of binomial coefficients (\Cref{defBinomialCoefficient}) is equivalent to the recursive definition (\Cref{defBinomialCoefficientRecursive}).
+\begin{backhint}
+\hintref{exPascalIdentity}
+How many ways can you select $k+1$ animals from a set containing $n$ cats and one dog?
+\end{backhint}
+\end{exercise}
+
+The following proposition demonstrates that the combinatorial definition of factorials (\Cref{defFactorial}) is equivalent to the recursive definition (\Cref{defFactorialRecursive}).
+
+\begin{theorem}
+\label{thmFactorialAsProduct}
+$0!=1$ and if $n \in \mathbb{N}$ then $(n+1)! = (n+1) \cdot n!$.
+\end{theorem}
+\begin{cproof}
+The only permutation of $\varnothing$ is the empty function $e : \varnothing \to \varnothing$. Hence $S_0 = \{ e \}$ and $0!=|S_0|=1$.
+
+Let $n \in \mathbb{N}$. A permutation of $[n+1]$ is a bijection $f : [n+1] \to [n+1]$. Specifying such a bijection is equivalent to carrying out the following procedure:
+\begin{itemize}
+\item Choose the (unique!) element $k \in [n+1]$ such that $f(k) = n+1$. There are $n+1$ choices for $k$.
+\item Choose the values of $f$ at each $\ell \in [n+1]$ with $\ell \ne k$. This is equivalent to finding a bijection $[n+1] \setminus \{ k \} \to [n]$. Since $|[n+1] \setminus \{ k \}| = |[n]| = n$, there are $n!$ such choices.
+\end{itemize}
+By the multiplication principle, we have
+\[ (n+1)! = |S_{n+1}| = (n+1) \cdot n! \]
+so we're done.
+\end{cproof}
+
+We now revisit \Cref{thmBinomAsFactorialByInduction}; this time, our proof will be combinatorial, rather than inductive.
+
+\begin{theorem} \label{thmBinomAsFactorial}
+Let $n, k \in \mathbb{N}$. Then
+\[ \binom{n}{k} = \begin{cases} \dfrac{n!}{k!(n-k)!} & \text{if } k \le n \\ 0 & \text{if } k > n \end{cases} \]
+\end{theorem}
+\begin{cproof}
+Suppose $k>n$. By \Cref{exSubsetOfFiniteSetIsFinite}, if $U \subseteq [n]$ then $|U| \le n$. Hence if $k > n$, then $\binom{[n]}{k} = \varnothing$, and so $\binom{n}{k}=0$, as required.
+
+Now suppose $k \le n$. We will prove that $n! = \binom{n}{k} \cdot k! \cdot (n-k)!$; the result then follows by dividing through by $k!(n-k)!$. We prove this equation by counting the number of elements of $S_n$.
+
+A procedure for defining an element of $S_n$ is as follows:
+\begin{enumerate}[(i)]
+\item Choose which elements will appear in the first $k$ positions of the list. There are $\binom{n}{k}$ such choices.
+\item Choose the order of these $k$ elements. There are $k!$ such choices.
+\item Choose the order of the remaining $n-k$ elements. There are $(n-k)!$ such choices.
+\end{enumerate}
+By the multiplication principle, $n! = \binom{n}{k} \cdot k! \cdot (n-k)!$.
+\end{cproof}
+
+Note that the proof of \Cref{thmBinomAsFactorial} relied only on the combinatorial definitions of binomial coefficients and factorials; we didn't need to know how to compute them at all! The proof was \textit{much} shorter, cleaner and, in some sense, more meaningful, than the inductive proof we gave in \Cref{thmBinomAsFactorialByInduction}.
+
+We conclude this section with some more examples and exercises in which
+double counting
+% counting in two ways
+can be used.
+
+\begin{exercise}
+\label{exCountingKTimesNChooseK}
+Let $n,k \in \mathbb{N}$ with $k \le n+1$. Prove that
+\[ k \binom{n}{k} = (n-k+1) \binom{n}{k-1} \]
+\begin{backhint}
+\hintref{exCountingKTimesNChooseK}
+Find two procedures for counting the number of pairs $(U, u)$, such that $U \subseteq [n]$ is a $k$-element subset and $u \in U$. Equivalently, count the number of ways of forming a committee of size $k$ from a population of size $n$, and then appointing one member of the committee to be the chair.
+\end{backhint}
+\end{exercise}
+
+\begin{example}
+\label{exCombinatorialIdentityCatsAndDogs}
+Let $m,n,k \in \mathbb{N}$. We prove that
+\[ \sum_{\ell=0}^k \binom{m}{\ell} \binom{n}{k-\ell} = \binom{m+n}{k} \]
+by finding a procedure for counting the number of $k$-element subsets of an appropriate $(m+n)$-element set. Specifically, let $X$ be a set containing $m$ cats and $n$ dogs. Then $\left| \binom{m+n}{k} \right|$ is the number of $k$-element subsets $U \subseteq X$. We can specify such a subset according to the following procedure.
+\begin{itemize}
+\item \textbf{Step 1.} Split into cases based on the number $\ell$ of cats in $U$. Note that we must have $0 \le \ell \le k$, since the number of cats must be a natural number and cannot exceed $k$ as $|U|=k$. Moreover, these cases are mutually exclusive. Hence by the addition principle we have
+\[ \binom{m+n}{k} = \sum_{\ell=0}^k a_{\ell} \]
+where $a_{\ell}$ is the number of subsets of $X$ containing $\ell$ cats and $k-\ell$ dogs.
+\item \textbf{Step 2.} Choose $\ell$ cats from the $m$ cats in $X$ to be elements of $U$. There are $\binom{[m]}{\ell}$ such choices.
+\item \textbf{Step 3.} Choose $k-\ell$ dogs from the $n$ dogs in $X$ to be elements of $U$. There are $\binom{[n]}{k-\ell}$ such choices.
+\end{itemize}
+The multiplication principle shows that $a_{\ell} = \binom{m}{\ell} \binom{n}{k-\ell}$. Hence
+\[ \binom{m+n}{k} = \sum_{\ell=0}^k \binom{m}{\ell} \binom{n}{k-\ell} \]
+as required.
+\end{example}
+
+\begin{exercise}
+\label{exTrinomialCoefficients}
+Given natural numbers $n,a,b,c$ with $a+b+c=n$, define the \textbf{trinomial coefficient} $\displaystyle \binom{n}{a,b,c}$\nindex{nChoosek3}{$\binom{n}{a,b,c}$}{trinomial coefficient} \index{trinomial coefficient} to be the number of ways of partitioning $[n]$ into three sets of sizes $a$, $b$ and $c$, respectively. That is, $\displaystyle \binom{n}{a,b,c}$ is the size of the set
+\[ \left\{ (A,B,C)\ \middle|\ 
+\begin{matrix} \begin{matrix} A \subseteq [n], & B \subseteq [n], & C \subseteq[n], \\ |A|=a, & |B|=b, & |C|=c, \end{matrix} \\ \text{and } A \cup B \cup C = [n] \end{matrix} \right\} \]
+By considering trinomial coefficients, prove that if $a,b,c \in \mathbb{N}$, then $(a+b+c)!$ is divisible by $a! \cdot b! \cdot c!$.
+\begin{backhint}
+\hintref{exTrinomialCoefficients}
+Find an expression for $(a+b+c)!$ in terms of $a!$, $b!$, $c!$ and $\binom{a+b+c}{a,b,c}$, following the pattern of \Cref{thmBinomAsFactorial}.
+\end{backhint}
+\end{exercise}
+
+\index{counting|)}

@@ -1,0 +1,112 @@
+\section{General probability spaces}
+\secbegin{secGeneralProbabilitySpaces}
+
+\incomplete
+
+\todo{}
+
+\begin{definition}
+\label{defSigmaAlgebra}
+\index{sigma-algebra@$\sigma$-algebra}
+Let $X$ be a set. A \textbf{$\sigma$-algebra} on $X$ is a collection $\mathcal{F}$ \inlatex{mathcal\{F\}}\lindexmmc{mathcal}{$\mathcal{A}, \mathcal{B}, \dots$} of subsets of $X$ such that
+\begin{enumerate}[(i)]
+\item $X \in \mathcal{F}$;
+\item For all $A \subseteq X$, if $A \in \mathcal{F}$, then $X \setminus A \in \mathcal{F}$; and
+\item If $\{ A_i \subseteq X \mid i \in I \}$ is a countable family of sets in $\mathcal{F}$, then $\bigcup_{i \in I} A_i \in \mathcal{F}$.
+\end{enumerate}
+A \textbf{measurable space} is a pair $(X, \mathcal{F})$ consisting of a set together with a $\sigma$-algebra on $X$. The sets in $\mathcal{F}$ are called ($\mathcal{F}$-)\textbf{measurable sets}.
+\end{definition}
+
+\begin{example}
+\label{exPowerSetIsSigmaAlgebra}
+Given any set $X$, the power set $\mathcal{P}(X)$ of $X$ is a $\sigma$-algebra, since $X \subseteq X$, the relative complement of any subset $A \subseteq X$ is a subset of $X$, and the union of any family of subsets of $X$ (countable or otherwise) is a subset of $X$.
+\end{example}
+
+\begin{example}
+Let $\mathcal{F}$ be the set of subsets $U \subseteq \mathbb{R}$ such that either $U$ is countable or $\mathbb{R} \setminus U$ is countable. Then:
+
+\begin{enumerate}[(i)]
+\item $\mathbb{R} \setminus \mathbb{R} = \varnothing$, which is finite (and hence countable), so $\mathbb{R} \in \mathcal{F}$;
+
+\item Let $A \in \mathcal{F}$. Either $A$ or $\mathbb{R} \setminus A$ is countable.
+\begin{itemize}
+\item Suppose $A$ is countable. By \Cref{exSetMinusSetMinus} we have $\mathbb{R} \setminus (\mathbb{R} \setminus A) = A$, which is countable, so that $\mathbb{R} \setminus A \in \mathcal{F}$;
+\item Suppose $\mathbb{R} \setminus A$ is countable. Then we immediately have $\mathbb{R} \setminus A \in \mathcal{F}$. 
+\end{itemize}
+In both cases, we see that $\mathbb{R} \setminus A \in \mathcal{F}$.
+
+\item Let $\{ A_i \mid i \in I \}$ be a countable family of sets in $\mathcal{F}$.
+\begin{itemize}
+\item If each $A_i$ is countable, then $\bigcup_{i \in I} A_i$ is countable by \Cref{thmCountableUnionOfCountableSetIsCountable};
+\item If at least one $A_i$ is uncountable, then there is some $j \in I$ such that $\mathbb{R} \setminus A_j$ is countable. Then by de Morgan's laws for sets (\Cref{thmDeMorganForSets}) we have
+\[ \mathbb{R} \setminus \bigcup_{i \in I} A_i = \bigcap_{i \in I} (\mathbb{R} \setminus A_i) \subseteq \mathbb{R} \setminus A_j \]
+Since $\mathbb{R} \setminus A_j$ is countable, we have $\mathbb{R} \setminus \bigcup_{i \in I} A_i$ is countable.
+\end{itemize}
+In both cases, it follows that $\bigcup_{i \in I} A_i \in \mathcal{F}$, as required.
+\end{enumerate}
+
+So $\mathcal{F}$ is a $\sigma$-algebra on $\mathbb{R}$.
+\end{example}
+
+\begin{exercise}
+Let $X$ be a set and let $\sim$ be an equivalence class on $X$. Define $\mathcal{F}$ to be the set of unions of $\sim$-equivalence classes; that is
+\[ \mathcal{F} = \left\{ \bigcup_{x \in U} [x]_{\sim} \middlemid U \subseteq X \right\} \]
+Prove that $\mathcal{F}$ is a $\sigma$-algebra on $X$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $\sigma$-algebras contain the empty set and are closed under countable intersections. That is, given a $\sigma$-algebra $\mathcal{F}$ on a set $X$, prove that $\varnothing \in \mathcal{F}$, and that if $\{ A_i \mid i \in I \}$ is a countable family of sets in $\mathcal{F}$, then $\bigcap_{i \in I} A_i \in \mathcal{F}$.
+\end{exercise}
+
+It would be nice if the collection of all \textit{open} subsets of $\mathbb{R}$ were a $\sigma$-algebra on $\mathbb{R}$. However, this is not the case.
+
+\begin{exercise}
+Prove that the set of all open subsets of $\mathbb{R}$ is not a $\sigma$-algebra on $\mathbb{R}$.
+\end{exercise}
+
+To remedy this situation, we introduce the notion of a \textit{Lebesgue measurable} subset of $\mathbb{R}$.
+
+
+
+\todo{}
+
+\begin{definition}
+\label{defMeasureSpace}
+\index{measure space}
+A \textbf{measure space} $(X, \mathcal{F}, \mu)$ consists of a set $X$, a $\sigma$-algebra $\mathcal{F}$ on $X$, and a function $\mu : X \to [0,\infty]$, satisfying the following conditions:
+\begin{enumerate}[(i)]
+\item $\mu(\varnothing) = 0$;
+\item (\textbf{Countable additivity}) If $\{ A_i \mid i \in I \}$ is any countable family of pairwise disjoint sets in $\mathcal{F}$, indexed by a countable then
+\[ \mu \left( \bigcup_{i \in I} A_i \right) = \sum_{i \in I} \mu(A_i) \]
+\end{enumerate}
+The value $\mu(A)$ of an $\mathcal{F}$-measurable set is called the \textbf{measure} of $A$ with respect to $\mu$.
+\end{definition}
+
+Comparing with \Cref{defDiscreteProbabilitySpace} reveals the following readily accessible example of a measure space.
+
+\begin{example}
+Every discrete probability space $(\Omega, \mathbb{P})$ defines a measure space $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$. To see this, note that $\mathcal{P}(\Omega)$ is a $\sigma$-algebra on $\Omega$ by \Cref{exPowerSetIsSigmaAlgebra}, we proved in \Cref{exProbabilityOfEmptySet} that $\mathbb{P}(\varnothing) = \varnothing$, and the countable additivity condition for discrete probability spaces is a direct translation of that for measure spaces.
+\end{example}
+
+\todo{}
+
+\begin{construction}
+\label{cnsLebesgueMeasure}
+\todo{}
+\end{construction}
+
+\todo{}
+
+\begin{definition}
+\label{defProbabilitySpace}
+\index{probability space}
+\index{probability}
+\index{probability measure}
+\index{sample space}
+\index{outcome}
+\index{event}
+\index{countable additivity}
+A \textbf{probability space} is a measure space $(\Omega, \mathcal{F}, \mathbb{P})$ such that $\mathbb{P}(\Omega) = 1$. The set $\Omega$ is called the \textbf{sample space}; the elements $\omega \in \Omega$ are called \textbf{outcomes}; the measurable sets $A \subseteq \mathcal{F}$ are called \textbf{events}; and the function $\mathbb{P}$ is called a \textbf{probability measure}. Given an event $A$, the value $\mathbb{P}(A)$ is called the \textbf{probability of $A$}.
+\end{definition}
+
+\todo{}

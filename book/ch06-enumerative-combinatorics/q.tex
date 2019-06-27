@@ -1,0 +1,97 @@
+\subsection*{Finite sets}
+
+\begin{chapex}
+Let $n \in \mathbb{N}$ and let $f : [n] \to [n]$ be a function. Prove that $f$ is injective if and only if $f$ is surjective.
+\end{chapex}
+
+\begin{chapex}
+Prove that $|\mathbb{Z}/n\mathbb{Z}|=n$ for all $n \ge 1$.
+\end{chapex}
+
+\subsection*{Counting}
+
+\begin{chapex}
+Let $X$ and $Y$ be finite sets with $|X|=m \in \mathbb{N}$ and $|Y|=n \in \mathbb{N}$. Prove that there are $2^{mn}$ relations from $X$ to $Y$.
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a set and let $R$ be a relation on $X$. Prove that $R$ is reflexive if and only if $\Delta_X \subseteq \mathrm{Gr}(R)$, where $\Delta_X$\nindex{DX}{$\Delta_X$}{diagonal subset} is the diagonal subset of $X \times X$ (see \Cref{defDiagonalSubset}). Deduce that if $X$ is finite and $|X|=n \in \mathbb{N}$, then there are $2^{n(n-1)}$ reflexive relations on $X$.
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a finite set with $|X|=n \in \mathbb{N}$. Prove that there are $2^{\binom{n}{2}} \cdot 2^n$ symmetric relations on $X$.
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a finite set with $|X|=n \in \mathbb{N}$. Prove that there are $3^{\binom{n}{2}} \cdot 2^n$ antisymmetric relations on $X$.
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a finite set with $|X| = n \in \mathbb{N}$, let $\sim$ be an equivalence relation on $X$, and suppose that there is some natural number $k$ such that $|[a]_{\sim}| = k$ for all $a \in X$. Prove that $k$ divides $n$, and that $|X/{\sim}| = \dfrac{n}{k}$.
+\hintlabel{cqSizeOfQuotient}{%
+Prove that $|X/{\sim}| \cdot k = n$ using the multiplication principle: find a two-step procedure for specifying an element of $X$ by first considering its $\sim$-equivalence class.
+}
+\end{chapex}
+
+\begin{chapex}
+Let $n,k \in \mathbb{N}$ with $k \le n$. Prove that the number of functions $f : [n] \to [n]$ that fix exactly $k$ elements of $[n]$ is equal to $\dbinom{n}{k}(n-1)^{n-k}$.
+\end{chapex}
+
+
+
+\subsection*{Double counting}
+
+\begin{chapex}
+Let $a,b,m,n \in \mathbb{N}$. Prove each of the following by double counting.
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item $a(m+n) = am + an$
+\item $a^{m+n} = a^m \cdot a^n$
+\item $(a^m)^n = a^{mn}$
+\item $(ab)^n = a^n \cdot b^n$
+\end{enumerate}
+\end{multicols}
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}$ for all $n \in \mathbb{N}$
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \sum_{k=m}^n \binom{n}{k} \binom{k}{m} = 2^{n-m} \binom{n}{m}$ for all $m,n \in \mathbb{N}$ with $m \le n$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \sum_{j=0}^k \binom{n-j}{k-j} = \binom{n+1}{k}$ for all $n,k \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \sum_{k=1}^n \sum_{\ell = 0}^k k \binom{n}{k} \binom{n-k}{\ell} = n \cdot 3^{n-1}$ for all $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \binom{n}{r+s+1} = \sum_{k=r+1}^{n-s} \binom{k-1}{r} \binom{n-k}{s}$ for all $n,r,s \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Let $a_1,a_2,\dots,a_r \in \mathbb{N}$ and let $n = a_1 + a_2 + \cdots + a_r$. Prove that
+\[
+\binom{n}{a_1,a_2,\dots,a_r} = \prod_{k=0}^{r-1} \binom{n - \sum_{i=1}^k a_i}{a_{k+1}}
+\]
+\end{chapex}
+where $\dbinom{n}{a_1,a_2,\dots,a_r}$ is the number of ordered $r$-tuples $(U_1, U_2, \dots, U_r)$ such that $U_1, U_2, \dots, U_r$ is a partition of $[n]$ and $|U_k| = a_k$ for all $k \in [r]$.
+
+\subsection*{Involution principle}
+
+\begin{chapex}
+Let $X$ be a finite set. Prove that if $|X|$ is odd then there is no parity-swapping involution $X \to X$.
+\hintlabel{exNoParitySwappingInvolutionFromOddSizedSetToItself}{%
+Find a way to apply \Cref{lemParitySwappingInvolutionInducesBijectionFromEvenToOdd}.
+}
+\end{chapex}
+
+\subsection*{Inclusion--exclusion principle}
+
+\begin{chapex}
+Find the number of subsets of $[100]$ that do not contain a multiple of $8$.
+\end{chapex}

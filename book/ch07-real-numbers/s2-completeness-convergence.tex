@@ -1,0 +1,863 @@
+\section{Completeness and convergence}
+\secbegin{secCompletenessConvergence}
+
+For most of the results that we proved in \Cref{secInequalitiesMeans}, it did not matter that we were talking about real numbers. We could just as well have been working with any other ordered field, such as the rational numbers---that is, most of the results in \Cref{secInequalitiesMeans} remain true by replacing $\mathbb{R}$ by $\mathbb{Q}$ (or any other ordered field) throughout.
+
+From here onwards, we isolate the property of $\mathbb{R}$ that separates it from $\mathbb{Q}$---namely, \textit{completeness}. It is completeness that will allow us to define and explore the fundamental concepts of mathematical analysis: sequences, functions, convergence, limits, continuity, differentiability, and so on.
+
+The property of completeness concerns least upper bounds for certain sets of real numbers.
+
+\begin{definition}
+\label{defSupremumOfSubsetOfR}
+\index{upper bound!of subset of $\mathbb{R}$}
+\index{supremum!of subset of $\mathbb{R}$}
+Let $A \subseteq \mathbb{R}$. A real number $m$ is an \textbf{upper bound} for $A$ if $a \le m$ for all $a \in A$. A \textbf{supremum} of $A$ is a \textit{least} upper bound of $A$; that is, a real number $m$ such that:
+\begin{enumerate}[(i)]
+\item $m$ is an upper bound of $A$---that is, $a \le m$ for all $a \in A$; and
+\item $m$ is least amongst all upper bounds for $A$---that is, for all $x \in \mathbb{R}$, if $a \le x$ for all $a \in A$, then $x \le m$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+We prove that $1$ is a supremum of the open interval $(0,1)$.
+\begin{enumerate}[(i)]
+\item Let $a \in (0,1)$. Then $a < 1$, so that $1$ is an upper bound of $(0,1)$.
+\item Let $x \in \mathbb{R}$ be another upper bound of $(0,1)$. If $x < 1$, then we have
+\[ x = \dfrac{x+x}{2} < \dfrac{x+1}{2} < \dfrac{1+1}{2} = 1 \]
+and so $x < \dfrac{x+1}{2} \in (0,1)$. This contradicts the assumption that $x$ is an upper bound of $(0,1)$. It follows that $x \ge 1$, as required.
+\end{enumerate}
+Hence $1$ is indeed a supremum of $(0,1)$.
+\end{example}
+
+\begin{exercise}
+\label{exDefineLowerBoundInfimum}
+\index{lower bound!of subset of $\mathbb{R}$}
+\index{infimum!of subset of $\mathbb{R}$}
+Define the notions of \textbf{lower bound} and \textbf{infimum}, and find the infimum of the open interval $(0,1)$.
+\end{exercise}
+
+The following proposition provides a convenient way of testing whether a real number is a supremum of a subset.
+
+\begin{proposition}
+\label{propSupremumEpsilon}
+Let $A \subseteq \mathbb{R}$ and suppose $m \in \mathbb{R}$ is an upper bound of $A$. Then $m$ is a supremum of $A$ if and only if, for all $\varepsilon > 0$, there exists $a \in A$ such that $a > m-\varepsilon$.
+\end{proposition}
+
+\begin{cproof}
+\fixlistskip
+\begin{itemize}
+\item ($\Rightarrow$). Suppose $m$ is a supremum of $A$, and let $\varepsilon > 0$. If there is no $a \in A$ such that $a > m - \varepsilon$, then $a \le m-\varepsilon$ for all $a \in A$. But this contradicts the assumption that $m$ is a supremum of $a$, since $m-\varepsilon$ is an upper bound of $A$ that is less than $m$. So there exists $a \in A$ with $a > m - \varepsilon$, as required.
+
+\item ($\Leftarrow$). Suppose that, for all $\varepsilon > 0$, there exists $a \in A$ with $a > m-\varepsilon$, and let $x \in \mathbb{R}$ be an upper bound of $A$. In order to prove that $m$ is a supremum of $A$, we must prove that $m \le x$.
+
+Suppose $x < m$, and define $\varepsilon = m-x$. Then $\varepsilon > 0$, so there exists $a \in A$ such that
+\[ a > m - \varepsilon = m - (m-x) = x \]
+But this contradicts the assumption that $x$ is an upper bound of $A$. So we must have $m \le x$, as required.
+\end{itemize}
+\end{cproof}
+
+\begin{theorem}[Uniqueness of suprema]
+Let $A$ be a subset of $\mathbb{R}$. If $m_1$ and $m_2$ are suprema of $A$, then $m_1 = m_2$.
+\end{theorem}
+
+\begin{cproof}
+Since $m_1$ is an upper bound of $A$ and $m_2$ is a supremum of $A$, we have $m_2 \ge m_1$ by \Cref{defSupremumOfSubsetOfR}(ii). Likewise, since $m_2$ is an upper bound of $A$ and $m_1$ is a supremum of $A$, we have $m_1 \ge m_2$ by \Cref{defSupremumOfSubsetOfR}(ii) again. But this implies that $m_1 = m_2$.
+\end{cproof}
+
+An analogous result proves that a subset of $\mathbb{R}$ may have at most one infimum. This allows us to introduce the following notation.
+
+\begin{definition}
+\nindex{supremum}{$\mathrm{sup}(A)$}{supremum}
+\nindex{infimum}{$\mathrm{inf}(A)$}{infimum}
+Let $A \subseteq \mathbb{R}$. The supremum of $A$, if it exists is denoted by $\mathrm{sup}(A)$ \inlatex{mathrm\{sup\}}\lindexmmc{mathrm}{$\mathrm{Aa}, \mathrm{Bb}, \dots$}; the infimum of $A$, if it exists, is denoted by $\mathrm{inf}(A)$ \inlatex{mathrm\{inf\}}.
+\end{definition}
+
+Now that we are more familiar with suprema, here is the completeness axiom in its full glory.
+
+\begin{axiom}[Completeness axiom]
+\label{axCompletenessOfR}
+Let $A \subseteq \mathbb{R}$ be inhabited. If $A$ has an upper bound, then $A$ has a supremum.
+\end{axiom}
+
+The true power of the completeness axiom will become apparent later in the section when we discuss the existence of limits of sequences of real numbers.
+
+Before we embark on that adventure, we first prove that the rational numbers are \textit{not} complete, by exhibiting a subset of $\mathbb{Q}$ that has no rational supremum.
+
+\begin{proposition}
+\label{propIrrationalsNotComplete}
+Let $A = \{ x \in \mathbb{Q} \mid x^2 < 2 \}$. Then $A$ does not have a rational supremum.
+\end{proposition}
+
+A quick proof of \Cref{propIrrationalsNotComplete} would be to verify that $\sqrt{2}$, which is irrational, is a supremum of $A$, and use uniqueness of suprema to deduce that there can be no rational supremum. However, this is cheating. Failure of completeness is an \textit{intrinsic} property---we should be able to prove \Cref{propIrrationalsNotComplete} without venturing outside of the realm of rational numbers at all. That is, we cannot use irrational numbers in our proof. This makes the proof significantly longer, but significantly more satisfying.
+
+\begin{cproof}[of \Cref{propIrrationalsNotComplete}]
+Towards a contradiction, suppose that $A$ has a supremum $q$.
+
+First note that $q>0$. Indeed, $1^2 < 2$, so that $1 \in A$, and so $q \ge 1 > 0$.
+
+Next, we prove that $q^2 = 2$. Indeed:
+\begin{itemize}
+\item Assume $q^2 < 2$, so that $2-q^2 > 0$. For each $n \ge 1$, we have
+\[ \left( q + \frac{1}{n} \right)^2 ~=~ q^2 + \frac{2q}{n} + \frac{1}{n^2} \]
+Choose $n$ sufficiently large that $\frac{2q}{n} < \frac{2-q^2}{2}$ and $\dfrac{1}{n^2} < \dfrac{2-q^2}{2}$. Then by the above, we observe that
+\[ \left( q + \frac{1}{n} \right)^2 ~<~ q^2 + \dfrac{2-q^2}{2} + \dfrac{2-q^2}{2} ~=~ q^2 + (2-q^2) ~=~ 2 \]
+and so $q+\frac{1}{n} \in A$. But $q + \frac{1}{n} > q$, so this contradicts the assumption that $q$ is an upper bound of $A$.
+
+\item Assume $q^2 > 2$, so that $q^2-2 > 0$. For each $n \ge 1$, we have
+\[ \left( q - \frac{1}{n} \right)^2 = q^2 - \frac{1}{n} \left( 2q - \frac{1}{n} \right) \]
+
+Choose $n$ sufficiently large that $\frac{1}{n} < q$ ($< 2q$) and $\frac{2q}{n} < q^2-2$. Then by the above work, we observe that
+\[ \left( q - \frac{1}{n} \right)^2 > q^2 - \frac{2q}{n} > q^2 - (q^2-2) = 2 \]
+Moreover $q-\frac{1}{n} > 0$ since $\frac{1}{n} < q$.
+
+Suppose that $q-\frac{1}{n}$ is \textit{not} an upper bound for $A$. Then there is some $x \in A$ with $x > q-\frac{1}{n} > 0$. But then $(q-\frac{1}{n})^2 < x^2 < 2$, contradicting the fact that $\left( q-\frac{1}{n} \right)^2 > 2$.
+
+So $q-\frac{1}{n}$ is an upper bound for $A$, contradicing the fact that $q$ is a supremum of $A$.
+\end{itemize}
+
+So we must have $q^2 = 2$. But this is impossible---the proof is identical to that of \Cref{propSqrt2Irrational}, but with all instances of `$\sqrt{2}$' replaced by `$q$' in the proof.
+
+So $\{ x \in \mathbb{Q} \mid x^2 < 2 \}$ has no rational supremum.
+\end{cproof}
+
+\subsection*{Sequences of real numbers}
+
+The rest of this chapter is dedicated to studying \textit{convergence} of sequences of real numbers. We will use the completeness axiom to find sufficient conditions for a sequence to converge.
+
+\begin{definition}
+\label{defSequence}
+\index{sequence}
+\index{term!of a sequence}
+\nindex{xn}{$(x_n)_{n \ge 0}$}{sequence}
+A \textbf{sequence of real numbers} is a function $x : \mathbb{N} \to \mathbb{R}$. Given a sequence $x$, we write $x_n$ instead of $x(n)$ and write $(x_n)_{n \ge 0}$, or even just $(x_n)$, instead of $x : \mathbb{N} \to \mathbb{R}$. The values $x_n$ are called the \textbf{terms} of the sequence, and the variable $n$ is called the \textbf{index} of the term $x_n$.
+\end{definition}
+
+\begin{example}
+\label{exConstantSequence}
+\index{sequence!constant}
+Some very basic but very boring examples of sequences are \textit{constant sequences}. For example, the constant sequence with value $0$ is
+\[ (0,0,0,0,0,0,\dots) \]
+More generally, for fixed $a \in \mathbb{R}$, the constant sequence with value $a$ is defined by $x_n=a$ for all $n \in \mathbb{N}$.
+\end{example}
+
+\begin{example}
+\label{exSequencePowersOfTwo}
+Sequences can be defined just like functions. For example, there is a sequence defined by $x_n = 2^n$ for all $n \in \mathbb{N}$. Writing out the first few terms, this sequence is
+\[ (1,2,4,8,16,\dots) \]
+\end{example}
+
+Sometimes it will be convenient to start the indexing of our sequence from numbers other than $0$, particularly when an expression involving a variable $n$ isn't defined when $n=0$. We'll denote such sequences by $(x_n)_{n \ge 1}$ or $(x_n)_{n \ge 2}$, and so on.
+
+\begin{example}
+Let $(z_n)_{n \ge 2}$ be the sequence defined by $z_n = \frac{(n+1)(n+2)}{(n-1)n}$ for all $n \ge 2$:
+\[ \left(6, \frac{10}{3}, \frac{5}{2}, \frac{21}{10}, \dots \right) \]
+The indexing of this sequence begins at $2$, rather than $0$, since when $n=0$ or $n=1$, the expression $\frac{(n+1)(n+2)}{(n-1)n}$ is undefined. We could \textit{reindex} the sequence: by letting $z'_n = z_{n+2}$ for all $n \ge 0$, we obtain a new sequence $(z'_n)_{n \ge 0}$ defined by $z'_n = \frac{(n+3)(n+4)}{(n+1)(n+2)}$ whose indexing starts from $0$. Fortunately for us, such matters won't cause any problems---it's just important to make sure that whenever we define a sequence, we make sure the terms make sense for all of the indices.
+\end{example}
+
+\subsection*{Convergence of sequences}
+
+Of particular interest to us will be sequences whose terms get closer and closer to a fixed real number. This phenomenon is called \textit{convergence}.
+
+\begin{example}
+\label{exOneOverN}
+Consider the sequence $(y_n)_{n \ge 1}$ defined by $y_n = \frac{1}{n}$ for all $n \ge 1$:
+\[ \left( 1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \frac{1}{5}, \dots\right) \]
+It is fairly clear that the terms $y_n$ become closer and closer to $0$ as $n$ grows; the following diagram is a plot of $y_n$ against $n$ for a few values of $n$.
+\end{example}
+
+\begin{example}
+\label{exTwoNOverNPlusOne}
+Define a sequence $(r_n)_{n \ge 0}$ by $r_n = \frac{2n}{n+1}$ for all $n \in \mathbb{N}$. Some of the values of this sequence are illustrated in the following table:
+\begin{center}
+\begin{tabular}{c|c|l}
+$n$ & $r_n$ & decimal expansion \\ \hline
+$0$ & $0$ & $0$ \\
+$1$ & $1$ & $1$ \\
+$2$ & $\frac{4}{3}$ & $1.333\dots$ \\
+$3$ & $\frac{3}{2}$ & $1.5$ \\
+$10$ & $\frac{20}{11}$ & $1.818\dots$ \\
+$100$ & $\frac{200}{101}$ & $1.980\dots$ \\
+$1000$ & $\frac{2000}{1001}$ & $1.998\dots$ \\
+$\vdots$ & $\vdots$ & $\ \ \vdots$
+\end{tabular}
+\end{center}
+As $n$ increases, the values of $r_n$ become closer and closer to $2$.
+\end{example}
+
+The precise sense in which the terms of the sequences in \Cref{exOneOverN,exTwoNOverNPlusOne} `get closer' to $0$ and $2$, respectively, is called \textit{convergence}, which we will define momentarily in \Cref{defConvergenceOfSequence}.
+
+First, let's try to work out what the definition \textit{should be} for a sequence $(x_n)$ to converge to a real number $a$.
+
+A na\"{i}ve answer might be to say that the sequence is `eventually equal to $a$'---that is, after some point in the sequence, all terms are equal to $a$. Unfortunately, this isn't quite good enough: if it were, then the values $r_n = \frac{2n}{n+1}$ from \Cref{exTwoNOverNPlusOne} would be equal to $2$ for sufficiently large $n$. However, if for some $n \in \mathbb{N}$ we have $\frac{2n}{n+1}=2$, then it follows that $2n=2(n+1)$; rearranging this gives $1=0$, which is a contradiction.
+
+However, this answer isn't too far from giving us what we need. Instead of saying that the terms $x_n$ are eventually \textit{equal} to $a$, we might want to say that they become \textit{infinitely close} to $a$, whatever that means.
+
+We can't really make sense of an `infinitely small positive distance' (e.g.\ \Cref{exNoLeastPositiveReal}), so we might instead make sense of `infinitely close' by saying that the terms $x_n$ eventually become as close to $a$ as we could possibly want them to be. Spelling this out, this means that for any positive distance $\varepsilon$ \inlatex{varepsilon}\lindexmmc{varepsilon}{$\varepsilon$}\nindex{epsilon}{$\varepsilon$}{epsilon} (read: `epsilon')\footnote{The lower case Greek letter \textit{epsilon} ($\varepsilon$) is traditionally used in analysis to denote a positive quantity whose value can be made arbitrarily small. We will encounter this letter frequently in this section and the next when discussing convergence.} no matter how small, the terms $x_n$ are eventually within distance $\varepsilon$ of $a$. In summary:
+
+\begin{definition}
+\label{defConvergenceOfSequence}
+\label{defLimitOfSequence}
+\index{convergence!of a sequence}
+\index{limit!of a sequence}
+\index{divergence}
+\nindex{convergence}{$(x_n) \to a$}{convergence of a sequence}
+Let $(x_n)$ be a sequence and let $a \in \mathbb{R}$. We say that $(x_n)$ \textbf{converges} to $a$, and write $(x_n) \to a$ \inlatex{to}\lindexmmc{to}{$\to$}, if the following condition holds:
+\[ \forall \varepsilon > 0,\, \exists N \in \mathbb{N},\, \forall n \ge N,\, |x_n-a| < \varepsilon \]
+The value $a$ is called a \textbf{limit} of $(x_n)$. Moreover, we say that a sequence $(x_n)$ \textbf{converges} if it has a limit, and diverges otherwise.
+\end{definition}
+
+Sometimes, we may write `$x_n \to a$ as $n \to \infty$' to mean $(x_n) \to a$; this indicates that the terms $x_n$ approach $a$ as $n$ increases without bound. Take heed of the fact that the symbol `$\infty$' in here does not have meaning on its own---it is simply a means of suggesting that as the index $n$ gets greater, the values $x_n$ of the terms in the sequence get closer to the limit.
+
+Before we move onto some examples, let's quickly digest the definition of the expression $(x_n) \to a$. The following table presents a suggestion of how you might read the expression `$\forall \varepsilon > 0,\, \exists N \in \mathbb{N},\, \forall n \ge N,\, |x_n-a| < \varepsilon$' in English.
+\begin{center}
+\begin{tabular}{ll}
+Symbols & English \\
+\hline
+$\forall \varepsilon > 0$\dots{} & For any positive distance $\varepsilon$ (no matter how small)\dots{} \\
+\dots{}$\exists N \in \mathbb{N}$ \dots{} & \dots{}there is a stage in the sequence\dots{} \\
+\dots{}$\forall n \ge N$\dots{} & \dots{}after which all terms in the sequence\dots{} \\
+\dots{}$|x_n-a| < \varepsilon$. & \dots{}are within distance $\varepsilon$ of $a$.
+\end{tabular}
+\end{center}
+
+Thus, a sequence $(x_n)$ converges to $a$ if `\textit{for any positive distance $\varepsilon$ (no matter how small), there is a stage in the sequence after which all terms in the sequence are within $\varepsilon$ of $a$}'. After reading this a few times, you should hopefully be content that this definition captures what is meant by saying that the terms in the sequence are eventually as close to $a$ as we could possibly want them to be.
+
+We are now ready to see some examples of convergent (and divergent) sequences. When reading the following proofs, keep in mind the logical structure---that is, the alternating quantifiers $\forall \varepsilon \dots \exists N \dots \forall n \dots$---in the definition of $(x_n) \to a$.
+
+\begin{proposition}
+\label{propOneOverNConvergence}
+The sequence $(y_n)$ defined by $y_n=\frac{1}{n}$ for all $n \ge 1$ converges to $0$.
+\end{proposition}
+
+\begin{cproof}
+By \Cref{defConvergenceOfSequence}, we need to prove
+\[ \forall \varepsilon > 0,\, \exists N \in \mathbb{N},\, \forall n \ge N,\, \left|\frac{1}{n}-0\right| < \varepsilon \]
+So fix $\varepsilon > 0$. Our goal is to find $N \in \mathbb{N}$ such that $\left|\frac{1}{n}\right| < \varepsilon$ for all $n \ge N$.
+
+Let $N$ be any natural number which is greater than $\frac{1}{\varepsilon}$. Then for all $n \ge N$, we have
+\begin{align*}
+\left| \frac{1}{n} \right| &= \frac{1}{n} && \text{since $\frac{1}{n}>0$ for all $n \ge 1$} \\
+&\le \frac{1}{N} && \text{since $n \ge N$} \\
+&< \frac{1}{1/\varepsilon} && \text{since $N > \frac{1}{\varepsilon}$} \\
+&=\varepsilon &&
+\end{align*}
+Hence $|y_n| < \varepsilon$ for all $n \ge N$. Thus we have proved that $(y_n) \to 0$.
+\end{cproof}
+
+\begin{remark}
+The value of $N$ you need to find in the proof of convergence will usually depend on the parameter $\varepsilon$. (For instance, in \Cref{propOneOverNConvergence}, we defined $N$ to be some natural number greater than $\frac{1}{\varepsilon}$.) This is to be expected---remember that $\varepsilon$ is the distance away from the limit that the terms are allowed to vary after the $N^{\text{th}}$ term. If you make this distance smaller, you'll probably have to go further into the sequence before your terms are all close enough to $a$. In particular, the value of $N$ will usually grow as the value of $\varepsilon$ gets smaller. This was the case in \Cref{propOneOverNConvergence}: note that $\frac{1}{\varepsilon}$ increases as $\varepsilon$ decreases.
+\end{remark}
+
+\begin{example}
+\label{exTwoNOverNPlusOneConvergence}
+Let $(r_n)$ be the sequence from \Cref{exTwoNOverNPlusOne} defined by $r_n = \dfrac{2n}{n+1}$ for all $n \in \mathbb{N}$. We'll prove that $(r_n) \to 2$. So fix $\varepsilon > 0$. We need to find $N \in \mathbb{N}$ such that
+\[ \left| \frac{2n}{n+1} - 2 \right| < \varepsilon \text{ for all } n \ge N \]
+To find such a value of $n$, we'll first do some algebra. Note first that for all $n \in \mathbb{N}$ we have
+\[ \left| \frac{2n}{n+1} - 2 \right| = \left| \frac{2n-2(n+1)}{n+1} \right| = \left| \frac{-2}{n+1} \right| = \frac{2}{n+1} \]
+Rearranging the inequality $\frac{2}{n+1} < \varepsilon$ gives $\frac{n+1}{2} > \frac{1}{\varepsilon}$, and hence $n > \frac{2}{\varepsilon} - 1$.
+
+To be clear, what we've shown so far is that a \textit{necessary} condition for $|r_n-2|<\varepsilon$ to hold is that $n>\frac{2}{\varepsilon}-1$. This informs us what the desired value of $N$ might look like---we will then verify that the desired inequality holds.
+
+So define $N=\frac{2}{\varepsilon}-1$. For all $n \ge N$, we have
+\begin{align*}
+\left| \frac{2n}{n+1} - 2 \right|
+&= \frac{2}{n+1} && \text{by the above work} \\
+&\le \frac{2}{N+1} && \text{since $n \ge N$} \\
+&< \frac{2}{\left(\frac{2}{\varepsilon}-1\right) + 1} && \text{since $N>\frac{2}{\varepsilon}-1$} \\
+&= \frac{2}{2/\varepsilon} && \text{rearranging} \\
+&= \varepsilon && \text{rearranging}
+\end{align*}
+Thus, as claimed, we have $|r_n-2|<\varepsilon$ for all $n \ge N$. It follows that $(r_n) \to 2$, as required.
+\end{example}
+
+\begin{exercise}
+Let $(x_n)$ be the constant sequence with value $a \in \mathbb{R}$. Prove that $(x_n) \to a$.
+\end{exercise}
+
+\begin{exercise}
+Prove that the sequence $(z_n)$ defined by $z_n=\frac{n+1}{n+2}$ converges to $1$.
+\end{exercise}
+
+Here's a slightly more involved example.
+
+\begin{proposition}
+\label{propPowerOfRTendsToZero}
+Let $r \in (-1, 1)$. Then $(r^n) \to 0$.
+\end{proposition}
+
+\begin{cproof}
+If $r=0$, then $r^n = 0$ for all $n \ge 1$, and so for any $\varepsilon > 0$ and $n \ge 1$ we have
+\[ |r^n - 0| = |0| = 0 < \varepsilon \]
+so that $(r^n) \to 0$ as required.
+
+So assume $r \ne 0$ and let $a = \dfrac{1}{|r|} > 1$. Then $a = 1 + \delta$ for some $\delta > 0$, so that by the binomial theorem we have
+\[ a^n ~=~ (1+\delta)^n ~=~ 1+n\delta + \sum_{k=2}^n \binom{n}{k} \delta^{n-k} ~\ge~ 1+n\delta \]
+for all $n \ge 1$.
+
+Now let $\varepsilon > 0$, and let $N \ge 2$ be such that $1+N\delta > \dfrac{1}{\varepsilon}$; any $N > \dfrac{1-\varepsilon}{\delta \varepsilon}$ will do.
+
+Then for all $n \ge N$, we have
+\[ |r^n| ~=~ \frac{1}{a^n} ~\le~ \frac{1}{a^N} ~\le~ \frac{1}{1+N\delta} ~<~ \frac{1}{1/\varepsilon} ~=~ \varepsilon \]
+and so $(r^n) \to 0$, as required.
+\end{cproof}
+
+\subsection*{Divergence}
+
+Before we go too much further, let's see some examples of sequences which \textit{diverge}. Recall (\Cref{defLimitOfSequence}) that a sequence $(x_n)$ converges if $(x_n) \to a$ for some $a \in \mathbb{R}$. Spelling this out symbolically, to say `$(x_n)$ converges' is to say the following:
+\[ \exists a \in \mathbb{R},\, \forall \varepsilon > 0,\, \exists N \in \mathbb{N},\, \forall n \ge N,\, |x_n-a|<\varepsilon \]
+We can negate this using the tools of \Cref{secLogicalEquivalence}: to say that a sequence $(x_n)$ diverges is to say the following:
+\[ \forall a \in \mathbb{R},\, \exists \varepsilon > 0,\, \forall N \in \mathbb{N},\, \exists n \ge N,\, |x_n-a| \ge \varepsilon \]
+In more intuitive terms: for all possible candidates for a limit $a \in \mathbb{R}$, there is a positive distance $\varepsilon$ such that, no matter how far down the sequence you go (say $x_N$), you can find a term $x_n$ beyond that point which is at distance $\ge \varepsilon$ away from $a$.
+
+\begin{example}
+\label{exSequencePlusMinusOneDiverges}
+Let $(x_n)$ be the sequence defined by $x_n=(-1)^n$ for all $n \in \mathbb{N}$:
+\[ (1,-1,1,-1,1,-1,\dots) \]
+We'll prove that $(x_n)$ diverges. Fix $a \in \mathbb{R}$. Intuitively, if $a$ is non-negative, then it must be at distance $\ge 1$ away from $-1$, and if $a$ is negative, then it must be at distance $\ge 1$ away from $1$. We'll now make this precise.
+
+So let $\varepsilon = 1$, and fix $N \in \mathbb{N}$. We need to find $n \ge N$ such that $|({-1})^n-a| \ge 1$. We'll split into cases based on whether $a$ is non-negative or negative.
+\begin{itemize}
+\item Suppose $a \ge 0$. Then ${-1}-a \le -1 < 0$, so that we have
+\[ |{-1}-a| = a-(-1) = a+1 \ge 1 \]
+So let $n=2N+1$. Then $n \ge N$ and $n$ is odd, so that
+\[ |x_n-a|=|({-1})^n-a|=|{-1}-a| \ge 1 \]
+\item Suppose $a<0$. Then $1-a > 1 > 0$, so that we have
+\[ |1-a| = 1-a > 1 \]
+So let $n=2N$. Then $n \ge N$ and $n$ is even, so that
+\[ |x_n-a| = |({-1})^n-a|=|1-a| \ge 1 \]
+\end{itemize}
+In both cases, we've found $n \ge N$ such that $|x_n-a| \ge 1$. It follows that $(x_n)$ diverges.
+\end{example}
+
+\Cref{exSequencePlusMinusOneDiverges} is an example of a \textit{periodic} sequence---that is, it's a sequence that repeats itself. It is difficult for such sequences to converge since, intuitively speaking, they jump up and down a lot. (In fact, the only way that a period sequence \textit{can} converge is if it is a constant sequence!)
+
+\begin{exercise}
+Let $(y_n)$ be the sequence defined by $y_n=n$ for all $n \in \mathbb{N}$:
+\[ (0,1,2,3,\dots) \]
+Prove that $(y_n)$ diverges.
+\end{exercise}
+
+\begin{exercise}
+Let $r \in \mathbb{R}$. Recall that $(r^n) \to 0$ if $|r|<1$ (this was \Cref{propPowerOfRTendsToZero}) and that $(r^n)$ diverges if $r=-1$ (this was \Cref{exSequencePlusMinusOneDiverges}). Prove that $(r^n)$ diverges if $|r|>1$.
+\end{exercise}
+
+\subsection*{`Eventually'}
+
+Consider the following sequence:
+\[ \left( 1,~ 2,~ -10,~ 7,~ \frac{1}{\sqrt{2}},~ 0,~ 0,~ 0,~ 0,~ 0,~ 0,~ \dots \right) \]
+It takes some nonzero values initially, but after the $5^{\text{th}}$ term in the sequence, it remains constant with the value $0$. For most intents and purposes, we can treat it as a constant sequence: after a certain point, it is constant, and so any properties involving \textit{limits} of constant sequences will also be true of this sequence.
+
+Situations like this arise frequently. For example, we might not need a sequence to be \textit{increasing} (\Cref{defMonotoneSequence})---we might just need it to be increasing after some finite stage.
+
+We use the word `eventually' to refer to this phenomenon. (In fact, the word `eventually' is a new kind of quantifier!)
+
+\begin{definition}
+\label{defEventually}
+\index{eventually}
+Let $p(x)$ be a logical formula with free variable $x$ ranging over sequences of real numbers. We say $p((x_n)_{n \ge 0})$ is \textbf{eventually} true if $p((x_n)_{n \ge k})$ is true for some $k \in \mathbb{N}$.
+\end{definition}
+
+\begin{example}
+Some examples of the word `eventually' include:
+\begin{itemize}
+\item A sequence $(x_n)$ is \textit{eventually constant} if $(x_n)_{n \ge k}$ is constant for some $k \in \mathbb{N}$---that is, if there is some $k \in \mathbb{N}$ such that $x_m = x_n$ for all $m,n \ge k$.
+
+\item A sequence $(x_n)$ is \textit{eventually nonzero} if there is some $k \in \mathbb{N}$ such that $x_n \ne 0$ for all $n \ge k$.
+
+\item Two sequences $(x_n)$ and $(y_n)$ are \textit{eventually equal} if there is some $k \in \mathbb{N}$ such that $x_n = y_n$ for all $n \ge k$.
+\end{itemize}
+\end{example}
+
+\begin{example}
+\label{exConvergenceEssentially}
+The definition of $(x_n) \to a$ can be equivalently phrased as:
+\begin{center}
+For all $\varepsilon > 0$, the sequence $(x_n)$ eventually satisfies $|x_n - a| < \varepsilon$.
+\end{center}
+This is because `$\exists N \in \mathbb{N},\, \forall n \ge N,\, |x_n - a| < \varepsilon$' means precisely that $|x_n - a|$ is eventually less than $\varepsilon$.
+\end{example}
+
+\begin{exercise}
+Prove that if a sequence $(x_n)$ converges to a nonzero limit, then $(x_n)$ is eventually nonzero. Find a sequence $(x_n)$ that converges to zero, but is not eventually nonzero.
+\hintlabel{exEventuallyZeroNonzero}{%
+If $(x_n) \to a \ne 0$, show that $|x_n-a|$ is eventually small enough that no $x_n$ can be equal to zero after a certain point in the sequence. On the other hand, there are plenty of sequences, \textit{all} of whose terms are nonzero, which converge to zero---find one!
+}
+\end{exercise}
+
+\begin{exercise}
+Let $(x_n)$ be a sequence and let $p(x)$ be a logical formula. What does it mean to say that $p(x_n)$ is \textit{not} eventually true? Find a sentence involving the phrase `not eventually' that is equivalent to the assertion that $(x_n)$ diverges.
+\end{exercise}
+
+The next theorem will allow us to use the word `eventually' in our proofs, without worrying about whether we're being precise.
+
+\begin{theorem}[`Eventually' preserves conjunction and disjunction]
+Let $(x_n)$ be a sequence, and let $p(x)$ and $q(x)$ be logical formula with free variable $x$ ranging over sequences of real numbers.
+\begin{enumerate}[(a)]
+\item If $p(x_n)$ is eventually true and $q(x_n)$ is eventually true, then $p(x_n) \wedge q(x_n)$ is eventually true.
+\item If $p(x_n)$ is eventually true or $q(x_n)$ is eventually true, then $p(x_n) \vee q(x_n)$ is eventually true.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}
+\fixlistskip
+\begin{enumerate}[(a)]
+\item Let $k,\ell \in \mathbb{N}$ be such that $p(x_n)$ is true for all $n \ge k$ and $q(x_n)$ is true for all $n \ge \ell$. Define $N = \mathrm{max} \{ k, \ell \}$. Then for all $n \ge N$, we have $p(x_n)$ is true since $n \ge N \ge k$, and $q(x_n)$ is true since $n \ge N \ge \ell$, so that $p(x_n) \wedge q(x_n)$ is true for all $n \ge N$. Hence $p(x_n) \wedge q(x_n)$ is eventually true.
+
+\item Assume that $p(x_n)$ is eventually true. Then there is some $k \in \mathbb{N}$ such that $p(x_n)$ is true for all $n \ge k$. But then $p(x_n) \vee q(x_n)$ is true for all $n \ge k$, so that $p(x_n) \vee q(x_n)$ is eventually true. Likewise, if $q(x_n)$ is eventually true, then $p(x_n) \vee q(x_n)$ is eventually true.
+\end{enumerate}
+\end{cproof}
+
+The next exercise urges you not to become too complacent with your use of the word `eventually'.
+
+\begin{exercise}[`Eventually' does not preserve negation]
+Find a sequence $(x_n)$ and a logical formula $p(x)$ such that $p(x_n)$ is neither eventually true nor eventually false. (Thus `$p(x_n)$ is eventually false' does not imply `$\neg p(x_n)$ is eventually true'.)
+\end{exercise}
+
+The following proposition justifies our use of `eventually' in proofs regarding limits---it implies that limiting behaviour of a sequence is not affected by changing (or completely disregarding) the finitely many terms at the beginning of the sequence.
+
+\begin{theorem}
+Let $(x_n)$ and $(y_n)$ be sequences. If $(x_n)$ and $(y_n)$ are eventually equal, then $(x_n)$ converges if and only if $(y_n)$ converges and, if $(x_n) \to a \in \mathbb{R}$, then $(y_n) \to a$ as well.
+\end{theorem}
+
+\begin{cproof}
+\fixlistskip
+\begin{itemize}
+\item First assume that $(x_n)$ converges to $a \in \mathbb{R}$. We prove that $(y_n) \to a$.
+
+So fix $\varepsilon > 0$. Since $(x_n) \to a$, eventually we have $|x_n - a| < \varepsilon$ by \Cref{exConvergenceEssentially}. But eventually $x_n = y_n$, and so we eventually have
+\[ |y_n - a| = |x_n - a| < \varepsilon \]
+as required.
+
+\item Now assume that $(x_n)$ diverges. We prove that $(y_n)$ diverges. So let $a \in \mathbb{R}$, and fix $\varepsilon > 0$ such that, for all $N \in \mathbb{N}$, we have $|x_n - a| \ge \varepsilon$ for some $n \ge N$.
+
+Let $M \in \mathbb{N}$ and define $N = \mathrm{max} \{ k, N \}$, where $k \in \mathbb{N}$ is such that $x_n=y_n$ for all $n \ge k$.
+
+Since $(x_n)$ diverges, there is some $n \ge N$ such that $|x_n - a| \ge \varepsilon$. But then $n \ge N \ge M$ and
+\[ |y_n - a| = |x_n - a| \ge \varepsilon \]
+so that $(y_n)$ diverges.
+\end{itemize}
+\end{cproof}
+
+\subsection*{Computing limits}
+
+Finding limits of sequences can be tricky. \Cref{thmLimitsPreserveArithmeticOperations} makes it slightly easier by saying that if a sequence is built up using arithmetic operations---addition, subtraction, multiplication and division---from sequences whose limits you know, then you can simply apply those arithmetic operations to the limits.
+
+In order to prove part of \Cref{thmLimitsPreserveArithmeticOperations}, however, the following lemma will be useful.
+
+\begin{lemma}
+\label{lemConvergentSequencesAreBounded}
+Let $(x_n)$ be a sequence of real numbers. If $(x_n)$ converges, then $(x_n)$ is bounded---that is, there is some real number $k$ such that $|x_n| \le k$ for all $n \in \mathbb{N}$.
+\end{lemma}
+
+\begin{cproof}
+Let $a \in \mathbb{R}$ be such that $(x_n) \to a$. Letting $\varepsilon = 1$ in the definition of convergence, it follows that there exists some $N \in \mathbb{N}$ such that $|x_n-a| < 1$ for all $n \ge N$. It follows that $-1 < x_n-a < 1$ for all $n \ge N$, and hence $-(1-a) < x_n < 1+a$ for all $n \ge N$.
+
+Now define
+\[ k = \max \{ |x_0|, |x_1|, \dots, |x_{N-1}|, |1-a|, |1+a| \} + 1 \]
+For all $n < N$, we have
+\[ -k < -|x_n| \le x_n \le |x_n| < k \]
+so that $|x_n| < k$. For all $n \ge N$, we have
+\[ -k < -|1-a| \le -(1-a) < x_n < 1+a \le |1+a| < k \]
+so that $|x_n| < k$.
+
+Hence $|x_n| < k$ for all $n \in \mathbb{N}$, as required.
+\end{cproof}
+
+\begin{theorem}
+\label{thmLimitsPreserveArithmeticOperations}
+Let $(x_n)$ and $(y_n)$ be sequences of real numbers, let $a,b \in \mathbb{R}$, and suppose that $(x_n) \to a$ and $(y_n) \to b$. Then
+\begin{enumerate}[(a)]
+\item $(x_n+y_n) \to a+b$;
+\item $(x_n-y_n) \to a-b$;
+\item $(x_ny_n) \to ab$; and
+\item $(\frac{x_n}{y_n}) \to \frac{a}{b}$, so long as $b \ne 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of {(a)} and {(c)}]
+(a). Fix $\varepsilon > 0$. We need to prove that eventually $|(x_n+y_n)-(a+b)| < \varepsilon$.
+\begin{itemize}
+\item Since $(x_n) \to a$, we eventually have $|x_n-a| < \frac{\varepsilon}{2}$;
+\item Since $(y_n) \to b$, we eventually have $|x_n-b| < \frac{\varepsilon}{2}$.
+\end{itemize}
+It follows from the triangle inequality (\Cref{thmTriangleInequality1D}) that we eventually have
+\[ |(x_n+y_n) - (a+b)| = |(x_n-a) + (y_n-b)| \le |x_n-a| + |y_n-b| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \]
+as required.
+
+(c). This one is a little harder. Fix $\varepsilon > 0$. Since $(x_n)$ converges, it follows from \Cref{lemConvergentSequencesAreBounded} that there is some real number $k$ with $|x_n| < k$ for all $n \in \mathbb{N}$.
+\begin{itemize}
+\item Since $(x_n) \to a$, we eventually have $|x_n-a| < \frac{\varepsilon}{2|b|}$;
+\item Since $(y_n) \to b$, we eventually have $|x_n-b| < \frac{\varepsilon}{2k}$.
+\end{itemize}
+Then using the triangle inequality again, eventually we have:
+\begin{align*}
+|x_ny_n - ab| &= |x_n(y_n-b) + b(x_n-a)| && \text{rearranging} \\
+&\le |x_n(y_n-b)| + |b(x_n-a)| && \text{by the triangle inequality} \\
+&= |x_n| |y_n-b| + |b| |x_n-a| && \text{rearranging} \\
+&< k|y_n-b| + |b| |x_n-a| && \text{since $|x_n| < k$ for all $n$} \\
+&< k\frac{\varepsilon}{2k} + |b|\frac{\varepsilon}{2|b|} && \text{(eventually)} \\
+&= \varepsilon && \text{rearranging}
+\end{align*}
+Hence $(x_ny_n) \to ab$, as required.
+\end{cproof}
+
+\begin{exercise}
+Prove parts (b) and (d) of \Cref{thmLimitsPreserveArithmeticOperations}.
+\end{exercise}
+
+\Cref{thmLimitsPreserveArithmeticOperations} \textit{appears} obvious, but as you can see in the proof, it is more complicated than perhaps expected. It was worth the hard work, though, because we can now compute more complicated limits formed in terms of arithmetic operations by taking the limits of the individual components.
+
+The following example uses \Cref{thmLimitsPreserveArithmeticOperations} to prove that $\left( \frac{2n}{n+1} \right) \to 2$ in a much simpler way than we saw in \Cref{exTwoNOverNPlusOneConvergence}.
+
+\begin{example}
+\label{exTwoNOverNPlusOneConvergenceAgain}
+We provide another proof that the sequence $(r_n)$ of \Cref{exTwoNOverNPlusOne}, defined by $r_n=\frac{2n}{n+1}$ for all $n \in \mathbb{N}$, converges to $2$.
+
+For all $n \ge 1$, dividing by the top and bottom gives
+\[ r_n=\frac{2}{1+\frac{1}{n}} \]
+The constant sequences $(2)$ and $(1)$ converge to $2$ and $1$, respectively; and by \Cref{propOneOverNConvergence}, we know that $(\frac{1}{n}) \to 0$. It follows that
+\[ (r_n) \to \frac{2}{1+0} = 2 \]
+as required.
+\end{example}
+
+\begin{exercise}
+\label{exPolynomialsAreContinuousUsingSequences}
+Let $(x_n)$ be a sequence of real numbers converging to a real number $a$, and let $p(x) = a_0 + a_1x + \cdots + a_d x^d$ be a polynomial function. Prove that $(p(x_n)) \to p(a)$, and that $\left( \frac{1}{p(x_n)} \right) \to \frac{1}{p(a)}$ if $p(a) \ne 0$.
+\end{exercise}
+
+The so-called \textit{squeeze theorem} provides another means of computing limits. It says that if we can eventually `squeeze' the terms of a sequence $(y_n)$ between terms of two other sequences that converge to the same limit, then we can deduce that $(y_n)$ converges to the same limit.
+
+\begin{theorem}[Squeeze theorem]
+\label{thmSqueeze}
+\index{squeeze theorem}
+Let $(x_n)$, $(y_n)$ and $(z_n)$ be sequences of real numbers such that:
+\begin{enumerate}[(i)]
+\item $(x_n) \to a$ and $(z_n) \to a$; and
+\item Eventually $x_n \le y_n \le z_n$.
+\end{enumerate}
+Then $(y_n) \to a$.
+\end{theorem}
+
+\begin{cproof}
+Fix $\varepsilon > 0$. We need to prove that, eventually, $|y_n - a| < \varepsilon$.
+
+Since $(x_n) \to a$ and $(z_n) \to a$, we eventually have $|x_n - a| < \varepsilon$ and $|z_n - a| < \varepsilon$.
+
+Fix $N \in \mathbb{N}$ such that for all $n \ge N$ we have $|y_n - a| < \varepsilon$, $|z_n - a| < \varepsilon$ and $x_n < y_n < z_n$. Given $n \ge N$:
+\begin{itemize}
+\item If $y_n \ge a$, then we have $a \le y_n \le z_n$, and so
+\[ |y_n-a| = y_n-a \le z_n-a = |z_n-a| < \varepsilon \]
+\item If $y_n \le a$, then we have $x_n \le y_n \le a$, and so
+\[ |y_n-a| = a-y_n \le a-x_n = |x_n-a| < \varepsilon \]
+\end{itemize}
+In both cases we have proved $|y_n-a| < \varepsilon$. It follows that $(y_n) \to a$.
+\end{cproof}
+
+\begin{example}
+\label{exOneOverNPowerK}
+Fix $k \ge 1$. We prove that the sequence $\left( \dfrac{1}{n^k} \right)_{n \ge 1}$ converges to zero.
+
+Note that $n^k > n$, so that we have $0 < \frac{1}{n^k} \le \frac{1}{n}$ for all $n \in \mathbb{N}$. We know that $(\frac{1}{n}) \to 0$ by \Cref{exOneOverN}, and $(0) \to 0$ since it is a constant sequence, so the squeeze theorem implies that $(\frac{1}{n^k}) \to 0$.
+\end{example}
+
+\begin{exercise}
+Fix $r \in \mathbb{N}$, and let $p(x) = a_0 + a_1 x + \cdots + a_r x^r$ and $q(x) = b_0 + b_1 x + \cdots + b_r x^r$ be polynomials with real coefficients. Prove that if $b_r \ne 0$, then $\left( \dfrac{p(n)}{q(n)} \right) \to \dfrac{a_r}{b_r}$.
+\hintlabel{exLimitOfQuotientOfPolynomials}{%
+Divide the numerator and denominator by $n^r$ and apply \Cref{thmLimitsPreserveArithmeticOperations} and \Cref{exOneOverNPowerK}.
+}
+\end{exercise}
+
+\subsection*{Uniqueness of limits}
+
+We now prove that a sequence can have at most one limit. This will allow us to talk about `the' limit of a sequence, and introduce notation for the limit of a sequence.
+
+\begin{theorem}[Uniqueness of limits]
+\label{thmUniquenessofLimits}
+Let $(x_n)$ be a sequence and let $a,b \in \mathbb{R}$. If $(x_n) \to a$ and $(x_n) \to b$, then $a=b$.
+\end{theorem}
+
+\begin{cproof}
+We'll prove that $|a-b|=0$, which will imply that $a=b$. To do this, we'll prove that $|a-b|$ is not positive: we already know it's non-negative, so this will imply that it is equal to zero. To prove that $|a-b|$ is not positive, we'll prove that it is less than every positive number.
+
+So fix $\varepsilon > 0$. Then also $\frac{\varepsilon}{2}>0$. The definition of convergence (\Cref{defConvergenceOfSequence}) tells us that eventually $|x_n-a|<\frac{\varepsilon}{2}$ and $|x_n-b|<\frac{\varepsilon}{2}$.
+
+By the triangle inequality (\Cref{thmTriangleInequality1D}), it follows that eventually
+\begin{align*}
+|a-b| &= |(a-x_n) + (x_n-b)| && \text{by cancelling the $x_n$ terms} \\
+&\le |a-x_n| + |x_n-b| && \text{by the triangle inequality} \\
+&= |x_n-a| + |x_n-b| && \text{by \Cref{exDistanceIsSymmetric}} \\
+&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon && \text{(eventually)}
+\end{align*}
+Since $|a-b|<\varepsilon$ for all $\varepsilon > 0$, it follows that $|a-b|$ is a non-negative real number that is less than every positive real number, so that it is equal to zero.
+
+Since $|a-b|=0$, we have $a-b=0$, and so $a=b$.
+\end{cproof}
+
+\Cref{thmUniquenessofLimits} justifies the following notation.
+
+\begin{definition}
+\label{defLimitOfSequenceNotation}
+Let $(x_n)$ be a convergent sequence. The limit of $(x_n)$ is denoted by $\lim\limits_{n \to \infty} (x_n)$ \inlatex{lim\_\{n \textbackslash{}to \textbackslash{}infty\}}.
+\end{definition}
+
+[The usual warnings about the symbol $\infty$ apply.]
+
+\begin{example}
+\Cref{propOneOverNConvergence,exTwoNOverNPlusOneConvergence} tell us that
+\[ \lim_{n \to \infty} \left( \frac{1}{n} \right) = 0 \quad \text{and} \quad \lim_{n \to \infty} \left( \frac{2n}{n+1} \right) = 2 \]
+\end{example}
+
+\subsection*{Existence of limits}
+
+It is often useful to know \textit{that} a sequence converges, but not necessary to go to the arduous lengths of computing its limit. However, as it currently stands, we don't really have any tools for proving that a sequence converges other than finding a limit for it! The remainder of this section is dedicated to deriving tools for finding out when a sequence does or does not converge, without needing to know exactly what the limit is.
+
+Perhaps the most fundamental result is the \textit{monotone convergence theorem} (\Cref{thmMonotoneConvergence}), since it underlies the proofs of all the other results that we will prove. What it says is that if the terms in a sequence always increase, or always decrease, and the set of terms in the sequence is bounded, then the sequence converges to a limit.
+
+The sequence $(r_n)$ from \Cref{exTwoNOverNPlusOne}, defined by $r_n=\frac{2n}{n+1}$ for all $n \in \mathbb{N}$, is an example of such a sequence. We proved that it converged by computing its limit in \Cref{exTwoNOverNPlusOneConvergence} and again in \Cref{exTwoNOverNPlusOneConvergenceAgain}. We will soon (\Cref{exTwoNOverNPlusOneConvergenceYetAgain}) use the monotone convergence theorem to give \textit{yet another proof} that it converges, but this time without going to the trouble of first finding its limit.
+
+Before we can state the monotone convergence theorem, we must first define what we mean by a \textit{monotonic sequence}.
+
+\begin{definition}
+\label{defMonotoneSequence}
+\index{sequence!monotone}\index{monotone sequence}
+\index{sequence!increasing}\index{increasing sequence}
+\index{sequence!decreasing}\index{decreasing sequence}
+A sequence of real numbers $(x_n)$ is\dots{}
+\begin{itemize}
+\item \dots{}\textbf{increasing} if $m \le n$ implies $x_m \le x_n$ for all $m,n \in \mathbb{N}$;
+\item \dots{}\textbf{decreasing} if $m \le n$ implies $x_m \ge x_n$ for all $m,n \in \mathbb{N}$.
+\end{itemize}
+If a sequence is either increasing or decreasing, we say it is \textbf{monotonic}.
+\end{definition}
+
+\begin{example}
+The sequence $(x_n)$ defined by $x_n=n^2$ for all $n \in \mathbb{N}$ is increasing, since for all $m,n \in \mathbb{N}$, if $m \le n$, then $m^2 \le n^2$. To see this, note that if $m \le n$, then $n-m \ge 0$ and $n+m \ge 0$, so that
+\[ n^2-m^2 = (n-m)(n+m) \ge 0 \cdot 0 = 0 \]
+and hence $n^2 \ge m^2$, as required.
+\end{example}
+
+\begin{example}
+\label{exTwoNOverNPlusOneIncreasing}
+The sequence $(r_n)$ from \Cref{exTwoNOverNPlusOne,exTwoNOverNPlusOneConvergenceAgain}, defined by $r_n=\frac{2n}{n+1}$ for all $n \in \mathbb{N}$, is increasing. To see this, suppose $m \le n$. Then $n=m+k$ for some $k \ge 0$. Now
+\begin{align*}
+&\phantom{\Rightarrow} 0 \le k && \text{by assumption} \\
+&\Leftrightarrow m^2+km+m \le m^2+km+m+k && \text{adding $m^2+km+m$ to both sides} \\
+&\Leftrightarrow m(m+k+1) \le (m+1)(m+k) && \text{factorising} \\
+&\Leftrightarrow m(n+1) \le (m+1)n && \text{since $n=m+k$} \\
+&\Leftrightarrow \frac{m}{m+1} \le \frac{n}{n+1} && \text{dividing both sides by $(m+1)(n+1)$} \\
+&\Leftrightarrow r_m \le r_n && \text{by definition of $(r_n)$}
+\end{align*}
+Note that the step where we divided through by $(m+1)(n+1)$ is justified since this quantity is positive.
+
+It is perhaps useful to add that to \textit{come up with} this proof, it is more likely that you would start with the assumption $r_m \le r_n$ and derive that $k \ge 0$---noting that all steps are reversible then allows us to write it in the `correct' order.
+\end{example}
+
+\begin{exercise}
+Prove that the sequence $(5^n-n^5)_{n \ge 0}$ is \textit{eventually} increasing---that is, there is some $k \in \mathbb{N}$ such that $(5^n-n^5)_{n \ge k}$ is an increasing sequence.
+\hintlabel{ex5PowerNMinusNPowerFiveIncreasing}{%
+You might want to begin by solving \Cref{exNPowerFiveLessThanFivePowerN}.
+}
+\end{exercise}
+
+The monotone convergence theorem underlies all of the other tools for proving convergence of sequences that are to follow. It makes essential use of the completeness axiom.
+
+\begin{theorem}[Monotone convergence theorem]
+\label{thmMonotoneConvergence}
+\index{monotone convergence theorem}
+Let $(x_n)$ be a sequence of real numbers.
+\begin{enumerate}[(a)]
+\item If $(x_n)$ is increasing and has an upper bound, then it converges;
+\item If $(x_n)$ is decreasing and has a lower bound, then it converges.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of (a)]
+We prove (a) here---part (b) is \Cref{exMonotoneConvergenceForDecreasingSequences}.
+
+So suppose $(x_n)$ is increasing and has an upper bound. Then:
+\begin{enumerate}[(i)]
+\item $x_m \le x_n$ for all $m \le n$; and
+\item There is some real number $u$ such that $u \ge x_n$ for all $n \in \mathbb{N}$.
+\end{enumerate}
+
+Condition (ii) tells us that the set $\{ x_n \mid n \in \mathbb{N} \} \subseteq \mathbb{R}$ has an upper bound. By the completeness axiom, it has a supremum $a$. We prove that $(x_n) \to a$.
+
+So let $\varepsilon > 0$. We need to find $N \in \mathbb{N}$ such that $|x_n - a| < \varepsilon$ for all $n \ge N$.
+
+Since $a$ is a supremum of $\{ x_n \mid n \in \mathbb{N} \}$, there is some $N \in \mathbb{N}$ such that $x_N > a-\varepsilon$.
+
+Since $(x_n)$ is increasing, by (i) we have $x_N \le x_n$ for all $n \ge N$. Moreover, since $a$ is an upper bound of the sequence, we actually have $x_N \le x_n \le a$ for all $n \ge N$.
+
+Putting this together, for all $n \ge N$, we have
+\begin{align*}
+|x_n - a|
+& = a-x_n && \text{since $x_n-a \le 0$} \\
+& \le a-x_N && \text{since $x_N \le x_n$ for all $n \ge N$} \\
+& < \varepsilon && \text{since $x_N > a-\varepsilon$}
+\end{align*}
+It follows that $(x_n) \to a$, as required.
+\end{cproof}
+
+\begin{exercise}
+\label{exMonotoneConvergenceForDecreasingSequences}
+Prove part (b) of the monotone convergence theorem (\Cref{thmMonotoneConvergence}). That is, prove that if a sequence $(x_n)$ is decreasing and has a lower bound, then it converges.
+\end{exercise}
+
+\begin{example}
+The monotone convergence theorem can be used to show that many of the sequences that we have already seen converge, although it doesn't tell us what their limit is. For example, $\left( \frac{1}{n} \right)$ converges since it is a decreasing sequence that is bounded below by $0$.
+\end{example}
+
+\begin{example}
+\label{exTwoNOverNPlusOneConvergenceYetAgain}
+Let $(r_n)$ be our recurring example sequence from \Cref{exTwoNOverNPlusOne,exTwoNOverNPlusOneConvergenceAgain,exTwoNOverNPlusOneIncreasing}, defined by $r_n = \frac{2n}{n+1}$ for all $n \in \mathbb{N}$. We proved in \Cref{exTwoNOverNPlusOneIncreasing} that $(r_n)$ is increasing. Moreover, for all $n \in \mathbb{N}$ we have
+\[ r_n = \frac{2n}{n+1} < \frac{2(n+1)}{n+1} = 2 \]
+and so $(r_n)$ is bounded above by $2$. By the monotone convergence theorem, the sequence $(r_n)$ converges. Unfortunately, the monotone convergence theorem does not tell us what the limit of $(r_n)$ is, but we have already computed it twice!
+\end{example}
+
+\begin{exercise}
+Use the monotone convergence theorem to prove that the sequence $\left( \frac{n!}{n^n} \right)$ converges.
+\end{exercise}
+
+\begin{exercise}
+A sequence $(x_n)$ is defined recursively by $x_0 = 0$ and $x_{n+1} = \sqrt{2+x_n}$ for all $n \ge 0$. That is,
+\[ x_n = \underbrace{\sqrt{2 + \sqrt{2 + \sqrt{ \cdots + \sqrt{2}}}}}_{n \text{ `2's}} \]
+Prove that $(x_n)$ converges.
+\end{exercise}
+
+We now define the notion of a \textit{subsequence} of a sequence. A subsequence of a sequence is just like a subset of a set, except we can only pick out terms in a sequence in the order they appear.
+
+\begin{definition}
+\label{defSubsequence}
+\index{subsequence}
+Let $(x_n)$ be a sequence of real numbers. A \textbf{subsequence} of $(x_n)$ is a sequence of the form $(x_{n_i})_{i \ge 0}$, where $n_i < n_j$ for all $0 \le i < j$.
+\end{definition}
+
+In \Cref{defSubsequence} we were careful to write $(x_{n_i})_{i \ge 0}$ rather than just $(x_{n_i})$, because we wanted to emphasise that the indexing variable is $i$, rather than $n$. This is good practice in any situation where confusion might arise over which variable is the indexing variable.
+
+\begin{example}
+Define a sequence $(x_n)$ by $x_n = (-1)^n$ for all $n \ge 0$.
+\[ (x_n)_{n \ge 0} = (1, {-1}, 1, {-1}, 1, {-1}, \dots) \]
+The subsequence $(x_{2i})$ is the constant sequence with value $1$, since for each $i \ge 0$ we have $x_{2i} = (-1)^{2i} = 1$, and the subsequence $(x_{2i+1})$ is the constant sequence with value $-1$, since for each $i \ge 0$ we have $x_{2i+1} = (-1)^{2i+1} = -1$.
+\end{example}
+
+\begin{theorem}
+Let $(x_n)$ be a sequence, let $a \in \mathbb{R}$, and suppose $(x_n) \to a$. Then every subsequence of $(x_n)$ converges to $a$.
+\end{theorem}
+
+\begin{cproof}
+Let $(x_{n_i})_{i \ge 0}$ be a subsequence of $(x_n)$. We need to prove that $(x_{n_i}) \to a$ as $i \to \infty$. To this end, fix $\varepsilon > 0$. We need to find $I \ge 0$ such that $|x_{n_i} - a| < \varepsilon$ for all $i \ge I$.
+
+Since $(x_n) \to a$ as $n \to \infty$, there exists some $N \ge 0$ such that $|x_n-a| < \varepsilon$ for all $n \ge N$. Let $I \ge 0$ be least such that $n_I \ge N$. We know that $I$ exists since we have $0 \le n_0 < n_1 < n_2 < \dots$.
+
+But then for all $i \ge I$, we have $n_i \ge n_I \ge N$, and hence $|x_{n_i} - a| < \varepsilon$ by definition of $N$.
+
+Hence the subsequence $(x_{n_i})$ converges to $a$, as required.
+\end{cproof}
+
+\begin{exercise}
+Prove that a subsequence of an increasing sequence is increasing, that a subsequence of a decreasing sequence is decreasing, and that a subsequence of a constant sequence is constant.
+\end{exercise}
+
+We can use the monotone convergence theorem and the squeeze theorem to prove the following very powerful result, which is related to a notion in the field of topology known as \textit{sequential compactness}.
+
+\begin{theorem}[Bolzano--Weierstrass theorem]
+\label{thmBolzanoWeierstrass}
+Every bounded sequence of real numbers has a convergent subsequence.
+\end{theorem}
+
+\begin{cproof}
+Let $(x_n)$ be a sequence of real numbers and let $a,b \in \mathbb{R}$ be such that $a < x_n < b$ for each $n \ge 0$---the numbers $a$ and $b$ exist since the sequence $(x_n)$ is bounded.
+
+Our strategy is as follows. The sequence $(x_n)$ is entirely contained inside the interval $[a, b]$, which has length $\ell = b-a$. Letting $c = \frac{a+b}{2}$ be the (arithmetic) mean of $a$ and $b$, we see that one of the intervals $[a,c]$ or $[c,b]$, or possibly both, must contain infinitely many terms of the sequence $(x_n)$---but then this defines a subsequence of $(x_n)$ which is entirely contained inside a sub-interval of $[a,b]$ whose length is $\frac{\ell}{2}$. We iterate this process inductively, obtaining smaller and smaller intervals that contain infinitely many terms in the sequence $(x_n)$. The end-points of these intervals are then bounded monotone sequences---the sequence of lower end-points is increasing, and the sequence of upper end-points is decreasing. The monotone convergence theorem implies that both sequences converge. We will prove that they converge to the same limit, thereby `trapping' a subsequence of $(x_n)$, which will converge by the squeeze theorem.
+
+Now let's put our strategy into action. We will define the terms $n_i$, $a_i$ and $b_i$ by induction on $i$, and then verify that the resulting subsequence $(x_{n_i})_{i \ge 0}$ converges.
+
+First, define $n_0=0$, $a_0=a$ and $b_0=b$.
+
+Now fix $i \ge 0$ and suppose that the numbers $n_i$, $a_i$ and $b_i$ have been defined in such a way that:
+\begin{enumerate}[(i)]
+\item $x_{n_i} \in [a_i, b_i]$;
+\item $x_n \in [a_i, b_i]$ for infinitely many $n > n_i$;
+\item $a_j \le a_i < b_i \le b_j$ for all $j \le i$; and
+\item $b_i-a_i = \frac{\ell}{2^i}$.
+\end{enumerate}
+Write $c_i = \frac{a_i+b_i}{2}$. By condition (ii), it must be case that infinitely many of the terms $x_n$, for $n > n_i$, are contained in either $[a_i, c_i]$ or in $[c_i, b_i]$. In the former case, define $a_{i+1}=a_i$ and $b_{i+1}=c_i$; and in the latter case define $a_{i+1}=c_i$ and $b_{i+1}=b_i$; and then define $n_{i+1} > n_i$ such that $x_{n_{i+1}} \in [a_{i+1}, b_{i+1}]$.
+
+Note that conditions (i)--(iv) are satisfied, with $i$ now replaced by $i+1$. Indeed, (i) and (ii) are satisfied by definition of $a_{i+1}, b_{i+1}$ and $n_{i+1}$. Condition (iii) is satisfied since either $a_{i+1}=a_i$ or $a_{i+1} = \frac{a_i + c_i}{2} \ge a_i$, and likewise for $b_{i+1}$. Condition (iv) is satisfied since
+\[ c_i-a_i = \frac{a_i+b_i}{2} - a_i = \frac{b_i-a_i}{2} = \frac{\ell/2^i}{2} = \frac{\ell}{2^{i+1}} \]
+and likewise $b_i-c_i = \frac{\ell}{2^{i+1}}$.
+
+Since by construction we have $n_i<n_{i+1}$ for each $i \ge 0$, we have defined a subsequence $(x_{n_i})_{i \ge 0}$ of $(x_n)$.
+
+Now the sequence $(a_i)$ is increasing and is bounded above by $b$, and the sequence $(b_i)$ is decreasing and is bounded below by $a$. By the monotone convergence theorem $(a_i) \to a^{\star}$ and $(b_i) \to b^{\star}$ for some $a^{\star}, b^{\star} \in \mathbb{R}$. But moreover we have
+\[ \frac{\ell}{2^i} = b_i - a_i \to b^{\star} - a^{\star} \]
+Since $\frac{\ell}{2^i} \to 0$, we have $b^{\star} - a^{\star} = 0$ by uniqueness of limits, and so $a^{\star} = b^{\star}$. Write $x^{\star}$ for the common value of $a^{\star}$ and $b^{\star}$.
+
+Finally, we have $a_i \le x_{n_i} \le b_i$ for all $i \ge 0$, so that $x_{n_i} \to x^{\star}$ by the squeeze theorem.
+\end{cproof}
+
+The Bolzano--Weierstrass theorem can be used to prove that a sequence converges by verifying that its terms get arbitrarily close together. Such sequences are called \textit{Cauchy} sequences, and the fact that all Cauchy sequences converge is proved in \Cref{thmCauchyImpliesConvergent}.
+
+\begin{definition}
+\label{defCauchySequence}
+\index{Cauchy sequence}
+\index{sequence!Cauchy}
+A \textbf{Cauchy sequence} is a sequence $(x_n)$ of real numbers such that, for all $\varepsilon > 0$, there exists $N \in \mathbb{N}$ such that $|x_m-x_n| < \varepsilon$ for all $m,n \ge N$.
+\end{definition}
+
+\begin{example}
+\label{exTwoNOverNPlusOneConvergenceYetYetAgain}
+Let $(r_n)$ be our favourite recurring example sequence from \Cref{exTwoNOverNPlusOne,exTwoNOverNPlusOneConvergenceAgain,exTwoNOverNPlusOneIncreasing,exTwoNOverNPlusOneConvergenceYetAgain}, defined by $r_n = \dfrac{2n}{n+1}$ for all $n \in \mathbb{N}$. We prove that $(r_n)$ is Cauchy.
+
+First note that, given $m,n \ge 1$, we have
+\[ |r_m - r_n| = \left| \frac{2m}{m+1} - \frac{2n}{n+1} \right| = \frac{2 |m-n|}{(m+1)(n+1)} = \frac{2 |\frac{1}{n} - \frac{1}{m}|}{(1+\frac{1}{m})(1+\frac{1}{n})} \]
+
+Now fix $\varepsilon > 0$, and let $N \in \mathbb{N}$ be such that $\frac{1}{m} < \frac{\varepsilon}{2}$ and $\frac{1}{n} < \frac{\varepsilon}{2}$ for all $m,n > N$. Note that such a value of $N$ exists by \Cref{exOneOverN}.
+
+Now let $m,n \ge N$. Then $|\frac{1}{n} - \frac{1}{m}| < \frac{\varepsilon}{2}$ since both $\frac{1}{m}$ and $\frac{1}{n}$ are elements of $(0,\frac{\varepsilon}{2})$. Moreover $1 + \frac{1}{m} > 1$ and $1 + \frac{1}{n} > 1$. It follows that, for all $m,n \ge N$, we have
+\[ |r_m - r_n| < \frac{2 \cdot \frac{\varepsilon}{2}}{1 \cdot 1} = \varepsilon \]
+
+Hence $(r_n)$ is Cauchy, as claimed.
+\end{example}
+
+The following exercise generalises the previous example.
+
+\begin{exercise}
+Prove that every convergent sequence is a Cauchy sequence.
+\hintlabel{exConvergentImpliesCauchy}{%
+In the definition of a Cauchy sequence, observe that $x_m-x_n = (x_m-a) - (x_n-a)$, and apply the triangle inequality (\Cref{thmTriangleInequality1D}).
+}
+\end{exercise}
+
+\begin{theorem}[Cauchy criterion]
+\label{thmCauchyImpliesConvergent}
+Every Cauchy sequence of real numbers converges.
+\end{theorem}
+
+\begin{cproof}
+Let $(x_n)$ be a Cauchy sequence of real numbers.
+
+First note that $(x_n)$ is bounded. To see this, note that by definition of Cauchy sequences, there is some $N \in \mathbb{N}$ such that $|x_m - x_n| < 1$ for all $m,n \ge N$. In particular, $|x_m - x_N| < 1$ for all $m \ge N$. This means that the sequence $(x_n)$ is bounded below by
+\[ a = \mathrm{min} \{ x_0, x_1, \dots, x_{N-1}, x_N - 1 \} \]
+and is bounded above by
+\[ b = \mathrm{max} \{ x_0, x_1, \dots, x_{N-1}, x_N + 1 \} \]
+
+By the Bolzano--Weierstrass theorem (\Cref{thmBolzanoWeierstrass}), the sequence $(x_n)$ has a convergent subsequence $(x_{n_i})$. Let $x^{\star} = \lim_{i \to \infty} (x_{n_i})$. We prove that $(x_n) \to x^{\star}$.
+
+So let $\varepsilon > 0$. Fix $M$ sufficiently large that:
+\begin{itemize}
+\item $|x_{n_i} - x^{\star}| < \frac{\varepsilon}{3}$ for all $n_i \ge M$; and
+\item $|x_n - x_m| < \frac{\varepsilon}{3}$ for all $m,n \ge M$.
+\end{itemize}
+Such a value of $M$ exists by convergence of $(x_{n_i})$ and the Cauchy property of $(x_n)$.
+
+Fix $n \ge M$, and let $i \in \mathbb{N}$ be arbitrary such that $n_i \ge M$. Then we have
+\begin{align*}
+& |x_n - x^{\star}| \\
+&= |(x_n - x_M) + (x_M - x_{n_i}) + (x_{n_i} - x^{\star})| && \text{rearranging} \\
+&\le |x_n - x_M| + |x_M - x_{n_i}| + |x_{n_i} - x^{\star}| && \text{by the triangle inequality} \\
+&< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} && \text{by the above properties} \\
+&= \varepsilon
+\end{align*}
+Hence $(x_n) \to x^{\star}$, as required.
+\end{cproof}

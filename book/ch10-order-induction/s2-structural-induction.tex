@@ -1,0 +1,633 @@
+\section{Structural induction}
+\label{secStructuralInduction}
+\index{induction!structural|(}
+
+In \Cref{secPeanosAxioms}, we formalised the idea that the set of natural numbers should be what is obtained by starting with zero and repeating the successor (`plus one') operation---this was done using Peano's axioms (\Cref{defNotionOfNaturalNumbers}). From these axioms we were able to derive the weak and strong induction principles, which turned out to be extremely powerful for proving results about natural numbers.
+
+We now generalise this idea to other so-called \textit{inductively defined} sets. The definition (\Cref{defInductivelyDefinedSet}) is a little tricky to digest, but the idea is relatively simple: an inductively defined set $X$ is one whose elements are built out of some specified \textit{basic elements} (such as $0$) by iterating some specified operations, called \textit{constructors} (such as the successor operation)---every element of $X$ should either be a basic element, or should be built in a unique way out of simpler elements of $X$ by using a constructor.
+
+Each inductively defined set $X$ will have its own induction principle: which says that if a property is true of all of the basic elements of $X$, and if all of its constructors preserve the truth of the property, then the property is true of all of the elements of $X$. We will prove this in \Cref{thmStructuralInduction}.
+
+Before jumping into the definition of an inductively defined set, it is helpful to see some examples. The first example is familiar.
+
+\begin{example}
+\label{exNaturalNumbersAsInductivelyDefinedSetPreliminary}
+The set $\mathbb{N}$ of natural numbers is built from the natural number $0$ by adding one. The operation of `adding one' yields the successor operation $s : \mathbb{N} \to \mathbb{N}$, defined by $s(n)=n+1$ for all $n \in \mathbb{N}$. The Peano axioms tell us that every natural number is either $0$, or is equal to $s(n)$ for a unique $n \in \mathbb{N}$.
+\end{example}
+
+The next example concerns words over an alphabet, which we studied in \Cref{secCountableUncountableSets} in the context of determining when a set is countable---see \Cref{defKleeneStar}.
+
+\begin{example}
+\label{exWordsAsInductivelyDefinedSetPreliminary}
+Given an alphabet $\Sigma$, the set $\Sigma^*$ of words over $\Sigma$ is built from the empty word $\varepsilon$ by appending elements $\sigma \in \Sigma$. Each $a \in \Sigma$ induces a function $\sigma_a : \Sigma^* \to \Sigma^*$ defined by $\sigma_a(w) = w\sigma$ for all $w \in \Sigma^*$, and every element of $\Sigma^*$ is either the empty word $\varepsilon$, or is equal to $\sigma_a(w)$ for a unique $a \in \Sigma$ and a unique $w \in \Sigma^*$. 
+\end{example}
+
+We alluded to the inductive character of propositional formulae in \Cref{secPropositionalLogic}. Although we were not able to make the idea precise at the time, we are now well on our way to doing so.
+
+\begin{example}
+\label{exPropositionalFormulaeAsInductivelyDefinedSetPreliminary}
+Given a set $P$, consider the set $L(P)$ of all propositional formulae with propositional variables from $P$ and logical operators from the set $\{ {\wedge}, {\vee}, {\Rightarrow}, {\neg} \}$. Then $L(P)$ is built out of the elements of $P$ using these logical operators.
+
+Each logical operator induces an operation on the set $L(P)$. Indeed, ach logical operator $\odot \in \{ {\wedge}, {\vee}, {\Rightarrow} \}$ induces a function $\sigma_{\odot} : L(P)^2 \to L(P)$ defined by $\sigma_{\odot}(\varphi, \psi) = \varphi \odot \psi$ for all $\varphi,\psi \in L(P)$; and the logical operator $\neg$ induces a function $\sigma_{\neg} : L(P) \to L(P)$ defined by $\sigma_{\neg}(\varphi) = \neg \varphi$ for all $\varphi \in L(P)$.
+
+Every propositional formula in $L(P)$ is then either a propositional variable $p \in P$, or is $\sigma_{\neg}(\varphi)$ for a unique $\varphi \in L(P)$, or is $\sigma_{\odot}(\varphi,\psi)$ for a unique logical operator $\odot \in \{ {\wedge}, {\vee}, {\Rightarrow}, {\neg} \}$ and unique $\varphi,\psi \in L(P)$ .
+
+For example, let $\varphi = (p \wedge q) \Rightarrow (\neg r)$. Then $\varphi = \sigma_{\Rightarrow}( p \wedge q, \neg r )$, and this is the unique expression of $\varphi$ as a constructor applied to simpler propositional formulae. Continuing, we eventually reach the level of basic elements, which are propositional variables in this case: $p \wedge q = \sigma_{\wedge}(p,q)$ and $\neg r = \sigma_{\neg}(r)$.
+\end{example}
+
+Keeping these examples in mind, we are now ready to define the notion of an inductively defined set.
+
+\begin{definition}
+\label{defInductivelyDefinedSet}
+\index{inductively defined set}
+\index{set!inductively defined}
+\index{constructor}
+\index{arity}
+\nindex{arity}{$\mathrm{ar}(f)$}{arity of a constructor}
+An \textbf{inductively defined set} is a set $A$ together with a set $C_A$ of \textbf{constructors}, which are functions $\sigma : A^r \to A$ for various $r \in \mathbb{N}$, such that
+\begin{enumerate}[(i)]
+\item For each $a \in A$, there is a unique constructor $\sigma : A^r \to A$ and unique elements $a_1,a_2,\dots,a_r \in A$ such that $a = \sigma(a_1,a_2,\dots,a_r)$; and
+\item For all sets $X$, if $\sigma(a_1,a_2,\dots,a_r) \in A$ for all constructors $\sigma : A^r \to A$ and all $a_1,a_2,\dots,a_r \in A$, then $A \subseteq X$.
+\end{enumerate}
+For a constructor $\sigma : A^r \to A$, the natural number $r$ such that $\sigma : A^r \to A$ is called the \textbf{arity} of $\sigma$, also written as $\mathrm{ar}(\sigma)$ \inlatex{mathrm\{ar\}}.
+\end{definition}
+
+A quick note on terminology: a constructor of arity $r \in \mathbb{N}$ is called an \textit{$r$-ary} constructor. For $r=0,1,2$, we may say \textit{nullary}, \textit{unary} and \textit{binary}, respectively.
+
+You might be wondering, where are the basic elements? It turns out that the basic elements are exactly the nullary constructors---after all, if basic elements are simply declared to exist, then they are constructed out of nothing. To make this idea precise, note that $A^0 = \{ () \}$, where $()$ is the empty list of elements of $A$; a function $\sigma : A^0 \to A$ is therefore determined by the value $\sigma(\,()\,) \in A$. Under this identification, we may regard $\sigma$ as \textit{being} an element of $A$!
+
+\begin{definition}
+\label{defBasicElement}
+\index{basic element}
+\index{element!basic}
+A \textbf{basic element} of an inductively defined set $A$ is a nullary constructor $\sigma : A^0 \to A$, regarded as an element $\sigma = \sigma(\,()\,) \in A$.
+\end{definition}
+
+Let's unpack these definitions in terms of \Crefrange{exNaturalNumbersAsInductivelyDefinedSetPreliminary}{exPropositionalFormulaeAsInductivelyDefinedSetPreliminary}.
+
+\begin{example}
+\index{natural number}
+The set $\mathbb{N}$ of natural numbers is an inductively defined set. The set $C_{\mathbb{N}}$ of constructors is given by $C_{\mathbb{N}} = \{ 0, s \}$, where $0 \in \mathbb{N}$ is a basic element, and $s : \mathbb{N} \to \mathbb{N}$ a unary constructor defined by $s(n) = n+1$ for all $n \in \mathbb{N}$.
+
+In fact, the conditions of \Cref{defInductivelyDefinedSet} are essentially just restatements of the Peano axioms (\Cref{defNotionOfNaturalNumbers}):
+\begin{enumerate}[(i)]
+\item Let $n \in \mathbb{N}$.
+\begin{itemize}
+\item If $n = 0$, then $n \ne s(m)$ for any $m \in \mathbb{N}$ by \Cref{defNotionOfNaturalNumbers}(i), so `$0$' is the unique expression for $0$ as a constructor applied to elements of $\mathbb{N}$.
+\item If $n > 0$, then $n-1 \in \mathbb{N}$ and $n=s(n-1)$. To see that this expression is unique, note that if $m \in \mathbb{N}$ and $s(m) = n$, then $m = n-1$ by \Cref{defNotionOfNaturalNumbers}(ii).
+\end{itemize}
+\item We need to prove that if $X$ is a set such that $0 \in X$ and $s(n) \in X$ for all $n \in \mathbb{N}$, then $\mathbb{N} \subseteq X$. But this is exactly \Cref{defNotionOfNaturalNumbers}(iii).
+\end{enumerate}
+
+Hence $\mathbb{N}$ is indeed an inductively defined set.
+\end{example}
+
+\begin{example}
+The set $\Sigma^*$ of words over an alphabet $\Sigma$ is an inductively defined set. The set of constructors is given by
+\[ C_{\Sigma^*} = \{ \varepsilon \} \cup \{ \sigma_a \mid a \in A \} \]
+where $\varepsilon \in \Sigma^*$ is a basic element, and for each $a \in A$, we have a unary constructor $\sigma_a : \Sigma^* \to \Sigma^*$ defined by $\sigma_a(w) = wa$ for all $w \in \Sigma^*$.
+
+% To verify conditions (i) and (ii) of \Cref{defInductivelyDefinedSet}, first recall that $\Sigma^* = \bigcup_{n \in \mathbb{N}} \Sigma^n$, where the sets $\Sigma^n$ are defined by
+% \[ \Sigma^0 = \{ \varepsilon \} \quad \text{and} \quad \Sigma^{n+1} = \{ wa \mid w \in \Sigma^n,~ a \in \Sigma \} \]
+% Thus the elements of $\Sigma^n$ are the words of length $n \in \mathbb{N}$. Now:
+% \begin{enumerate}[(i)]
+% \item Let $w \in \Sigma^*$.
+% \begin{itemize}
+% \item If $w \in \Sigma^0$, then $w = \varepsilon$, and therefore $w \ne w'a$ for any $a \in \Sigma$.
+% \item If $w$ has length $n+1$ for some $n \in \mathbb{N}$, then $w = w'a$ for some $w' \in \Sigma^n$ and $a \in \Sigma$. This expression is unique: if $w = w''b$ for some $w'' \in \Sigma^*$ and $b \in \Sigma$, then $w'' \in \Sigma^n$ since $w$ must have length $n+1$; and $a=b$ since the last character of two equal words must be the same; and then $w'a=w''a$, so that $w'=w''$, since deleting the last character from two equal words results in the same word. So $w=\sigma_a(w')$ is the unique expression of $w$ as a constructor applied to an element of $\Sigma^*$.
+% \end{itemize}
+
+% \item Let $X$ be a set and suppose that $\varepsilon \in X$ and, for all $w \in \Sigma^*$, if $w \in X$ then $\sigma_a(w) \in X$ for all $a \in \sigma$. To see that $\Sigma^* \subseteq X$, let $w \in \Sigma^*$. We prove by induction that $\Sigma^n \subseteq X$ for all $n \in \mathbb{N}$.
+% \begin{itemize}
+% \item (\textbf{Base case}) Let $w \in \Sigma^0$. Then $w=\varepsilon \in X$, so that $\Sigma^0 \subseteq X$.
+% \item (\textbf{Induction step}) Let $n \in \mathbb{N}$, assume that $\Sigma^n \subseteq X$, and let $w \in \Sigma^{n+1}$. Then $w = w'a = \sigma_a(w')$ for some $w' \in \Sigma^n$. But then $w' \in X$ by the induction hypothesis, so that $w = \sigma_a(w') \in X$. Hence $\Sigma^{n+1} \subseteq X$.
+% \end{itemize}
+% It follows that $\Sigma^* = \bigcup_{n \in \mathbb{N}} \Sigma^n \subseteq X$, as required.
+% \end{enumerate}
+\end{example}
+
+\begin{example}
+Let $P$ be a set of propositional variables. Describe the set $L(P)$ of propositional formulae (as in \Cref{exPropositionalFormulaeAsInductivelyDefinedSetPreliminary}) as an inductively defined set.
+\end{example}
+
+\begin{exercise}
+Prove that the set $A = \{ 1, 2, 4, 8, 16 \dots \}$ of (natural number) powers of $2$ is inductively defined by taking $C_A = \{ 1, d \}$, where $1$ is basic and $d : A \to A$ is defined by $d(n) = 2n$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+The next exercise gives a different way of inductively defining $\mathbb{N}$---it demonstrates that we can consider a set to be inductively defined in more than one way.
+
+\begin{exercise}
+Prove that $\mathbb{N}$ is inductively defined by taking $C_{\mathbb{N}} = \{ 1, \sigma \}$, where $\sigma : \mathbb{N} \to \mathbb{N}$ is defined by
+\[ \sigma(n) = \begin{cases} n-1 & \text{if $n$ is odd} \\ n+3 & \text{if $n$ is even} \end{cases} \]
+for all $n \in \mathbb{N}$.
+\end{exercise}
+
+So far we have seen how to describe sets that have \textit{already been defined} as inductively defined sets. In practice, it is much more convenient to be able to make an inductive definition of a set by describing how to construct its elements.
+
+\begin{definition}
+\label{defRuleForInductiveDefinition}
+A (\textbf{finitary}) \textbf{rule} for an inductive definition is an expression of the form
+\begin{center}
+\begin{prooftree}
+    \AxiomC{$x_1$}
+    \AxiomC{$x_2$}
+    \AxiomC{$\cdots$}
+    \AxiomC{$x_r$}
+\QuaternaryInfC{$\sigma(x_1,x_2,\dots,x_r)$}
+\end{prooftree}
+\end{center}
+where $r \in \mathbb{N}$, $x_1,x_2,\dots,x_r$ are variables, and $\sigma(x_1,x_2,\dots,x_r)$ is some expression involving the variables $x_1,x_2,\dots,x_r$. The natural number $r$ is called the \textbf{arity} of the rule.
+\end{definition}
+
+Rules describe how an inductively defined set $(A, C_A)$ is built up; the rule in \Cref{defRuleForInductiveDefinition} can be read as saying that if $x_1, x_2, \dots, x_r \in A$, then $\sigma(x_1,x_2,\dots,x_r) \in A$. Note that if $r=0$, then this amounts to declaring a basic element of $A$.
+
+\todo{}
+
+\begin{center}
+\begin{tikzpicture}
+\draw (-2, 2) node(x1) {$x_1$} ;
+\draw (-1, 2) node(x2) {$x_2$} ;
+\draw (0.5, 2) node(dots) {$\cdots$} ;
+\draw (2, 2) node(xn) {$x_n$} ;
+  \draw (0, 1) \sdconstructor{sigma}{$\sigma$} ;
+    \draw (0, 0) node(result) {$\sigma(x_1,x_2,\dots,x_n)$} ;
+\draw[-latex] (x1) -- (sigma) -- (result) ;
+\draw (x2) -- (sigma) ;
+\draw (xn) -- (sigma) ;
+\end{tikzpicture}
+\end{center}
+
+We can then piece these rules together
+
+\todo{}
+
+\begin{example}
+The rules defining the natural numbers are
+\begin{center}
+\begin{minipage}{0.2\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{~}
+\UnaryInfC{$0$}
+\end{prooftree}
+\end{minipage}
+%
+\text{ and }
+%
+\begin{minipage}{0.2\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$n$}
+\UnaryInfC{$s(n)$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+The first of these rules says that $0$ is a natural number; the second says that if $n$ is a natural number, then its successor $s(n)$ is a natural number.
+\end{example}
+
+\begin{example}
+Let $P$ be a set of propositional variables. The rules defining the set $L(P)$ of propositional formulae over $P$ are given by
+\begin{center}
+\begin{minipage}{0.19\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{~}
+\TagC{$\large p \in P$}
+\UnaryInfC{$p$}
+\end{prooftree}
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}{0.19\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$\varphi$}
+    \AxiomC{$\psi$}
+\BinaryInfC{$\varphi \wedge \psi$}
+\end{prooftree}
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}{0.19\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$\varphi$}
+    \AxiomC{$\psi$}
+\BinaryInfC{$\varphi \vee \psi$}
+\end{prooftree}
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}{0.19\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$\varphi$}
+    \AxiomC{$\psi$}
+\BinaryInfC{$\varphi \Rightarrow \psi$}
+\end{prooftree}
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}{0.19\textwidth}
+\centering
+\begin{prooftree}
+    \AxiomC{$\varphi$}
+\UnaryInfC{$\neg \varphi$}
+\end{prooftree}
+\end{minipage}
+\end{center}
+The first of these rules says that every propositional variable $p \in P$ is a propositional formula. The next three say that if $\varphi$ and $\psi$ are propositional formulae, then so are $\varphi \wedge \psi$, $\varphi \vee \psi$ and $\varphi \Rightarrow \psi$. The last rule says that if $\varphi$ is a propositional formula, then so is $\neg \varphi$.
+\end{example}
+
+\begin{exercise}
+Write rules for inductively defining the set $\Sigma^*$ of words over an alphabet $\Sigma$.
+\end{exercise}
+
+\begin{definition}
+\label{defSetGeneratedByRules}
+Let $R$ be a set of rules for an inductive definition. The set \textbf{generated by} $R$ is defined by $A = \bigcup_{n \in \mathbb{N}} A_n$, where the sets $A_n$ for $n \in \mathbb{N}$ are defined recursively by:
+\[ A_0 = \left\{ a \middlemid \dfrac{\hspace{20pt}}{a} \in R \right\} \]
+and
+\[ A_{n+1} = \left\{ \sigma(a_1,a_2,\dots,a_r) \middlemid a_1,a_2,\dots,a_r \in A_n, \quad \dfrac{x_1 \hspace{10pt} x_2 \hspace{10pt} \cdots \hspace{10pt} x_r}{\sigma(x_1,x_2,\dots,x_r)} \in R \right\} \]
+That is, $A_0$ is the set of basic elements declared to exist by the nullary rules in $R$, and $A_{n+1}$ is the set of all expressions obtained by applying the rules in $R$ to the elements of $A_n$.
+\end{definition}
+
+\todo{}
+
+\begin{exercise}
+Let $R$ be a set of rules for an inductive definition and let $A$ be the set generated by $R$. Prove that if $R$ has no nullary rules, then $A$ is empty.
+\end{exercise}
+
+\begin{exercise}
+Let $R$ be a set of rules for an inductive definition, and let $A$ be the set generated by $R$. Prove that if $R$ is countable, then $A$ is countable.
+\end{exercise}
+
+\todo{}
+
+\begin{definition}
+\label{defRank}
+\index{rank}
+\nindex{rk}{$\mathrm{rk}(a)$}{rank}
+Let $(A, C_A)$ be an inductively defined set. The \textbf{rank} of an element $a \in A$ is the (unique) natural number $n$ such that $a \in A_n$, also written $\mathrm{rk}(a)$ \inlatex{mathrm\{rk\}}.
+\end{definition}
+
+\todo{}
+
+\begin{theorem}
+Let $R$ be a set of rules for an inductive definition, and let $A$ be the set generated by $R$. Then $A$ is an inductively defined set, with each $r$-ary rule $\dfrac{x_1 \hspace{10pt} x_2 \hspace{10pt} \cdots \hspace{10pt} x_r}{\sigma(x_1,x_2,\dots,x_r)}$ defining an $r$-ary constructor $\sigma : A^r \to A$ in the evident way.
+\end{theorem}
+
+\begin{cproof}
+We must verify conditions (i) and (ii) of \Cref{defInductivelyDefinedSet}.
+\begin{enumerate}[(i)]
+\item Let $a \in A$. We prove by induction on $n \in \mathbb{N}$ that, if $a \in A_n$, then $a = \sigma(a_1,a_2,\dots,a_r)$ for a unique constructor $\sigma : A^r \to A$ and unique $a_1,a_2,\dots,a_r \in A$, and moreover $a_1,a_2,\dots,a_r \in A_k$ for some $k < n$.
+
+\begin{itemize}
+\item (\textbf{Base case}) Suppose $a \in A_0$. Then $a$ is a basic element of $A$, corresponding with the nullary rule $\dfrac{\hspace{20pt}}{a}$, so that $a$ is already a nullary constructor. But then $a$ involves no variables, so that $a$ does not arise from an $r$-ary rule for $r \ge 1$---hence if $a=\sigma(a_1,a_2,\dots,a_r)$ for some constructor $\sigma : A^r \to A$, then $r=0$ and $a = \sigma(\,()\,)$; but this says precisely that `$a$' is the unique expression of $a$ as a constructor applied to some elements of $A$.
+
+\item (\textbf{Induction step}) Fix $n \ge 0$ and assume that, for all $k \le n$, if $b \in A_k$, then $b = \sigma(b_1,b_2,\dots,b_r)$ for a unique constructor $\sigma : A^r \to A$ and unique elements $b_1,b_2,\dots,b_r \in A$.
+
+\end{itemize}
+
+\item \todo{}
+\end{enumerate}
+\end{cproof}
+
+\todo{}
+
+\subsection*{Structural induction}
+
+\todo{}
+
+\begin{theorem}[Structural induction principle]
+\label{thmStructuralInduction}
+\index{induction!structural}
+Let $(A, C_A)$ be an inductively defined set, and let $p(x)$ be a logical formula with free variable $x \in A$.
+
+If for all constructors $\sigma : A^r \to A$ and all $a_1,\dots,a_r \in A$ we have
+\[ (\forall i \in [r],~p(a_i)) \Rightarrow p(\sigma(a_1,a_2,\dots,a_r)) \]
+then $p(x)$ is true for all $x \in A$.
+\end{theorem}
+
+\begin{cproof}
+Let $a \in A$. We prove that $p(a)$ is true by strong induction on the rank of $a$.
+\begin{itemize}
+\item (\textbf{Base case}) Suppose $\mathrm{rk}(a) = 0$. Then $a = \sigma(\,()\,)$ for some nullary constructor $\sigma$, and so the assumption in the statement of the theorem says that
+\[ (\forall i \in [0],~p(a_i)) \Rightarrow p(a) \]
+The hypothesis $\forall i \in [0],~p(a_i)$ is satisfied vacuously, since $[0] = \varnothing$, and so $p(a)$ is true.
+
+\item (\textbf{Induction step}) Let $n \in \mathbb{N}$ and suppose that $p(a)$ is true for all $a \in A$ with $\mathrm{rk}(a) \le n$. Let $a \in A$ and assume that $\mathrm{rk}(a) = n+1$; we need to prove that $p(a)$ is true.
+
+Since $\mathrm{rk}(a) = n+1$, it follows that $a = \sigma(a_1,a_2,\dots,a_r)$ for some constructor $\sigma$ and some $a_1,a_2,\dots,a_r \in A$ with $\mathrm{rk}(a_i) \le n$ for all $i \in [r]$.
+
+By the induction hypothesis, $p(a_i)$ is true for all $i \in [r]$. By the assumption in the statement of the theorem, it follows that $p(\sigma(a_1,a_2,\dots,a_r))$ is true. But $\sigma(a_1,a_2,\dots,a_r) = a$, so that $p(a)$ is true.
+\end{itemize}
+
+By induction, it follows for all $n \in \mathbb{N}$ that $p(a)$ is true for all $a \in A_n$. But then $p(a)$ is true for all $a \in A$.
+\end{cproof}
+
+\todo{}
+
+\begin{example}
+
+\end{example}
+
+\todo{}
+
+\begin{definition}
+\todo{Ancestor relation $<_A$} 
+\end{definition}
+
+\todo{}
+
+\begin{theorem}[Strong structural induction principle]
+Let $(A, C_A)$ be an inductively defined set, and let $p(x)$ be a logical formula with free variable $x \in A$.
+
+If for all $a \in A$ we have
+\[ (\forall b <_A a,~ p(b)) \Rightarrow p(a) \]
+then $p(x)$ is true for all $x \in A$.
+\end{theorem}
+
+\begin{cproof}
+Let $q(x)$ be the logical formula defined by $\forall b <_a x,~ p(b)$. We prove $\forall x \in A,~ q(x)$ by structural induction on $x$.
+\end{cproof}
+
+
+\textbf{--- OLD CONTENT BEGINS HERE ---}
+
+We will prove \Cref{thmStructuralInduction} on page \pageref{prfStructuralInduction}.
+
+\begin{example}
+\label{exStructuralInductoinOnNIsWeakInduction}
+\todo{Structural induction on $\mathbb{N}$ is weak induction.}
+\end{example}
+
+\todo{Disjunctive normal form}
+
+\todo{Generalise to quotients of inductive structures $\leadsto$ induction on $\mathbb{Z}$ using $0$ and $+,-$ and on $\mathbb{Z}^{>0}$ using $1$ and $p \times (-)$.}
+
+We saw in \Cref{propPositiveIntegersAsWellFoundedSet} that the relation $R$ on the set $\mathbb{Z}^{>0}$ of positive integers defined for $m,n \in \mathbb{Z}^{>0}$ by
+\[ m\; R\; n \quad \Leftrightarrow \quad n=pm \text{ for some prime } p>0 \]
+is well-founded. We can use well-founded induction to prove a general formula for the totient of an integer $n$.
+
+\begin{theorem}[Formula for Euler's totient function]
+\label{thmFormulaForTotientFunction}
+Let $n \in \mathbb{Z}$ be nonzero, and let $\varphi : \mathbb{Z} \to \mathbb{N}$ be Euler's totient function (see \Cref{defTotient}). Then
+\[ \varphi(n) = |n| \cdot \prod_{p \mid n\ \text{prime}} \left( 1-\frac{1}{p} \right) \]
+where the product is indexed over the distinct positive prime factors $p$ of $n$.
+\end{theorem}
+\begin{cproof}
+If $n < 0$ then $\varphi(n) = \varphi(-n)$, $|n| = -n$ and $p \mid n$ if and only if $p \mid {-n}$, so the theorem holds for negative integers if and only if it holds for positive integers.
+
+We prove the formula for $n > 0$ by well-founded induction on $\mathbb{Z}^{>0}$ with respect to the relation $R$ defined in \Cref{propPositiveIntegersAsWellFoundedSet}.
+\begin{itemize}
+\item (\textbf{BC}) $\varphi(1)=1$ and, since no prime $p$ divides $1$, we have $\prod_{p \mid 1\ \text{prime}} \left( 1-\frac{1}{p} \right) = 1$. Hence
+\[ 1 \cdot \prod_{p \mid 1\ \text{prime}} \left( 1-\frac{1}{p} \right) = 1 \cdot 1 = 1 \]
+as erquired.
+\item (\textbf{IS}) Fix $n \ge 1$ and suppose that
+\[ \varphi(n) = n \cdot \prod_{p \mid n\ \text{prime}} \left( 1-\frac{1}{p} \right) \]
+Let $q > 0$ be prime. We prove that
+\[ \varphi(qn) = qn \cdot \prod_{p \mid qn\ \text{prime}} \left( 1-\frac{1}{p} \right) \]
+\begin{itemize}
+\item Suppose $q \mid n$. Then by we have
+\begin{align*}
+\varphi(qn) &= q\varphi(n) && \text{by \Cref{exTotientMultiplyByPrime}} \\
+&= qn \cdot \prod_{p \mid n\, prime} \left( 1-\frac{1}{p} \right) && \text{by induction hypothesis} \\
+&= qn \cdot \prod_{p \mid qn\, prime} \left( 1-\frac{1}{p} \right) && 
+\end{align*}
+The last equation holds because the fact that $q \mid n$ implies that, for all positive primes $p$, we have $p \mid n$ if and only if $p \mid qn$.
+\item Suppose $q \nmid n$. Then $q \perp n$, so we have
+\begin{align*}
+\varphi(qn) &= \varphi(q)\varphi(n) && \text{by \Cref{thmTotientIsMultiplicative}} \\
+&= \varphi(q) \cdot n \cdot \prod_{p \mid n \text{ prime}} \left( 1-\frac{1}{p} \right) && \text{by induction hypothesis} \\
+&= (q-1) \cdot n \cdot \prod_{p \mid n \text{ prime}} \left( 1-\frac{1}{q} \right) && \text{by \Cref{exComputationsOfTotients}} \\
+&= q\left( 1-\frac{1}{p} \right) n \cdot \prod_{p \mid n \text{ prime}} \left( 1-\frac{1}{p} \right) && \text{rearranging} \\
+&= qn \cdot \left(\prod_{p \mid n \text{ prime}} \left( 1 - \frac{1}{p} \right)\right) \cdot \left( 1 - \frac{1}{q} \right) && \text{rearranging} \\
+&= qn \cdot \prod_{p \mid qn} \left( 1 - \frac{1}{p} \right) && \text{reindexing the product}
+\end{align*}
+\end{itemize}
+In both cases, we have shown that the formula holds.
+\end{itemize}
+By induction, we're done.
+\end{cproof}
+
+\subsection*{Well-founded relations}
+
+First, we introduce the notion of a \textit{well-founded relation}.
+
+\begin{definition}
+\label{defWellFoundedRelation}
+\index{relation!well-founded}
+\index{relation!ill-founded}
+\index{well-founded relation}
+\index{ill-founded relation}
+Let $X$ be a set. A relation $R$ on $X$ is \textbf{well-founded} if every inhabited subset of $X$ has an \textbf{$R$-minimal} element, in the following sense: for each inhabited $U \subseteq X$, there exists $m \in U$ such that $\neg (x\;R\;m)$ for all $x \in U$. A relation that is not well-founded is called \textbf{ill-founded}.
+\end{definition}
+
+\begin{example}
+\label{exNIsWellFounded}
+The relation $<$ on $\mathbb{N}$ is well-founded---this is just a fancy way of stating the well-ordering principle (\Cref{thmWellOrderingPrinciple}). Indeed, let $U \subseteq \mathbb{N}$ be an inhabited subset. By the well-ordering principle, there exists an element $m \in U$ such that $m \le x$ for all $x \in U$. But this says precisely that $\neg (x < m)$ for all $x \in U$.
+\end{example}
+
+\begin{example}
+\label{exZNotWellFounded}
+However, the relation $<$ on $\mathbb{Z}$ is not well-founded---indeed, $\mathbb{Z}$ is an inhabited subset of $\mathbb{Z}$ with no $<$-least element.
+\end{example}
+
+\begin{exercise}
+\label{exNIsWellFoundedBySuccessor}
+Let ${<}^1$ be the relation on $\mathbb{N}$ defined for $m,n \in \mathbb{N}$ by
+\[ m \;{<}^1\; n \quad \Leftrightarrow \quad n = m + 1 \]
+Prove that ${<}^1$ is a well-founded relation on $\mathbb{N}$.
+\end{exercise}
+
+\begin{proposition}
+\label{propWellFoundedIffNoInfiniteDescendingChains}
+Let $X$ be a set and let $R$ be a relation on $X$. $R$ is well-founded if and only if there is no infinite $R$-descending chains; that is, there does not exist a sequence $(x_n)_{n \in \mathbb{N}}$ of elements of $X$ such that $x_{n+1}\;R\;x_n$ for all $n \in \mathbb{N}$.
+\end{proposition}
+\begin{cproof}
+We prove the contrapositives of the two directions; that is, $R$ is ill-founded if and only if $R$ has an infinite descending $R$-chain.
+
+\begin{itemize}
+\item ($\Rightarrow$) Suppose that $R$ is ill-founded, and let $U \subseteq X$ be an inhabited subset with no $R$-minimal element. Define a sequence $(x_n)_{n \in \mathbb{N}}$ of elements of $X$---in fact, of $U$---recursively as follows:
+\begin{itemize}
+\item Let $x_0 \in U$ be arbitrarily chosen.
+\item Fix $n \in \mathbb{N}$ and suppose $x_0, x_1, \dots, x_n \in U$ have been defined. Since $U$ has no $R$-minimal element, it contains an element which is related to $x_n$ by $R$; define $x_{n+1}$ to be such an element.
+\end{itemize}
+Then $(x_n)_{n \in \mathbb{N}}$ is an infinite $R$-descending chain
+\item ($\Leftarrow$) Suppose there is an infinite $R$-descending chain $(x_n)_{n \in \mathbb{N}}$. Define $U = \{ x_n \mid n \in \mathbb{N} \}$ to be the set of elements in this sequence. Then $U$ has no $R$-minimal element. Indeed, given $m \in U$, we must have $m=x_n$ for some $n \in \mathbb{N}$; but then $x_{n+1} \in U$ and $x_{n+1}\;R\;m$. Hence $R$ is ill-founded.
+\end{itemize}
+\end{cproof}
+
+\begin{proposition}
+\label{propPositiveIntegersAsWellFoundedSet}
+Let $\mathbb{Z}^{>0}$ be the set of positive integers and define a relation $R$ on $\mathbb{Z}^{>0}$ by
+\[ m\; R\; n \quad \Leftrightarrow \quad n=pm \text{ for some prime } p>0 \]
+for all $m,n > 0$. Then $R$ is a well-founded relation on $\mathbb{Z}^{>0}$.
+\end{proposition}
+\begin{cproof}
+Suppose that $(x_n)_{n \in \mathbb{N}}$ is an infinite $R$-descending chain in $\mathbb{Z}^{>0}$. Since $x_{n+1}\;R\;x_n$ for all $n \in \mathbb{N}$, we have $x_n = px_{n+1}$ for some positive prime $p$ for all $n \in \mathbb{N}$. Since all positive primes are greater than or equal to $2$, this implies that $x_n \ge 2x_{n+1}$ for all $n \in \mathbb{N}$.
+
+We prove by strong induction on $n \in \mathbb{N}$ that $x_0 > 2^nx_{n+1}$ for all $n \in \mathbb{N}$.
+
+\begin{itemize}
+\item (\textbf{BC}) We proved above that $x_0 \ge 2x_1$. Hence $x_0 > x_1 = 2^0x_1$, as required.
+\item (\textbf{IS}) Fix $n \in \mathbb{N}$ and suppose $x_0 > 2^nx_{n+1}$. We want to show $x_0 > 2^{n+1}x_{n+2}$. Well $x_{n+1} > 2x_{n+2}$, as proved above, and hence
+\[ x_0 \overset{\text{IH}}{>} 2^nx_{n+1} > 2^n \cdot 2x_{n+2} = 2^{n+1}x_{n+2} \]
+as required.
+\end{itemize}
+
+By induction, we've shown that $x_0 > 2^nx_{n+1}$ for all $n \in \mathbb{N}$. But $x_{n+1} > 0$ for all $n \in \mathbb{N}$, so $x_0 > 2^n$ for all $n \in \mathbb{N}$. This implies that $x_0$ is greater than every integer, which is a contradiction.
+
+So such a sequence $(x_n)_{n \in \mathbb{N}}$ cannot exist, and by \Cref{propWellFoundedIffNoInfiniteDescendingChains}, the relation $R$ is well-founded.
+\end{cproof}
+
+\begin{exercise}
+\label{exWellFoundedRelationsAreAsymmetric}
+Let $X$ be a set and let $R$ be a well-founded relation on $X$. Given $x,y \in X$, prove that not both $x\; R\; y$ and $y\; R\; x$ are true.
+\end{exercise}
+
+\begin{theorem}[Principle of well-founded induction]
+\label{thmWellFoundedInduction}
+\index{well-founded induction}
+\index{induction!on a well-founded relation}
+\index{R-induction@$R$-induction}
+Let $X$ be a set, let $R$ be a well-founded relation on $X$, and let $p(x)$ be a logical formula concerning elements of $X$. Suppose that for each $x \in X$, the following is true:
+\begin{center}
+\textit{If $p(y)$ is true for all $R$-predecessors $y$ of $x$, then $p(x)$ is true.}
+\end{center}
+That is, suppose for each $x \in X$ that
+\[ [\forall y \in X,\, (y\; R\; x \Rightarrow p(y))] \Rightarrow p(x) \]
+Then $p(x)$ is true for all $x \in X$.
+\end{theorem}
+\begin{cproof}
+Suppose that, for each $x \in X$, if $p(y)$ is true for all $R$-predecessors $y$ of $x$, then $p(x)$ is true. Let
+\[ U = \{ x \in X \mid \neg p(x) \} \]
+Towards a contradiction, suppose that $p(x)$ is false for some $x \in X$. Then $U$ is inhabited. Since $R$ is well-founded, $U$ has an $R$-minimal element $m \in U$. Now
+\begin{enumerate}[(i)]
+\item $p(m)$ is false, since $m \in U$.
+\item $p(x)$ is true for all $x \in X$ with $x\; R\; m$. To see this, note that if $p(x)$ is false and $x\; R\; m$, then $x \in U$, so that $m\; R\; x$ by $R$-minimality of $m$ in $U$. Since also $x\; R\; m$, this contradicts \Cref{exWellFoundedRelationsAreAsymmetric}.
+\end{enumerate}
+Since $p(x)$ is true for all $x \in X$ with $x\; R\; m$, by assumption we also have that $p(m)$ is true. But this contradicts our assumption that $m \in U$.
+
+So it must in fact be the case that $U = \varnothing$, so that $p(x)$ is true for all $x \in X$.
+\end{cproof}
+
+\begin{exercise}
+Prove that the principle of $<$-induction on $\mathbb{N}$ is precisely strong induction. Specifically, prove that the following two statements are equivalent:
+\begin{enumerate}[(i)]
+\item $p(0)$ is true and, for all $n \in \mathbb{N}$, if $p(k)$ is true for all $k \le n$, then $p(n+1)$ is true;
+\item For all $n \in \mathbb{N}$, if $p(k)$ is true for all $k<n$, then $p(n)$ is true.
+\end{enumerate}
+Strong induction says that we can deduce that $p(n)$ is true for all $n \in \mathbb{N}$ from the knowledge that (i) is true for all $n \in \mathbb{N}$; and $<$-induction tells us that $p(n)$ is true for all $n \in \mathbb{N}$ from the knowledge that (ii) is true for all $n \in \mathbb{N}$. You should prove that (i) and (ii) are equivalent.
+\end{exercise}
+
+\begin{example}
+\label{exWellFoundedInductionOnNWithSuccessor}
+Let ${<}^1$ be the relation on $\mathbb{N}$ defined in \Cref{exNIsWellFoundedBySuccessor}. We prove that the principle of ${<}^1$-induction on $\mathbb{N}$ is precisely strong induction. Specifically, prove that the following two statements are equivalent:
+\begin{enumerate}[(i)]
+\item $p(0)$ is true and, for all $n \in \mathbb{N}$, if $p(n)$ is true then $p(n+1)$ is true;
+\item For all $n \in \mathbb{N}$, if $p(k)$ is true for all $k \in \mathbb{N}$ with $k+1=n$, then $p(n)$ is true.
+\end{enumerate}
+
+Weak induction says that we can deduce that $p(n)$ is true for all $n \in \mathbb{N}$ from the knowledge that (i) is true for all $n \in \mathbb{N}$; and ${<}^1$-induction tells us that $p(n)$ is true for all $n \in \mathbb{N}$ from the knowledge that (ii) is true for all $n \in \mathbb{N}$. We prove that (i) and (ii) are equivalent.
+
+\begin{itemize}
+\item (i) $\Rightarrow$ (ii). Suppose that $p(0)$ and, for all $n \in \mathbb{N}$, if $p(n)$ is true then $p(n+1)$ is true. We will prove that
+\[ [\forall m \in \mathbb{N},\, (n=m+1 \Rightarrow p(m))] \Rightarrow p(n) \]
+is true for all $n \in \mathbb{N}$.
+
+So fix $n \in \mathbb{N}$, and assume $\forall m \in \mathbb{N},\, (n=m+1 \Rightarrow p(m))$. We prove $p(n)$ is true.
+\begin{itemize}
+\item If $n=0$ then we're done, since $p(0)$ is true by assumption.
+\item If $n>0$ then $n=m+1$ for some $m \in \mathbb{N}$. By our assumption, we have $\forall m \in \mathbb{N},\, (n=m+1 \Rightarrow p(m))$, and so in particular, $p(m)$ is true. By the weak induction step, we have $p(m) \Rightarrow p(m+1)$ is true. But then $p(m+1)$ is true. Since $n=m+1$, we have that $p(n)$ is true.
+\end{itemize}
+In any case, we've proved that $p(n)$ is true, as required.
+
+\item (ii) $\Rightarrow$ (i). For $n \in \mathbb{N}$, denote the following statement by $H(n)$
+\[ [\forall m \in \mathbb{N},\, (n=m+1 \Rightarrow p(m))] \Rightarrow p(n) \]
+Assume $H(n)$ is true for all $n \in \mathbb{N}$. We prove that $p(0)$ is true and, for all $n \in \mathbb{N}$, if $p(n)$ is true then $p(n+1)$ is true.
+\begin{itemize}
+\item $p(0)$ is true. Indeed, for any $m \in \mathbb{N}$ we have that $0=m+1$ is false, so the statement ~$0=m+1 \Rightarrow p(m)$ is true. Hence $\forall m \in \mathbb{N},\, (0=m+1 \Rightarrow p(m))$ is true. Since $H(0)$ is true, it follows that $p(0)$ is true.
+\item Fix $n \in \mathbb{N}$ and suppose $p(n)$ is true. By $H(n+1)$, we have that if $p(n+1)$ is true for all $m \in \mathbb{N}$ with $m+1=n+1$, then $p(n+1)$ is true. But the only $m \in \mathbb{N}$ such that $m+1=n+1$ is $n$ itself, and $p(n)$ is true by assumption; so by $H(n+1)$, we have $p(n+1)$, as required.
+\end{itemize}
+\end{itemize}
+
+Hence the two induction principles are equivalent.
+\end{example}
+
+\begin{example}
+
+\end{example}
+
+\subsection*{Structural induction from well-founded induction}
+
+We will now derive the principle of structural induction in terms of the principle of well-founded induction. To do this, we need to associate to each inductively defined set $X$ a corresponding well-founded relation $R_X$, such that well-founded induction on $R_X$ corresponds with structural induction on $X$.
+
+\begin{definition}
+\label{defRX}
+Let $X$ be an inductively defined set. Define a relation $R_X$\nindex{RX}{$R_X$}{relation associated with an inductively defined set} on $X$ as follows: for all $x,y \in X$, $x\;R_X\;y$ if and only if
+\[ y=f(x_1,x_2,\dots,x_n) \]
+for some constructor $f$ of arity $n$ and elements $x_1,x_2,\dots,x_n$, such that $x_i=x$ for some $i \in [n]$.
+\end{definition}
+
+\begin{example}
+Let $\mathbb{N}$ be the set of natural numbers, taken to be inductively defined in the usual way. Since the only constructor is the successor operation, we must have for $m,n \in \mathbb{N}$ that
+\[ m\; R_{\mathbb{N}}\; n \quad \Leftrightarrow \quad n=m+1 \]
+This is precisely the relation ${<}^1$ from \Cref{exNIsWellFoundedBySuccessor}. We already established that structural induction on $\mathbb{N}$ is precisely weak induction (\Cref{exStructuralInductoinOnNIsWeakInduction}), and that well-founded induction on ${<}^1$ is also precisely weak induction (\Cref{exWellFoundedInductionOnNWithSuccessor}).
+\end{example}
+
+\begin{example}
+Let $P$ be a set of propositional variables and let $L(P)$ be the set of propositional formulae built from variables in $P$ and the logical operators $\wedge$, $\vee$, $\Rightarrow$ and $\neg$.
+
+Then $R=R_{L(P)}$ is the relation defined for $s,t \in L(P)$ by letting $s \;R\; t$ if and only if
+\[ t \in \{ s \wedge u,\ u \wedge s,\ s \vee u,\ u \vee s,\ s \Rightarrow u,\ u \Rightarrow s,\ \neg s \} \]
+for some $u \in L(P)$.
+\end{example}
+
+The plan for the rest of this section is to demonstrate that structural induction follows from well-founded induction. To do this, we prove that the relation $R_X$ associated with an inductively defined set $X$ is well-founded, and then we prove that structural induction on $X$ is equivalent to well-founded induction on $R_X$.
+
+To simplify our proofs, we introduce the notion of \textit{rank}. The rank of an element $x$ of an inductively defined set $X$ is a natural number which says how many constructors need to be applied in order to obtain $x$.
+
+% \begin{definition}
+% \label{defRank}
+% \index{rank}
+% Let $X$ be an inductively defined set. The function $\mathrm{rank} : X \to \mathbb{N}$ is defined recursively as follows:
+% \begin{itemize}
+% \item If $b$ is a basic element of $X$, then $\mathrm{rank}(b)=0$.
+% \item Let $f$ be a constructor of arity $n$ and let $x_1,x_2,\dots,x_n \in X$. Then
+% \[ \mathrm{rank}(f(x_1,x_2,\dots,x_n)) = \mathrm{max} \{ \mathrm{rank}(x_1), \mathrm{rank}(x_2), \dots, \mathrm{rank}(x_n) \} + 1 \]
+% \end{itemize}
+% \end{definition}
+
+Note that $\mathrm{rank} : X \to \mathbb{N}$ is a well-defined function, since by the conditions listed in \Cref{defInductivelyDefinedSet}, every element of $X$ is either basic or has a unique representation in the form $f(x_1,x_2,\dots,x_n)$ for some constructor $f$ and elements $x_1,x_2,\dots,x_n \in X$.
+
+\begin{example}
+\label{exRankOnN}
+The rank function on the inductively defined set of natural numbers is fairly boring. Indeed, it tells us that
+\begin{itemize}
+\item $\mathrm{rank}(0)=0$; and
+\item $\mathrm{rank}(n+1) = \mathrm{rank}(n) + 1$ for all $n \in \mathbb{N}$.
+\end{itemize}
+It can easily be seen that $\mathrm{rank}(n)=n$ for all $n \in \mathbb{N}$. This makes sense, since $n$ can be obtained from $0$ by iterating the successor operation $n$ times.
+\end{example}
+
+\begin{lemma}
+Let $X$ be an inductively defined set. The relation $R_X$ defined in \Cref{defRX} is well-founded.
+\end{lemma}
+\begin{cproof}
+
+\end{cproof}
+
+\begin{cproof}[of \Cref{thmStructuralInduction}]
+\label{prfStructuralInduction}
+\todo{Write proof}
+\end{cproof}
+
+\todo{Examples and exercises}
+
+\index{induction!structural|)}

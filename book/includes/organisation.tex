@@ -1,0 +1,49 @@
+%
+% Contents and indices
+%
+
+% Contents
+\setcounter{tocdepth}{1}
+
+% Indices
+\indexsetup{%
+    othercode={
+        \fancyhead[RE]{{\color{hdcol}\fontfamily{bch}\itshape \indexname}}
+        \fancyhead[LO]{{\color{hdcol}\fontfamily{bch}\itshape \indexname}}
+        \fancyhead[RO,LE]{\thepage}\fancyfoot[C]{\thepage}
+    }
+}
+\makeindex[title={Index of topics}]
+\makeindex[name=notation, title={Index of notation}]
+\makeindex[name=vocabulary, title={Index of vocabulary}]
+\makeindex[name=latex, columns=1, title={Index of \LaTeX{} commands}]
+
+
+
+%
+% Transitions
+%
+
+% Counter to make updating filenames easier
+\newcommand{\currentchapter}{}
+
+% Commands to be executed at the beginning of each section
+\newcommand{\secbegin}[1]{%
+    \label[section]{#1}
+    \hintsection{\Cref*{#1}}
+}
+
+% Commands to be executed at the beginning/end of each chapter exercises section
+\newcommand{\chexbegin}[1]{%
+    \newpage%
+    \hintsection{\Cref*{#1} exercises}
+    \setcounter{section}{4}%
+    \setcounter{chapex}{0}%
+    \renewcommand{\thesection}{\thechapter.E}%
+    \section{Chapter \thechapter{} exercises}%
+    \chexwarning
+}
+
+\newcommand{\chexend}{%
+    \renewcommand{\thesection}{\thechapter.\arabic{section}}%
+}

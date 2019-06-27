@@ -1,0 +1,427 @@
+\section{Equivalence relations and partitions}
+\secbegin{secEquivalenceRelationsPartitions}
+\index{equivalence relation|(}
+\index{relation!equivalence relation|(}
+
+An equivalence relation on a set $X$ is a relation on $X$ that, to a certain extent, \textit{behaves like equality}. That is, equivalence relations give us a way of saying that two elements of a set are `similar', without having to be equal. As an example, we might be interested in when the base-10 expansions of two natural numbers end in the \textit{same} digit, or when two finite sets have the \textit{same} number of elements.
+
+\begin{definition}
+\label{defEquivalenceRelation}
+\index{relation!equivalence relation}
+\index{equivalence relation}
+A relation $R$ on a set $X$ is an \textbf{equivalence relation} if it is reflexive, symmetric and transitive.
+\end{definition}
+
+To denote a relation that we know (or suspect) is an equivalence relation, we will usually use a symbol like `$\sim$' \inlatex{sim}\lindexmmc{sim}{$\sim$} or `$\equiv$' \inlatex{equiv}\lindexmmc{equiv}{$\equiv$} or `$\approx$' \inlatex{approx}\lindexmmc{approx}{$\approx$} instead of a letter like `$R$' or `$S$'.
+\nindex{eqrel}{$\sim$, $\equiv$, $\approx$}{equivalence relation}
+
+\begin{example}
+\label{exEqualityIsEquivalenceRelation}
+Given any set $X$, it follows from \Cref{exEqualityIsReflexive,exEqualityIsSymmetric,exEqualityIsTransitive} that the equality relation $=$ is an equivalence relation on $X$. This is a relief, since we motivated equivalence relations by saying that they are those that behave like equality!
+\end{example}
+
+\begin{example}
+\label{exDifferenceOfRealsInQIsEquivalenceRelation}
+Let $R$ be the relation on $\mathbb{R}$ defined for $a,b \in \mathbb{R}$ by $a \mathrel{R} b$ if and only if $b-a \in \mathbb{Q}$. Piecing together \Cref{exDifferenceOfRealsInQIsReflexive,exDifferenceOfRealsInQIsSymmetric,exDifferenceOfRealsInQIsTransitive}, we see that $R$ is an equivalence relation on $\mathbb{R}$.
+\end{example}
+
+\begin{exercise}
+\label{exEquivalenceRelationFromFunction}
+Given a function $f : X \to Y$, define a relation $\sim_f$ on $X$ by
+\[ a \sim_f b \quad \Leftrightarrow \quad f(a) = f(b) \]
+for all $a,b \in X$. Prove that $\sim_f$ is an equivalence relation on $X$.
+\end{exercise}
+
+The equivalence relation in the next exercise comes back with a vengeance in \Cref{secCardinality}, where we will use it to compare the sizes of (finite and) infinite sets.
+
+\begin{exercise}
+\label{exBijectionIsEquivalenceRelation}
+Let $\mathcal{S}$ be some set whose elements are all sets. (For example, we could take $\mathcal{S} = \mathcal{P}(X)$ for some fixed set $X$.) Define a relation $\cong$ \inlatex{cong}\lindexmmc{cong}{$\cong$} on $\mathcal{S}$ by letting $U \cong V$ if and only if there exists a bijection $f : U \to V$, for all $U,V \in \mathcal{S}$. Prove that $\cong$ is an equivalence relation on $\mathcal{S}$.
+\end{exercise}
+
+\subsection*{A first look at modular arithmetic}
+
+A particularly useful family of equivalence relations is given by \textit{congruence} of integers, which allows us to do \textit{modular arithmetic}---this is the topic of \Cref{secModularArithmetic}. For a fixed integer $n$, this relation identifies two integers when they have the same remainder upon division by $n$ (as in \Cref{thmDivisionPreliminary}).
+
+\begin{restatable}{definition}{rdefCongruence}
+\label{defCongruence}
+\index{congruence}
+\index{modulo}
+\nindex{mod}{$a \equiv b \bmod n$}{congruence}
+\nindex{mod2}{$\bmod$}{congruence}
+\lindexmmc{not}{$\not\in, \not\equiv, \dots$}
+\lindexmmc{bmod}{$\bmod$}
+Fix $n \in \mathbb{Z}$. Given integers $a,b \in \mathbb{Z}$, we say $a$ is \textbf{congruent} to $b$ \textbf{modulo} $n$, and write
+\[ a \equiv b \bmod{n} \text{ \inlatexnb{a \textbackslash{}equiv b \textbackslash{}bmod\{n\}}} \]
+if $n$ divides $a-b$. If $a$ is not congruent to $b$ modulo $n$, write
+\[ a \not \equiv b \bmod n \text{ \inlatex{not\textbackslash{}equiv}} \]
+The number $n$ is called the \textbf{modulus} of the congruence.
+\end{restatable}
+
+Before we prove that congruence is modulo $n$ is an equivalence relation for all $n \in \mathbb{Z}$, it is worthwhile to get a feel for how it works.
+
+\begin{example}
+\label{exCongruenceModuloTwoIsSameAsParity}
+Let $a,b \in \mathbb{Z}$. Then $a \equiv b \bmod 2$ if and only if $a$ and $b$ are both even or both odd---that is, if and only if they have the same \textit{parity}.
+
+Indeed, by the division theorem, we can write $a=2k+i$ and $b=2\ell+j$ for some $k,\ell \in \mathbb{Z}$ and $i,j \in \{ 0,1 \}$. Then
+\[ b - a ~=~ (2k+i) - (2\ell+j) ~=~ 2(k-\ell) + (i-j) \]
+Note that $i-j \in \{ {-1},0,1 \}$, and so $a \equiv b \bmod 2$ if and only if $i=j$. But this occurs if and only if $i=j=0$, in which case $a$ and $b$ are both even, or $i=j=1$, in which case $a$ and $b$ are both odd.
+\end{example}
+
+\begin{example}
+\label{exModuloTenIsSameAsLastDigit}
+Let $a,b \in \mathbb{N}$. Then $a \equiv b \bmod{10}$ if and only if $10$ divides $b-a$, which occurs if and only if the last digit in the decimal expansion of $b-a$ is $0$. But this implies that the decimal expansions of $a$ and $b$ have the same last digit. So the relation of congruence modulo $10$ on $\mathbb{N}$ is the same as the relation of `having the same last (decimal) digit'.
+\end{example}
+
+\begin{exercise}
+Let $n \in \mathbb{Z}$. Prove that if $n \ne 0$, then $a \equiv b \bmod n$ if and only if $a$ and $b$ have the same remainder when divided by $n$.
+\end{exercise}
+
+\begin{exercise}
+Let $a,b \in \mathbb{Z}$. When is it true that $a \equiv b \bmod 0$?
+\end{exercise}
+
+Having got a better feel for how congruence works, we now prove that, for each $n \in \mathbb{Z}$, congruence modulo $n$ is an equivalence relation on $\mathbb{Z}$.
+
+\begin{restatable}{theorem}{rthmCongruenceIsEquivalenceRelation}
+\label{thmCongruenceIsEquivalenceRelation}
+Let $n \in \mathbb{Z}$. Then congruence modulo $n$ is an equivalence relation on $\mathbb{Z}$. That is:
+\begin{enumerate}[(a)]
+\item $a \equiv a \bmod n$ for all $a \in \mathbb{Z}$;
+\item For all $a,b \in \mathbb{Z}$, if $a \equiv b \bmod n$, then $b \equiv a \bmod n$;
+\item For all $a,b,c \in \mathbb{Z}$, if $a \equiv b \bmod n$ and $b \equiv c \bmod n$, then $a \equiv c \bmod n$.
+\end{enumerate}
+\end{restatable}
+
+\begin{cproof}
+\fixlistskip
+\begin{enumerate}[(a)]
+\item Let $a \in \mathbb{Z}$. Note that $a-a=0$, which is divisible by $n$ since $0 = 0 \times n$, and hence $a \equiv a \bmod n$. So congruence modulo $n$ is reflexive.
+\item Let $a,b \in \mathbb{Z}$ and suppose $a \equiv b \bmod n$. Then $n$ divides $a-b$, so that $a-b = kn$ for some $k \in \mathbb{Z}$. Hence $b-a=-kn$, and so $n$ divides $b-a$, so that $b \equiv a \bmod n$ as required. So congruence modulo $n$ is symmetric.
+\item Let $a,b,c \in \mathbb{Z}$ and suppose that $a \equiv b \bmod n$ and $b \equiv c \bmod n$. Then $n$ divides both $a-b$ and $b-c$, so there exist $k, \ell \in \mathbb{Z}$ such that
+\[ a-b = kn \quad \text{and} \quad b-c = \ell n \]
+Hence $a-c = (a-b)+(b-c) = (k+\ell)n$, so that $n$ divides $a-c$. Hence $a \equiv c \bmod n$, as required. So congruence modulo $n$ is transitive.
+\end{enumerate}
+Since congruence modulo $n$ is reflexive, symmetric and transitive, it is an equivalence relation.
+\end{cproof}
+
+\subsection*{Equivalence classes}
+
+What makes equivalence relations so useful is they give us a way of ignoring information that is irrelevant to the task at hand.
+
+For example, suppose $a$ and $b$ are two very large natural numbers, each with several trillion (decimal) digits. We want to know what the last digit of $ab$ is. To find this out, it would be silly to compute $ab$ and then look at its last digit. Instead, we can observe that the last digit of a product of two integers depends only on the last digit of each integer---for example, $1527 \times 9502$ has the same last digit as $7 \times 2 = 14$. By using the equivalence relation `has the same last digit as', we are able to ignore the irrelevant information about $a$ and $b$---that is, all but one of their trillions of digits---and simplify the problem considerably.
+
+To make this precise, we introduce the notion of an \textit{equivalence class}. For a set $X$ with an equivalence relation, the equivalence class of an element $a \in X$ will be the set of elements of $X$ that $a$ is equivalent to. By working with the \textit{equivalence classes} of elements of $X$, rather than the elements of $X$ themselves, we are able to regard two equivalent elements as being `the same'.
+
+\begin{definition}
+\index{equivalence class}
+\index{quotient!of a set by an equivalence relation}
+Let $X$ be a set and let $\sim$ be an equivalence relation on $X$. The $\sim$-\textbf{equivalence class} of an element $a \in X$ is the set $[a]_{\sim}$ \inlatexnb{[x]\_\{\textbackslash{}sim\}} defined by
+\[ [a]_{\sim} = \left\{ x \in X \mid a \sim x \right\} \]
+\nindex{equivalence class}{$[a]_{\sim}$}{equivalence class}%
+The \textbf{quotient} of $X$ by $\sim$ is the set $X/{\sim}$\nindex{quotient}{$X/{\sim}$}{quotient} \inlatexnb{X/\{\textbackslash{}sim\}} of all $\sim$-equivalence classes of elements of $X$; that is
+\[ X/{\sim} = \left\{ [a]_{\sim} \mid a \in X \right\} \]
+\end{definition}
+
+\begin{latextip}
+Putting \texcode{\{}curly brackets\texcode{\}} around the command for a symbol like $\sim$ (\texcodebs{sim}) tells \LaTeX{} to consider the symbol \textit{as a symbol}, rather than as a connective. Compare the following:
+
+\begin{center}
+\begin{tabular}{cc}
+\textit{\TeX{} code}                    & \textit{Output} \\
+\texcode{X/\textbackslash{}sim = Y}     & $X/\sim = Y$   \\
+\texcode{X/\{\textbackslash{}sim\} = Y} & $X/{\sim} = Y$
+\end{tabular}
+\end{center}
+This is because, without braces, \LaTeX{} thinks you're saying `$X$-forward-slash is related to is equal to $Y$', which clearly makes no sense; putting braces around \texcodebs{sim} signifies to \LaTeX{} that the $\sim$ symbol is being considered as an object in its own right, rather than as a connective.
+\end{latextip}
+
+\begin{example}
+\label{exEquivalenceClassesModuloTwo}
+Let $\sim$ be the relation of congruence modulo $2$ on $\mathbb{Z}$. We showed in \Cref{exCongruenceModuloTwoIsSameAsParity} that, for all $a,b \in \mathbb{Z}$ we have $a \equiv b \bmod 2$ if and only if $a$ and $b$ have the same parity. But this means that, for all $[a]_{\sim}$ is the set of all integers with the same parity as $a$---that is:
+\begin{itemize}
+\item If $a$ is even, then $[a]_{\sim}$ is the set of all even integers; and
+\item If $a$ is odd, then $[a]_{\sim}$ is the set of all odd integers.
+\end{itemize}
+It follows that $\mathbb{Z}/{\sim} = \{ [0]_{\sim}, [1]_{\sim} \} = \{ E, O \}$, where $E$ is the set of all even integers and $O$ is the set of all odd integers.
+\end{example}
+
+\begin{exercise}
+Let $\approx$ be the relation of congruence modulo $10$ on $\mathbb{N}$. Describe the equivalence classes, and give an explicit expression of the quotient $\mathbb{N}/{\approx}$ in list notation.
+\end{exercise}
+
+\begin{example}
+Let $f : X \to Y$ be a function, and let $\sim_f$ be the equivalence relation on $X$ that we defined in \Cref{exEquivalenceRelationFromFunction}. Given $a \in X$, we have
+\[ [a]_{\sim_f} = \{ x \in X \mid a \sim_f x \} = \{ x \in X \mid f(a) = f(x) \} \]
+Thus we have $[a]_{\sim_f} = f^{-1}[\{ f(a) \}]$.
+\end{example}
+
+\begin{exercise}
+Let $f : X \to Y$ be a function. Prove that $f$ is injective if and only if each $\sim_f$-equivalence class has a unique element, where $\sim_f$ is the equivalence relation defined in \Cref{exEquivalenceRelationFromFunction}.
+\end{exercise}
+
+The next result demonstrates that an equivalence relation $\sim$ on a set $X$ `descends' to the equality relation $=$ on the quotient $X/{\sim}$. This means that if we would rather deal with equality than with the equivalence relation itself, then we may do so by working inside the quotient $X/{\sim}$ rather than in the set $X$.
+
+\begin{theorem}
+\label{thmEquivalenceRelationDescendsToEqualityOnQuotient}
+Let $\sim$ be an equivalence relation on a set $X$. Then for all $a,b \in X$, we have $a \sim b$ if and only if $[a]_{\sim} = [b]_{\sim}$.
+\end{theorem}
+
+\begin{cproof}
+The proof is an exercise in piecing together the properties of equivalence relations.
+
+Fix $a, b \in X$.
+\begin{itemize}
+\item ($\Rightarrow$) Suppose $a \sim b$. We prove $[a]_{\sim} = [b]_{\sim}$ by double containment.
+\begin{itemize}
+\item ($\subseteq$) Let $x \in [a]_{\sim}$---then $a \sim x$. We are assuming that $a \sim b$, so that $b \sim a$ by symmetry, and so $b \sim x$ by transitivity. So $x \in [b]_{\sim}$.
+\item ($\supseteq$) Let $x \in [b]_{\sim}$---then $b \sim x$. We are assuming that $a \sim b$, and so $a \sim x$ by transitivity. So $x \in [a]_{\sim}$.
+\end{itemize}
+We have shown by double containment that $[a]_{\sim} = [b]_{\sim}$.
+
+\item ($\Leftarrow$) Assume $[a]_{\sim} = [b]_{\sim}$. We have $b \sim b$ by reflexivity, and so $b \in [b]_{\sim}$. But then $b \in [a]_{\sim}$, so that $a \sim b$, as required.
+\end{itemize}
+
+So $a \sim b$ if and only if $[a]_{\sim} = [b]_{\sim}$.
+\end{cproof}
+
+For congruence, special terminology and notation exists for equivalence classes and quotients.
+
+\begin{definition}
+\label{defCongruenceClass}
+\index{congruence class}
+\nindex{an}{$[a]_n$}{congruence class}
+\nindex{ZnZ}{$\mathbb{Z}/n\mathbb{Z}$}{set of congruence classes modulo $n$}
+Let $n \in \mathbb{Z}$. The \textbf{congruence class} of an integer $a$ modulo $n$ is defined by
+\[ [a]_n ~=~ [a]_{\equiv \bmod n} ~=~ \{ x \in \mathbb{Z} \mid a \equiv x \bmod n \} \]
+The set of all congruence classes modulo $n$ is denoted by
+\[ \mathbb{Z}/n\mathbb{Z} ~=~ \mathbb{Z}/{\equiv \bmod n} ~=~ \{ [a]_n \mid a \in \mathbb{Z} \} \]
+\end{definition}
+
+\begin{example}
+Using the terminology of congruence classes, \Cref{exEquivalenceClassesModuloTwo} can be rephrased by saying that $\mathbb{Z}/2\mathbb{Z} = \{ [0]_2, [1]_2 \}$. Moreover, \Cref{thmEquivalenceRelationDescendsToEqualityOnQuotient} gives us a more succinct proof: for all $a \in \mathbb{Z}$, we have $a \equiv 0 \bmod 2$ if and only if $a$ is even, and $a \equiv 1 \bmod 2$ if and only if $a$ is odd. Therefore for all $a \in \mathbb{Z}$, we have $[a]_2 = [0]_2$ or $[a]_2 = [1]_2$, and so
+\[ \mathbb{Z}/2\mathbb{Z} ~=~ \{ [a]_2 \mid a \in \mathbb{Z} \} ~=~ \{ [0]_2, [1]_2 \} \]
+Additionally, $[0]_2$ is the set of all even integers and $[1]_2$ is the set of all odd integers.
+\end{example}
+
+The next exercise generalises the previous one, proving that congruence classes correspond with remainders.
+
+\begin{exercise}
+\label{exCongruenceClassesCorrespondWithRemainders}
+Let $n \in \mathbb{Z}$ with $n \ne 0$. Prove that the function
+\[ i : \{ 0,~ 1,~ \dots,~ |n|-1 \} \to \mathbb{Z}/n\mathbb{Z} \]
+defined by $i(r) = [r]_n$ for all $0 \le r < |n|$ is a bijection.
+\end{exercise}
+
+\subsection*{Partitions}
+
+A partition of a set $X$ is a way of breaking $X$ up into mutually disjoint subsets. They will be an immensely useful tool for counting how many elements a finite set has in \Cref{chCombinatorics}, and will reappear in \Cref{secCardinalArithmetic} for defining arithmetic operations with cardinal numbers.
+
+\begin{definition}
+\label{defPartition}
+A \textbf{partition} of a set $X$ is a collection $\mathcal{U} = \{ U_i \mid i \in I \}$ of inhabited subsets of $X$ such that, for each $a \in X$, there is a unique subset $U_i \in \mathcal{U}$ such that $a \in U_i$.
+\end{definition}
+
+\begin{example}
+We can partition $\mathbb{Z}$ as $E \cup O$, where $E$ is the set of all even integers and $O$ is the set of all odd integers. Indeed, for each integer $a$, there is a unique set $U \in \{ E, O \}$ such that $a \in U$---namely, $U=E$ if $a$ is even, and $U=O$ if $a$ is odd.
+\end{example}
+
+\begin{exercise}
+\label{exPreimagesFormPartition}
+Let $f : X \to Y$ be a surjection, and define a collection $\mathcal{F}$ of subsets of $X$ by
+\[ \mathcal{F} = \{ f^{-1}[\{b\}] \mid b \in Y \} \]
+That is, $\mathcal{F}$ is the set of subsets of $X$ given by the preimages of individual elements of $Y$ under $f$. Prove that $\mathcal{F}$ is a partition of $X$. Where in your proof do you use surjectivity of $f$?
+\end{exercise}
+
+\begin{exercise}
+\label{exConditionsForPartition}
+Let $X$ be a set and let $\mathcal{U} = \{ U_i \mid i \in I \}$ be a family of subsets of $X$. Prove that $\mathcal{U}$ is a partition of $X$ if and only if each of the following conditions holds:
+\begin{enumerate}[(a)]
+\item For each $i \in I$, the subset $U_i$ is inhabited;
+\item For all $i,j \in I$, if $U_i \cap U_j$ is inhabited, then $i=j$;
+\item $\bigcup_{i \in I} U_i = X$.
+\end{enumerate}
+\end{exercise}
+
+Note that, by contraposition, condition (b) in \Cref{exConditionsForPartition} is equivalent to saying that the subsets in $\mathcal{U}$ are \textit{pairwise disjoint}---that is, given $i,j \in I$, if $i \ne j$, then $U_i \cap U_j$ is empty.
+
+\begin{strategy}[Proving a family of subsets forms a partition]
+Let $X$ be a set. In order to prove a collection $\mathcal{U} \subseteq \mathcal{P}(X)$ is a partition of $X$, it suffices to prove:
+\begin{enumerate}[(a)]
+\item Each $U \in \mathcal{U}$ is inhabited;
+\item For all $U, V \in \mathcal{U}$, if $U \cap V$ is inhabited, then $U=V$;
+\item For all $a \in X$, there is some $U \in \mathcal{U}$ such that $a \in U$.
+\end{enumerate}
+\end{strategy}
+
+\begin{exercise}
+\label{exQuotientIsPartition}
+If $\sim$ be an equivalence relation on $X$, then $X/{\sim}$ is a partition $X$. Deduce that, for all $a,b \in X$, we have $a \sim b$ if and only if $[a]_{\sim} = [b]_{\sim}$.
+\end{exercise}
+
+In fact, the converse of \Cref{exQuotientIsPartition} is also true, as we prove next.
+
+\begin{proposition}
+\label{propPartitionIsQuotientByEquivalenceRelation}
+Let $X$ be a set and let $\mathcal{U}$ be a partition of $X$. Then $\mathcal{U}=X/{\sim}$ for exactly one equivalence relation $\sim$ on $X$.
+\end{proposition}
+\begin{cproof}
+Define a relation $\sim$ by
+\[ x \sim y \quad \Leftrightarrow \quad \exists U \in \mathcal{U},\, x \in U \text{ and } y \in U \]
+for all $x,y \in X$. That is, $x \sim y$ if and only if $x$ and $y$ are elements of the same set of the partition. We check that $\sim$ is an equivalence relation.
+\begin{itemize}
+\item \textbf{Reflexivity.} Let $x \in X$. Then $x \in U$ for some $U \in \mathcal{U}$ since $\bigcup_{U \in \mathcal{U}} U = X$. Hence $x \sim x$.
+\item \textbf{Symmetry.} Let $x,y \in X$ and suppose $x \sim y$. Then there is some $U \in \mathcal{U}$ with $x \in U$ and $y \in U$. But then it is immediate that $y \sim x$.
+\item \textbf{Transitivity.} Let $x,y,z \in X$ and suppose that $x \sim y$ and $y \sim z$. Then there exist $U,V \in \mathcal{U}$ with $x,y \in U$ and $y,z \in V$. Thus $y \in U \cap V$. Since $\mathcal{U}$ is a partition of $X$, its elements are pairwise disjoint; thus if $U \ne V$ then $U \cap V = \varnothing$. Hence $U=V$. Thus $x \in U$ and $z \in U$, so $x \sim z$.
+\end{itemize}
+The definition of $\sim$ makes it immediate that $X/{\sim} = \mathcal{U}$.
+
+To prove that $\sim$ is the only such relation, suppose $\approx$ is another equivalence relation on $X$ for which $X/{\approx}=\mathcal{U}$. Then, given $x,y \in X$, we have:
+\begin{align*}
+x \sim y & \Leftrightarrow \exists U \in \mathcal{U},\, x \in U \wedge y \in U && \text{by definition of $\sim$} \\
+& \Leftrightarrow \exists z \in X,\, x \in [z]_{\approx} \wedge y \in [z]_{\approx} && \text{since $\mathcal{U} = X/{\approx}$} \\
+& \Leftrightarrow \exists z \in X,\, x \approx z \wedge y \approx z && \text{by definition of $[z]_{\approx}$} \\
+& \Leftrightarrow x \approx y && \text{by symmetry and transitivity}
+\end{align*}
+So ${\sim} = {\approx}$.
+\end{cproof}
+
+\Cref{exQuotientIsPartition} and \Cref{propPartitionIsQuotientByEquivalenceRelation} prove that equivalence relations and quotients are essentially the same thing: the quotient of a set by an equivalence relation is a partition of the set, and every partition of a set is the quotient by a unique equivalence relation!
+
+The following lemma can be skipped over without grave consequences---it is a technical result with an extremely fiddly proof, but we will use it at a couple of points later in the book. It says that, given two partitioned sets, if we can pair up the sets in the partition, and pair up the elements in each pair of paired-up partitions, then we can pair up the elements of each set.
+
+\begin{lemma}
+\label{lemBijectionBetweenPartitionAndComponentsInducesBijectionOfSets}
+Let $X$ and $Y$ be sets, let $\{ U_i \mid i \in I \}$ be a partition of $X$ and let $\{ V_j \mid j \in J \}$ be a partition of $Y$. If there exists:
+\begin{itemize}
+\item A bijection $f : I \to J$; and
+\item For each $i \in I$, a bijection $g_i : U_i \to V_{f(i)}$;
+\end{itemize}
+then there exists a bijection $h : X \to Y$.
+\end{lemma}
+
+\begin{cproof}
+Given $a \in X$, let $i(a)$ be the unique element of $I$ such that $a \in X_{i(a)}$. Note that this is valid since $\{ X_i \mid i \in I \}$ is a partition of $X$. Likewise, given $b \in Y$, let $j(b)$ be the unique element of $J$ such that $b \in Y_{j(b)}$.
+
+Define $h : X \to Y$ by $h(a) = g_{i(a)}(a)$ for all $a \in X$. This is well-defined since
+\[ h(a) = g_{i(a)}(a) \in Y_{f(i(a))} \subseteq Y \]
+This also shows that $j(h(a)) = f(i(a))$.
+
+Now define $k : Y \to X$ by $k(b) = g_{f^{-1}(j(b))}^{-1}(b)$ for all $b \in Y$. Then $k$ is well-defined: indeed, $g_{f^{-1}(j(b))}$ is a function from $U_{f^{-1}(j(b))}$ to $V_{j(b)}$, and so
+\[ k(b) = g_{f^{-1}(j(b))}^{-1}(b) \in U_{f^{-1}(j(b))} \subseteq X \]
+This also shows that $i(k(b)) = f^{-1}(j(b))$.
+
+Then $k$ is an inverse for $h$. To see this, let $a \in X$; then
+\begin{align*}
+k(h(a)) &= g_{f^{-1}(j(h(a)))}^{-1} (h(a)) && \text{by definition of $k$} \\
+&= g_{f^{-1}(f(i(a)))}^{-1} (h(a)) && \text{since $j(h(a)) = f(i(a))$} \\
+&= g_{i(a)}^{-1}(h(a)) && \text{since $f^{-1} \circ f = \mathrm{id}_I$} \\
+&= g_{i(a)}^{-1}(g_{i(a)}(a)) && \text{by definition of $h$} \\
+&= a && \text{since $g_{i(a)}^{-1} \circ g_{i(a)} = \mathrm{id}_{X_{i(a)}}$}
+\end{align*}
+
+A similarly tedious computation reveals that $h(k(b)) = b$ for all $b \in Y$:
+\begin{align*}
+h(k(b)) &= g_{i(k(b))}(k(b)) && \text{by definition of $h$} \\
+&= g_{f^{-1}(j(b))}(k(b)) && \text{since $i(k(b)) = f^{-1}(j(b))$} \\
+&= g_{f^{-1}(j(b))}(g_{f^{-1}(j(b))}^{-1}(b)) && \text{by definition of $k$} \\
+&= b && \text{since $g_{f^{-1}(j(b))} \circ g_{f^{-1}(j(b))}^{-1} = \mathrm{id}_{Y_{j(b)}}$}
+\end{align*}
+
+So $k$ is an inverse for $h$, as required.
+\end{cproof}
+
+\begin{exercise}
+\label{exBijectionOfQuotientsAndClassesInducesBijectionOfSets}
+Let $X$ and $Y$ be sets, let $\sim$ be an equivalence relation on $X$ and let $\approx$ be an equivalence relation on $Y$. Assume that there is a bijection $p : X/{\sim} \to Y/{\approx}$, and for each equivalence class $E \in X/{\sim}$ there is a bijection $h_E : E \to p(E)$. Use \Cref{lemBijectionBetweenPartitionAndComponentsInducesBijectionOfSets} to prove that there is a bijection $h : X \to Y$.
+\end{exercise}
+
+\subsection*{The quotient function}
+
+We will now show that equivalence relations on a set $X$ are essentially the same thing as \textit{surjections} from $X$ to another set.
+
+\begin{definition}
+\label{defQuotientFunction}
+\index{function!quotient}
+\index{quotient function}
+Let $X$ be a set and let $\sim$ be an equivalence relation on $X$. The \textbf{quotient function} for $\sim$ is the function $q_{\sim} : X \to X/{\sim}$ defined by $q(a) = [a]_{\sim}$ for each $a \in X$. That is, the quotient function sends each element of $X$ to its $\sim$-equivalence class.
+\end{definition}
+
+\begin{example}
+Recall that, given $a \in \mathbb{Z}$, we have $[a]_2 = [0]_2$ if $a$ is even, and $[a]_2 = [1]_2$ is $a$ is odd. Thus the quotient function $q_2 : \mathbb{Z} \to \mathbb{Z}/2\mathbb{Z}$ can be viewed as telling us the parity of an integer.
+\end{example}
+
+\begin{exercise}
+Let $n \in \mathbb{Z}$ with $n \ne 0$. Describe the quotient function $q_n : \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ in terms of remainders.
+\end{exercise}
+
+\begin{exercise}
+\label{exQuotientFunctionIsSurjective}
+Let $\sim$ be an equivalence relation on a set $X$. Prove that the quotient function $q_{\sim} : X \to X/{\sim}$ is surjective.
+\end{exercise}
+
+The theorem we prove next can be viewed as the converse to \Cref{exQuotientFunctionIsSurjective}. It proves that every surjection `is' a quotient function, in the sense that given any surjection $p : X \to A$, we can view $A$ as a quotient of $X$ by a suitably-defined equivalence relation, and then $p$ `is' the corresponding quotient function.
+
+\begin{theorem}
+\label{thmEquivalenceRelationsSurjections}
+Let $X$ be a set. Then for every set $A$ and every surjection $p : X \to A$, there exist a unique equivalence relation $\sim$ on $X$ and bijection $f : X/{\sim} \to A$ such that $f([x]) = p(x)$ for all $x \in X$.
+\end{theorem}
+
+\begin{cproof}
+Let $A$ be a set and $p : X \to A$ be a surjection.
+\begin{itemize}
+\item (\textbf{Existence}) Define a relation $\sim$ on $X$ by $x \sim y$ if and only if $p(x) = p(y)$. Then $\sim$ is an equivalence relation by \Cref{exEquivalenceRelationFromFunction}.
+
+Moreover, given $x \in X$, we have
+\[ [x]_{\sim} = \{ y \in X \mid p(x) = p(y) \} = p^{-1}[\{p(x)\}] \]
+So define $f : X/{\sim} \to A$ by letting $f([x]_{\sim}) = p(x)$. Then $f$ is well-defined, since if $[x]_{\sim} = [y]_{\sim}$ then $x \sim y$, so that $p(x)=p(y)$.
+
+Furthermore, $f$ is a bijection:
+\begin{itemize}
+\item (\textbf{Injectivity}) Let $[x]_{\sim},[y]_{\sim} \in X/{\sim}$ and assume $f([x]_{\sim}) = f([y]_{\sim})$. Then $p(x)=p(y)$, so that $x \sim y$, and hence $[x]_{\sim} = [y]_{\sim}$.
+\item (\textbf{Surjectivity}) Let $a \in A$. Since $p$ is a surjection, there is some $x \in X$ such that $p(x) = a$. But then $f([x]_{\sim}) = p(x) = a$.
+\end{itemize}
+So we have established that there exist an equivalence relation $\sim$ on $X$ and a bijection $f : X/{\sim} \to A$ such that $f([x]_{\sim}) = p(x)$ for all $x \in X$.
+
+\item (\textbf{Uniqueness}) Suppose $\approx$ is another equivalence relation on $X$ and that $g : X/{\approx} \to A$ is a bijection such that $g([x]_{\approx}) = p(x)$ for all $x \in X$. We prove that ${\sim} = {\approx}$, and then that $g = f$, so that $\sim$ and $f$ are unique.
+
+So let $x,y \in X$. Then
+\begin{align*}
+x \sim y
+&\Leftrightarrow p(x) = p(y) && \text{by definition of $\sim$} \\
+&\Leftrightarrow g([x]_{\approx}) = g([y]_{\approx}) && \text{by definition of $g$} \\
+&\Leftrightarrow [x]_{\approx} = [y]_{\approx} && \text{since $g$ is bijective} \\
+&\Leftrightarrow x \approx y && \text{by \Cref{exQuotientIsPartition}}
+\end{align*}
+
+It follows that ${\sim} = {\approx}$, and then for all $x \in X$ we have
+\[ f([x]_{\sim}) = p(x) = g([x]_{\approx}) = g([x]_{\sim}) \]
+so that $f=g$, as required.
+\end{itemize}
+\end{cproof}
+
+In light of \Cref{thmEquivalenceRelationsSurjections}, we have now established the equivalence of three notions for a given set $X$:
+\begin{center}
+\begin{tikzcd}[row sep=huge, column sep=normal]
+&
+\begin{matrix} \text{equivalence relations} \\ \text{on } X \end{matrix}
+\arrow[dl, <->]
+\arrow[dr, <->]
+& \\
+\begin{matrix} \text{partitions} \\ \text{of } X \end{matrix}
+\arrow[rr, <->, dashed]
+&&
+\begin{matrix} \text{surjections with} \\ \text{domain } X \end{matrix}
+\end{tikzcd}
+\end{center}
+
+\begin{exercise}
+Give an explicit description of the dashed arrow in the above diagram. That is, describe the correspondence between partitions of a set $X$ and surjections whose domain is $X$.
+\hintlabel{exPartitionsSurjections}{%
+Given a partition $\mathcal{U}$ of a set $X$, find a surjection $q : X \to \mathcal{U}$. Then prove that, for every surjection $p : X \to A$, there is a unique partition $\mathcal{U}_p$ of $X$ and a unique bijection $f : \mathcal{U}_p \to A$ such that, for all $U \in \mathcal{U}_p$, we have $p(x) = f(U)$ for all $x \in U$. The structure of the proof will be similar to that of \Cref{thmEquivalenceRelationsSurjections}.
+}
+\end{exercise}
+
+\index{equivalence relation|)}
+\index{relation!equivalence relation|)}

@@ -1,0 +1,355 @@
+\section{Cardinality}
+\secbegin{secCardinality}
+
+\Cref{secFiniteSets} was all about defining a notion of \textit{size} for finite sets, and using this definition to compare and contrast the sizes of finite sets by constructing injections, surjections and bijections between them.
+
+We made some progress in comparing the sizes of infinite sets in \Cref{secCountableUncountableSets}, but only to a certain extent: at this point, we can only distinguish between two sizes of infinity, namely `countable' and `uncountable'. While this is interesting, we can do much better---that is where this section comes in.
+
+The \textit{cardinality} (defined in \Cref{defCardinality}) of a set can be understood as a measure of its size, generalising the notion of size for finite sets. In particular:
+\begin{itemize}
+\item Whereas the size of a \textit{finite} set $X$ is a natural number $|X| \in \mathbb{N}$, the cardinality of an arbitrary set is a \textit{cardinal number}---but if the set happens to be finite, then this cardinal number is equal to the natural number given by its size.
+\item We proved in \Cref{thmFiniteSetsAndJections} that two finite sets $X$ and $Y$ have equal size if and only if there is a bijection $X \to Y$. We generalise this fact to arbitrary sets by building it into the definition of cardinality: that is, two sets $X$ and $Y$ will have equal cardinality if and only if there is a bijection $X \to Y$.
+\end{itemize}
+
+Without further ado, behold the definition of cardinality.
+
+\begin{definition}
+\label{defCardinality}
+\index{cardinality}
+\index{number!cardinal}
+\index{cardinal number}
+\nindex{card}{$\mathsf{Card}$}{set of cardinal numbers}
+\nindex{size}{$"|X"|$}{size, cardinality}
+The \textbf{cardinality} of a set $X$ is an element $|X|$ of the collection $\mathsf{Card}$ \inlatex{mathsf\{Card\}}\lindexmmc{mathsf}{$\mathsf{Aa}, \mathsf{Bb}, \dots$} of all \textbf{cardinal numbers}, defined so that the following properties hold:
+\begin{enumerate}[(i)]
+\item For every set $X$, there is a unique cardinal number $\kappa \in \mathsf{Card}$ such that $|X| = \kappa$;
+\item For all sets $X$ and $Y$, we have $|X| = |Y|$ if and only if there exists a bijection $X \to Y$;
+\item $\mathbb{N} \subseteq \mathsf{Card}$, and if $X$ is finite, then its cardinality $|X|$ is equal to its size; and
+\item For each cardinal number $\kappa$, there exists a set $[\kappa]$ with $|[\kappa]| = \kappa$, with $[n]$ defined as in \Cref{defBracketN} for all $n \in \mathbb{N} \subseteq \mathsf{Card}$.
+\end{enumerate}
+A cardinal number $\kappa \in \mathsf{Card} \setminus \mathbb{N}$ is called an \textbf{infinite cardinal number}.
+\end{definition}
+
+Condition (iii) ensures that cardinality generalises the notion of size: whereas size is defined only for finite sets, cardinality is defined for both finite and infinite sets.
+
+\Cref{defCardinality} tells us only what properties cardinal numbers satisfy; it doesn't tell us what they actually \textit{are}, how they are defined, or even whether they exist. This is on purpose: the construction of the cardinal numbers is very intricate, and far beyond the scope of this introductory textbook.
+
+One cardinal number of interest to us is the cardinality of the natural numbers. In a sense that we will make precise later (\Cref{thmAlephNaughtIsSupremumOfNaturalNumbers}), we can think of this cardinal number as being the \textit{smallest} infinite cardinal number.
+
+\begin{definition}
+\label{defAlephNaught}
+\nindex{alephnaught}{$\aleph_0$}{aleph naught}
+The cardinal number $\aleph_0$ \inlatex{aleph\_0}\lindexmmc{aleph}{$\aleph$}, called \textbf{aleph naught} (or \textbf{aleph null}), is defined by $\aleph_0 = |\mathbb{N}|$.
+\end{definition}
+
+The symbol $\aleph$ is the Hebrew letter \textit{aleph}. The cardinal number $\aleph_0$ is the first infinite cardinal number in a hierarchy of so-called \textit{well-orderable cardinals}.
+
+\begin{example}
+\label{exCountablyInfiniteIfAndOnlyIfCardinalityAlephNought}
+A set $X$ is countably infinite if and only if $|X| = \aleph_0$. Indeed, to say that $X$ is countably infinite is to say that there is a bijection $\mathbb{N} \to X$, which by \Cref{defCardinality}(ii) is equivalent to saying that $\aleph_0 = |\mathbb{N}| = |X|$.
+\end{example}
+
+In light of \Cref{exCountablyInfiniteIfAndOnlyIfCardinalityAlephNought}, we have
+\[ |\mathbb{N}| = |\mathbb{Z}| = |\mathbb{Q}| = \aleph_0 \]
+
+So what about $\mathbb{R}$? We know that $|\mathbb{R}| \ne \aleph_0$ by \Cref{thmRIsUncountable}. The cardinality of the real numbers has its own notation, given next.
+
+\begin{definition}
+\label{defCardinalityOfContinuum}
+\nindex{continuum}{$\mathfrak{c}$}{cardinality of the continuum}
+The \textbf{cardinality of the continuum} is the cardinal number $\mathfrak{c}$ \inlatex{mathfrak\{c\}}\lindexmmc{mathfrak}{$\mathfrak{Aa}, \mathfrak{Bb}, \dots$} defined by $\mathfrak{c} = |\mathbb{R}|$.
+\end{definition}
+
+\begin{exercise}
+\label{exIntervalFromMinusOneToOneHasCardinalityOfContinuum}
+Consider the function $f : \mathbb{R} \to (-1,1)$ defined by
+\[ f(x) = \dfrac{x}{1+|x|} \]
+for all $x \in \mathbb{R}$. Prove that $f$ is a bijection, and deduce that $|(-1,1)| = \mathfrak{c}$.
+\end{exercise}
+
+\begin{exercise}
+\label{exRealsHaveSameCardinalityAsIntervals}
+Let $a,b \in \mathbb{R}$ with $a<b$. Prove that each of the sets $(a,b)$, $[a,b)$, $(a,b]$ and $[a,b]$ has cardinality $\mathfrak{c}$.
+\hintlabel{exAllOpenInvervalsHaveCardinalityOfContinuum}{%
+Start by finding a bijection $(-1,1) \to (a,b)$ and apply \Cref{exIntervalFromMinusOneToOneHasCardinalityOfContinuum}.
+}
+\end{exercise}
+
+\subsection*{Ordering the cardinal numbers}
+
+In \Cref{thmFiniteSetsAndJections} we proved that, given finite sets $X$ and $Y$, we can prove that $|X| \le |Y|$ by constructing an injection $X \to Y$. This made intuitive sense: for an injection $X \to Y$ to exist, there must be sufficiently many elements in $Y$ to be able to spread out all of the elements of $X$.
+
+The intuition bestowed upon us by the finite case yields the following definition.
+
+\begin{definition}
+\label{defOrderingOfCardinals}
+Given cardinal numbers $\kappa$ and $\lambda$, we say that $\kappa$ is \textbf{less than or equal to} $\lambda$, and write $\kappa \le \lambda$, if there exists an injection $[\kappa] \to [\lambda]$. We say $\kappa$ is \textbf{less than} $\lambda$, and write $\kappa < \lambda$, if $\kappa \le \lambda$ and $\kappa \ne \lambda$.
+\end{definition}
+
+A word of warning is pertinent at this point. Given $m,n \in \mathbb{N}$, but regarding $m$ and $n$ as cardinal numbers, \Cref{defOrderingOfCardinals} defines the expression `$m \le n$' to mean that there exists an injection $[m] \to [n]$. This is not how `$m \le n$' is typically defined for natural numbers $m$ and $n$. Fortunately for us, we proved in \Cref{thmJectionsAndSizeOfNaturalNumbers} that $m \le n$ (in the usual sense) if and only if there is an injection $[m] \to [n]$. This ensures that these two notions of `$\le$'---for cardinal numbers and for natural numbers---are consistent with one another.
+
+This is typical for the definitions we will make involving cardinal numbers, particularly in \Cref{secCardinalArithmetic}: results that we \textit{proved} for natural numbers in \Cref{chCombinatorics} will be generalised to form \textit{definitions} for cardinal numbers, but then these generalised definitions are consistent with the usual definitions for natural numbers. While it is not worth losing sleep over these matters, it is good practice to check that the definitions we make are not mutually contradictory!
+
+We may at times write $\lambda \ge \kappa$ to mean $\kappa \le \lambda$, and $\lambda > \kappa$ to mean $\kappa < \lambda$. Note that $\lambda \ge \kappa$ should \textit{not} be interpreted to mean `there exists a surjection $[\lambda] \to [\kappa]$'---for example, that would imply that $1 \ge 0$ is false, which is nonsense.
+
+In any case \Cref{defOrderingOfCardinals} provides the following proof strategy.
+
+\begin{strategy}
+Let $X$ and $Y$ be sets.
+\begin{itemize}
+\item In order to prove $|X| \le |Y|$, it suffices to find an injection $X \to Y$.
+\item In order to prove $|X| < |Y|$, it suffices to find an injection $X \to Y$, and prove that there does not exist a surjection $X \to Y$.
+\end{itemize}
+\end{strategy}
+
+\begin{example}
+$\aleph_0 \le \mathfrak{c}$. To see this, note that the function $i : \mathbb{N} \to \mathbb{R}$ given by $i(n)=n$ for all $n \in \mathbb{N}$ is an injection.
+\end{example}
+
+\begin{exercise}
+Prove that $n < \aleph_0$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $\le$ is a reflexive, transitive relation on $\mathsf{Card}$. That is, prove that:
+\begin{enumerate}[(a)]
+\item $\kappa \le \kappa$ for all cardinal numbers $\kappa$; and
+\item For all cardinal numbers $\kappa, \lambda, \mu$, if $\kappa \le \lambda$ and $\lambda \le \mu$, then $\kappa \le \mu$.
+\end{enumerate}
+\end{exercise}
+
+\begin{theorem}[Cantor's theorem]
+\label{thmCantor}
+Let $X$ be a set. Then $|X| < |\mathcal{P}(X)|$.
+\end{theorem}
+
+\begin{cproof}
+The function $x \mapsto \{ x \}$ evidently defines an injection $X \to \mathcal{P}(X)$, so $|X| \le |\mathcal{P}(X)|$. The fact that $|X| \ne |\mathcal{P}(X)|$ is then immediate from \Cref{exRussellSubset}, which proves that no function $X \to \mathcal{P}(X)$ is surjective.
+\end{cproof}
+
+Cantor's theorem implies that there is no bound on how large a cardinal number can be. Indeed, if $\kappa$ is any cardinal number, then Cantor's theorem implies that
+\[ \kappa = |[\kappa]| < |\mathcal{P}([\kappa])| \]
+and so $|\mathcal{P}([\kappa])|$ is a larger cardinal number yet.
+
+Earlier in the section we claimed that $\aleph_0$ is, in a suitable sense, the \textit{smallest} infinite cardinal number. \Cref{thmAlephNaughtIsSupremumOfNaturalNumbers} makes it clear what we mean by this.
+
+\begin{theorem}
+\label{thmAlephNaughtIsSupremumOfNaturalNumbers}
+The cardinal number $\aleph_0$ is the smallest infinite cardinal in the following sense:
+\begin{enumerate}[(a)]
+\item $n \le \aleph_0$ for all $n \in \mathbb{N}$; and
+\item For all cardinal numbers $\kappa$, if $n \le \kappa$ for all $n \in \mathbb{N}$, then $\aleph_0 \le \kappa$.
+\end{enumerate}
+Thus $\aleph_0$ can be thought of as the cardinal supremum of $\mathbb{N} \subseteq \mathsf{Card}$.
+\end{theorem}
+
+\begin{cproof}
+For part (a), note that for each $n \in \mathbb{N}$, we have $[n] \subseteq \mathbb{N}$, and so the function $i : [n] \to \mathbb{N}$ given by $i(k) = k$ for all $k \in [n]$ is an injection. It follows that
+\[ n = |[n]| \le |\mathbb{N}| = \aleph_0 \]
+as required.
+
+For part (b), fix a cardinal number $\kappa$ and assume that $n \le \kappa$ for all $n \in \mathbb{N}$. Then there exist injections $j_n : \{0, 1, \dots, n\} \to [\kappa]$ for each $n \in \mathbb{N}$.
+
+We will use these injections to construct an injection $f : \mathbb{N} \to [\kappa]$ in the following way: each function $j_n : \{ 0,1,\dots,n \} \to [\kappa]$ takes exactly $n+1$ values. This means that for all $n \in \mathbb{N}$, the function $j_{n+1}$ takes at least one value in $[\kappa]$ that the function $j_n$ does not take---we will define $f(n+1)$ to be one of these values.
+
+Now let's define $f$ properly: define $f(n) \in [\kappa]$ for $n \in \mathbb{N}$ recursively as follows:
+\begin{itemize}
+\item $f(0) = j_0(0) \in [\kappa]$.
+\item Fix $n \in \mathbb{N}$ and suppose $f(k)$ has been defined for all $k \le n$, such that $f(k) \ne f(\ell)$ for $\ell < k$. Let
+\[ A = \{ a \le n+1 \mid j_{n+1}(a) \ne f(k) \text{ for all } k \le n \} \]
+Note that $A$ is inhabited: the set $\{ j_{n+1}(a) \mid 0 \le a \le n+1 \}$ has size $n+2$ since $j_{n+1}$ is injective, and the set $\{ f(k) \mid 0 \le k \le n \}$ has size $n+1$ by construction, so at least one $a \le n+1$ must satisfy the requirement that $j_{n+1}(a) \ne f(k)$ for all $k \le n$.
+
+Let $a$ be the least element of $A$, and define $f(n+1) = j_{n+1}(a)$. Then by construction we have $j_{n+1}(a) \ne f(k)$ for any $k < n+1$, as required.
+\end{itemize}
+
+By construction, the function $f$ is injective, since for all $n \in \mathbb{N}$, the value $f(n) \in [\kappa]$ was defined so that $f(n) \ne f(k)$ for any $k < n$.
+
+Hence $\aleph_0 = |\mathbb{N}| \le |[\kappa]| = \kappa$, as required.
+\end{cproof}
+
+\subsection*{The Cantor--Schr\"{o}der--Bernstein theorem}
+
+Even if two sets $X$ and $Y$ have the same cardinality, it is not always easy to find a bijection $X \to Y$. This is problematic if we want to prove that they \textit{do} have the same cardinality! The Cantor--Schr\"{o}der--Bernstein theorem greatly simplifies this process, allowing us to deduce that $|X| = |Y|$ from the existence of injections $X \to Y$ and $Y \to X$.
+
+\begin{theorem}[Cantor--Schr\"{o}der--Bernstein theorem]
+\label{thmCantorSchroederBernstein}
+\index{Cantor--Schr\"{o}der--Bernstein theorem}
+The relation $\le$ on $\mathsf{Card}$ is antisymmetric. That is, for all cardinal numbers $\kappa$ and $\lambda$, if $\kappa \le \lambda$ and $\lambda \le \kappa$, then $\kappa = \lambda$.
+\end{theorem}
+
+\begin{cproof}
+This is one of the most involved proofs that we will see in this book, and so we break it into steps. Some details are left as exercises, in part because the details cloud the bigger picture of the proof, and in part because they provide good practice with working with all the definitions.
+
+Let $\kappa$ and $\lambda$ be cardinal numbers and assume that $\kappa \le \lambda$ and $\lambda \le \kappa$. Then there exist injections $f : [\kappa] \to [\lambda]$ and $g : [\lambda] \to [\kappa]$.
+
+The steps we will follow are these:
+\begin{itemize}
+\item \textbf{Step 1.} We will use the injections $f$ and $g$ to partition $[\kappa]$ and $[\lambda]$ into equivalence classes. Intuitively, two elements of $[\kappa]$ will be `equivalent' if one can be obtained from the other by successively applying $g \circ f$, and likewise for $[\lambda]$ with $f \circ g$.
+\item \textbf{Step 2.} We will prove that $f$ and $g$ induce a bijection $[\kappa]/{\sim} \to [\lambda]/{\approx}$---that is, they pair up the $\sim$-equivalence classes with the $\approx$-equivalence classes.
+\item \textbf{Step 3.} We will prove that there is a bijection between each pair of the paired-up equivalence classes.
+\item \textbf{Step 4.} We will piece together the bijections between equivalence classes to obtain a bijection $[\kappa] \to [\lambda]$.
+\end{itemize}
+
+So here we go.
+
+\textbf{Step 1.} Define a relation $\sim$ on $[\kappa]$ by letting
+\[ a \sim b \quad \Leftrightarrow \quad (g \circ f)^n(a) = b \text{ or } (g \circ f)^n(b) = a \text{ for some } n \in \mathbb{N} \]
+for all $a,b \in [\kappa]$. Here $(g \circ f)^n$ refers to the $n$-fold composite of $g \circ f$, that is
+\[ (g \circ f)^n(x) = (\underbrace{(g \circ f) \circ (g \circ f) \circ \cdots \circ (g \circ f)}_{\text{$n$ copies of $(g \circ f)$}}) (x) \]
+In other words, $a \sim b$ means that we can get from $a$ to $b$, or from $b$ to $a$, by applying the function $g \circ f$ some number of times.
+
+\begin{exercise}
+Prove that $\sim$ is an equivalence relation on $[\kappa]$.
+\end{exercise}
+
+% We prove that $\sim$ is an equivalence relation:
+% \begin{itemize}
+% \item (\textbf{Reflexivity}) For all $a \in [\kappa]$, we have $a = (g \circ f)^0(a)$, and so $a \sim a$.
+% \item (\textbf{Symmetry}) Let $a, b \in [\kappa]$ and suppose that $a \sim b$. Then for some $n \in \mathbb{N}$ we have either $(g \circ f)^n(a) = b$ or $(g \circ f)^n(b) = a$. But this is also what it means for $b \sim a$ to be true!
+% \item (\textbf{Transitivity}) Let $a,b,c \in [\kappa]$ and suppose that $a \sim b$ and $b \sim c$. Then there exist $m,n \in \mathbb{N}$ such that one of the following cases holds:
+% \begin{itemize}
+% \item $(g \circ f)^m(a) = b$ and $(g \circ f)^n(b) = c$. In this case, we have
+% \[ (g \circ f)^{m+n}(a) ~=~ (g \circ f)^n( (g \circ f)^m (a) ) ~=~ (g \circ f)^n(b) ~=~ c \]
+% and so $a \sim c$.
+% \item $(g \circ f)^m(a) = b$ and $(g \circ f)^n(c) = b$. Then $(g \circ f)^m(a) = (g \circ f)^n(c)$. Since $g \circ f$ is an injection, we may cancel it from both sides of the equation as many times as we can, meaning that either
+% \[ (g \circ f)^{m-n}(a) = c \quad \text{or} \quad (g \circ f)^{n-m}(c) = a \]
+% But both of these imply that $a \sim c$.
+% \item $(g \circ f)^m(b) = a$ and $(g \circ f)^n(b) = c$. In this case we either have
+% \[ (g \circ f)^{n-m}(a) = (g \circ f)^n(b) = c \quad \text{or} \quad (g \circ f)^{m-n}(c) = (g \circ f)^m(b) = a \]
+% But both of these imply that $a \sim c$.
+% \item $(g \circ f)^m(b)=a$ and $(g \circ f)^n(c) = b$. In this case, we have
+% \[ (g \circ f)^{m+n}(c) = (g \circ f)^m( (g \circ f)^n(c) ) = (g \circ f)^m(b) = a \]
+% and so $a \sim c$.
+% \end{itemize}
+% In all four cases, we have $a \sim c$, as required.
+% \end{itemize}
+
+Likewise the relation $\approx$ on $[\lambda]$, defined by letting
+\[ c \approx d \quad \Leftrightarrow \quad (f \circ g)^n(c) = d \text{ or } (f \circ g)^n(d) = c \text{ for some } n \in \mathbb{N} \]
+for all $c,d \in [\lambda]$, is an equivalence relation.
+
+\textbf{Step 2.} Define functions $p : [\kappa]/{\sim} \to [\lambda]/{\approx}$ and $q : [\lambda]/{\approx} \to [\kappa]/{\sim}$ by
+\[ p([a]_{\sim}) = [f(a)]_{\approx} \quad \text{and} \quad q([b]_{\approx}) = [g(b)]_{\sim} \]
+for all $[a]_{\sim} \in [\kappa]/{\sim}$ and $[b] \in [\lambda]_{\approx}$.
+
+\begin{exercise}
+Prove that $p$ and $q$ are well-defined, and that $q$ is an inverse for $p$.
+\end{exercise}
+
+% Then $p$ is well-defined. To see this, let $[a]_{\sim}, [b]_{\sim} \in [\kappa]/{\sim}$ and suppose that $[a]_{\sim} = [b]_{\sim}$. Then there is some $n \in \mathbb{N}$ such that either:
+% \begin{itemize}
+% \item $(g \circ f)^n(a) = b$, in which case we have
+% \[ (f \circ g)^n(f(a)) = f( (g \circ f)^n(a) ) = f(b) \]
+% and so $f(a) \approx f(b)$; or
+% \item $(g \circ f)^n(b) = a$, in which case we have
+% \[ (f \circ g)^n(f(a)) = f( (g \circ f)^n(a) ) = f(b) \]
+% and so $f(a) \approx f(b)$; or
+% \end{itemize}
+% In both cases we have $f(a) \approx f(b)$, so that $p([a]_{\sim}) = [f(a)]_{\approx} = [f(b)]_{\approx} = p([b]_{\sim})$, as required.
+
+% Now define $q : [\lambda]/{\approx} \to [\kappa]/{\sim}$ by
+% \[ q([c]_{\approx}) = [g(c)]_{\sim} \]
+% for all $[c]_{\approx} \in [\lambda]/{\approx}$. Then $q$ is well-defined---the proof is identical to the one for $p$.
+
+% Moreover $q$ is an inverse for $p$. Indeed, given $[a]_{\sim} \in [\kappa]/{\sim}$, we have
+% \[ q(p([a]_{\sim}) = q([f(a)]_{\approx}) = [g(f(a))]_{\sim} = [a]_{\sim} \]
+% The last equation holds because $a \sim (g \circ f)(a)$. Likewise $p(q([b]_{\approx})) = [b]_{\approx}$ for all $[b]_{\approx} \in [\lambda]/{\approx}$. Hence $q$ is an inverse for $p$, so that $p$ is a bijection from $[\kappa]/{\sim}$ to $[\lambda]/{\approx}$.
+
+In particular, $p$ defines a bijection $[\kappa]/{\sim} \to [\lambda]/{\approx}$.
+
+\textbf{Step 3.} Fix $a \in [\kappa]$ and let $b=f(a) \in [\lambda]$. We prove that there is a bijection $[a]_{\sim} \to [b]_{\approx}$. There are three possible cases:
+
+\begin{itemize}
+\item \textbf{Case 1.} Suppose $[a]_{\sim}$ contains an element $a_0$ such that $a_0 \ne g(y)$ for any $y \in [\lambda]$. Define a function $h_a : [a]_{\sim} \to [b]_{\approx}$ by letting $h_a(x) = f(x)$ for all $x \in [a]_{\sim}$.
+\item \textbf{Case 2.} Suppose $[b]_{\approx}$ contains an element $b_0$ such that $b_0 \ne f(x)$ for any $x \in [\kappa]$. Define a function $k_b : [b]_{\approx} \to [a]_{\sim}$ by letting $k_b(y) = g(x)$ for all $y \in [b]_{\approx}$.
+\item \textbf{Case 3.} Otherwise, define $h_a : [a]_{\sim} \to [b]_{\approx}$ by $h_a(x) = f(x)$ for all $x \in [a]_{\sim}$.
+\end{itemize}
+
+\begin{exercise}
+Prove that each of the functions defined in the above three cases is a bijection.
+\end{exercise}
+
+\textbf{Step 4.} By taking $h_a = k_b^{-1} : [a]_{\sim} \to [b]_{\approx}$ in Case 2 above, we have proved that:
+\begin{itemize}
+\item There is a bijection $p : [\kappa]/{\sim} \to [\lambda]/{\approx}$; and
+\item For each $E = [a]_{\sim} \in [\kappa]/{\sim}$, there is a bijection $h_a : E \to p(E)$.
+\end{itemize}
+By \Cref{exBijectionOfQuotientsAndClassesInducesBijectionOfSets}, it follows that there is a bijection $[\kappa] \to [\lambda]$, as required. This completes the proof.
+\end{cproof}
+
+The Cantor--Schr\"{o}der--Bernstein theorem is not just an interesting fact: it is useful for proving that two sets have the same cardinality without having to explicitly construct a bijection between them.
+
+\begin{strategy}[Proving that two sets have equal cardinality]
+\label{strCantorSchroederBernstein}
+Let $X$ and $Y$ be sets. In order to prove that $|X| = |Y|$, it suffices to show that there exists an injection $X \to Y$ and an injection $Y \to X$.
+\end{strategy}
+
+\begin{example}
+Let $a,b \in \mathbb{R}$ with $a<b$, and consider the chain of functions
+\[ (0,1) \xrightarrow{f_1} (a,b) \xrightarrow{f_2} [a,b] \xrightarrow{f_3} [0,1] \xrightarrow{f_4} (0,1) \]
+defined by:
+
+\begin{itemize}
+\item $f_1(t) = a + t(b-a)$ for all $t \in (0,1)$.
+\item $f_2(t) = t$ for all $t \in (a,b)$.
+\item $f_3(t) = \dfrac{t-a}{b-a}$ for all $t \in [a,b]$.
+\item $f_4(t) = \frac{1}{4} + \frac{1}{2}t$ for all $t \in [0,1]$.
+\end{itemize}
+
+Each of these functions is injective by \Cref{exLinearPolynomialIsInjective}. Hence we can compose these functions to obtain injections from any of these sets to any other---for example, $f_1 \circ f_4 \circ f_3 : [0,1] \to (a,b)$ is an injection.
+
+By the Cantor--Schr\"{o}der--Bernstein theorem, it follows that
+\[ |(0,1)| = |(a,b)| = |[a,b]| = |[0,1]| \]
+\end{example}
+
+\begin{example}
+\label{exCardinalityOfNCrossN}
+Here is a proof that $\mathbb{N} \times \mathbb{N}$ is countably infinite using the Cantor--Schr\"{o}der--Bernstein theorem.
+
+Define $f : \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ by $f(n) = (n, 0)$ for all $n \in \mathbb{N}$. Given $m,n \in \mathbb{N}$ we have
+\[ f(m) = f(n) \quad \Rightarrow \quad (m,0) = (n,0) \quad \Rightarrow \quad m=n \]
+So $f$ is injective.
+
+Next, define $g : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ by $g(m,n) = 2^m \cdot 3^n$ for all $m,n \in \mathbb{N}$. Then given $(m,n), (p,q) \in \mathbb{N} \times \mathbb{N}$, if $g(m,n) = g(p,q)$, then $2^m \cdot 3^n = 2^p \cdot 3^q$. It follows from the fundamental theorem of arithmetic (\Cref{thmFTA}) that $m=n$ and $p=q$, so that $g$ is injective.
+
+Since $f : \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ and $g : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ are injective, it follows from the Cantor--Schr\"{o}der--Bernstein theorem that
+\[ |\mathbb{N} \times \mathbb{N}| = |\mathbb{N}| = \aleph_0 \]
+so that $\mathbb{N} \times \mathbb{N}$ is countably infinite.
+\end{example}
+
+We can use the Cantor--Schr\"{o}der--Bernstein theorem to prove that $\mathcal{P}(\mathbb{N})$ has the cardinality of the coninuum.
+
+\begin{theorem}
+\label{thmPowerSetOfNHasCardinalityC}
+$|\mathcal{P}(\mathbb{N})| = \mathfrak{c}$
+\end{theorem}
+
+\begin{cproof}
+Define a function $f : \mathcal{P}(\mathbb{N}) \to \mathbb{R}$ as follows. Given $U \subseteq \mathbb{N}$, define
+\[ U_n = \begin{cases} 1 & \text{if $n \in U$} \\ 0 & \text{if $n \not\in U$} \end{cases} \]
+Let $f(U)$ be the real number whose decimal expansion is $U_0.U_1U_2\dots$ . Then $f$ is an injection: given $U, V \subseteq \mathbb{N}$, if $f(U) = f(V)$, then $f(U)$ and $f(V)$ have the same decimal expansion, so that $U_n = V_n$ for all $n \in \mathbb{N}$. But that says precisely that $n \in U$ if and only if $n \in V$ for all $n \in \mathbb{N}$, so that $U=V$.
+
+Next, define a function $g : [0,1) \to \mathcal{P}(\mathbb{N})$ as follows: given $x \in \mathbb{R}$, let the binary expansion of $x$ be
+\[ x = 0.x_1x_2x_3x_4\dots{}_{(2)} \]
+Define $g(x) = \{ i \in \mathbb{N} \mid x_i = 1 \}$. Then $g$ is injective by uniqueness of binary expansions again.
+
+Then:
+\begin{itemize}
+\item Since $f$ is injective we have $|\mathcal{P}(\mathbb{N})| \le |\mathbb{R}| = \mathfrak{c}$.
+\item Since $g$ is injective we have $\mathfrak{c} = |[0,1)| \le |\mathcal{P}(\mathbb{N})|$.
+\end{itemize}
+
+By the Cantor--Schr\"{o}der--Bernstein theorem (\Cref{thmCantorSchroederBernstein}), it follows that $|\mathcal{P}(\mathbb{N})| = \mathfrak{c}$.
+\end{cproof}
+
+\begin{exercise}
+Let $\mathcal{F}(\mathbb{N})$ be the set of all finite subsets of $\mathbb{N}$, and define $f : \mathcal{F}(\mathbb{N}) \to \mathbb{N}$ by
+\[ f(U) ~=~ \sum_{a \in U} 10^a ~=~ \sum_{k = 1}^n 10^{a_k} \]
+for all $U = \{ a_1, a_2, \dots, a_n \} \in \mathcal{F}(\mathbb{N})$. Put another way, $f(U)$ is the natural number whose decimal expansion has a $1$ in the $r^{\text{th}}$ position (counting from $r=0$) if $r \in U$, and a $0$ otherwise. For example
+\[ f(\{ 0, 1, 3, 4, 8 \}) = 100011011 \quad \text{and} \quad f(\varnothing) = 0 \]
+Prove that $f$ is injective, and use the Cantor--Schr\"{o}der--Bernstein theorem to deduce that $\mathcal{F}(\mathbb{N})$ is countably infinite.
+\end{exercise}
+
+\begin{exercise}
+Let $X$, $Y$ and $Z$ be sets. Prove that if $|X| = |Z|$ and $X \subseteq Y \subseteq Z$, then $|X| = |Y| = |Z|$.
+\end{exercise}

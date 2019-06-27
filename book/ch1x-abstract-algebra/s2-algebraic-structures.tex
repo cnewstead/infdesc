@@ -1,0 +1,159 @@
+\section{Algebraic structures}
+\secbegin{secAlgebraicStructures}
+\index{algebraic structure|(}
+
+\todo{}
+
+\begin{definition}
+\label{defOperation}
+\index{operation}
+A (\textbf{finitary}) \textbf{operation} on a set $X$ is a function $o : X^n \to X$ for some natural number $n$, called the \textbf{arity} of $o$; we may also say that $o$ is an \textbf{$n$-ary} operation.
+\end{definition}
+
+We will use the terms \textit{unary} and \textit{binary} to refer to $1$-ary and $2$-ary operations, respectively. Binary operations are often written using \textit{infix notation}, which is to say that, instead of writing $o(a,b)$, we might write something like `$a \star b$' \inlatex{star} or `$a \diamond b$' \inlatex{diamond}---this is convenient for a number of reasons, as will become evident from the examples we provide below.
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\begin{definition}
+\label{defAssociative}
+\index{associative operation}
+\index{operation!associative}
+A binary operation $\binop$ on a set $X$ is \textbf{associative} if $(a \binop b) \binop c = a \binop (b \binop c)$ for all $a,b,c \in X$.
+\end{definition}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\todo{}
+
+\begin{definition}
+\label{defCommutativeOperation}
+A binary operation $\binop$ on a set $X$ is \textbf{commutative} if $a \star b = b \star a$ for all $a,b \in X$.
+\end{definition}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\todo{}
+
+\begin{definition}
+\label{defUnitalOperation}
+\index{unital operation}
+\index{operation!unital}
+A binary operation $\binop$ on a set $X$ is \textbf{unital} if there is some element $e \in X$ such that $e \binop a = a$ and $a \binop e = a$ for all $a \in X$. Such an element $e$ is called a \textbf{unit} for the operation $\binop$.
+\end{definition}
+
+\begin{example}
+The unit for the operation $+$ on $\mathbb{Z}$ is $0$, since $0 + n = n = n + 0$ for all $n \in \mathbb{Z}$.
+\end{example}
+
+\begin{exercise}
+Let $X$ be a set. Prove that $\cap$ and $\cup$ are unital operations on $\mathcal{P}(X)$.
+\end{exercise}
+
+\begin{proposition}
+Let $\binop$ be a unital operation on a set $X$. Then $\binop$ has a unique unit.
+\end{proposition}
+
+\begin{cproof}
+Let $e, e' \in X$ be units for $\binop$. Then $e = e \star e' = e'$.
+\end{cproof}
+
+\todo{}
+
+\begin{exercise}[Eckmann--Hilton argument]
+\index{Eckmann--Hilton argument}
+Let $\binop$ and $\binopalt$ be unital operations on a set $X$. Prove that if
+\[ (a \binop b) \binopalt (c \binop d) = (a \binopalt c) \binop (b \binopalt d) \]
+for all $a,b,c,d \in X$, then $\binop$ and $\binopalt$ are the same operation, and this operation is commutative and associative.
+\hintlabel{exEckmannHilton}{%
+First prove that $\binop$ and $\binopalt$ have the same unit, and then use a cunning choice of variable substitution to prove that $a \binop b = a \binopalt b$ for all $a,b \in X$.
+}
+\end{exercise}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\todo{}
+
+\begin{definition}
+\label{defInverseElement}
+\index{inverse}
+Let $X$ be a set and let $\binop$ be a unital binary operation on $X$ with unit $e$. An \textbf{inverse} for $a \in X$ with respect to $\star$ is an element $b \in X$ such that $a \star b = e$ and $b \star a = e$.
+\end{definition}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\begin{example}
+Let $\star$ be a unital binary operation on a set $X$, and let $a \in X$. Prove that if $a$ has an inverse with respect to $\star$, then it is unique.
+\hintlabel{exInversesAreUnique}{%
+Assume that $b,c \in X$ are inverses for $a$, and prove that $b=c$. You might find inspiration from the proof of \Cref{propLeftAndRightInversesAreEqual}.
+}
+\end{example}
+
+\todo{}
+
+\begin{definition}
+\label{defGroup}
+\index{group}
+A \textbf{group} is a set $G$ equipped with an associative, unital binary operation $\star$, with respect to which every element of $G$ has an inverse.
+\end{definition}
+
+We will adopt some notation conventions for groups:
+\begin{itemize}
+\item The group operation $\star$ will often be omitted, so that we write $ab$ to mean $a \star b$.
+\item The unit element of $G$ will typically be written as $e_G$, $1_G$ or $0_G$, depending on context, and the subscripts may be omitted.
+\item The inverse of an element $a \in G$ is usually written as $a^{-1}$ (if the unit element is $e_G$ or $1_G$) or $-a$ (if the unit element is $0_G$).
+\end{itemize}
+
+\todo{}
+
+\begin{definition}
+\label{defAbelianGroup}
+\index{group!abelian}
+\index{abelian group}
+A group $G$ is \textbf{abelian} if its group operation is commutative.
+\end{definition}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{example}
+\todo{}
+\end{example}
+
+\begin{exercise}
+\todo{}
+\end{exercise}
+
+\todo{Lots}
+
+\index{algebraic structure|)}

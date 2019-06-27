@@ -1,0 +1,398 @@
+\section{Constructions of the number sets}
+\secbegin{secConstructions}
+
+\todo{}
+
+\subsection*{The natural numbers}
+
+We can use the framework provided by Zermelo--Fraenkel set theory (\Cref{secZFC}) to provide set theoretic constructions of the number sets $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$. Indeed, if we want to reason about mathematics within the confines of ZF, we must encode everything (including numbers) as sets!
+
+We will begin with a set theoretic construction of the natural numbers---that is, we will construct a notion of natural numbers in the sense of \Cref{defNotionOfNaturalNumbers}. We will encode the natural numbers as sets, called \textit{von Neumann natural numbers}. We will identify the natural number $0$ with the empty set $\varnothing$, and we will identify the successor operation $\mathsf{s}$ with an operation involving sets.
+
+\begin{definition}
+\label{defVonNeumannNaturalNumbers}
+\index{number!natural}
+\index{natural number}
+\index{natural number!von Neumann}
+\index{von Neumann natural number}
+A \textbf{von Neumann natural number}\nindex{nvn}{$n_{\mathsf{vN}}$}{von Neumann natural number} is any set obtainable from $\varnothing$ by repeatedly taking successor sets (see \Cref{defSuccessorSet}). Write $0_{\mathsf{vN}} = \varnothing$ and $(n+1)_{\mathsf{vN}} = (n_{\mathsf{vN}})^+$; that is
+\[ 0_{\mathsf{vN}} = \varnothing, \quad 1_{\mathsf{vN}} = \varnothing^+, \quad 2_{\mathsf{vN}} = \varnothing^{++}, \quad 3_{\mathsf{vN}} = \varnothing^{+++}, \quad 4_{\mathsf{vN}} = \varnothing^{++++}, \quad \dots \]
+\end{definition}
+
+\begin{example}
+The first three von Neumann natural numbers are:
+\begin{itemize}
+\item $0_{\mathsf{vN}} = \varnothing$;
+\item $1_{\mathsf{vN}} = \varnothing^+ = \varnothing \cup \{ \varnothing \} = \{ \varnothing \}$;
+\item $2_{\mathsf{vN}} = \varnothing^{++} = \{ \varnothing \}^+ = \{ \varnothing \} \cup \{ \{ \varnothing \} \} = \{ \varnothing, \{ \varnothing \} \}$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Write out the elements of $3_{\mathsf{vN}}$ ($=\varnothing^{+++}$) and of $4_{\mathsf{vN}}$.
+\end{exercise}
+
+\begin{exercise}
+\label{exSizeOfVonNeumannOrdinals}
+Recall the definition of von Neumann natural numbers from \Cref{defVonNeumannNaturalNumbers}. Prove that $|n_{\mathsf{vN}}| = n$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+\begin{construction}
+\label{cnsNaturalNumbersVonNeumann}
+We construct the set $\mathbb{N}_{\mathsf{vN}}$ of all von Neumann natural numbers as follows. Let $X$ be an arbitrary set satisfying the axiom of infinity (\Cref{axZFCInfinity}), and then define $\mathbb{N}_{\mathsf{vN}}$ to be the intersection of all subsets of $X$ that also satisfy the axiom of infinity---that is:
+\[ \mathbb{N}_{\mathsf{vN}} = \{ x \in X \mid \forall U \in \mathcal{P}(X),\, [U \text{ satisfies the axiom of infinity } \Rightarrow x \in U ] \} \]
+\end{construction}
+
+The existence of $\mathbb{N}_{\mathsf{vN}}$ follows from the axioms of power set (\Cref{axZFCPowerSet}) and separation (\Cref{axZFCSeparation}).
+
+\begin{theorem}
+\label{thmVonNeumannNaturalNumbers}
+The set $\mathbb{N}_{\mathsf{vN}}$, zero element $0_{\mathsf{vN}}$ and successor function $s : \mathbb{N}_{\mathsf{vN}} \to \mathbb{N}_{\mathsf{vN}}$ defined by $\mathsf{s}(n_{\mathsf{vN}}) = n_{\mathsf{vN}}^+$ for all $n_{\mathsf{vN}} \in \mathbb{N}_{\mathsf{vN}}$, define a notion of natural numbers.
+\end{theorem}
+
+\begin{cproof}
+We must verify Peano's axioms, which are conditions (i)--(iii) of \Cref{defNotionOfNaturalNumbers}.
+
+To prove (i), observe that for all sets $X$ we have $X^+ = X \cup \{ X \}$, so that $X \in X^+$. In particular, we have $n_{\mathsf{vN}} \in n_{\mathsf{vN}}^+$ for all $n_{\mathsf{vN}} \in \mathbb{N}_{\mathsf{vN}}$, and hence $n_{\mathsf{vN}}^+ \ne \varnothing = 0_{\mathsf{vN}}$.
+
+For (ii), let $m_{\mathsf{vN}}, n_{\mathsf{vN}} \in \mathbb{N}_{\mathsf{vN}}$ and assume that $m_{\mathsf{vN}}^+ = n_{\mathsf{vN}}^+$. Then $m_{\mathsf{vN}} = n_{\mathsf{vN}}$ by \Cref{lemSuccessorSetIsInjective}.
+
+For (iii), let $X$ be a set and suppose that $0_{\mathsf{vN}} \in X$ and, for all $n_{\mathsf{vN}} \in \mathbb{N}_{\mathsf{vN}}$, if $n_{\mathsf{vN}} \in X$, then $n_{\mathsf{vN}}^+ \in X$. Then $X$ satisfies the axiom of infinity (\Cref{axZFCInfinity}), and so by \Cref{cnsNaturalNumbersVonNeumann} we have $\mathbb{N}_{\mathsf{vN}} \subseteq X$.
+\end{cproof}
+
+In light of \Cref{thmVonNeumannNaturalNumbers}, we may declare `the natural numbers' to be the von Neumann natural numbers, and have done with it. As such, you can---if you want---think of all natural numbers in these notes as \textit{being} their corresponding von Neumann natural number. With this in mind, we now omit the subscript `$\mathsf{vN}$', leaving implicit the fact that we are referring to von Neumann natural numbers.
+
+However, there are many other possible notions of natural numbers. In \Cref{thmNNNUnique}, we prove that any two notions of natural numbers are essentially the same, and so the specifics of how we actually define $\mathbb{N}$, the zero element and successor operation, are irrelevant for most purposes.
+
+First we will prove the following handy lemma, which provides a convenient means of proving when a function is the identity function (\Cref{defIdentityFunction}).
+
+\begin{lemma}
+\label{lemIdentityFromNNN}
+Let $(\mathbb{\mathbb{N}}, z, s)$ be a notion of natural numbers, and let $j : \mathbb{N} \to \mathbb{N}$ be a function such that $j(z) = 0$ and $j(s(n)) = s(j(n))$ for all $n \in \mathbb{N}$. Then $j = \mathrm{id}_{\mathbb{N}}$.
+\end{lemma}
+
+\begin{proof}
+By \Cref{thmRecursion}, there is a unique function $i : \mathbb{N} \to \mathbb{N}$ such that $i(z)=0$ and $i(s(n)) = s(i(n))$ for all $n \in \mathbb{N}$. But then:
+\begin{itemize}
+\item $j = i$ by uniqueness of $i$, since $j$ satisfies the same conditions as $i$; and
+\item $\mathrm{id}_\mathbb{N} = i$ by uniqueness of $i$, since $\mathrm{id}_\mathbb{N}(z) = z$ and $\mathrm{id}_\mathbb{N}(s(n)) = s(n) = s(\mathrm{id}_\mathbb{N}(n))$ for all $n \in \mathbb{N}$.
+\end{itemize}
+Hence $j = \mathrm{id}_\mathbb{N}$, as required.
+\end{proof}
+
+\begin{theorem}
+\label{thmNNNUnique}
+Any two notions of natural numbers are essentially the same, in a very strong sense. More precisely, if $(\mathbb{N}_1, z_1, s_1)$ and $(\mathbb{N}_2, z_2, s_2)$ are notions of natural numbers, then there is a unique bijection $f : \mathbb{N}_1 \to \mathbb{N}_2$ such that $f(z_1) = z_2$ and $f(s_1(n)) = s_2(f(n))$ for all $n \in \mathbb{N}_1$.
+\end{theorem}
+
+\begin{proof}
+The function $f$ with the desired properties is obtained from \Cref{defNotionOfNaturalNumbers} applied to $(\mathbb{N}_1, z_1, s_1)$, with $X = \mathbb{N}_2$, $a = z_2$ and $h = s_2$. This also gives us uniqueness of $f$, so it remains only to prove that $f$ is a bijection.
+
+By applying \Cref{defNotionOfNaturalNumbers} to $(\mathbb{N}_2, z_2, s_2)$, with $X = \mathbb{N}_1$, $a = z_1$ and $f = s_1$, we obtain a (unique!) function $g : \mathbb{N}_2 \to \mathbb{N}_1$ such that $g(z_2) = z_1$ and $g(s_2(n)) = s_1(g(n))$ for all $n \in \mathbb{N}_2$.
+
+But then $g(f(z_1)) = g(z_2) = z_1$ and, for all $n \in \mathbb{N}_1$, we have
+\[ g(f(s_1(n))) = g(s_2(f(n))) = s_2(g(f(n))) \]
+and so $g \circ f = \mathrm{id}_{\mathbb{N}_1}$ by \Cref{lemIdentityFromNNN}. Likewise $f \circ g = \mathrm{id}_{\mathbb{N}_2}$. Hence $g$ is an inverse for $f$, so that $f$ is a bijection, as required.
+\end{proof}
+
+\todo{}
+
+\todo{Arithmetic operations, order}
+
+\todo{Define relation for the integers, prove it's well-defined, provide intuition.}
+
+\begin{definition}
+\label{defIntegersFromNaturalNumbers}
+The \textbf{set of integers} is the set $\mathbb{Z}$ defined by
+\[ \mathbb{Z} = (\mathbb{N} \times \mathbb{N})/{\sim} \]
+where $\sim$ is the equivalence relation on $\mathbb{N} \times \mathbb{N}$ defined by
+\[ (a,b) \sim (c,d) \text{ if and only if } a+d=b+c \]
+for all $(a,b),(c,d) \in \mathbb{N} \times \mathbb{N}$.
+\end{definition}
+
+\todo{Arithmetic operations, order}
+
+\todo{Define relation for the rationals, prove it's well-defined, provide intuition.}
+
+\begin{definition}
+\label{defRationalsFromIntegers}
+The \textbf{set of rational numbers} is the set $\mathbb{Q}$ defined by
+\[ \mathbb{Q} = (\mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})) / {\sim} \]
+where $\sim$ is the equivalence relation on $\mathbb{Z} \times (\mathbb{Z} \setminus \{0\})$ defined by
+\[ (a,b) \sim (c,d) \text{ if and only if } ad=bc \]
+for all $(a,b),(c,d) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$.
+\end{definition}
+
+\todo{Arithmetic operations, order}
+
+\todo{Motivate Dedekind cuts}
+
+\begin{definition}[Dedekind's construction of the real numbers]
+\label{defDedekindReals}
+The \textbf{set of} (\textbf{Dedekind}) \textbf{real numbers} is the set $\mathbb{R}$ defined by
+\[ \mathbb{R} = \{ D \subseteq \mathbb{Q} \mid D \text{ is bounded above and downwards-closed} \} \]
+\end{definition}
+
+\todo{Arithmetic operations, order}
+
+\todo{Motivate Cauchy reals}
+
+\begin{definition}[Cauchy's construction of the real numbers]
+The \textbf{set of} (\textbf{Cauchy}) \textbf{real numbers} is the set $\mathbb{R}$ defined by
+\[ \mathbb{R} = \{ (x_n) \in \mathbb{Q}^{\mathbb{N}} \mid (x_n) \text{ is Cauchy} \} / {\sim} \]
+where $\sim$ is the equivalence relation defined by
+\[ (x_n) \sim (y_n) \text{ if and only if } (x_n-y_n) \to 0 \]
+for all Cauchy sequences $(x_n),(y_n)$ of rational numbers.
+\end{definition}
+
+\todo{Arithmetic operations, order}
+
+\todo{Motivate definition of complex numbers}
+
+\begin{definition}
+\label{defComplexNumbersFromReals}
+The \textbf{set of complex numbers} is the set $\mathbb{C} = \mathbb{R} \times \mathbb{R}$.
+\end{definition}
+
+\todo{Arithmetic operations}
+
+
+\subsection*{Algebraic structures}
+
+\todo{Monoids, groups, rings}
+
+\subsection*{Axiomatising the real numbers}
+
+\todo{}
+
+\begin{axioms}[Field axioms]
+\label{axField}
+\index{field}
+Let $X$ be a set equipped with elements $0$ (`zero') and $1$ (`unit'), and binary operations $+$ (`addition') and $\cdot$ (`multiplication'). The structure $(X,0,1,+,{\cdot})$ is a \textbf{field} if it satisfies the following axioms:
+\begin{itemize}
+\item \textbf{Zero and unit}
+\begin{itemize}
+\item[(F1)] $0 \ne 1$.
+\end{itemize}
+\item \textbf{Axioms for addition}
+\begin{itemize}
+\item[(F2)] (Associativity) $x+(y+z) = (x+y)+z$ for all $x,y,z \in X$.
+\item[(F3)] (Identity) $x+0=x$ for all $x \in X$.
+\item[(F4)] (Inverse) For all $x \in X$, there exists $y \in X$ such that $x+y=0$.
+\item[(F5)] (Commutativity) $x+y=y+x$ for all $x,y \in X$.
+\end{itemize}
+\item \textbf{Axioms for multiplication}
+\begin{itemize}
+\item[(F6)] (Associativity) $x \cdot (y \cdot z) = (x \cdot y) \cdot z$ for all $x,y,z \in X$.
+\item[(F7)] (Identity) $x \cdot 1 = x$ for all $x \in X$.
+\item[(F8)] (Inverse) For all $x \in X$ with $x \ne 0$, there exists $y \in X$ such that $x \cdot y = 1$.
+\item[(F9)] (Commutativity) $x \cdot y = y \cdot x$ for all $x,y \in X$.
+\end{itemize}
+\item \textbf{Distributivity}
+\begin{itemize}
+\item[(F10)] $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$ for all $x,y,z \in X$.
+\end{itemize}
+\end{itemize}
+\end{axioms}
+
+\begin{example}
+The rationals $\mathbb{Q}$ and the reals $\mathbb{R}$ both form fields with their usual notions of zero, unit, addition and multiplication. However, the integers $\mathbb{Z}$ do not, since for example $2$ has no multiplicative inverse.
+\end{example}
+
+\begin{example}
+\label{exZpZIsField}
+Let $p>0$ be prime. The set $\mathbb{Z}/p\mathbb{Z}$ (see \Cref{defCongruenceClass}) is a field, with zero element $[0]_p$ and unit element $[1]_p$, and with addition and multiplication defined by
+\[ [a]_p+[b]_p=[a+b]_p \quad \text{and} \quad [a]_p \cdot [b]_p = [ab]_p \]
+for all $a,b \in \mathbb{Z}$. Well-definedness of these operations is immediate from \Cref{thmCongruenceIsEquivalenceRelation} and the modular arithmetic theorem (\Cref{thmModularArithmetic}).
+
+The only axiom which is not easy to verify is the multiplicative inverse axiom (F8). Indeed, if $[a]_p \in \mathbb{Z}/p\mathbb{Z}$ then $[a]_p \ne [0]_p$ if and only if $p \nmid a$. But if $p \nmid a$ then $a \perp p$, so $a$ has a multiplicative inverse $u$ modulo $p$. This implies that $[a]_p \cdot [u]_p = [au]_p = [1]_p$. So (F8) holds.
+\end{example}
+
+\begin{exercise}
+Let $n > 0$ be composite. Prove that $\mathbb{Z}/n\mathbb{Z}$ is not a field, where zero, unit, addition and multiplication are defined as in \Cref{exZpZIsField}.
+\end{exercise}
+
+\Cref{axField} tell us that every element of a field has an additive inverse, and every \textit{nonzero} element of a field has a multiplicative inverse. It would be convenient if inverses were \textit{unique} whenever they exist. \Cref{propInversesInFieldsAreUnique} proves that this is the case.
+
+\begin{proposition}[Uniqueness of inverses]
+\label{propInversesInFieldsAreUnique}
+Let $(X,0,1,+,{\cdot})$ be a field and let $x \in X$. Then
+\begin{enumerate}[(a)]
+\item Suppose $y,z \in X$ are such that $x+y=0$ and $x+z=0$. Then $y=z$.
+\item Suppose $x \ne 0$ and $y,z \in X$ are such that $x \cdot y = 1$ and $x \cdot z = 1$. Then $y=z$.
+\end{enumerate}
+\end{proposition}
+\begin{cproof}[of (a)]
+By calculation, we have
+\begin{align*}
+y &= y + 0 && \text{by (F3)} \\
+&= y + (x+z) && \text{by definition of $z$} \\
+&= (y+x)+z && \text{by associativity (F2)} \\
+&= (x+y)+z && \text{by commutativity (F5)} \\
+&= 0+z && \text{by definition of $y$} \\
+&= z+0 && \text{by commutativity (F5)} \\
+&= z && \text{by (F3)}
+\end{align*}
+so indeed $y=z$.
+
+The proof of (b) is essentially the same and is left as an exercise.
+\end{cproof}
+
+Since inverses are unique, it makes sense to have notation to refer to them.
+
+\begin{notation}
+Let $(X,0,1,+,{\cdot})$ be a field and let $x \in X$. Write $-x$ for the (unique) additive inverse of $x$ and, if $x \ne 0$ write $x^{-1}$ for the (unique) multiplicative inverse of $x$.
+\end{notation}
+
+\begin{example}
+\label{exQRAreFields}
+In the fields $\mathbb{Q}$ and $\mathbb{R}$, the additive inverse $-x$ of an element $x$ is simply its negative, and the multiplicative inverse $x^{-1}$ of some $x \ne 0$ is simply its reciprocal $\frac{1}{x}$.
+\end{example}
+
+\begin{example}
+Let $p>0$ be prime and let $[a]_p \in \mathbb{Z}/p\mathbb{Z}$. Then $-[a]_p=[-a]_p$ and, if $p \nmid a$, then $[a]_p^{-1} = [u]_p$, where $u$ is any integer satisfying $au \equiv 1 \bmod p$.
+\end{example}
+
+\begin{exercise}
+\label{exInverseIsInvolution}
+Let $(X, 0, 1, +, {\cdot})$ be a field. Prove that $-(-x)=x$ for all $x \in X$, and that $(x^{-1})^{-1} = x$ for all nonzero $x \in X$.
+\begin{backhint}
+\hintref{exInverseIsInvolution}
+Prove that $x$ is an additive inverse for $-x$ (in the sense of \Cref{axField}(F4)) and use uniqueness of additive inverses. Likewise for $x^{-1}$.
+\end{backhint}
+\end{exercise}
+
+\begin{example}
+Let $(X,0,1,+,{\cdot})$ be a field. We prove that if $x \in X$ then $x \cdot 0 = 0$. Well, $0=0+0$ by (F3). Hence $x \cdot 0 = x \cdot (0+0)$. By distributivity (F10), we have $x \cdot (0+0) = (x \cdot 0) + (x \cdot 0)$. Hence
+\[ x \cdot 0 = (x \cdot 0) + (x \cdot 0) \]
+Let $y=-(x \cdot 0)$. Then
+\begin{align*}
+0 &= x \cdot 0 + y && \text{by (F4)} \\
+&= ((x \cdot 0) + (x \cdot 0)) + y && \text{as above} \\
+&= (x \cdot 0) + ((x \cdot 0) + y) && \text{by associativity (F2)} \\
+&= (x \cdot 0) + 0 && \text{by (F4)} \\
+&= x \cdot 0 && \text{by (F3)}
+\end{align*}
+so indeed we have $x \cdot 0 = 0$.
+\end{example}
+
+\begin{exercise}
+\label{exMinusOneSquaredIsOne}
+Let $(X,0,1,+,{\cdot})$ be a field. Prove that $(-1) \cdot x = -x$ for all $x \in X$, and that $(-x)^{-1} = -(x^{-1})$ for all nonzero $x \in X$.
+\end{exercise}
+
+What makes the real numbers useful is not simply our ability to add, subtract, multiply and divide them; we can also compare their size---indeed, this is what gives rise to the informal notion of a \textit{number line}. \Cref{axOrderedField} make precise exactly what it means for the elements of a field to be assembled into a `number line'.
+
+\begin{axioms}[Ordered field axioms]
+\label{axOrderedField}
+Let $X$ be a set, $0,1 \in X$ be elements, $+,{\cdot}$ be binary operations, and $\le$ be a relation on $X$. The structure $(X,0,1,+,{\cdot},{\le})$ is an \textbf{ordered field} if it satisfies the field axioms (F1)--(F10) (see \Cref{axField}) and, additionally, it satisfies the following axioms:
+\begin{itemize}
+\item \textbf{Linear order axioms}
+\begin{itemize}
+\item[(PO1)] (Reflexivity) $x \le x$ for all $x \in X$.
+\item[(PO2)] (Antisymmetry) For all $x,y \in X$, if $x \le y$ and $y \le x$, then $x=y$.
+\item[(PO3)] (Transitivity) For all $x,y,z \in X$, if $x \le y$ and $y \le z$, then $x \le z$.
+\item[(PO4)] (Linearity) For all $x,y \in X$, either $x \le y$ or $y \le x$.
+\end{itemize}
+\item \textbf{Interaction of order with arithmetic}
+\begin{itemize}
+\item[(OF1)] For all $x,y,z \in X$, if $x \le y$, then $x+z \le y+z$.
+\item[(OF2)] For all $x,y \in X$, if $0 \le x$ and $0 \le y$, then $0 \le xy$. 
+\end{itemize}
+\end{itemize}
+\end{axioms}
+
+\begin{example}
+\label{exQRAreOrderedFields}
+The field $\mathbb{Q}$ of rational numbers and and the field $\mathbb{R}$ of real numbers, with their usual notions of ordering, can easily be seen to form ordered fields.
+\end{example}
+
+\begin{example}
+\label{exZeroIsLessThanOne}
+We prove that, in any ordered field, we have $0 \le 1$. Note first that either $0 \le 1$ or $1 \le 0$ by linearity (PO4). If $0 \le 1$ then we're done, so suppose $1 \le 0$. Then $0 \le -1$; indeed:
+\begin{align*}
+0 &= 1 + (-1) && \text{by (F4)} \\
+&\le 0+(-1) && \text{by (OF1), since $1 \le 0$} \\
+&= (-1)+0 && \text{by commutativity (F5)} \\
+&= -1 && \text{by (F3)}
+\end{align*}
+By (OF2), it follows that $0 \le (-1)(-1)$. But $(-1)(-1)=1$ by \Cref{exMinusOneSquaredIsOne}, and hence $0 \le 1$. Since $1 \le 0$ and $0 \le 1$, we have $0=1$ by antisymmetry (PO2). But this contradicts axiom (F1). Hence $0 \le 1$. In fact, $0<1$ since $0 \ne 1$.
+\end{example}
+
+We have seen that $\mathbb{Q}$ and $\mathbb{R}$ are ordered fields (\Cref{exQRAreFields,exQRAreOrderedFields}), and that $\mathbb{Z}/p\mathbb{Z}$ is a field for $p>0$ prime (\Cref{exZpZIsField}). The following proposition is an interesting result proving that there is no notion of `ordering' under which the field $\mathbb{Z}/p\mathbb{Z}$ can be made into an ordered field!
+
+\begin{proposition}
+Let $p>0$ be prime. There is no relation $\le$ on $\mathbb{Z}/p\mathbb{Z}$ which satisfies the ordered field axioms.
+\end{proposition}
+\begin{cproof}
+We just showed that $[0] \le [1]$. It follows that, for all $a \in \mathbb{Z}$, we have $[a] \le [a]+[1]$; indeed:
+\begin{align*}
+[a] &= [a]+[0] && \text{by (F3)} \\
+&\le [a]+[1] && \text{by (OF1), since $[0] \le [1]$} \\
+&= [a+1] && \text{by definition of $+$ on $\mathbb{Z}/p\mathbb{Z}$}
+\end{align*}
+It is a straightforward induction to prove that $[a] \le [a+n]$ for all $n \in \mathbb{N}$. But then we have
+\[ [1] \le [1+(p-1)] = [p] = [0] \]
+so $[0] \le [1]$ and $[1] \le [0]$. This implies $[0]=[1]$ by antisymmetry (PO2), contradicting axiom (F1).
+\end{cproof}
+
+\begin{exercise}
+Let $(X,0,1,+,{\cdot})$ be a field. Prove that if $X$ is finite, then there is no relation $\le$ on $X$ such that $(X,0,1,+,{\cdot},{\le})$ is an ordered field.
+\end{exercise}
+
+\Cref{thmPropertiesOfOrderedFields} below summarises some properties of ordered fields which are used in our proofs. Note, however, that this is certainly \textit{not} an exhaustive list of elementary properties of ordered fields that we use---to explicitly state and prove all of these would not make for a scintillating read.
+
+\begin{theorem}
+\label{thmPropertiesOfOrderedFields}
+Let $(X,0,1,+,{\cdot},{\le})$ be an ordered field. Then
+\begin{enumerate}[(a)]
+\item For all $x,y \in X$, $x \le y$ if and only if $0 \le y-x$;
+\item For all $x \in X$, $-x \le 0 \le x$ or $x \le 0 \le -x$;
+\item For all $x,x',y,y' \in X$, if $x \le x'$ and $y \le y'$, then $x + y \le x' + y'$;
+\item For all $x,y,z \in X$, if $0 \le x$ and $y \le z$, then $xy \le xz$;
+\item For all nonzero $x \in X$, if $0 \le x$, then $0 \le x^{-1}$.
+\item For all nonzero $x,y \in X$, if $x \le y$, then $y^{-1} \le x^{-1}$.
+\end{enumerate}
+\end{theorem}
+\begin{cproof}[of {(a)}, {(b)} and {(e)}]
+$ $
+\begin{enumerate}[(a)] 
+\item ($\Rightarrow$) Suppose $x \le y$. Then by additivity (OF1), $x+(-x) \le y+(-x)$, that is $0 \le y-x$. ($\Leftarrow$) Suppose $0 \le y-x$. By additivity (OF1), $0+x \le (y-x)+x$; that is, $x \le y$.
+\item We know by linearity (PO4) that either $0 \le x$ or $x \le 0$. If $0 \le x$, then by (OF1) we have $0+(-x) \le x+(-x)$, that is $-x \le 0$. Likewise, if $x \le 0$ then $0 \le -x$.
+\setcounter{enumi}{4}
+\item Suppose $0 \le x$. By linearity (PO4), either $0 \le x^{-1}$ or $x^{-1} \le 0$. If $x^{-1} \le 0$, then by (d) we have $x^{-1} \cdot x \le 0 \cdot x$, that is $1 \le 0$. This contradicts \Cref{exZeroIsLessThanOne}, so we must have $0 \le x^{-1}$.
+\end{enumerate}
+The proofs of the remaining properties are left as an exercise.
+\end{cproof}
+
+We wanted to characterise the reals completely, but so far we have failed to do so---indeed, \Cref{exQRAreOrderedFields} showed that both $\mathbb{Q}$ and $\mathbb{R}$ are ordered fields, so the ordered field axioms do not suffice to distinguish $\mathbb{Q}$ from $\mathbb{R}$. The final piece in the puzzle is \textit{completeness}. This single additional axiom distinguishes $\mathbb{Q}$ from $\mathbb{R}$, and in fact completely characterises $\mathbb{R}$ (see \Cref{thmRIsTheUniqueCompleteOrderedField}).
+
+\begin{axioms}[Complete ordered field axioms]
+\label{axCompleteOrderedField}
+\index{complete ordered field}
+\index{completeness axiom}
+Let $X$ be a set, $0,1 \in X$ be elements, $+,{\cdot}$ be binary operations, and $\le$ be a relation on $X$. The structure $(X,0,1,+,{\cdot},{\le})$ is a \textbf{complete ordered field} if it is an ordered field---that is, it satisfies axioms (F1)--(F10), (PO1)--(PO4) and (OF1)--(OF2) (see \Cref{axField,axOrderedField})---and, in addition, it satisfies the following \textbf{completeness axiom}:
+\begin{itemize}
+\item[(C1)] Let $A \subseteq X$. If $A$ has an upper bound, then it has a least upper bound. Specifically, if there exists $u \in X$ such that $a \le u$ for all $a \in A$, then there exists $s \in X$ such that
+\begin{itemize}
+\item $a \le s$ for all $a \in A$; and
+\item If $s' \in X$ is such that $a \le s'$ for all $a \in A$, then $s \le s'$.
+\end{itemize}
+We call such a value $s \in X$ a \textbf{supremum} for $A$.
+\end{itemize}
+\end{axioms}
+
+\begin{theorem}
+\label{thmRIsTheUniqueCompleteOrderedField}
+The real numbers $(\mathbb{R},0,1,+,\cdot,\le)$ form a complete ordered field. Moreover, any two complete ordered fields are essentially the same. \qed
+\end{theorem}
+
+The notion of `sameness' alluded to in \Cref{thmRIsTheUniqueCompleteOrderedField} is more properly called \textit{isomorphism}. A proof of this theorem is intricate and far beyond the scope of this book, so is omitted. What it tells us is that it doesn't matter exactly how we define the reals, since any complete ordered field will do. We can therefore proceed with confidence that, no matter what notion of `real numbers' we settle on, everything we prove will be true of that notion. This is for the best, since we haven't actually defined the set $\mathbb{R}$ of real numbers at all!
+
+The two most common approaches to constructing a set of real numbers are:
+\begin{itemize}
+\item \textbf{Dedekind reals.} In this approach, real numbers are identified with particular subsets of $\mathbb{Q}$---informally speaking, $r \in \mathbb{R}$ is identified with the set of rational numbers less than $r$.
+\item \textbf{Cauchy reals.} In this approach, real numbers are identified with equivalence classes of sequences of rational numbers---informally speaking, $r \in \mathbb{R}$ is identified with the set of sequences of rational numbers which converge to $r$ (in the sense of \Cref{defConvergenceOfSequence}).
+\end{itemize}
+
+\todo{}

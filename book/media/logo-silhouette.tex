@@ -1,0 +1,77 @@
+\documentclass{standalone}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{afterpage}
+\usepackage{appendix}
+\usepackage{array}
+\usepackage[UKenglish]{babel}
+\usepackage{bbm}
+\usepackage[numbered]{bookmark}
+\usepackage[nameinlink]{cleveref}
+\usepackage{datetime}
+    \newdateformat{customdate}{\dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR} \ordinaldate{\THEDAY} \monthname[\THEMONTH] \THEYEAR}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+    \setlist[itemize]{topsep=0pt}
+    \setlist[enumerate]{topsep=0pt}
+\usepackage{environ}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage{hyperref}
+    \hypersetup{
+    pdftitle={An infinite descent into pure mathematics},
+    pdfsubject={Introductory pure mathematics textbook with an emphasis on proof},
+    pdfauthor={Clive Newstead},
+    pdfkeywords={math,maths,mathematics,pure mathematics,undergraduate,textbook},
+    pdfproducer={Clive Newstead}
+    }
+\usepackage[latin1]{inputenc}
+\usepackage{lastpage}
+\usepackage{makeidx}
+    \makeindex
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{multicol}
+\usepackage{refcount}
+\usepackage{thmtools}
+\usepackage{tikz}
+    \tikzset{node distance=3cm and 5cm, auto}
+    \usetikzlibrary{arrows}
+\usepackage{tikz-cd}
+\usepackage{type1cm}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{xparse}
+
+%\pagecolor[HTML]{510C6D}
+\pagecolor[HTML]{8D00C8}
+
+\definecolor{infty1alt}{HTML}{FFFFFF}
+\definecolor{infty2alt}{HTML}{FFFFFF}
+\definecolor{infty3alt}{HTML}{FFFFFF}
+\definecolor{infty4alt}{HTML}{FFFFFF}
+\definecolor{infty5alt}{HTML}{FFFFFF}
+\definecolor{infty6alt}{HTML}{FFFFFF}
+\definecolor{infty7alt}{HTML}{FFFFFF}
+\definecolor{infty8alt}{HTML}{FFFFFF}
+
+\begin{document}
+\begin{minipage}{70pt}
+\vspace{10pt}
+\centering
+{\color{infty1alt} \fontsize{2cm}{2cm}\selectfont $\infty$} \\ \vspace{10pt}
+{\color{infty2alt} \fontsize{1.33cm}{1.33cm}\selectfont $\infty$} \\ \vspace{5pt}
+{\color{infty3alt} \fontsize{0.89cm}{0.89cm}\selectfont $\infty$} \\
+{\color{infty4alt} \fontsize{0.59cm}{0.59cm}\selectfont $\infty$} \\ \vspace{-2pt}
+{\color{infty5alt} \fontsize{0.40cm}{0.40cm}\selectfont $\infty$} \\ \vspace{-5pt}
+{\color{infty6alt} \fontsize{0.26cm}{0.26cm}\selectfont $\infty$} \\ \vspace{-7pt}
+{\color{infty7alt} \fontsize{0.18cm}{0.18cm}\selectfont $\infty$} \\
+{\color{infty8alt} \hspace{3.4pt}$\vdots$}
+\vspace{10pt}
+\end{minipage}
+
+\end{document}

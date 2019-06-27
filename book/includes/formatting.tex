@@ -1,0 +1,269 @@
+%
+% Paper size configuration
+%
+
+% Default values for watermark location
+\newcommand{\watermarkh}{0in}
+\newcommand{\watermarkv}{0in}
+
+% Print version (6x9, no crops)
+\ifnumequal{\value{bookformat}}{0}{%
+    \geometry{
+        paperwidth={6in},
+        paperheight={9in},
+        margin={0.5in},
+        bindingoffset={0.2in},
+        includehead,
+        includefoot,
+        centering
+    }
+    \setlength{\leftmargini}{0.25in}
+    \setlength{\leftmarginii}{0.25in}
+    \setlength{\leftmarginiii}{0.25in}
+    \renewcommand{\watermarkh}{5in}
+    \renewcommand{\watermarkv}{8in}
+    \hypersetup{pdfpagelayout={TwoPageRight}}
+}
+
+% Print version (6x9 on letter paper, with crops)
+\ifnumequal{\value{bookformat}}{100}{%
+    \geometry{
+        paper={letterpaper},
+        layoutwidth={6in},
+        layoutheight={9in},
+        layouthoffset={1.25in},
+        layoutvoffset={1in},
+        margin={0.5in},
+        bindingoffset={0.2in},
+        includehead,
+        includefoot,
+        centering
+    }
+    \setlength{\leftmargini}{0.25in}
+    \setlength{\leftmarginii}{0.25in}
+    \setlength{\leftmarginiii}{0.25in}
+    \renewcommand{\watermarkh}{6.25in}
+    \renewcommand{\watermarkv}{9in}
+    \hypersetup{pdfpagelayout={TwoPageRight}}
+}
+
+% A4 paper
+\ifnumequal{\value{bookformat}}{1}{%
+    \geometry{
+        paper={a4paper},
+        marginratio={1:1}
+    }
+    \renewcommand{\watermarkh}{185mm}
+    \renewcommand{\watermarkv}{272mm}
+    \hypersetup{pdfpagelayout={OneColumn}}
+}
+
+% US letter
+\ifnumequal{\value{bookformat}}{2}{%
+    \geometry{
+        paper={letterpaper},
+        marginratio={1:1}
+    }
+    \renewcommand{\watermarkh}{7.5in}
+    \renewcommand{\watermarkv}{10in}
+    \hypersetup{pdfpagelayout={OneColumn}}
+}
+
+% Tablet version
+\ifnumequal{\value{bookformat}}{3}{%
+    \geometry{
+        paperwidth={150mm},
+        paperheight={240mm},
+        margin={0.5cm},
+        marginratio={1:1},
+        includehead,
+        includefoot
+    }
+    \renewcommand{\watermarkh}{125mm}
+    \renewcommand{\watermarkv}{215mm}
+    \hypersetup{pdfpagelayout={SinglePage}}
+}
+
+% Phone version
+\ifnumequal{\value{bookformat}}{4}{%
+    \geometry{
+        paperwidth={130mm},
+        paperheight={230mm},
+        margin={3mm},
+        marginratio={1:1},
+        includehead,
+        includefoot
+    }
+    \renewcommand{\watermarkh}{105mm}
+    \renewcommand{\watermarkv}{205mm}
+    \setlength{\leftmargini}{0.5cm}
+    \setlength{\leftmarginii}{0.5cm}
+    \setlength{\leftmarginiii}{0.5cm}
+    \hypersetup{pdfpagelayout={SinglePage}}
+}
+
+% Watermark for preview versions
+
+\iforiginal{%
+\ifnumgreater{0}{\value{versionpatch}}{%
+    \usepackage{draftwatermark}
+        \SetWatermarkHorCenter{\watermarkh}
+        \SetWatermarkVerCenter{\watermarkv}
+        \SetWatermarkLightness{0.9}
+        \SetWatermarkText{\texttt{preview}}
+}}
+
+
+
+
+
+%
+% Document formatting
+%
+
+% Lengths and spacing
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+\setlist{topsep=0pt,leftmargin=*}
+
+% Source: http://tex.stackexchange.com/questions/22119/
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip
+  \thm@postskip=0pt
+}
+\makeatother
+
+% Better paragraph and list spacing inside theorem environments
+\newcommand{\fixthmbox}{\setlist[itemize,enumerate]{topsep={5pt},leftmargin=*}\setlength{\parskip}{7pt}\vspace{-7pt}}
+
+% Better spacing when a theorem environment begins or ends with a list
+\newcommand{\fixlistskip}{~ \vspace{-20pt}}
+
+% Avoid breaking mid-formula
+\relpenalty=9999
+\binoppenalty=9999
+
+% Reduce hyphenation.
+% Source: https://ctan.org/tex-archive/info/l2tabu/english/
+\tolerance 1414
+\hbadness 1414
+\emergencystretch 1.5em
+\hfuzz 0.3pt
+\widowpenalty=10000
+\vfuzz \hfuzz
+\raggedbottom
+
+
+
+% Header and footer styles
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+
+\renewcommand{\sectionmark}[1]{\markboth{\leftmark}{Section \thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\ #1}{\rightmark}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyhead[RE]{{\color{hdcol}\fontfamily{bch}\itshape \nouppercase{\leftmark}}}
+\fancyhead[LO]{{\color{hdcol}\fontfamily{bch}\itshape \nouppercase{\rightmark}}}
+\fancyhead[RO,LE]{\thepage}
+\fancyfoot[C]{\thepage}
+
+
+
+% Chapter and section title styles styles
+
+\makeatletter
+\titleformat{\chapter}[display]{\LARGE}{\color{midgray} \@chapapp\ \thechapter}{0pt}{\fontfamily{bch}\Huge\bfseries}
+\titleformat{\section}[display]{\Large}{\color{midgray} Section \thesection}{-10pt}{\fontfamily{bch}\LARGE\bfseries}
+\makeatother
+
+
+
+
+
+%
+% Colours
+%
+
+% For theorem environments
+
+% Results
+\definecolor{thmcol}{HTML}{002882}
+\definecolor{thmcolac}{HTML}{6699CC}
+\definecolor{thmbdcol}{HTML}{77AADD}
+\definecolor{thmbgcol}{HTML}{F7FCFF}
+
+% Definitions
+\definecolor{defcol}{HTML}{820028}
+\definecolor{defcolac}{HTML}{CC6699}
+\definecolor{defbdcol}{HTML}{DD77AA}
+\definecolor{defbgcol}{HTML}{FFF7FC}
+\definecolor{defqedcol}{HTML}{820028}
+
+% Examples
+\definecolor{excol}{HTML}{006644}
+\definecolor{excolac}{HTML}{66CCCC}
+\definecolor{exbdcol}{HTML}{888888}
+\definecolor{exbgcol}{HTML}{FCFCFC}
+\definecolor{exqedcol}{HTML}{666666}
+
+% Exercises
+\definecolor{prcol}{HTML}{884400}
+\definecolor{prbdcol}{HTML}{CCCC66}
+\definecolor{prbgcol}{HTML}{FCFCFC}
+\definecolor{prqedcol}{HTML}{666666}
+
+% Proofs
+\definecolor{pfcol}{HTML}{555555}
+
+% Tips
+\definecolor{tipcol}{HTML}{550055}
+\definecolor{tipcolac}{HTML}{CC66CC}
+\definecolor{tipbdcol}{HTML}{AA77DD}
+\definecolor{tipbgcol}{HTML}{FCF7FF}
+\definecolor{tipqedcol}{HTML}{990099}
+
+% Optional content 
+\definecolor{optmarkcol}{HTML}{770077}
+
+% Other colours
+
+\definecolor{notecol}{HTML}{2266AA}
+\definecolor{citecol}{HTML}{883388}
+\definecolor{refcol}{HTML}{115588}
+\definecolor{urlcol}{HTML}{115588}
+
+% Colours for links and so on
+\hypersetup{
+    colorlinks=true,
+    linkcolor={refcol},
+    citecolor={citecol},
+    urlcolor={urlcol}
+}
+
+% For proof by induction diagrams
+\definecolor{indstepcol}{HTML}{FFF0F8}
+\definecolor{indbasecol}{HTML}{DDEEFF}
+
+% New colours for the infinity symbols on the title page
+\definecolor{infty1}{HTML}{880088}
+\definecolor{infty2}{HTML}{000088}
+\definecolor{infty3}{HTML}{008888}
+\definecolor{infty4}{HTML}{008800}
+\definecolor{infty5}{HTML}{888800}
+\definecolor{infty6}{HTML}{880000}
+\definecolor{infty7}{HTML}{880088}
+\definecolor{infty8}{HTML}{888888}
+
+% Miscellaneous colours
+\definecolor{lccol1}{HTML}{3333CC}    % Light blue
+\definecolor{lccol2}{HTML}{003388}    % Dark blue
+\definecolor{gridlines}{HTML}{DDDDDD} % Light grey
+\definecolor{midgray}{HTML}{777777}   % Mid grey
+\definecolor{fncol}{HTML}{664466}     % Footnote labels
+\definecolor{hdcol}{HTML}{444444}     % Headers

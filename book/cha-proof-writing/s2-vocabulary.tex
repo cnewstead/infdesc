@@ -1,0 +1,277 @@
+\section{Vocabulary for proofs}
+\label{secVocabulary}
+
+The focus of \Cref{chLogicalStructure} was on examining the logical structure of a proposition and using this to piece together a proof.
+
+For example, in order to prove that every prime number greater than two is odd, we observe that `every prime number greater than two is odd' takes the form
+\[ \forall n \in \mathbb{Z},~ [({n \text{ is prime}} \wedge {n > 2}) \Rightarrow {n \text{ is odd}}] \]
+By piecing together the proof strategies in \Cref{secPropositionalLogic,secVariablesQuantifiers}, we can see what a proof of this must look like:
+\begin{itemize}
+\item By \Cref{strProvingUniversal}, we must assume $n \in \mathbb{Z}$ and, without assuming anything about $n$ other than that it is an integer, derive `$({n \text{ is prime}} \wedge {n > 2}) \Rightarrow {n \text{ is odd}}$';
+\item By \Cref{strProvingImplicationsDirect}, we must assume `${n \text{ is prime}} \wedge {n > 2}$' and derive that $n$ is odd;
+\item By \Cref{strAssumingConjunctionsDirect}, we may separately assume that $n$ is prime and $n > 2$.
+\end{itemize}
+Thus a proof that every prime number greater than two is odd would assume $n \in \mathbb{Z}$, assume that $n$ is prime and $n>2$, and then derive that $n$ is odd.
+
+While all of this tells us how to \textit{structure} a proof, it does not tell us \textit{what to write} in such a proof---that is the goal of this section.
+
+\subsection*{Breaking down a proof}
+
+As we discussed in \Cref{secPropositionalLogic}, at every stage in a proof, there is some set of \textit{assumptions} and some set of \textit{goals}. The assumptions are the propositions that we may take to be true, either because we already proved them or because they are being temporarily assumed; and the goals are the propositions that remain to be deduced in order for the proof to be complete.
+
+The words we use indicate to the reader how the assumptions and goals are changing. Thus the words we use allow the reader to follow our logical reasoning and verify our correctness.
+
+For the next few pages, we will examine the proof strategies governing logical operators and quantifiers, as discussed in \Cref{chLogicalStructure}, and identify some words and phrases that can be used in a proof to indicate which strategy is being used.
+
+\todo{Say what the weird notation means, i.e. $\langle \cdots \rangle$ and ($\cdots$ | $\cdots$) }
+
+\subsubsection*{Making inferences}
+
+\begin{vocabulary}
+\label{vcbBy}
+\index[vocabulary]{by}
+\index[vocabulary]{know@we know that}
+\index[vocabulary]{so}
+\index[vocabulary]{follows@it follows that}
+The following construction can be used to indicate that a goal $q$ is being deduced from an assumption $p$.
+
+\begin{vocabtemplate}
+(\textbf{then} | \textbf{therefore} | \textbf{so} | \textbf{hence}) \propstate{$q$}, \textbf{by} \propcite{$p$}
+
+\vtor
+
+\textbf{we know that} \propstate{$p$}, \textbf{and so} \propstate{$q$}
+
+\vtor
+
+\textbf{it follows from} \propcite{$p$} \textbf{that} \propstate{$q$}
+\end{vocabtemplate}
+
+If $p$ was the last thing to be proved in the proof, it may not be necessary to cite it or state it again explicitly---that can be inferred.
+\end{vocabulary}
+
+\todo{Examples}
+
+\subsubsection*{Introducing assumptions}
+
+Several kinds of logical formulae are proved by introducing new assumptions into a proof. For example:
+\begin{itemize}
+\item \Cref{strProvingImplicationsDirect} says that an implication $p \Rightarrow q$ can be proved by assuming $p$ and deriving $q$.
+\item \Cref{strProvingUniversal} says that a universally quantified proposition $\forall x \in X,~ p(x)$ can be proved by introducing a new variable $x$, assuming $x \in X$, and deriving $p(x)$.
+\item \Cref{strProvingNegationsDirect} says that a negation $\neg p$ can be proved by assuming $p$ and deriving a contradiction.
+\end{itemize}
+
+\begin{vocabulary}
+\label{vcbTemporaryAssumption}
+\index[vocabulary]{assume}
+\index[vocabulary]{suppose}
+The words \textbf{assume} and \textbf{suppose} can be used to introduce a new assumption $p$ into a proof.
+
+\begin{vocabtemplate}
+[\textbf{assume} | \textbf{suppose}] \propstate{$p$}. 
+\end{vocabtemplate}
+\end{vocabulary}
+
+\subsubsection*{Proving conjunctions: breaking into steps}
+
+Often a goal in a proof has the form $p \wedge q$---for example, in order to prove a function $f : X \to Y$ is a bijection, we can prove that $f$ is injective \textbf{and} $f$ is surjective; and in order to prove that a relation $\sim$ is an equivalence relation, we can prove that $\sim$ is reflexive \textbf{and} symmetric \textbf{and} transitive.
+
+In these cases, we can split into steps.
+
+\begin{vocabulary}
+\label{vcbSteps}
+\index[vocabulary]{step}
+To indicate to a reader that you are proving a conjunction $p \wedge q$ by proving $p$ and $q$ individually, you can say that you are breaking into \textbf{steps}. For example:
+
+\begin{vocabtemplate}
+\begin{itemize}
+\item \textbf{Step 1:} (\propstate{$p$}) \propproof{$p$}.
+\item \textbf{Step 2:} (\propstate{$q$}) \propproof{$q$}.
+\end{itemize}
+\end{vocabtemplate}
+
+This can be generalised to conjunctions of more than two propositions. Explicitly enumerated steps are not usually necessary, as long as it is clear what you are aiming to achieve in each step.
+\end{vocabulary}
+
+\subsubsection*{Assuming disjunctions: breaking into cases}
+
+By \Cref{strAssumingDisjunctionsDirect}, in order to use an assumption of the form $p \vee q$ (`$p$ or $q$') to deduce a goal $r$, it suffices to show that $r$ may be deduced from each of $p$ and $q$---the idea here is that we may not know which of $p$ or $q$ is true, but that is fine since we derive $r$ in both cases.
+
+\begin{vocabulary}
+\label{vcbCases}
+\index[vocabulary]{case}
+To indicate to a reader that you are using an assumption $p \vee q$ to prove a goal $r$, you can say that you are breaking into \textbf{cases}. For example:
+
+\begin{vocabtemplate}
+We know that either \propstate{$p$} or \propstate{$q$}.
+\begin{itemize}
+\item \textbf{Case 1:} Assume that \propstate{$p$}\textbf{.} \propproof{$r$}.
+\item \textbf{Case 2:} Assume that \propstate{$q$}\textbf{.} \propproof{$r$}.
+\end{itemize}
+In both cases we see that \propstate{$r$}, as required.
+\end{vocabtemplate}
+
+Like with proofs involving steps (\Cref{vcbSteps}), the explicit enumeration of cases is not usually necessary.
+\end{vocabulary}
+
+\subsubsection*{Proving negations: proof by contradiction}
+
+\todo{}
+
+\begin{vocabulary}
+The following construction can be used in order to indicate that an assumption $p$ is being introduced with the view of deriving a contradiction.
+
+\begin{vocabtemplate}
+\textbf{Towards a contradiction, assume} \propstate{$p$}.
+
+\vtor
+
+\textbf{Assume} \propstate{$p$}. \textbf{We will derive a contradiction.}
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\begin{vocabulary}
+The following construction can be used in order to indicate that a contradiction to an assumption $q$ has been reached from an assumption $p$.
+
+\begin{vocabtemplate}
+\textbf{This contradicts} \propcite{$q$}. \textbf{Therefore} \propstate{$\neg p$}.
+
+\vtor
+
+\dots{}, \textbf{contrary to} \propcite{$q$}, \textbf{so that} \propstate{$\neg p$}.
+\end{vocabtemplate}
+
+Explicit reference to the proposition being contradicted is not always necessary if it is clear from context.
+
+\begin{vocabtemplate}
+\textbf{This is} [\textbf{a contradiction} | \textbf{nonsense} | \textbf{absurd} | \textbf{impossible}]. Therefore \propstate{$\neg p$}.
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\todo{One-liner contradictions.}
+
+\begin{vocabulary}
+The following construction can be used for a one-sentence proof by contradiction, when deriving the contradiction $\neg q$ from the assumption $p$ is very quick.
+
+\begin{vocabtemplate}
+(\textbf{To see that} \propstate{$\neg p$}, \textbf{note that}) \textbf{if} \propstate{$\neg p$}, \textbf{then} \propproof{$\neg q$}, [\textbf{contradicting} | \textbf{contrary to}] \propcite{$q$}.
+\end{vocabtemplate}
+\end{vocabulary}
+
+\subsubsection*{Proving universally quantified statements: introducing variables}
+
+\begin{vocabulary}
+\label{vcbIntroducingVariable}
+\index[vocabulary]{let}
+\index[vocabulary]{fix}
+\index[vocabulary]{take}
+\index[vocabulary]{given}
+\index[vocabulary]{arbitrary}
+The following constructions can be used to introduce a new variable $x$, referring to an arbitrary element of a set $X$.
+
+\begin{vocabtemplate}
+\textbf{Let} $x \in X$ (\textbf{be arbitrary}).
+
+\vtor
+
+[\textbf{Take} | \textbf{Fix}] (\textbf{an} (\textbf{arbitrary}) \textbf{element}) $x \in X$.
+
+\vtor
+
+\textbf{Given} $x \in X$, ~\dots{}
+\end{vocabtemplate}
+
+Explicit use of the word `arbitrary' can be useful to drive home the point that nothing is assumed about $x$ other than that it is an element of $X$. Typically, however, this is optional.
+\end{vocabulary}
+
+\subsubsection*{Proving existentially quantified statements: making definitions}
+
+\todo{}
+
+\begin{vocabulary}
+The following construction can be used to indicate that you are proving that there exists an element $x$ of a set $X$ such that $p(x)$ is true.
+
+\begin{vocabtemplate}
+\textbf{Define} \vardefine{$a$}. \propproof{$p(a)$}.
+
+(\textbf{It follows that} \propstate{$\exists x \in X,~p(x)$}.)
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\subsubsection*{Assuming existentially quantified statements: choosing elements}
+
+\todo{}
+
+\begin{vocabulary}
+The following construction can be used to indicate that you are invoking an assumption of the form $\exists x \in X,~p(x)$.
+
+\begin{vocabtemplate}
+\textbf{Let} $a \in X$ \textbf{be such that} \propstate{$p(a)$}.
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\subsection*{`Without loss of generality'}
+
+\todo{}
+
+\begin{vocabulary}
+When invoking an assumption of the form $p \vee q$, the phrase \textbf{without loss of generality} can be helpful to avoid splitting into cases when a proof in each case is essentially identical:
+
+\begin{vocabtemplate}
+\textbf{Without loss of generality}, (\textbf{we may}) \textbf{assume} \propstate{$p$}---\textbf{otherwise} \vtinstructions{say how to modify the proof if $q$ were true}.
+\end{vocabtemplate}
+
+The phrase `without loss of generality' is so widespread that it is sometimes abbreviated to \textbf{wlog}.
+\end{vocabulary}
+
+\todo{}
+
+\subsection*{Keeping track of everything}
+
+\subsubsection*{Stating goals}
+
+\todo{}
+
+\begin{vocabulary}
+The following phrases can be used to indicate that the next goal in a proof is to prove a proposition $p$.
+
+\begin{vocabtemplate}
+[\textbf{We want} | \textbf{Our goal now is}] {to} [\textbf{show} | \textbf{prove}] \propstate{$p$}
+
+\vtor
+
+\textbf{To see} \propstate{$p$}, \textbf{note that} \dots{}
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\subsubsection*{Conclusions}
+
+\todo{}
+
+\begin{vocabulary}
+The following phrases can be used to reiterate that a goal $p$ has been proved.
+
+\begin{vocabtemplate}
+[\textbf{Hence} | \textbf{Therefore} | \textbf{It follows that}] \propstate{$p$}, \textbf{as required}.
+\end{vocabtemplate}
+\end{vocabulary}
+
+\todo{}
+
+\subsection*{Case study: proofs by induction}
+
+\todo{}
+
+\subsection*{Long proofs}
+
+\todo{}

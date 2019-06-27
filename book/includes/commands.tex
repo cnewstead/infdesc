@@ -1,0 +1,174 @@
+%
+% Custom symbols and commands
+%
+
+% Text mode
+
+% Symbols for optional content
+\newcommand{\optmarksymbol}{$\star$}
+\newcommand{\optmark}[1]{\optmarksymbol~#1}
+
+% Indicators of where AC is used
+\newcommand{\assumesAC}[1]{\textsuperscript{\hyperref[axChoice]{\color{#1}\textbf{AC}}}}
+
+% QED symbols
+\newcommand{\nonproofqedsymbol}{$\vartriangleleft$}
+\newcommand{\defqedsymbol}{\color{defqedcol} $\vartriangleleft$}
+\newcommand{\exqedsymbol}{\color{exqedcol} $\vartriangleleft$}
+\newcommand{\prqedsymbol}{\color{prqedcol} $\vartriangleleft$}
+\newcommand{\tipqedsymbol}{\color{tipqedcol} $\vartriangleleft$}
+\newcommand{\quoteqedsymbol}{\color{excol} \ding{126}}
+
+% Symbols for theorem environments
+\newcommand{\defintrosymbol}{\ding{70}\hspace{4pt}} % Star
+\newlength{\defsymbolwidth}
+\setlength{\defsymbolwidth}{\widthof{\defintrosymbol}}
+% \addtolength{\defsymbolwidth}{1pt}
+
+\newcommand{\thmintrosymbol}{\ding{67}\hspace{4pt}} % Plus
+\newlength{\thmsymbolwidth}
+\setlength{\thmsymbolwidth}{\widthof{\thmintrosymbol}}
+% \addtolength{\thmsymbolwidth}{1pt}
+
+\newcommand{\exintrosymbol}{\ding{48}\hspace{4pt}} % Pen up
+\newlength{\exsymbolwidth}
+\setlength{\exsymbolwidth}{\widthof{\exintrosymbol}}
+% \addtolength{\exsymbolwidth}{1pt}
+
+\newcommand{\printrosymbol}{\ding{46}\hspace{4pt}} % Pen down
+\newlength{\prsymbolwidth}
+\setlength{\prsymbolwidth}{\widthof{\printrosymbol}}
+% \addtolength{\prsymbolwidth}{1pt}
+
+\newcommand{\tipintrosymbol}{\ding{118}\hspace{4pt}} % Four diamonds
+\newlength{\tipsymbolwidth}
+\setlength{\tipsymbolwidth}{\widthof{\tipintrosymbol}}
+% \addtolength{\tipsymbolwidth}{1pt}
+
+\newcommand{\quoteintrosymbol}{\ding{125}\hspace{4pt}} % Open quotation mark
+\newlength{\quotesymbolwidth}
+\setlength{\quotesymbolwidth}{\widthof{\quoteintrosymbol}}
+% \addtolength{\quotesymbolwidth}{1pt}
+
+% Warning messages for incomplete sections
+\newcommand{\chexwarning}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Under construction!}} \\
+    The end-of-chapter exercise sections are new and in an incomplete state.\end{figure}%
+}
+\newcommand{\incomplete}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
+    This section is not yet finished---do not rely on its correctness or completeness.\end{figure}%
+}
+\newcommand{\incompletefromhere}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
+    The section beyond this point is not yet finished---do not rely on its correctness or completeness.\end{figure}%
+}
+
+% For scaling figures that might overflow with small page sizes
+\newcommand{\fitwidth}[1]{\resizebox{\textwidth}{!}{#1}}
+\newcommand{\fitwidthc}[2]{\resizebox{#1\textwidth}{!}{#2}}
+\newcommand{\fitheight}[1]{\resizebox{\textheight}{!}{#1}}
+\newcommand{\fitheightc}[2]{\resizebox{#1\textheight}{!}{#2}}
+
+% To-do remarks and hints
+\newcommand{\todo}[1]{{\color{magenta} \textbf{To do:} #1}}
+
+% Custom table alignments
+% Source: http://tex.stackexchange.com/questions/12703/
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Truth table shortcuts
+\newcommand{\TT}{\checkmark}
+\newcommand{\FF}{${\times}$}
+
+% Emphasis in extracts
+\newcommand{\xtremph}[1]{\!\fcolorbox{black}{indbasecol}{\!#1\!}}
+
+% Source for extracts
+\newcommand{\xtrsource}[1]{taken from #1}
+
+% Commands for proof-writing section
+\newcommand{\vtinstructions}[1]{${\color{defcol} \langle \text{#1} \rangle}$}
+\newcommand{\propproof}[1]{\vtinstructions{insert proof of #1 here}}
+\newcommand{\propstate}[1]{\vtinstructions{state #1 here}}
+\newcommand{\propcite}[1]{\vtinstructions{cite #1 here}}
+\newcommand{\vardefine}[1]{\vtinstructions{define #1 here}}
+\newcommand{\vtor}{\hspace{7pt}--- \textit{or} ---}
+
+\newenvironment{vocabtemplate}{\begin{minipage}{0.05\linewidth}~\end{minipage}\vline\hspace{7pt}\begin{minipage}{0.9\linewidth}}{\end{minipage}}
+
+
+% Math mode
+
+% Custom quantifiers
+\newcommand{\forQ}{\mathbin{\text{\raisebox{1.1pt}{\rotatebox[origin=c]{180}{$\mathsf{Q}$}}}}} % Rotated Q
+
+% Introduction and elimination rule labels
+\newcommand{\introrule}[1]{($#1$\textsc{i})}
+\newcommand{\introrulesub}[2]{($#1$\textsc{i}$_{#2}$)}
+\newcommand{\elimrule}[1]{($#1$\textsc{e})}
+\newcommand{\elimrulesub}[2]{($#1$\textsc{e}$_{#2}$)}
+
+% Rotated 'leads to' arrow for proof trees
+\newcommand{\downleadsto}{\mathbin{\text{\rotatebox{-90}{$\leadsto$}}}}
+\newcommand{\upleadsto}{\mathbin{\text{\rotatebox{90}{$\leadsto$}}}}
+\newcommand{\leftleadsto}{\mathbin{\text{\rotatebox{180}{$\leadsto$}}}}
+
+% String diagrams for inductively defined sets
+\newcommand{\sdconstructor}[2]{node[circle, draw, text width=10, text centered, fill=indbasecol](#1) {#2}}
+
+% Diagrams for homogeneous relations
+\newcommand{\relnode}[2]{node[circle, draw, text width=10, text centered](#1) {#2}}
+
+% Tagged step in proof tree
+\newcommand{\TagC}[1]{\RightLabel{\scriptsize #1}}
+
+% Modifications to default symbols
+\renewcommand{\labelitemii}{$\diamond$}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\preceq}{\preccurlyeq}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand*{\thefootnote}{\color{fncol} [\alph{footnote}]}
+
+% Custom binary operations
+\newcommand{\symmdiff}{\mathbin{\triangle}}
+
+% Vertical bar for use with \left ... \right (e.g. for set-builder notation)
+\newcommand{\middlemid}{~\middle|~}
+
+% Symbol for binary operations
+\newcommand{\binop}{\star}
+\newcommand{\binopalt}{\diamond}
+
+% Ensure that limits on sums and products appear above and beneath
+\let\nsum\sum
+\let\nprod\prod
+\renewcommand{\sum}{\displaystyle\nsum}
+\renewcommand{\prod}{\displaystyle\nprod}
+\newcommand{\ssum}{\nsum\limits}
+\newcommand{\sprod}{\prod\limits}
+
+
+
+% Text and math mode
+
+% Superscripts for ordinal numbers (1st, 2nd, 3rd, 4th, ...)
+\newcommand{\supst}{\textsuperscript{st}}
+\newcommand{\supnd}{\textsuperscript{nd}}
+\newcommand{\suprd}{\textsuperscript{rd}}
+\newcommand{\supth}{\textsuperscript{th}}
+
+
+
+
+%
+% Modifications for derivations
+%
+
+\newcommand{\ifadaptedelse}[2]{\ifdefempty{\adaptername}{#2}{#1}}
+\newcommand{\ifadapted}[1]{\ifadaptedelse{#1}{}}
+\newcommand{\iforiginal}[1]{\ifadaptedelse{}{#1}}

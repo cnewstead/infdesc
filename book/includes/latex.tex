@@ -1,0 +1,50 @@
+%
+% LaTeX support
+%
+
+% Display LaTeX code in text
+\newcommand{\inlatexnb}[1]{({\color{lccol1}\LaTeX{} code: {\tt \color{lccol2} #1}})}
+\newcommand{\inlatex}[1]{\inlatexnb{\textbackslash{}#1}}
+\newcommand{\texcode}[1]{{\color{lccol2} \tt #1}}
+\newcommand{\texcodebs}[1]{\texcode{\textbackslash{}#1}}
+
+% Enter into notation or latex index
+\newcommand{\nindex}[3]{\index[notation]{A#1@#2 --- \textit{#3}}}
+\newcommand{\lindexmmc}[2]{\index[latex]{A@Math mode commands!#1@\texcodebs{#1}, #2}}
+\newcommand{\lindexmme}[2]{\index[latex]{B@Math mode environments!#1@\texcode{#1}, #2}}
+\newcommand{\lindextmc}[2]{\index[latex]{C@Text mode commands!#1@\texcodebs{#1}, #2}}
+\newcommand{\lindextme}[2]{\index[latex]{D@Text mode environments!#1@\texcode{#1}, #2}}
+\newcommand{\lindexdsc}[2]{\index[latex]{C@Text mode commands!#1@\texcodebs{#1}, #2}}
+\newcommand{\lindexdse}[2]{\index[latex]{D@Text mode environments!#1@\texcode{#1}, #2}}
+
+% TeX code and output side-by-side
+\lstnewenvironment{texcodeleft}[1][0.5]{%
+    \minipage[t]{\dimexpr#1\textwidth\relax}%
+    \begin{center}\textit{\TeX{} code}\end{center} \vspace{-15pt}%
+    \lstset{basicstyle=\tt\footnotesize,breakindent=0pt,breakatwhitespace=true}%
+}
+{%
+    \endminipage\lstset{basicstyle=\tt,breakindent=20pt,breakatwhitespace=false}\hfill%
+}
+\newenvironment{texcoderightinnerbox}{%
+    \minipage[t]{\dimexpr\textwidth\relax}
+}{%
+    \endminipage%
+}
+\newsavebox{\texbox}
+\newenvironment{texcoderight}[1][0.45]{%
+    \minipage[t]{\dimexpr#1\textwidth\relax}%
+    \begin{center}\textit{Output}\end{center} \vspace{-5pt}%
+    \begin{lrbox}{\texbox}\begin{texcoderightinnerbox}%
+}
+{%
+    \end{texcoderightinnerbox}\end{lrbox}\begin{minipage}{\textwidth}\fbox{\usebox{\texbox}}\end{minipage}\endminipage%
+}
+\newenvironment{texcoderightnobox}[1][0.45]{%
+    \minipage[t]{\dimexpr#1\textwidth\relax}%
+    \begin{center}\textit{Output}\end{center} \vspace{-5pt}%
+    \begin{lrbox}{\texbox}\begin{texcoderightinnerbox}%
+}
+{%
+    \end{texcoderightinnerbox}\end{lrbox}\begin{minipage}{\textwidth}\usebox{\texbox}\end{minipage}\endminipage%
+}
