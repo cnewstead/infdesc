@@ -1,7 +1,9 @@
 An Infinite Descent into Pure Mathematics
 =========================================
 
-This Git repository contains the TeX source for _An Infinite Descent into Pure Mathematics_ by Clive Newstead. The main website for the book is [here](https://infinitedescent.xyz/).
+This Git repository contains the TeX source for _An Infinite Descent into Pure Mathematics_ by Clive Newstead.
+
+The main website for the book is [here](https://infinitedescent.xyz/).
 
 ## Navigating the source
 
