@@ -141,19 +141,22 @@ where $r \in \mathbb{N}$, $x_1,x_2,\dots,x_r$ are variables, and $\sigma(x_1,x_2
 
 Rules describe how an inductively defined set $(A, C_A)$ is built up; the rule in \Cref{defRuleForInductiveDefinition} can be read as saying that if $x_1, x_2, \dots, x_r \in A$, then $\sigma(x_1,x_2,\dots,x_r) \in A$. Note that if $r=0$, then this amounts to declaring a basic element of $A$.
 
-\todo{}
+We can represent rules diagramatically using diagrams like the following. Each constructor $\sigma$ of arity $r$ can be represented by a node with $r$ inputs, representing the variables in the rule, and one output, representing the expression $\sigma(x_1,x_2,\dots,x_r)$. For example:
 
 \begin{center}
 \begin{tikzpicture}
 \draw (-2, 2) node(x1) {$x_1$} ;
 \draw (-1, 2) node(x2) {$x_2$} ;
 \draw (0.5, 2) node(dots) {$\cdots$} ;
-\draw (2, 2) node(xn) {$x_n$} ;
+\draw (2, 2) node(xr) {$x_r$} ;
   \draw (0, 1) \sdconstructor{sigma}{$\sigma$} ;
-    \draw (0, 0) node(result) {$\sigma(x_1,x_2,\dots,x_n)$} ;
+    \draw (0, 0) node(result) {$\sigma(x_1,x_2,\dots,x_r)$} ;
 \draw[-latex] (x1) -- (sigma) -- (result) ;
 \draw (x2) -- (sigma) ;
-\draw (xn) -- (sigma) ;
+\draw (xr) -- (sigma) ;
+\draw (5,1) \sdconstructor{a}{$a$} ;
+  \draw (5,0) node(aresult) {$a$} ;
+\draw[-latex] (a) -- (aresult) ;
 \end{tikzpicture}
 \end{center}
 

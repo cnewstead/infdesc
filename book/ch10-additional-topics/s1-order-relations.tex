@@ -304,11 +304,10 @@ Let $X$ be a set. We show that every element $U \in \mathcal{P}(X)$ has a comple
 \end{example}
 
 \begin{exercise}
-\label{exComplementIsUnique}
-Let $(X, \preceq)$ be a distributive lattice with a greatest element and a least element, and let $x \in X$. Prove that, if a complement for $x$ exists, then it is unique; that is, prove that if $y,y' \in X$ are complements for $X$, then $y=y'$. \begin{backhint}
-\hintref{exComplementIsUnique}
-Use distributivity, together with the fact that $\bot \vee y' = y'$ and $\top \wedge y' = y'$.
-\end{backhint}
+Let $(X, \preceq)$ be a distributive lattice with a greatest element and a least element, and let $x \in X$. Prove that, if a complement for $x$ exists, then it is unique; that is, prove that if $y,z \in X$ are complements for $X$, then $y=z$.
+\hintlabel{exComplementIsUnique}{%
+Use distributivity, together with the fact that $y = y \vee \bot$ and $y = y \wedge \top$.
+}
 \end{exercise}
 
 \Cref{exComplementIsUnique} justifies the following notation.
@@ -385,13 +384,48 @@ The fact that $(A, \vdash)$ is a lattice can be proved by verifying that:
 Finally, distributivity of suprema and infima in $(A, \vdash)$ follows from the corresponding properties of conjunction and disjunction; $(A, \vdash)$ has greatest element $[p \Rightarrow p]$ and least element $[\neg(p \Rightarrow p)]$, where $p$ is some fixed propositional variable; and the complement of $[s] \in A$ is given by $[\neg s]$.
 \end{cproof}
 
+\subsection*{De Morgan's laws revisited}
+
 We finish this section on orders and lattices with a general version of de Morgan's laws for Boolean algebras, which by Theorems \Cref{thmPowerSetIsBooleanAlgebra,thmLindenbaumTarskiIsBooleanAlgebra} implies the versions we proved for logical formulae (\Cref{thmDeMorganLogicalOperators}) and for sets (\Cref{thmDeMorganForSets}(a)--(b)).
+
+
 
 \begin{theorem}[De Morgan's laws]
 \label{thmDeMorgan}
 Let $(X, \preceq)$ be a Boolean algebra, and let $x,y \in X$. Then
 \[ \neg (x \wedge y) = (\neg x) \vee (\neg y) \quad \text{and} \quad \neg (x \vee y) = (\neg x) \wedge (\neg y) \]
 \end{theorem}
-\begin{cproof}
-\todo{}
+\begin{cproof}[of {(a)}]
+We prove that $(\neg x) \vee (\neg y)$ satisfies the definition of a complement for $x \wedge y$; then we'll have $(\neg x) \vee (\neg y) = \neg (x \wedge y)$ by \Cref{exComplementIsUnique}.
+
+So let $z = (\neg x) \vee (\neg y)$. Then
+\begin{align*}
+&  (x \wedge y) \wedge z && \\
+&= (x \wedge y) \wedge ((\neg x) \vee (\neg y)) && \text{by definition of $z$} \\
+&= [(x \wedge y) \wedge (\neg x)] \vee [(x \wedge y) \wedge (\neg y)] && \text{by distributivity} \\
+&= [(x \wedge (\neg x)) \wedge y] \vee [x \wedge (y \wedge (\neg y))] && \text{by associativity and commutativity} \\
+&= [\bot \wedge y] \vee [x \wedge \bot] && \text{by definition of complements} \\
+&= \bot \vee \bot && \text{by definition of $\bot$ and $\wedge$} \\
+&= \bot && \text{by idempotence}
+\end{align*}
+
+Likewise we have
+\begin{align*}
+&  (x \wedge y) \vee z && \\
+&= (x \wedge y) \vee ((\neg x) \vee (\neg y)) && \text{by definition of $z$} \\
+&= [x \vee ((\neg x) \vee (\neg y))] \wedge [y \vee ((\neg x) \vee (\neg y))] && \text{by distributivity} \\
+&= [((x \vee (\neg x)) \vee (\neg y)] \wedge [(\neg x) \vee (y \vee (\neg y))] && \text{by associativity and commutativity} \\
+&= [\top \vee (\neg y)] \wedge [(\neg x) \vee \top] && \text{by definition of complements} \\
+&= \top \wedge \top && \text{by definition of $\top$ and $\wedge$} \\
+&= \top && \text{by idempotence}
+\end{align*}
+
+Since $(x \wedge y) \wedge z = \bot$ and $(x \wedge y) \vee z = \top$, we have
+\[ (\neg x) \vee (\neg y) ~=~ z ~=~ \neg (x \wedge y) \]
+by definition of complements.
 \end{cproof}
+
+\begin{exercise}
+Prove part (b) of \Cref{thmDeMorgan}.
+
+\end{exercise}
