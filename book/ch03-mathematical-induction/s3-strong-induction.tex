@@ -113,12 +113,17 @@ then $p(n)$ is true for all $n \ge n_0$.
 \end{theorem}
 
 \begin{cproof}
-The fact that $p(n)$ is true for all $n \ge n_1$ follows from strong induction. Indeed:
+The fact that $p(n)$ is true for all $n \ge n_0$ follows from strong induction. Indeed:
 \begin{itemize}
-\item $p(n_1)$ is true by (i);
-\item Fix $n \ge n_1$ and assume $p(k)$ is true for all $n_1 \le k \le n$. Then in fact $p(k)$ is true for all $n_0 \le k \le n$, since $p(n_0), p(n_0+1), \dots p(n_1-1)$ are true by (i). So $p(n+1)$ is true by (ii)
+\item (\textbf{Base case}) $p(n_0)$ is true by (i);
+\item (\textbf{Induction step}) Fix $n \ge n_0$ and assume $p(k)$ is true for all $n_0 \le k \le n$. Then:
+\begin{itemize}
+\item If $n < n_1$, then $n+1 \le n_1$, so that $p(n)$ is true by (i);
+\item If $n \ge n_1$, then $p(n+1)$ is true by (ii).
 \end{itemize}
-So $p(n)$ is true for all $n \ge n_1$. But then $p(n)$ is true for all $n \ge n_0$, again by (i).
+In both cases we see that $p(n+1)$ is true, as required.
+\end{itemize}
+Thus by strong induction, we have that $p(n)$ is true for all $n \ge n_0$.
 \end{cproof}
 
 \begin{strategy}[Proof by strong induction with multiple base cases]

@@ -317,6 +317,17 @@ Use distributivity, together with the fact that $y = y \vee \bot$ and $y = y \we
 Let $(X, \preceq)$ be a distributive lattice with greatest and least elements. If $x \in X$ has a complement, denote it by $\neg x$.
 \end{notation}
 
+\begin{proposition}
+\label{propDoubleNegation}
+Let $(X, \preceq)$ be a distributive lattice and let $x \in X$. If $x$ has a complement $\neg x$, then $\neg x$ has a complement, and $\neg (\neg x) = x$.
+\end{proposition}
+
+\begin{cproof}
+Assume that $x$ has a complement $\neg x$. Then by commutativity of $\wedge$ and $\vee$ and by definition of $\neg$, we have
+\[ (\neg x) \wedge x ~=~ x \wedge (\neg x) ~=~ \bot \quad \text{and} \quad (\neg x) \vee x ~=~ x \vee (\neg x) ~=~ \top \]
+so $x$ satisfies the definition of what it means to be a complement of $\neg x$. By uniqueness of complements (\Cref{exComplementIsUnique}), we have $x = \neg (\neg x)$.
+\end{cproof}
+
 \begin{definition}
 \label{defBooleanAlgebra}
 \index{Boolean algebra}
@@ -399,7 +410,7 @@ Let $(X, \preceq)$ be a Boolean algebra, and let $x,y \in X$. Then
 We prove that $(\neg x) \vee (\neg y)$ satisfies the definition of a complement for $x \wedge y$; then we'll have $(\neg x) \vee (\neg y) = \neg (x \wedge y)$ by \Cref{exComplementIsUnique}.
 
 So let $z = (\neg x) \vee (\neg y)$. Then
-\begin{align*}
+\begin{flalign*}
 &  (x \wedge y) \wedge z && \\
 &= (x \wedge y) \wedge ((\neg x) \vee (\neg y)) && \text{by definition of $z$} \\
 &= [(x \wedge y) \wedge (\neg x)] \vee [(x \wedge y) \wedge (\neg y)] && \text{by distributivity} \\
@@ -407,10 +418,10 @@ So let $z = (\neg x) \vee (\neg y)$. Then
 &= [\bot \wedge y] \vee [x \wedge \bot] && \text{by definition of complements} \\
 &= \bot \vee \bot && \text{by definition of $\bot$ and $\wedge$} \\
 &= \bot && \text{by idempotence}
-\end{align*}
+\end{flalign*}
 
 Likewise we have
-\begin{align*}
+\begin{flalign*}
 &  (x \wedge y) \vee z && \\
 &= (x \wedge y) \vee ((\neg x) \vee (\neg y)) && \text{by definition of $z$} \\
 &= [x \vee ((\neg x) \vee (\neg y))] \wedge [y \vee ((\neg x) \vee (\neg y))] && \text{by distributivity} \\
@@ -418,7 +429,7 @@ Likewise we have
 &= [\top \vee (\neg y)] \wedge [(\neg x) \vee \top] && \text{by definition of complements} \\
 &= \top \wedge \top && \text{by definition of $\top$ and $\wedge$} \\
 &= \top && \text{by idempotence}
-\end{align*}
+\end{flalign*}
 
 Since $(x \wedge y) \wedge z = \bot$ and $(x \wedge y) \vee z = \top$, we have
 \[ (\neg x) \vee (\neg y) ~=~ z ~=~ \neg (x \wedge y) \]
@@ -427,5 +438,7 @@ by definition of complements.
 
 \begin{exercise}
 Prove part (b) of \Cref{thmDeMorgan}.
-
+\hintlabel{exSecondPartOfDeMorgan}{%
+This can be proved by swapping $\wedge$ with $\vee$ and $\top$ with $\bot$ in the proof of (a). But there is a shorter proof which uses the result of part (a) together with \Cref{propDoubleNegation}.
+}
 \end{exercise}
