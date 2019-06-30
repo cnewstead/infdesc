@@ -338,22 +338,31 @@ Find a bijection $[p] \times C_n \to C_{pn}$, where $C_n = \{ k \in [|n|] \mid k
 \end{backhint}
 \end{exercise}
 
+% \begin{exercise}
+% \label{exTotientOfProductOfTwoPrimes}
+% Let $p$ and $q$ be distinct positive primes. Prove that $\varphi(pq)=(p-1)(q-1)$.
+% \begin{backhint}
+% \hintref{exTotientOfProductOfTwoPrimes}
+% Start by proving that $k \in [pq]$ is \textit{not} coprime to $pq$ if and only if $p \mid k$ or $q \mid k$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
+% \end{backhint}
+% \end{exercise}
+
 \begin{exercise}
-\label{exTotientOfProductOfTwoPrimes}
-Let $p$ and $q$ be distinct positive primes. Prove that $\varphi(pq)=(p-1)(q-1)$.
-\begin{backhint}
-\hintref{exTotientOfProductOfTwoPrimes}
-Start by proving that $k \in [pq]$ is \textit{not} coprime to $pq$ if and only if $p \mid k$ or $q \mid k$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
-\end{backhint}
+Let $n \in \mathbb{Z}$ and let $p>0$ be prime. Prove that if $p \nmid n$, then $\varphi(pn)=(p-1)\varphi(n)$.
+\hintlabel{exTotientMultiplyByPrimeTwo}{%
+Start by proving that $k \in [pn]$ is \textit{not} coprime to $pn$ if and only if either $p \mid k$ or $k$ is not coprime to $n$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
+}
 \end{exercise}
 
-Together, \Cref{exTotientMultiplyByPrime,exTotientOfProductOfTwoPrimes} allow us to compute the totient of any integer with up to two primes in its prime factorisation.
+Together, \Cref{exTotientMultiplyByPrime,exTotientMultiplyByPrimeTwo} allow us to compute the totient of any integer with up to two primes in its prime factorisation.
 
 \begin{example}
 \label{exTotientOfOneHundred}
 We compute $\varphi(100)$. The prime factorisation of $100$ is $2^2 \times 5^2$. Applying \Cref{exTotientMultiplyByPrime} twice
 \[ \varphi(2^2 \times 5^2) = 2 \times 5 \times \varphi(2 \times 5) = 10\varphi(10) \]
-Finally, \Cref{exTotientOfProductOfTwoPrimes} tells us that $\varphi(10) = \varphi(2 \times 5) = 1 \times 4 = 4$. Hence $\varphi(100) = 40$.
+Finally, \Cref{exTotientMultiplyByPrimeTwo} tells us that
+\[ \varphi(10) = \varphi(2 \times 5) = 1 \times \varphi(5) = 1 \times 4 = 4 \]
+Hence $\varphi(100) = 40$.
 \end{example}
 
 \begin{exercise}
@@ -852,12 +861,12 @@ as required.
 
 It turns out that \Cref{thmTotientIsMultiplicative} and \Cref{exTotientMultiplyByPrime} are precisely the ingredients we need to find a general formula for the totient of a nonzero integer.
 
-\begin{theorem}[Formula for Euler's totient function]
+\begin{restatable}[Formula for Euler's totient function]{theorem}{rthmTotientFormula}
 \label{thmTotientFormula}
 Let $n$ be a nonzero integer. Then
 \[ \varphi(n) = |n| \cdot \prod_{p \mid n} \left( 1 - \frac{1}{p} \right) \]
 where the product is indexed over positive primes $p$ dividing $n$
-\end{theorem}
+\end{restatable}
 \begin{cproof}
 Since $\varphi(n) = \varphi(-n)$ for all $n \in \mathbb{Z}$, we may assume that $n>0$. Moreover
 \[ \varphi(1) = 1 = 1 \cdot \prod_{p \mid 1} \left( 1 - \frac{1}{p} \right) \]

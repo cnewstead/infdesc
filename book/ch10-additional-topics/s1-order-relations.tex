@@ -245,14 +245,15 @@ The proof that $L_2 = L$ is similar. Hence $L_1=L_2$. But $x \wedge (y \wedge z)
 Since $L_1=L_2$, it follows that $x \wedge (y \wedge z) = (x \wedge y) \wedge z$, as required.
 \end{cproof}
 
-\begin{exercise}[Commutativity laws for lattices]
-Let $(X, \preceq)$ be a lattice. Prove that, for all $x,y \in X$, we have
-\[ x \wedge y = y \wedge x \quad \text{and} \quad x \vee y = y \vee x \]
-\end{exercise}
+In the next exercise, you will prove some properties satisfied by suprema and infima in addition to associativity.
 
-\begin{exercise}[Absorption laws for lattices]
-Let $(X, \preceq)$ be a lattice. Prove that, for all $x,y \in X$, we have
-\[ x \vee (x \wedge y) = x \qquad \text{and} \qquad x \wedge (x \vee y) = x \]
+\begin{exercise}[Properties of suprema and infima]
+Let $(X, \preceq)$ be a lattice. Prove that, for all $x,y \in X$, we have:
+\begin{enumerate}[(a)]
+\item (\textbf{Idempotence}) $x \wedge x = x$ and $x \vee x = x$;
+\item (\textbf{Commutativity}) $x \wedge y = y \wedge x$ and $x \vee y = y \vee x$;
+\item (\textbf{Absorption}) $x \vee (x \wedge y) = x$ and $x \wedge (x \vee y) = x$.
+\end{enumerate}
 \end{exercise}
 
 \begin{example}

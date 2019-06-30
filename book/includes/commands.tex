@@ -125,15 +125,6 @@
 % Tagged step in proof tree
 \newcommand{\TagC}[1]{\RightLabel{\scriptsize #1}}
 
-% Modifications to default symbols
-\renewcommand{\labelitemii}{$\diamond$}
-\renewcommand{\le}{\leqslant}
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\preceq}{\preccurlyeq}
-\renewcommand{\ge}{\geqslant}
-\renewcommand{\geq}{\geqslant}
-\renewcommand*{\thefootnote}{\color{fncol} [\alph{footnote}]}
-
 % Custom binary operations
 \newcommand{\symmdiff}{\mathbin{\triangle}}
 
@@ -144,13 +135,37 @@
 \newcommand{\binop}{\star}
 \newcommand{\binopalt}{\diamond}
 
-% Ensure that limits on sums and products appear above and beneath
+% Modifications to default symbols
+\renewcommand{\labelitemii}{$\diamond$}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\preceq}{\preccurlyeq}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand*{\thefootnote}{\color{fncol} [\alph{footnote}]}
+
+% Force \displaystyle for indexed operations
 \let\nsum\sum
 \let\nprod\prod
+\let\nbigcap\bigcap
+\let\nbigcup\bigcup
+\let\nbigsqcup\bigsqcup
+\let\nbigwedge\bigwedge
+\let\nbigvee\bigvee
+
 \renewcommand{\sum}{\displaystyle\nsum}
 \renewcommand{\prod}{\displaystyle\nprod}
+\renewcommand{\bigcap}{\displaystyle\nbigcap}
+\renewcommand{\bigcup}{\displaystyle\nbigcup}
+\renewcommand{\bigsqcup}{\displaystyle\nbigsqcup}
+\renewcommand{\bigwedge}{\displaystyle\nbigwedge}
+\renewcommand{\bigvee}{\displaystyle\nbigvee}
+
 \newcommand{\ssum}{\nsum\limits}
 \newcommand{\sprod}{\prod\limits}
+\newcommand{\sbigcap}{\nbigcap\limits}
+\newcommand{\sbigcup}{\nbigcup\limits}
+\newcommand{\sbigsqcup}{\nbigsqcup\limits}
 
 
 

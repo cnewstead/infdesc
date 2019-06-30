@@ -46,7 +46,7 @@ as required.
 \begin{example}
 \label{exAlephNaughtPlusAlephNaughtEqualsAlephNaught}
 We show that $\aleph_0 + \aleph_0 = \aleph_0$. To see this, note that $\mathbb{N} = E \cup O$, where $E$ is the set of all even natural numbers and $O$ is the set of all odd natural numbers. But $E$ and $O$ are disjoint, so that by \Cref{lemCardinalityOfUnionOfDisjointSets} we have
-\[ \aleph_0 + \aleph_0 = |E \cup O| = |\mathbb{N}| = \aleph_0 \]
+\[ \aleph_0 + \aleph_0 ~=~ |E| + |O| ~=~ |E \cup O| ~=~ |\mathbb{N}| ~=~ \aleph_0 \]
 as claimed.
 \end{example}
 
@@ -84,27 +84,27 @@ $\kappa + \aleph_0 = \kappa$ for all cardinal numbers $\kappa \ge \aleph_0$.
 \end{proposition}
 
 \begin{cproof}
-Let $\kappa \ge \aleph_0$ and let $A = [\kappa]$. Note that by \Cref{defOrderingOfCardinals} there is an injection $i : \mathbb{N} \to A$.
+Let $\kappa \ge \aleph_0$ and let $A = [\kappa]$. Note that by \Cref{defOrderingOfCardinals} there is an injection $i : \mathbb{N} \to A$. Write $a_n = i(n)$ for all $n \in \mathbb{N}$, so that $i[\mathbb{N}] = \{ a_0, a_1, a_2, \dots \} \subseteq A$.
 
-Partition $A$ as $A = A' \cup U \cup V$, where:
+Partition $A$ as $A = B \cup U \cup V$, where:
 \begin{itemize}
-\item $A' = A \setminus i[\mathbb{N}]$;
-\item $U = \{ i(n) \mid n \in \mathbb{N} \text{ is even} \} = i[E]$; and
-\item $V = \{ i(n) \mid n \in \mathbb{N} \text{ is odd} \} = i[O]$.
+\item $B = A \setminus i[\mathbb{N}] = A \setminus \{ a_0, a_1, a_2, a_3, \dots \}$;
+\item $U = i[E] = \{ a_0, a_2, a_4, \dots \}$; and
+\item $V = i[O] = \{ a_1, a_3, a_5, \dots \}$.
 \end{itemize}
 Here $E$ and $O$ are the sets of even and odd natural numbers, respectfully.
 
 The sets $U$, $V$ and $i[\mathbb{N}]$ are all countably infinite, since $E$, $O$ and $\mathbb{N}$ are countably infinite and $i$ is an injection.
 
-Since $U$ and $i[\mathbb{N}]$ are countably infinite, there is a bijection $f : U \to i[\mathbb{N}]$, which in turn yields a bijection $g : A' \cup U \to A' \cup i[\mathbb{N}]$ defined by
-\[ g(a) = \begin{cases} a & \text{if } a \in A' \\ f(a) & \text{if } a \in U \end{cases} \]
-Note that $g$ is well-defined since $A \cap U = \varnothing$ and $A' \cap i[\mathbb{N}] = \varnothing$. And $g$ is bijective: it has an inverse function, defined similarly but with $f$ replaced by $f^{-1}$.
+Since $U$ and $i[\mathbb{N}]$ are countably infinite, there is a bijection $f : U \to i[\mathbb{N}]$, which in turn yields a bijection $g : B \cup U \to B \cup i[\mathbb{N}]$ defined by
+\[ g(a) = \begin{cases} a & \text{if } a \in B \\ f(a) & \text{if } a \in U \end{cases} \]
+Note that $g$ is well-defined since $A \cap U = \varnothing$ and $B \cap i[\mathbb{N}] = \varnothing$. And $g$ is bijective: it has an inverse function, defined similarly but with $f$ replaced by $f^{-1}$.
 
 Thus
-\[ |A| ~=~ |A' \cup i[\mathbb{N}]| ~=~ |A' \cup U| \]
+\[ |A| ~=~ |B \cup i[\mathbb{N}]| ~=~ |B \cup U| \]
 
 Since $U$ and $V$ are countably infinite, we have $|U| = |V| = \aleph_0$. It follows that
-\[ \kappa + \aleph_0 ~=~ |A| + |V| ~=~ |A' \cup U| + |V| ~=~ |A' \cup U \cup V| ~=~ |A| ~=~ \kappa \]
+\[ \kappa + \aleph_0 ~=~ |A| + |V| ~=~ |B \cup U| + |V| ~=~ |B \cup U \cup V| ~=~ |A| ~=~ \kappa \]
 as required.
 \end{cproof}
 
@@ -179,7 +179,7 @@ Let $X$ be a set and let $\sim$ be an equivalence relation on $X$. Prove that if
 \begin{cproof}[of {(a)}]
 Define $f : [\kappa] \times ([\lambda] \times [\mu]) \to ([\kappa] \times [\lambda]) \times [\mu]$ by $f(a,(b,c)) = ((a,b), c)$ for all $a \in [\kappa]$, $b \in [\lambda]$ and $c \in [\mu]$. Then $f$ is a bijection, since it has an inverse $g : ([\kappa] \times [\lambda]) \times [\mu] \to [\kappa] \times ([\lambda] \times [\mu])$ defined by $g((a,b),c) = (a,(b,c))$ for all $a \in [\kappa]$, $b \in [\lambda]$ and $c \in [\mu]$.
 
-But then
+But then by \Cref{lemCardinalityOfProductOfSets} we have
 \[ \kappa \cdot (\lambda \cdot \mu) ~=~ |[\kappa] \times ([\lambda] \times [\mu])| ~=~ |([\kappa] \times [\lambda]) \times [\mu]| ~=~ (\kappa \cdot \lambda) \cdot \mu\]
 as required.
 \end{cproof}
