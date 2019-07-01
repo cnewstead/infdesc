@@ -1,0 +1,75 @@
+\begin{chapex}
+The video-sharing website \textit{YouTube} assigns to each video a unique identifier, which is a string of 11 characters from the set
+\[ \{ \mathtt{A}, \mathtt{B}, \dots, \mathtt{Z}, \mathtt{a}, \mathtt{b}, \dots, \mathtt{z}, \mathtt{0}, \mathtt{1}, \mathtt{2}, \mathtt{3}, \mathtt{4}, \mathtt{5}, \mathtt{6}, \mathtt{7}, \mathtt{8}, \mathtt{9}, \text{\texttt{-}}, \text{\texttt{\_}} \} \]
+This string is actually a natural number expressed in base-64, where the characters in the above set represent the numbers $0$ through $63$, in the same order---thus $\mathtt{C}$ represents $2$, $\mathtt{c}$ represents $28$, $\mathtt{3}$ represents $55$, and \texttt{\_} represents $63$. According to this schema, find the natural number whose base-64 expansion is $\mathtt{dQw4w9WgXcQ}$, and find the base-64 expansion of the natural number $7\,159\,047\,702\,620\,056\,984$.
+\end{chapex}
+
+\begin{chapex}
+Let $a, b, c, d \in \mathbb{Z}$. Under what conditions is $(a+b\sqrt{2})(c+d\sqrt{2})$ an integer?
+\end{chapex}
+
+\begin{chapex}
+Suppose an integer $m$ leaves a remainder of $i$ when divided by $3$, and an integer $m$ leaves a remainder of $j$ when divided by $3$, where $0 \le i,j < 3$. Prove that $m+n$ and $i+j$ leave the same remainder when divided by $3$.
+\end{chapex}
+
+\begin{chapex}
+What are the possible integers of $n^2$ when divided by $3$, where $n \in \mathbb{Z}$?
+\end{chapex}
+
+\begin{definition}
+A set $X$ is \textbf{closed} under an operation $\odot$ if, whenever $a$ and $b$ are elements of $X$, $a \odot b$ is also an element of $X$.
+\end{definition}
+
+In \Crefrange{cqClosureOfNumberSetsBegin}{cqClosureOfNumberSetsEnd}, determine which of the number sets $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$ and $\mathbb{R}$ are closed under the operation $\odot$ defined in the question.
+
+\begin{multicols}{2}
+\begin{chapex}
+\label{cqClosureOfNumberSetsBegin}
+$a \odot b = a + b$
+\end{chapex}
+
+\begin{chapex}
+$a \odot b = a - b$
+\end{chapex}
+
+\begin{chapex}
+$a \odot b = (a-b)(a+b)$
+\end{chapex}
+
+\begin{chapex}
+$a \odot b = (a-1)(b-1) + 2(a+b)$
+\end{chapex}
+
+\begin{chapex}
+$a \odot b = \dfrac{a}{b^2+1}$
+\end{chapex}
+
+\begin{chapex}
+$a \odot b = \dfrac{a}{\sqrt{b^2+1}}$
+\end{chapex}
+
+\begin{chapex}
+\label{cqClosureOfNumberSetsEnd}
+$a \odot b = \begin{cases} a^{b} & \text{if $b > 0$} \\ 0 & \text{if $b \not\in \mathbb{Q}$} \end{cases}$
+\end{chapex}
+\end{multicols}
+
+\begin{definition}
+A complex number $\alpha$ is \textbf{algebraic} if $p(\alpha) = 0$ for some nonzero polynomial $p(x)$ over $\mathbb{Q}$.
+\end{definition}
+
+\begin{chapex}
+Let $x$ be a rational number. Prove that $x$ is an algebraic number.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\sqrt{2}$ is an algebraic number.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\sqrt{2} + \sqrt{3}$ is an algebraic number.
+\end{chapex}
+
+\begin{chapex}
+Prove that $x+yi$ is an algebraic number, where $x$ and $y$ are any two rational numbers.
+\end{chapex}

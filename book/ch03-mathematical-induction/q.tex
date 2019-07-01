@@ -61,14 +61,3 @@ Let $f : \mathbb{R} \to \mathbb{R}$ be a function such that $f(0) > 0$ and $f(x+
 Start by proving by induction on $n \in \mathbb{N}$ that $f(n) = a^n$ for all $n \in \mathbb{N}$. Then deduce that $f(n) = a^n$ for all $n \in \mathbb{Z}$, and finally deduce that $f(x)=a^x$ for all $x \in \mathbb{Q}$.
 }
 \end{chapex}
-
-\begin{chapex}
-\nindex{floor}{$\left\lfloor \cdots \right\rfloor$}{floor operator}
-\todo{Move to the number theory chapter; this is easier without induction!}
-Let $n \in \mathbb{N}$. Use induction to prove that the number of trailing $0$s in the decimal expansion of $n!$ is equal to
-\[ \sum_{k=1}^d \left\lfloor \dfrac{n}{5^k} \right \rfloor \]
-where $d \in \mathbb{N}$ is least such that $5^{d+1}>n$, and where $\lfloor x \rfloor$ \inlatex{lfloor,\textbackslash{}rfloor} denotes the greatest integer less than or equal to $x \in \mathbb{R}$ (called the \textbf{floor} of $x$).
-\hintlabel{cqTrailingZerosOfFactorialByInduction}{%
-Start by proving that, for all $n \in \mathbb{N}$ and all $k \in \mathbb{N}$, there are exactly $\left\lfloor n/5^k \right\rfloor$ natural numbers $\le n$ that are divisible by $5^k$. Then consider how many zeros are contributed by each factor of $n!$ to the decimal expansion of $n!$.
-}
-\end{chapex}
