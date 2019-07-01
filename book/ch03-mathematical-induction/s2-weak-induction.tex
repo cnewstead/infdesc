@@ -4,7 +4,7 @@
 
 Just as recursion exploited the structure of the natural numbers to \textit{define expressions} involving natural numbers, induction exploits the very same structure to \textit{prove results} about natural numbers.
 
-\begin{theorem}[Weak induction principle]
+\begin{restatable}[Weak induction principle]{theorem}{rthmWeakInduction}
 \label{thmWeakInduction}
 \index{induction!on $\mathbb{N}$ (weak)}
 \index{weak induction principle}
@@ -14,7 +14,7 @@ Let $p(n)$ be logical formula with free variable $n \in \mathbb{N}$, and let $n_
 \item For all $n \ge n_0$, if $p(n)$ is true, then $p(n+1)$ is true;
 \end{enumerate}
 then $p(n)$ is true for all $n \ge n_0$.
-\end{theorem}
+\end{restatable}
 
 \begin{cproof}
 Define $X = \{ n \in \mathbb{N} \mid p(n_0 + n) \text{ is true} \}$; that is, given a natural number $n$, we have $n \in X$ if and only if $p(n_0 + n)$ is true. Then

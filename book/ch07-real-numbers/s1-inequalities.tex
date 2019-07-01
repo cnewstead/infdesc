@@ -323,9 +323,12 @@ Equality holds if and only if the two `$\le$' symbols in the above derivation ar
 \item The first inequality is equality if and only if $\vec x \cdot \vec y = |\vec x \cdot \vec y|$, which holds if and only if $\vec x \cdot \vec y \ge 0$.
 \item The second inequality is equality if and only if equality holds in the Cauchy--Schwarz inequality. In turn, this occurs if and only if $a\vec x = b \vec y$ for some $a,b \in \mathbb{R}$. We may, moreover, assume that $a \ge 0$---if not, replace $a$ and $b$ by their negatives.
 \end{itemize}
-If $a=0$ then we can take $b=0$. If $a>0$, then by \Cref{exVectorDotItself} and \Cref{exScalarProductIsBilinear}, we have
+If $a=0$ then we can take $b=0$.
+%% BEGIN EXTRACT {xtrSoExampleTwo} %%
+If $a>0$, then by \Cref{exVectorDotItself} and \Cref{exScalarProductIsBilinear}, we have
 \[ \vec x \cdot \left( \frac{b}{a} \vec x \right) = \frac{b}{a} \lVert \vec x \rVert^2 \]
 which is non-negative if and only if $b \ge 0$, since we are assuming that $a \ge 0$.
+%% END EXTRACT %%
 
 Thus, equality holds in the triangle inequality if and only if $a\vec x = b\vec y$ for some $a,b \ge 0$.
 \end{cproof}

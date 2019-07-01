@@ -427,11 +427,13 @@ Let $X$ and $Y$ be sets. Prove that $X \subseteq Y$ if and only if $X \cap Y = X
 \end{proposition}
 
 \begin{cproof}
+%% BEGIN QUOTATION (xtrSoExample) %%
 Suppose that $X \subseteq Y$. We prove $X \cap Y = X$ by double containment.
 \begin{itemize}
 \item ($\subseteq$) Suppose $a \in X \cap Y$. Then $a \in X$ and $a \in Y$ by definition of intersection, so in particular we have $a \in X$.
 \item ($\supseteq$) Suppose $a \in X$. Then $a \in Y$ since $X \subseteq Y$, so that $a \in X \cap Y$ by definition of intersection.
 \end{itemize}
+%% END QUOTATION %%
 
 Conversely, suppose that $X \cap Y = X$. To prove that $X \subseteq Y$, let $a \in X$. Then $a \in X \cap Y$ since $X = X \cap Y$, so that $a \in Y$ by definition of intersection, as required.
 \end{cproof}
@@ -473,7 +475,8 @@ Let $X$ and $Y$ be sets. Prove that $X \subseteq Y$ if and only if $X \cup Y = Y
 Let $X,Y,Z$ be sets. We prove that $X \cap (Y \cup Z) = (X \cap Y) \cup (X \cap Z)$.
 \begin{itemize}
 \item ($\subseteq$) Let $x \in X \cap (Y \cup Z)$. Then $x \in X$, and either $x \in Y$ or $x \in Z$. If $x \in Y$ then $x \in X \cap Y$, and if $x \in Z$ then $x \in X \cap Z$. In either case, we have $x \in (X \cap Y) \cup (X \cap Z)$.
-\item ($\supseteq$) Let $x \in (X \cap Y) \cup (X \cap Z)$. Then either $x \in X \cap Y$ or $x \in X \cap Z$. In both cases we have $x \in X$ by definition of intersection. In the first case we have $x \in Y$, and in the second case we have $x \in Z$; in either case, we have $x \in Y \cup Z$, so that $x \in X \cap (Y \cup Z)$.
+\item ($\supseteq$) Let $x \in (X \cap Y) \cup (X \cap Z)$. Then either $x \in X \cap Y$ or $x \in X \cap Z$. In both cases we have $x \in X$ by definition of intersection 
+In the first case we have $x \in Y$, and in the second case we have $x \in Z$; in either case, we have $x \in Y \cup Z$, so that $x \in X \cap (Y \cup Z)$.
 \end{itemize}
 \end{example}
 

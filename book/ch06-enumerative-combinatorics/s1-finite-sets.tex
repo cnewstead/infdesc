@@ -275,7 +275,9 @@ Note that $h$ is well-defined: the cases $k \le m$ and $k > m$ are mutually excl
 \[ h^{-1}(z) = \begin{cases} f^{-1}(z) & \text{if } z \in X \\ g^{-1}(z)+m & \text{if } z \in Y \end{cases} \]
 Well-definedness of $h^{-1}$ relies fundamentally on the assumption that $X \cap Y = \varnothing$, as this is what ensures that the cases $x \in X$ and $x \in Y$ are mutually exclusive.
 
+%% BEGIN EXTRACT (xtrConclusionExampleTwo) %%
 Hence $|X \cup Y| = m+n = |X| + |Y|$, which is as required since $|X \cap Y| = 0$.
+%% END EXTRACT %%
 \end{cproof}
 
 \begin{exercise}
@@ -354,5 +356,7 @@ The set $\mathbb{N}$ is infinite.
 \end{theorem}
 
 \begin{cproof}
+%% BEGIN EXTRACT (xtrContradictionExample) %%
 We proceed by contradiction. Suppose $\mathbb{N}$ is finite. Then $|\mathbb{N}| = n$ for some $n \in \mathbb{N}$, and hence $\mathbb{N}$ is either empty (nonsense, since $0 \in \mathbb{N}$) or, by \Cref{lemFinSetGreatestElement}, it has a greatest element $g$. But $g+1 \in \mathbb{N}$ since every natural number has a successor, and $g+1 > g$, so this contradicts maximality of $g$. Hence $\mathbb{N}$ is infinite.
+%% END EXTRACT %%
 \end{cproof}

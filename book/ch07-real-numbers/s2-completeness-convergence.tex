@@ -112,7 +112,7 @@ Moreover $q-\frac{1}{n} > 0$ since $\frac{1}{n} < q$.
 
 Suppose that $q-\frac{1}{n}$ is \textit{not} an upper bound for $A$. Then there is some $x \in A$ with $x > q-\frac{1}{n} > 0$. But then $(q-\frac{1}{n})^2 < x^2 < 2$, contradicting the fact that $\left( q-\frac{1}{n} \right)^2 > 2$.
 
-So $q-\frac{1}{n}$ is an upper bound for $A$, contradicing the fact that $q$ is a supremum of $A$.
+So $q-\frac{1}{n}$ is an upper bound for $A$, contradicting the fact that $q$ is a supremum of $A$.
 \end{itemize}
 
 So we must have $q^2 = 2$. But this is impossible---the proof is identical to that of \Cref{propSqrt2Irrational}, but with all instances of `$\sqrt{2}$' replaced by `$q$' in the proof.
@@ -547,7 +547,7 @@ Fix $N \in \mathbb{N}$ such that for all $n \ge N$ we have $|y_n - a| < \varepsi
 \begin{itemize}
 \item If $y_n \ge a$, then we have $a \le y_n \le z_n$, and so
 \[ |y_n-a| = y_n-a \le z_n-a = |z_n-a| < \varepsilon \]
-\item If $y_n \le a$, then we have $x_n \le y_n \le a$, and so
+\item If $y_n < a$, then we have $x_n \le y_n \le a$, and so
 \[ |y_n-a| = a-y_n \le a-x_n = |x_n-a| < \varepsilon \]
 \end{itemize}
 In both cases we have proved $|y_n-a| < \varepsilon$. It follows that $(y_n) \to a$.

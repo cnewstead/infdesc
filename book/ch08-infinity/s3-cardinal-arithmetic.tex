@@ -211,7 +211,10 @@ Let $\kappa = |X|$ and $\lambda = |Y|$, and fix bijections $f : [\kappa] \to X$ 
 
 Define $H : [\lambda]^{[\kappa]} \to Y^X$ as follows. Given $\theta \in [\lambda]^{\kappa}$, that is $\theta : [\kappa] \to [\lambda]$, define $h_{\theta} = g \circ \theta \circ f^{-1} : X \to Y$, and let $H(\theta) = h_{\theta} \in Y^X$.
 
-To see that $H$ is a bijection, note that the function $K : Y^X \to [\lambda]^{[\kappa]}$ defined by $K(\varphi) = k_{\varphi} = g^{-1} \circ \varphi \circ f$ is a bijection, since for all $\theta : [\kappa] \to [\lambda]$ we have
+%% BEGIN EXTRACT (xtrStatingGoalsExampleTwo) %%
+To see that $H$ is a bijection, note that the function $K : Y^X \to [\lambda]^{[\kappa]}$ defined by $K(\varphi) = k_{\varphi} = g^{-1} \circ \varphi \circ f$ is a bijection%
+%% END EXTRACT%%
+, since for all $\theta : [\kappa] \to [\lambda]$ we have
 \[ K(H(\theta)) = K(g \circ \theta \circ f^{-1} = g^{-1} \circ g \circ \theta \circ f^{-1} \circ f = \theta \]
 and for all $\varphi : X \to Y$, we have
 \[ H(K(\varphi)) = H(g^{-1} \circ \varphi \circ f) = g \circ g^{-1} \circ \varphi \circ f \circ f^{-1} = \varphi \]

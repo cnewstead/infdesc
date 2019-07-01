@@ -202,12 +202,15 @@ Let $k \in \mathbb{N}$, and define $f : D \to D$ by $f(x)=\frac{x}{2^k}$. We wil
 \begin{itemize}
 \item (\textbf{Injectivity}) Fix $x,y \in D$ and suppose that $f(x)=f(y)$. Then $\frac{x}{2^k}=\frac{y}{2^k}$, so that $x=y$, as required.
 \item (\textbf{Surjectivity}) Fix $y \in D$. We need to find $x \in D$ such that $f(x)=y$. Well certainly if $2^ky \in D$ then we have \[ f(2^ky)=\frac{2^ky}{2^k}=y \]
-so it suffices to prove that $2^ky \in D$. Since $y \in D$, we must have $y=\frac{a}{2^n}$ for some $n \in \mathbb{N}$.
+so it suffices to prove that $2^ky \in D$.
+%% BEGIN EXTRACT (xtrCasesExample)
+Since $y \in D$, we must have $y=\frac{a}{2^n}$ for some $n \in \mathbb{N}$.
 \begin{itemize}
 \item If $k \le n$ then $n-k \in \mathbb{N}$ and so $2^ky=\frac{a}{2^{n-k}} \in D$.
 \item If $k > n$ then $k-n>0$ and $2^ky = 2^{k-n}a \in \mathbb{Z}$; but $\mathbb{Z} \subseteq D$ since if $a \in \mathbb{Z}$ then $a=\frac{a}{2^0}$. So again we have $2^ky \in D$.
 \end{itemize}
-In any case we have $2^ky \in D$ and $f(2^ky)=y$, so that $f$ is surjective.
+In both cases we have $2^ky \in D$; and $f(2^ky)=y$, so that $f$ is surjective.
+%% END EXTRACT
 \end{itemize}
 Since $f$ is both injective and surjective, it is bijective.
 \end{example}

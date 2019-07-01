@@ -354,12 +354,15 @@ Let $X$ be a set and let $U, V \subseteq X$. Then $U=V$ if and only if $\chi_U =
 \begin{cproof}
 \fixlistskip
 \begin{itemize}
-\item ($\subseteq$) Assume $U=V$ and let $a \in X$. Then
+\item ($\subseteq$)
+%% BEGIN EXTRACT (xtrAssumeExample) %%
+Assume $U=V$ and let $a \in X$. Then
 \begin{align*}
 \chi_U(a) = 1 & \Leftrightarrow a \in U && \text{by definition of $\chi_U$} \\
 &\Leftrightarrow a \in V && \text{since $U=V$} \\
 &\Leftrightarrow \chi_V(a) = 1 && \text{by definition of $\chi_V$}
 \end{align*}
+%% END EXTRACT %%
 Likewise $\chi_U(a) = 0$ if and only if $\chi_V(a) = 1$, so that $\chi_U = \chi_V$ by function extensionality.
 
 \item ($\supseteq$) Assume $\chi_U = \chi_V$ and let $a \in X$. Then

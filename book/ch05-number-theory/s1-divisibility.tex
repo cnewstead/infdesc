@@ -29,7 +29,9 @@ We can show that such a descending sequence of remainders terminates using the w
 \end{strategy*}
 
 \begin{cproof}
+%% BEGIN EXTRACT (xtrWlogExampleTwo) %%
 We may assume that $b>0$: if not, replace $b$ by $-b$ and $q$ by $-q$. We may also assume that $a \ge 0$. Otherwise, replace $a$ by $-a$, $q$ by $-(q+1)$ and $r$ by $b-r$.
+%% END EXTRACT %%
 
 Thus, what follows assumes that $a \ge 0$ and $b > 0$.
 
@@ -49,7 +51,11 @@ Since $b>0$, we must have $r_{n+1} < r_n$ for all $n$.
 
 Let $R = \mathbb{N} \cap \{ r_n \mid n \in \mathbb{N} \}$. That is, $R$ is the set of terms of the sequence which are non-negative. Since $r_0 = a \ge 0$, we have that $r_0 \in R$ and hence $R$ is inhabited. By the well-ordering principle, $R$ has a least element $r_k$ for some $k \in \mathbb{N}$.
 
-Define $q=k$ and $r=r_k$. By construction we have $a=qb+r$ and $r \ge 0$, so it remains to show that $r < b$. Well, if $r \ge b$ then $r-b \ge 0$, but $r-b=r_{k+1}$, so this would imply $r_{k+1} \in R$, contradicting minimality of $r$. Hence $r < b$, so $q,r$ are as required.
+Define $q=k$ and $r=r_k$. By construction we have $a=qb+r$ and $r \ge 0$, so
+%% BEGIN EXTRACT (xtrContradictionOneLineExample) %%
+it remains to show that $r < b$. Well, if $r \ge b$ then $r-b \ge 0$, but $r-b=r_{k+1}$, so this would imply $r_{k+1} \in R$, contradicting minimality of $r$. Hence $r < b$%
+%% END EXTRACT %%
+, so $q,r$ are as required.
 
 \item \textbf{Uniqueness.} Suppose $q',r'$ also satisfy $a=q'b+r'$ and $0 \le r' < b$. If we can show that $r'=r$ then this proves that $q=q'$: indeed, if $qb+r=q'b+r$ then we can subtract $r$ and then divide by $b$, since $b>0$.
 

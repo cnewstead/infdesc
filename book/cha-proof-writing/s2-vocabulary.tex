@@ -7,13 +7,26 @@ For example, in order to prove that every prime number greater than two is odd, 
 \[ \forall n \in \mathbb{Z},~ [({n \text{ is prime}} \wedge {n > 2}) \Rightarrow {n \text{ is odd}}] \]
 By piecing together the proof strategies in \Cref{secPropositionalLogic,secVariablesQuantifiers}, we can see what a proof of this must look like:
 \begin{itemize}
-\item By \Cref{strProvingUniversal}, we must assume $n \in \mathbb{Z}$ and, without assuming anything about $n$ other than that it is an integer, derive `$({n \text{ is prime}} \wedge {n > 2}) \Rightarrow {n \text{ is odd}}$';
-\item By \Cref{strProvingImplicationsDirect}, we must assume `${n \text{ is prime}} \wedge {n > 2}$' and derive that $n$ is odd;
+\item By \Cref{strProvingUniversal}, we must assume $n \in \mathbb{Z}$ and, without assuming anything about $n$ other than that it is an integer, derive `$({n \text{ is prime}} \,\wedge\, {n > 2}) \Rightarrow {n \text{ is odd}}$';
+\item By \Cref{strProvingImplicationsDirect}, we must assume `${n \text{ is prime}} \,\wedge\, {n > 2}$' and derive that $n$ is odd;
 \item By \Cref{strAssumingConjunctionsDirect}, we may separately assume that $n$ is prime and $n > 2$.
 \end{itemize}
 Thus a proof that every prime number greater than two is odd would assume $n \in \mathbb{Z}$, assume that $n$ is prime and $n>2$, and then derive that $n$ is odd.
 
-While all of this tells us how to \textit{structure} a proof, it does not tell us \textit{what to write} in such a proof---that is the goal of this section.
+All of this tells us how to \textit{structure} a proof, but it does not tell us \textit{what to write} in such a proof---that is the goal of this section.
+
+This section provides some basic vocabulary and templates that can be used in proofs. We will use some notation conventions for introducing these template:
+\begin{itemize}
+\item{} [Square | brackets | and | bars] will be used where one of several choices can be made. For example, if you see
+\[ \text{[then | therefore | so | hence]} \]
+it means that any of the words `then', `therefore', `so' or `hence' can be used.
+\item (Round brackets) will be used where a word or phrase is optional. For example if you see
+\[ \text{Let $x \in X$ (be arbitrary)} \]
+it means that either `Let $x \in X$' or `Let $x \in X$ be arbitrary' can be used.
+\item $\langle\text{Angle brackets}\rangle$ will be used to provide instructions. For example if you see
+\[ \text{\vtinstructions{insert proof of $p$ here}} \]
+then you should write out a proof of the proposition $p$ being referred to.
+\end{itemize}
 
 \subsection*{Breaking down a proof}
 
@@ -23,20 +36,23 @@ The words we use indicate to the reader how the assumptions and goals are changi
 
 For the next few pages, we will examine the proof strategies governing logical operators and quantifiers, as discussed in \Cref{chLogicalStructure}, and identify some words and phrases that can be used in a proof to indicate which strategy is being used.
 
-\todo{Say what the weird notation means, i.e. $\langle \cdots \rangle$ and ($\cdots$ | $\cdots$) }
+\subsubsection*{Deductive reasoning}
 
-\subsubsection*{Making inferences}
+At its core, a proof is a sequence of deductions: starting with a proposition that is already known or assumed to be true, we deduce something new, and continue deducing new things until the proposition we deduce is the result we are trying to prove.
+
+Each time we make a deduction, it should be clear why that deduction is valid, so it is good practice to justify each deduction we make by either \textit{stating} or \textit{citing} the reason.
 
 \begin{vocabulary}
 \label{vcbBy}
 \index[vocabulary]{by}
 \index[vocabulary]{know@we know that}
 \index[vocabulary]{so}
+\index[vocabulary]{hence}
 \index[vocabulary]{follows@it follows that}
-The following construction can be used to indicate that a goal $q$ is being deduced from an assumption $p$.
+The following construction can be used to indicate that an assumption $p$ is being used to deduce a goal $q$.
 
 \begin{vocabtemplate}
-(\textbf{then} | \textbf{therefore} | \textbf{so} | \textbf{hence}) \propstate{$q$}, \textbf{by} \propcite{$p$}
+[\textbf{then} | \textbf{therefore} | \textbf{so} (\textbf{that}) | \textbf{hence}] \propstate{$q$} [\textbf{by} \propcite{$p$} | \textbf{since} \propstate{$p$}]
 
 \vtor
 
@@ -50,7 +66,29 @@ The following construction can be used to indicate that a goal $q$ is being dedu
 If $p$ was the last thing to be proved in the proof, it may not be necessary to cite it or state it again explicitly---that can be inferred.
 \end{vocabulary}
 
-\todo{Examples}
+Here are a couple of examples of \Cref{vcbBy} in action.
+
+\begin{extract}[\xtrsource{\Cref{propSubsetFromIntersection}}]
+\label{xtrSoExample}
+\dots{} \xtremph{Then $a \in Y$ since $X \subseteq Y$}, \xtremph{so that $a \in X \cap Y$ by definition of intersection} \dots{}
+\end{extract}
+
+Notice the choice of words used to \textit{state} versus to \textit{cite} assumptions; in both the previous and next example, we used `since' to state, and `by' to cite.
+
+\begin{extract}[\xtrsource{\Cref{thmTriangleInequality}}]
+\label{xtrSoExampleTwo}
+If $a>0$, then \xtremph{by \Cref{exVectorDotItself} and \Cref{exScalarProductIsBilinear}, we have}
+\[ \vec x \cdot \left( \frac{b}{a} \vec x \right) = \frac{b}{a} \lVert \vec x \rVert^2 \]
+which is non-negative if and only if $b \ge 0$, \xtremph{since we are assuming that $a \ge 0$}.
+\end{extract}
+
+\begin{exercise}
+In the following proof that every multiple of four is even, identify all instances where an assumption is stated or cited in order to justify a step in the proof.
+
+\begin{snippet}
+Let $n \in \mathbb{Z}$ and suppose that $n$ is divisible by $4$. Then by definition of divisibility we have $n=4k$ for some $k \in \mathbb{Z}$. But then $n$ is even, since $n = 4k = 2(2k)$ and $2k \in \mathbb{Z}$.
+\end{snippet}
+\end{exercise}
 
 \subsubsection*{Introducing assumptions}
 
@@ -70,7 +108,21 @@ The words \textbf{assume} and \textbf{suppose} can be used to introduce a new as
 \begin{vocabtemplate}
 [\textbf{assume} | \textbf{suppose}] \propstate{$p$}. 
 \end{vocabtemplate}
+
+The proposition $p$ may then be used in the proof.
 \end{vocabulary}
+
+In the following extract, observe how the introduced assumption is used later in the proof.
+
+\begin{extract}[\xtrsource{\Cref{thmCharacteristicFunctionsCharacteriseSubsets}}]
+\label{xtrAssumeExample}
+\xtremph{Assume $U=V$} and let $a \in X$. Then
+\begin{align*}
+\chi_U(a) = 1 & \Leftrightarrow a \in U && \text{by definition of $\chi_U$} \\
+&\Leftrightarrow a \in V && \text{\xtremph{since $U=V$}} \\
+&\Leftrightarrow \chi_V(a) = 1 && \text{by definition of $\chi_V$}
+\end{align*}
+\end{extract}
 
 \subsubsection*{Proving conjunctions: breaking into steps}
 
@@ -93,6 +145,30 @@ To indicate to a reader that you are proving a conjunction $p \wedge q$ by provi
 This can be generalised to conjunctions of more than two propositions. Explicitly enumerated steps are not usually necessary, as long as it is clear what you are aiming to achieve in each step.
 \end{vocabulary}
 
+A common example of where steps are used is in proving propositions of the form $p \Leftrightarrow q$, which is shorthand for $(p \Rightarrow q) \wedge (q \Rightarrow p)$. In these cases, the two steps are the proofs of $p \Rightarrow q$ and $q \Rightarrow p$; the steps can then be labelled as ($\Rightarrow$) and ($\Leftarrow$), respectively.
+
+\begin{extract}[\xtrsource{\Cref{exTestForDivisibilityByEight}}]
+\label{xtrStepsExample}
+Our goal is now to prove that \xtremph{$8$ divides $n$ if and only if $8$ divides $n'$}.
+
+\begin{itemize}
+\item \xtremph{($\Rightarrow$)} Suppose $8$ divides $n$. Since $8$ divides $n''$, it follows from \Cref{exDivisibilityIsLinear} that $8$ divides $an+bn''$ for all $a,b \in \mathbb{Z}$. But
+\[
+n' = n-(n-n') = n-n'' = 1 \cdot n + (-1) \cdot n''
+\]
+so indeed $8$ divides $n'$, as required.
+\item \xtremph{($\Leftarrow$)}  Suppose $8$ divides $n'$. Since $8$ divides $n''$, it follows from \Cref{exDivisibilityIsLinear} that $8$ divides $an'+bn''$ for all $a,b \in \mathbb{Z}$. But
+\[
+n = n'+(n-n') = n'+n'' = 1 \cdot n' + 1 \cdot n''
+\]
+so indeed $8$ divides $n$, as required.
+\end{itemize}
+\end{extract}
+
+Proofs of set equality by double containment also follow this format; in \Cref{secSets} we denoted the steps by ($\subseteq$) and ($\supseteq$), respectively.
+
+
+
 \subsubsection*{Assuming disjunctions: breaking into cases}
 
 By \Cref{strAssumingDisjunctionsDirect}, in order to use an assumption of the form $p \vee q$ (`$p$ or $q$') to deduce a goal $r$, it suffices to show that $r$ may be deduced from each of $p$ and $q$---the idea here is that we may not know which of $p$ or $q$ is true, but that is fine since we derive $r$ in both cases.
@@ -114,12 +190,38 @@ In both cases we see that \propstate{$r$}, as required.
 Like with proofs involving steps (\Cref{vcbSteps}), the explicit enumeration of cases is not usually necessary.
 \end{vocabulary}
 
-\subsubsection*{Proving negations: proof by contradiction}
+In the following extract, the assumption made is $(k \le n) \vee (k > n)$, which is valid by the law of excluded middle (\Cref{strLEM}), and the goal is $2^ky \in D$.
 
-\todo{}
+\begin{extract}[\xtrsource{\Cref{exDyadicRationalsBijection}}]
+\label{xtrCasesExample}
+Since $y \in D$, we must have $y=\frac{a}{2^n}$ for some $n \in \mathbb{N}$.
+\begin{itemize}
+\item \xtremph{If $k \le n$} then $n-k \in \mathbb{N}$ and \xtremph{so $2^ky=\frac{a}{2^{n-k}} \in D$}.
+\item \xtremph{If $k > n$} then $k-n>0$ and $2^ky = 2^{k-n}a \in \mathbb{Z}$; but $\mathbb{Z} \subseteq D$ since if $a \in \mathbb{Z}$ then $a=\frac{a}{2^0}$. So again we have \xtremph{$2^ky \in D$}.
+\end{itemize}
+\xtremph{In both cases we have $2^ky \in D$}; and $f(2^ky)=y$, so that $f$ is surjective.
+\end{extract}
+
+Sometimes proofs by cases are extremely compact---so much so that you might not notice it---like in the next extract.
+
+\begin{extract}[\xtrsource{\Cref{propFactorsOfIrred}}]
+\label{xtrCasesExampleThree}
+Since $a \mid p$, we have $a \in \{ 1, -1, p, -p \}$. \xtremph{If $a = \pm 1$}, \xtremph{then $a$ is a unit}; \xtremph{if $a = \pm p$}, then $b = \pm 1$, so that \xtremph{$b$ is a unit}. \xtremph{In any case, either $a$ or $b$ is a unit}, and hence $p$ is irreducible.
+\end{extract}
+
+Note that cases were not explicitly labelled, but it was clear from context that cases were what were being used.
+
+\subsubsection*{Proving negations: proof by contradiction} 
 
 \begin{vocabulary}
-The following construction can be used in order to indicate that an assumption $p$ is being introduced with the view of deriving a contradiction.
+\label{vcbContradiction}
+\index[vocabulary]{contradiction}
+\index[vocabulary]{assume}
+\index[vocabulary]{contrary to}
+\index[vocabulary]{nonsense}
+\index[vocabulary]{absurd}
+\index[vocabulary]{impossible}
+The following construction can be used in order to indicate that an assumption $p$ is being introduced with the view of deriving a contradiction, thereby proving that $p$ is false (that is, $\neg p$ is true).
 
 \begin{vocabtemplate}
 \textbf{Towards a contradiction, assume} \propstate{$p$}.
@@ -128,12 +230,8 @@ The following construction can be used in order to indicate that an assumption $
 
 \textbf{Assume} \propstate{$p$}. \textbf{We will derive a contradiction.}
 \end{vocabtemplate}
-\end{vocabulary}
 
-\todo{}
-
-\begin{vocabulary}
-The following construction can be used in order to indicate that a contradiction to an assumption $q$ has been reached from an assumption $p$.
+The following construction can be used in order to indicate that a contradiction to an assumption $q$ has been reached from a contradictory assumption $p$.
 
 \begin{vocabtemplate}
 \textbf{This contradicts} \propcite{$q$}. \textbf{Therefore} \propstate{$\neg p$}.
@@ -150,17 +248,52 @@ Explicit reference to the proposition being contradicted is not always necessary
 \end{vocabtemplate}
 \end{vocabulary}
 
+\begin{extract}[\xtrsource{\Cref{thmNIsInfinite}}]
+\label{xtrContradictionExample}
+\index[vocabulary]{contradiction}
+\index[vocabulary]{contrary to}
+\xtremph{We proceed by contradiction. Suppose $\mathbb{N}$ is finite.} Then $|\mathbb{N}| = n$ for some $n \in \mathbb{N}$, and hence $\mathbb{N}$ is either empty (nonsense, since $0 \in \mathbb{N}$) or, by \Cref{lemFinSetGreatestElement}, it has a greatest element $g$. But $g+1 \in \mathbb{N}$ since every natural number has a successor, and $g+1 > g$, so \xtremph{this contradicts maximality of $g$. Hence $\mathbb{N}$ is infinite.}
+\end{extract}
+
+In the next extract, the contradictory assumption was made a long time before the contradiction is reached, so special care is taken to reiterate that a contradiction was reached, and what the conclusion of the contradiction is.
+
+\begin{extract}[\xtrsource{\Cref{thmEIsIrrational}}]
+\label{xtrContradictionExampleTwo}
+\xtremph{Towards a contradiction, suppose that $e \in \mathbb{Q}$.}
+
+[\textit{\dots{}many lines of proof omitted\dots{}}]
+
+But this implies that $0 < c < 1$, \xtremph{which is nonsense since $c \in \mathbb{Z}$}.
+
+\xtremph{We have arrived at a contradiction}, so \xtremph{it follows that $e$ is irrational}.
+\end{extract}
+
+Proofs by contradiction need not be long and drawn out---sometimes you just need to say that something is false and give a brief justification. This is illustrated in the next extract.
+
+\begin{extract}[\xtrsource{\Cref{thmDivisionTheorem}}]
+\label{xtrContradictionOneLineExample}
+\dots{} it remains to show that $r < b$. Well, \xtremph{if $r \ge b$ then} $r-b \ge 0$, but $r-b=r_{k+1}$, so \xtremph{this would imply $r_{k+1} \in R$, contradicting minimality of $r$}. \xtremph{Hence $r < b$} \dots{}
+\end{extract}
+
+\subsubsection*{Assuming implications: reducing the problem}
+
 \todo{}
 
-\todo{One-liner contradictions.}
-
 \begin{vocabulary}
-The following construction can be used for a one-sentence proof by contradiction, when deriving the contradiction $\neg q$ from the assumption $p$ is very quick.
+\label{vcbAssumingImplications}
+\index[vocabulary]{suffices@it suffices to show that}
+The following construction can be used to indicate to a reader that you are invoking an assumption of the form $p \Rightarrow q$ to prove a goal $q$ by instead proving $p$.
 
 \begin{vocabtemplate}
-(\textbf{To see that} \propstate{$\neg p$}, \textbf{note that}) \textbf{if} \propstate{$\neg p$}, \textbf{then} \propproof{$\neg q$}, [\textbf{contradicting} | \textbf{contrary to}] \propcite{$q$}.
+[\textbf{Since} \propstate{$p \Rightarrow q$} | \textbf{By} \propcite{$p \Rightarrow q$} ], (\textbf{in order to prove} \propstate{$q$},) \textbf{it suffices to prove} \propstate{$p$}.
+
+\vtor
+
+\propproof{$p$}. [\textbf{Since} \propstate{$p \Rightarrow q$} | \textbf{By} \propcite{$p \Rightarrow q$}], \textbf{it follows that} \propstate{$q$}.
 \end{vocabtemplate}
 \end{vocabulary}
+
+\todo{}
 
 \subsubsection*{Proving universally quantified statements: introducing variables}
 
@@ -193,6 +326,8 @@ Explicit use of the word `arbitrary' can be useful to drive home the point that 
 \todo{}
 
 \begin{vocabulary}
+\label{vcbDefiningVariable}
+\index[vocabulary]{define}
 The following construction can be used to indicate that you are proving that there exists an element $x$ of a set $X$ such that $p(x)$ is true.
 
 \begin{vocabtemplate}
@@ -209,6 +344,8 @@ The following construction can be used to indicate that you are proving that the
 \todo{}
 
 \begin{vocabulary}
+\label{vcbAssumingExistential}
+\index[vocabulary]{let}
 The following construction can be used to indicate that you are invoking an assumption of the form $\exists x \in X,~p(x)$.
 
 \begin{vocabtemplate}
@@ -220,57 +357,176 @@ The following construction can be used to indicate that you are invoking an assu
 
 \subsection*{`Without loss of generality'}
 
-\todo{}
+Sometimes we need to prove a result in one of several cases, but the proofs in each case turn out to be very similar. This might be because the proofs are the same but with two variables swapped; or it might be because one case easily reduces to the other.
+
+In such cases, instead of writing out the whole proof again with the minor changes made, we can inform the reader that this is happening and tell them how to recover the cases we do not prove.
 
 \begin{vocabulary}
+\label{vcbWlog}
+\index[vocabulary]{without loss of generality}
+\index[vocabulary]{wlog}
 When invoking an assumption of the form $p \vee q$, the phrase \textbf{without loss of generality} can be helpful to avoid splitting into cases when a proof in each case is essentially identical:
 
 \begin{vocabtemplate}
-\textbf{Without loss of generality}, (\textbf{we may}) \textbf{assume} \propstate{$p$}---\textbf{otherwise} \vtinstructions{say how to modify the proof if $q$ were true}.
+(\textbf{We may}) \textbf{assume} \propstate{$p$} (\textbf{without loss of generality})---\textbf{otherwise} \vtinstructions{say how to modify the proof if $q$ were true instead of $p$}.
 \end{vocabtemplate}
 
-The phrase `without loss of generality' is so widespread that it is sometimes abbreviated to \textbf{wlog}.
+The phrase `without loss of generality' is so widespread that it is sometimes abbreviated to \textbf{wlog} (or WLOG), but this is best reserved for informal, hand-written proofs.
 \end{vocabulary}
 
-\todo{}
+We only used the phrase `without loss of generality' explicitly once in this book so far; this is recalled in the next extract.
+
+\begin{extract}[\xtrsource{proof of \Cref{thmTotientFormula} in \Cref{secStructuralInduction}}]
+\label{xtrWlogExample}
+Recall that $\varphi(-n) = \varphi(n)$ for all $n \in \mathbb{Z}$, so \xtremph{we may assume without loss of generality} \xtremph{that $n \ge 0$}---\xtremph{otherwise just replace $n$ by $-n$ throughout}.
+\end{extract}
+
+Nonetheless, we used the construction in \Cref{vcbWlog} at other times, as illustrated in the next extract, where we used it \textit{twice}!
+
+\begin{extract}[\xtrsource{\Cref{thmDivisionTheorem}}]
+\label{xtrWlogExampleTwo}
+\xtremph{We may assume that $b>0$}: \xtremph{if not, replace $b$ by $-b$ and $q$ by $-q$}. \xtremph{We may also assume} \xtremph{that $a \ge 0$}. \xtremph{Otherwise, replace $a$ by $-a$, $q$ by $-(q+1)$ and $r$ by $b-r$}.
+\end{extract}
 
 \subsection*{Keeping track of everything}
 
-\subsubsection*{Stating goals}
+It can be difficult when writing a proof to keep track of what you have proved and what you have left to prove, particularly if you partially prove a result and then come back to it after a break.
 
-\todo{}
+On the other hand, it can be very difficult when \textit{reading} a proof to keep track of what has been proved and what is left to prove!
+
+As such, when writing a proof, it is of benefit both to you and to your future readers to insert language into your proofs that clarifies what has been done and what is left to do.
 
 \begin{vocabulary}
+\label{vcbStatingGoal}
+\index[vocabulary]{want@we want}
+\index[vocabulary]{goal}
+\index[vocabulary]{want@we want}
+\index[vocabulary]{see@to see that}
 The following phrases can be used to indicate that the next goal in a proof is to prove a proposition $p$.
 
 \begin{vocabtemplate}
-[\textbf{We want} | \textbf{Our goal now is}] {to} [\textbf{show} | \textbf{prove}] \propstate{$p$}
+[\textbf{We want} | \textbf{Our goal} (\textbf{now}) \textbf{is} | \textbf{It remains}] \textbf{to} [\textbf{show} | \textbf{prove}] \propstate{$p$}
 
 \vtor
 
-\textbf{To see} \propstate{$p$}, \textbf{note that} \dots{}
+\textbf{To see that} \propstate{$p$}, \textbf{note that} \dots{}
 \end{vocabtemplate}
 \end{vocabulary}
 
-\todo{}
+The first extract we look at is taken from the middle of a very long proof in \Cref{secSeriesSums}. The entire highlighted sentence could be deleted and the proof would still be \textit{correct}, but it would be much harder to follow---the sentence beginning `So let $K \ge N\dots{}$' might look as if it came out of nowhere.
 
-\subsubsection*{Conclusions}
+\begin{extract}[\xtrsource{\Cref{exExponentialFunctionCoverges}}]
+\label{xtrStatingGoalsExample}
+\dots{} \xtremph{It remains to prove that $\left| \displaystyle\sum_{n=0}^K a_{\sigma(n)} - A \right| < \varepsilon$ for all $K \ge N$.} So let $K \ge N$, \dots{}
+\end{extract}
 
-\todo{}
+Here is an example where we reiterate what we are about to prove before we prove it. Again, the highlighted text could be deleted without making the proof any less correct, but including it makes the proof easier to navigate.
+
+\begin{extract}[\xtrsource{\Cref{lemCardinalityOfFunctionSet}}]
+\label{xtrStatingGoalsExampleTwo}
+\xtremph{To see that $H$ is a bijection, note that} the function $K : Y^X \to [\lambda]^{[\kappa]}$ defined by $K(\varphi) = k_{\varphi} = g^{-1} \circ \varphi \circ f$ is a bijection \dots{}
+\end{extract}
+
+When a key goal in a proof is reached, it is useful to say so.
 
 \begin{vocabulary}
+\label{vcbConclusions}
+\index[vocabulary]{hence}
+\index[vocabulary]{therefore}
+\index[vocabulary]{follows@it follows that}
 The following phrases can be used to reiterate that a goal $p$ has been proved.
 
 \begin{vocabtemplate}
-[\textbf{Hence} | \textbf{Therefore} | \textbf{It follows that}] \propstate{$p$}, \textbf{as required}.
+[\textbf{Hence} | \textbf{So} (\textbf{that}) | \textbf{Therefore} | \textbf{It follows that}] \propstate{$p$}(, \textbf{as required}).
 \end{vocabtemplate}
 \end{vocabulary}
 
-\todo{}
+The next proof extract is a very typical example.
+
+\begin{extract}[\xtrsource{\Cref{thmRecursion}}]
+\label{xtrConclusionExample}
+By condition (iii) of \Cref{defNotionOfNaturalNumbers}, we have $\mathbb{N} \subseteq D$, \xtremph{so that $f(n)$ is defined for all} \xtremph{$n \in \mathbb{N}$, as required}.
+\end{extract}
+
+Sometimes it might not be obvious that we have achieved the goal that we set out to achieve, in which case saying \textit{why} the conclusion is `as required' is also important.
+
+This is illustrated in the next extract, where the goal was to prove that $|X \cup Y| = |X| + |Y| - |X \cap Y|$.
+
+\begin{extract}[\xtrsource{\Cref{propUnionOfFiniteSetsIsFinite}}]
+\label{xtrConclusionExampleTwo}
+Hence $|X \cup Y| = m+n = |X| + |Y|$, \xtremph{which is as required since} $|X \cap Y| = 0$.
+\end{extract}
 
 \subsection*{Case study: proofs by induction}
 
-\todo{}
+Many of the strategies for structuring and writing proofs are illustrated in proofs by induction. The strategy of proof by weak induction is described by the weak induction principle, recalled next.
+
+\rthmWeakInduction*
+
+Expressed as a single logical formula, the weak induction principle says that
+\[ [p(n_0) \wedge (\forall n \ge n_0, (p(n) \Rightarrow p(n+1))]~\Rightarrow~[\forall n \ge n_0,~p(n)] \]
+
+Let's pretend we know nothing about proofs by induction, and use the vocabulary in this section to construct a template for ourselves.
+
+The goal is to prove $\forall n \ge n_0,~ p(n)$. We are going to invoke the weak induction principle (\Cref{thmWeakInduction}), and so using \Cref{vcbAssumingImplications} our proof should look something like this:
+
+\begin{snippet}
+\propproof{$p(n_0) \wedge (\forall n \ge n_0, (p(n) \Rightarrow p(n+1))$}
+
+It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_0$.
+\end{snippet}
+
+Since our goal is the conjunction of two formulae, using \Cref{vcbSteps} tells us that we should break up the proof into steps:
+
+\begin{snippet}
+\begin{itemize}
+\item \textbf{Step 1.} \propproof{$p(n_0)$}
+\item \textbf{Step 2.} \propproof{$\forall n \ge n_0,~ p(n) \Rightarrow p(n+1)$}
+\end{itemize}
+
+It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_0$.
+\end{snippet}
+
+The goal in Step 2 is universally quantified, so we now need to introduce a variable $n$ satisfying the condition that ($n$ is a natural number and) $n \ge n_0$. We can do so using \Cref{vcbIntroducingVariable}.
+
+\begin{snippet}
+\begin{itemize}
+\item \textbf{Step 1.} \propproof{$p(n_0)$}
+\item \textbf{Step 2.} Fix $n \ge n_0$. \propproof{$p(n) \Rightarrow p(n+1)$}
+\end{itemize}
+
+It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_0$.
+\end{snippet}
+
+The goal in Step 2 is an implication, so using \Cref{vcbTemporaryAssumption}, we obtain the following.
+
+\begin{snippet}
+\begin{itemize}
+\item \textbf{Step 1.} \propproof{$p(n_0)$}
+\item \textbf{Step 2.} Fix $n \ge n_0$ and assume \propstate{$p(n)$}.
+
+\propproof{$p(n+1)$}
+\end{itemize}
+
+It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_0$.
+\end{snippet}
+
+To help the reader navigate the proof, we can use \Cref{vcbStatingGoal} to reiterate the goal that we want to prove in Step 2.
+
+\begin{snippet}
+\begin{itemize}
+\item \textbf{Step 1.} \propproof{$p(n_0)$}
+\item \textbf{Step 2.} Fix $n \ge n_0$ and assume \propstate{$p(n)$}. 
+
+We need to prove \propstate{$p(n+1)$}.
+
+\propproof{$p(n+1)$}
+\end{itemize}
+
+It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_0$.
+\end{snippet}
+
+This is now a perfectly good template for a proof of $\forall n \ge n_0,~ p(n)$. But this is exactly what a proof by induction looks like: `Step 1' is the base case, `Step 2' is the induction step, the assumption $p(n)$ in Step 2 is the induction hypothesis, and the goal $p(n+1)$ in Step 2 is the induction goal!
 
 \subsection*{Long proofs}
 

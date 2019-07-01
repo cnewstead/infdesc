@@ -438,7 +438,7 @@ Let's prove that this intuition is valid.
 \label{thmStructuralInduction}
 \index{induction!structural}
 Let $A$ be an inductively defined set and let $p(x)$ be a logical formula with free variable $x \in A$. If for all rules $\sigma$ and all $a_1,\dots,a_r \in A$ we have
-\[ [\forall i \in [r],~ p(a_i)] \Rightarrow f_{\sigma}(\sigma(a_1,a_2,\dots,a_r)) \]
+\[ [\forall i \in [r],~ p(a_i)] \Rightarrow f_{\sigma}(a_1,a_2,\dots,a_r) \]
 then $p(x)$ is true for all $x \in A$.
 \end{theorem}
 
@@ -458,7 +458,7 @@ Let's digest the statement of \Cref{thmStructuralInduction}.
 For a nullary rule $\sigma = (~ \mid a)$, the arity $r$ is $0$, so $\forall i \in [r],~p(a_i)$ is vacuously true (see \Cref{exEverythingIsTrueOfElementsOfEmptySet}), so that
 \[ [\forall i \in [r],~ p(a_i)] \Rightarrow p(f_{\sigma}(a_1,a_2,\dots,a_r)) \quad \equiv \quad p(a) \]
 
-Therefore, saying that $[\forall i \in [r],~ p(a_i)] \Rightarrow f_{\sigma}(\sigma(a_1,a_2,\dots,a_r))$ is true for all rules $\sigma$ and all elements $a_1,a_2,\dots,a_r \in A$ is equivalent to saying:
+Therefore, saying that $[\forall i \in [r],~ p(a_i)] \Rightarrow f_{\sigma}(a_1,a_2,\dots,a_r)$ is true for all rules $\sigma$ and all elements $a_1,a_2,\dots,a_r \in A$ is equivalent to saying:
 \begin{itemize}
 \item $p(a)$ is true for all basic elements $a$; and
 \item $[\forall i \in [r],~ p(a_i)] \Rightarrow f_{\sigma}(\sigma(a_1,a_2,\dots,a_r))$ is true for all rules $\sigma$ of \textit{positive} arity $r$, and all elements $a_1,a_2,\dots,a_r$.
@@ -523,7 +523,10 @@ A nice application of structural induction is to provide a formula for the \text
 \rthmTotientFormula*
 
 \begin{cproof}
-Recall that $\varphi(-n) = \varphi(n)$ for all $n \in \mathbb{Z}$, so we may assume without loss of generality that $n \ge 0$. Moreover
+%% BEGIN EXTRACT (xtrWlogExample) %%
+Recall that $\varphi(-n) = \varphi(n)$ for all $n \in \mathbb{Z}$, so we may assume without loss of generality that $n \ge 0$---otherwise just replace $n$ by $-n$ throughout.
+%% END EXTRACT %%
+Moreover
 \[ \varphi(0) ~=~ 0 ~=~ 0 \cdot \prod_{p \mid n} \left( 1- \frac{1}{p} \right) \]
 so for the rest of the proof, assume that $n>0$.
 

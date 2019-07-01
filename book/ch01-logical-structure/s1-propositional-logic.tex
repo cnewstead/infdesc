@@ -789,6 +789,7 @@ then $\alpha$ is a root of the polynomial $x^2+ax+b$.
 Another class of examples of biconditional propositions arise in finding necessary and sufficient criteria for an integer $n$ to be divisible by some number---for example, that an integer is divisible by $10$ if and only if its base-$10$ expansion ends with the digit $0$.
 
 \begin{example}
+\label{exTestForDivisibilityByEight}
 Let $n \in \mathbb{N}$. We will prove that $n$ is divisible by $8$ if and only if the number formed of the last three digits of the base-$10$ expansion of $n$ is divisible by $8$.
 
 First, we will do some `scratch work'. Let $d_rd_{r-1}\dots{}d_1d_0$ be the base-$10$ expansion of $n$. Then
@@ -801,6 +802,7 @@ n' = d_2d_1d_0 \quad \text{and} \quad n'' = n-n' = d_rd_{r-1}\dots{}d_4d_3000
 \]
 Now $n-n' = 1000 \cdot d_rd_{r-1} \dots d_4d_3$ and $1000 = 8 \cdot 125$, so it follows that $8$ divides $n''$.
 
+%% BEGIN EXTRACT (xtrStepsExample) %%
 Our goal is now to prove that $8$ divides $n$ if and only if $8$ divides $n'$.
 
 \begin{itemize}
@@ -815,6 +817,7 @@ n = n'+(n-n') = n'+n'' = 1 \cdot n' + 1 \cdot n''
 \]
 so indeed $8$ divides $n$, as required.
 \end{itemize}
+%% END EXTRACT
 \end{example}
 
 \begin{exercise}

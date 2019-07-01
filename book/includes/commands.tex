@@ -84,7 +84,8 @@
 \newcommand{\FF}{${\times}$}
 
 % Emphasis in extracts
-\newcommand{\xtremph}[1]{\!\fcolorbox{black}{indbasecol}{\!#1\!}}
+% \newcommand{\xtremph}[1]{\!\fcolorbox{black}{indbasecol}{\!#1\!}}
+\newcommand{\xtremph}[1]{\!\colorbox{indbasecol}{\!#1\!}}
 
 % Source for extracts
 \newcommand{\xtrsource}[1]{taken from #1}
@@ -98,6 +99,8 @@
 \newcommand{\vtor}{\hspace{7pt}--- \textit{or} ---}
 
 \newenvironment{vocabtemplate}{\begin{minipage}{0.05\linewidth}~\end{minipage}\vline\hspace{7pt}\begin{minipage}{0.9\linewidth}}{\end{minipage}}
+
+\newenvironment{snippet}{\begin{minipage}[b]{7pt}~\end{minipage}\vline\hspace{7pt}\begin{minipage}[b]{0.88\linewidth}}{\end{minipage}}
 
 
 % Math mode

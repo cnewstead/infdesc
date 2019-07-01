@@ -535,11 +535,15 @@ for all $n_1 \ge n_0 \ge M_2$.
 
 Let $M$ be the greater of $M_1$ and $M_2$.
 
-Now let $N \in \mathbb{N}$ be such that $\{ 0, 1, \dots, M \} \subseteq \{ \sigma(0), \sigma(1), \dots, \sigma(N) \}$. This ensures that the terms $a_0, a_1, \dots, a_M$ appear amongst the terms $a_{\sigma(0)}, a_{\sigma(1)}, \dots, a_{\sigma(N)}$. Such a value exists since $\sigma$ is a bijection; for example, we can take $N$ to be the greatest value of $\sigma^{-1}(i)$ for $i \le M$. Note that $N \ge M$.
+Now let $N \in \mathbb{N}$ be such that $\{ 0, 1, \dots, M \} \subseteq \{ \sigma(0), \sigma(1), \dots, \sigma(N) \}$. This ensures that the terms $a_0, a_1, \dots, a_M$ appear amongst the terms $a_{\sigma(0)}, a_{\sigma(1)}, \dots, a_{\sigma(N)}$. Such a value exists since $\sigma$ is a bijection; for example, we can take $N$ to be the greatest value of $\sigma^{-1}(i)$ for $i \le M$. 
+%% BEGIN EXTRACT (xtrStatingGoalsExample) %%
+Note that $N \ge M$.
 
 It remains to prove that $\left| \displaystyle\sum_{n=0}^K a_{\sigma(n)} - A \right| < \varepsilon$ for all $K \ge N$.
 
-So let $K \ge N$, let $L = \mathrm{max} \{ \sigma(0), \sigma(1), \dots, \sigma(K) \}$, and let $m_0, m_1, \dots, m_r \in \mathbb{N}$ be such that the terms in the list $a_0, a_1, \dots, a_L$ that remain after the terms $a_{\sigma(0)}, \dots, a_{\sigma(K)}$ have been deleted are precisely the terms $a_{m_0}$, $a_{m_1}$, \dots, $a_{m_r}$. Thus
+So let $K \ge N$,
+%% END EXTRACT %%
+let $L = \mathrm{max} \{ \sigma(0), \sigma(1), \dots, \sigma(K) \}$, and let $m_0, m_1, \dots, m_r \in \mathbb{N}$ be such that the terms in the list $a_0, a_1, \dots, a_L$ that remain after the terms $a_{\sigma(0)}, \dots, a_{\sigma(K)}$ have been deleted are precisely the terms $a_{m_0}$, $a_{m_1}$, \dots, $a_{m_r}$. Thus
 \[ \sum_{n=0}^K a_{\sigma(n)} ~=~ \sum_{n=0}^L a_n ~-~ \sum_{i=0}^r a_{m_i} \]
 
 Note in particular that $L \ge K$. Additionally, $m_i \ge N$ for all $i \le r$, since we ensured that the terms $a_0, a_1, \dots, a_M$ appear amongst the terms $a_{\sigma(0)}, a_{\sigma(1)}, \dots, a_{\sigma(N)}$.
@@ -704,10 +708,12 @@ Prove that $\mathrm{exp}(x) = e^x$ for all $x \in \mathbb{Q}$.
 \end{exercise}
 
 \begin{theorem}
+\label{thmEIsIrrational}
 $e$ is irrational.
 \end{theorem}
 
 \begin{cproof}
+%% BEGIN EXTRACT (xtrContradictionExampleTwo) %%
 Towards a contradiction, suppose that $e \in \mathbb{Q}$.
 
 Then $k!e \in \mathbb{Z}$ for some natural number $k \ge 2$. Indeed, letting $e = \dfrac{a}{b}$ for some $a,b \in \mathbb{Z}$ with $b \ne 0$, we obtain $|b|e = \pm a \in \mathbb{N}$, and so we can take $k$ to be the greatest of $2$ and $|b|$.
@@ -740,4 +746,5 @@ c = \sum_{n \ge k+1} \dfrac{k!}{n!} &\le \sum_{n \ge k+1} \dfrac{1}{(k+1)^{n-k}}
 But this implies that $0 < c < 1$, which is nonsense since $c \in \mathbb{Z}$.
 
 We have arrived at a contradiction, so it follows that $e$ is irrational.
+%% END EXTRACT %%
 \end{cproof}

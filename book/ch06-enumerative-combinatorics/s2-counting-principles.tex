@@ -336,27 +336,25 @@ The image (\Cref{defImage}) of an injection $[3] \to [4]$ must be a subset of $[
 }
 \end{exercise}
 
-\todo{Rewrite to account for the fact that partitions are now introduced in Section 2.4}
+The \textit{addition principle} says that if we can partition a set into smaller chunks, then the size of the set is the sum of the sizes of the chunks.
 
-The \textit{addition principle} says that if we can \textit{partition} a set into smaller chunks, then the size of the set is the sum of the sizes of the chunks. We will first make this notion of `partition' precise.
+% \begin{definition}
+% \index{disjoint}
+% Sets $X$ and $Y$ are \textbf{disjoint} if $X \cap Y = \varnothing$. More generally, given $n \in \mathbb{N}$, a collection of sets $X_1, X_2, \dots, X_n$ is \textbf{pairwise disjoint} if $X_i \cap X_j = \varnothing$ for all $i,j \in [n]$ with $i \ne j$.
+% \end{definition}
 
-\begin{definition}
-\index{disjoint}
-Sets $X$ and $Y$ are \textbf{disjoint} if $X \cap Y = \varnothing$. More generally, given $n \in \mathbb{N}$, a collection of sets $X_1, X_2, \dots, X_n$ is \textbf{pairwise disjoint} if $X_i \cap X_j = \varnothing$ for all $i,j \in [n]$ with $i \ne j$.
-\end{definition}
+% \begin{definition}
+% \label{defPartitionFinite}
+% \index{partition (finite version)}
+% A (\textbf{finite}) \textbf{partition} of a set $X$ is, for some $n \in \mathbb{N}$, a collection $\{ U_i \mid i \in [n] \}$ of subsets of $X$ such that:
+% \begin{enumerate}[(a)]
+% \item Each $U_i$ is inhabited;
+% \item The sets $U_1, U_2, \dots, U_n$ are pairwise disjoint; and
+% \item $\bigcup_{i = 1}^n U_i = X$.
+% \end{enumerate}
+% \end{definition}
 
-\begin{definition}
-\label{defPartitionFinite}
-\index{partition (finite version)}
-A (\textbf{finite}) \textbf{partition} of a set $X$ is, for some $n \in \mathbb{N}$, a collection $\{ U_i \mid i \in [n] \}$ of subsets of $X$ such that:
-\begin{enumerate}[(a)]
-\item Each $U_i$ is inhabited;
-\item The sets $U_1, U_2, \dots, U_n$ are pairwise disjoint; and
-\item $\bigcup_{i = 1}^n U_i = X$.
-\end{enumerate}
-\end{definition}
-
-For the purposes of proving \Cref{thmAdditionPrinciple} and stating the addition principle (\Cref{strAdditionPrinciple}), we may dispense with the requirement that the sets $U_i$ in the partition be inhabited, since if any of them are empty, they contribute a value of $0$ to the sum. Thus when we say `partition' in this section, we will secretly allow the sets in the partition to be empty. Be warned, though---when we discuss partitions in contexts other than the addition principle (for example in \Cref{secRelations}), we will require the sets in the partition to be inhabited.
+% For the purposes of proving \Cref{thmAdditionPrinciple} and stating the addition principle (\Cref{strAdditionPrinciple}), we may dispense with the requirement that the sets $U_i$ in the partition be inhabited, since if any of them are empty, they contribute a value of $0$ to the sum. Thus when we say `partition' in this section, we will secretly allow the sets in the partition to be empty. Be warned, though---when we discuss partitions in contexts other than the addition principle (for example in \Cref{secRelations}), we will require the sets in the partition to be inhabited.
 
 \begin{theorem}
 \label{thmAdditionPrinciple}
