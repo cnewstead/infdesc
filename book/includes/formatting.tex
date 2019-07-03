@@ -51,7 +51,10 @@
 \ifnumequal{\value{bookformat}}{1}{%
     \geometry{
         paper={a4paper},
-        marginratio={1:1}
+        margin={25mm},
+        marginratio={1:1},
+        includehead,
+        includefoot
     }
     \renewcommand{\watermarkh}{185mm}
     \renewcommand{\watermarkv}{272mm}
@@ -62,7 +65,10 @@
 \ifnumequal{\value{bookformat}}{2}{%
     \geometry{
         paper={letterpaper},
-        marginratio={1:1}
+        margin={1in},
+        marginratio={1:1},
+        includehead,
+        includefoot
     }
     \renewcommand{\watermarkh}{7.5in}
     \renewcommand{\watermarkv}{10in}

@@ -766,7 +766,9 @@ Every bounded sequence of real numbers has a convergent subsequence.
 \end{theorem}
 
 \begin{cproof}
+%% BEGIN EXTRACT (xtrIntroducingVariablesExistentialExampleTwo) %%
 Let $(x_n)$ be a sequence of real numbers and let $a,b \in \mathbb{R}$ be such that $a < x_n < b$ for each $n \ge 0$---the numbers $a$ and $b$ exist since the sequence $(x_n)$ is bounded.
+%% END EXTRACT %%
 
 Our strategy is as follows. The sequence $(x_n)$ is entirely contained inside the interval $[a, b]$, which has length $\ell = b-a$. Letting $c = \frac{a+b}{2}$ be the (arithmetic) mean of $a$ and $b$, we see that one of the intervals $[a,c]$ or $[c,b]$, or possibly both, must contain infinitely many terms of the sequence $(x_n)$---but then this defines a subsequence of $(x_n)$ which is entirely contained inside a sub-interval of $[a,b]$ whose length is $\frac{\ell}{2}$. We iterate this process inductively, obtaining smaller and smaller intervals that contain infinitely many terms in the sequence $(x_n)$. The end-points of these intervals are then bounded monotone sequences---the sequence of lower end-points is increasing, and the sequence of upper end-points is decreasing. The monotone convergence theorem implies that both sequences converge. We will prove that they converge to the same limit, thereby `trapping' a subsequence of $(x_n)$, which will converge by the squeeze theorem.
 

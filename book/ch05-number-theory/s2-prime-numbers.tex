@@ -125,9 +125,12 @@ We prove the two directions separately.
 
 So suppose $p \nmid a$. Let $d = \mathrm{gcd}(p,a)$. Since $d \mid p$ and $p$ is irreducible, we must have $d=1$ or $d=p$ by \Cref{propFactorsOfIrred}. Since $p \nmid a$ and $d \mid a$, we must therefore have $d=1$.
 
-By B\'{e}zout's lemma (\Cref{thmBezout}), there exist $u,v \in \mathbb{Z}$ such that $au+pv=1$. Multiplying by $b$ gives $abu+pbv=b$. Since $p \mid ab$, there exists $k \in \mathbb{Z}$ such that $pk=ab$. Then
-\[ b = abu+pbv = pku+pbv = p(ku+bv) \]
+By B\'{e}zout's lemma (\Cref{thmBezout}), there exist $u,v \in \mathbb{Z}$ such that $au+pv=1$. Multiplying by $b$ gives $abu+pbv=b$. Since $p \mid ab$, there exists $k \in \mathbb{Z}$ such that $pk=ab$.
+%% BEGIN EXTRACT (xtrProvingExistsExample) %%
+Define $q = ku+bv$; then
+\[ b = abu+pbv = pku+pbv = p(ku+bv) = qp \]
 so $p \mid b$, as required.
+%% END EXTRACT %%
 \end{itemize}
 So we're done.
 \end{cproof}

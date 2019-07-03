@@ -156,11 +156,15 @@ Let $X$ be a finite set. The \textbf{size} of $X$, written $|X|$, is the unique 
 \end{example}
 
 \begin{example}
+\label{exBijectionFromIntegersFromMinusNToNToBracketTwoNPlusOne}
 Fix $n \in \mathbb{N}$ and let $X = \{ a \in \mathbb{Z} \mid -n \le a \le n \}$. There is a bijection $f : [2n+1] \to X$ defined by $f(k) = k-n-1$. Indeed:
 \begin{itemize}
-\item \textbf{$f$ is well-defined.} Given $k \in [2n+1]$, we have $1 \le k \le 2n+1$, and so
+\item \textbf{$f$ is well-defined.}
+%% BEGIN EXTRACT (xtrIntroducingVariableExampleTwo) %%
+We need to prove $f(k) \in X$ for all $k \in [2n+1]$. Well given $k \in [2n+1]$, we have $1 \le k \le 2n+1$, and so
 \[ -n = 1-(n+1) \le ~ \underbrace{k-(n+1)}_{=f(k)} ~  \le (2n+1) - (n+1) = n \]
 so that $f(k) \in X$ as claimed.
+%% END EXTRACT %%
 \item \textbf{$f$ is injective.} Let $k, \ell \in [2n+1]$ and assume $f(k) = f(\ell)$. Then $k - n - 1 = \ell - n - 1$, and so $k = \ell$.
 \item \textbf{$f$ is surjective.} Let $a \in X$ and define $k = a+n+1$. Then
 \[ 1 = (-n) + n + 1 \le ~ \underbrace{a + n + 1}_{= k} ~ \le n + n + 1 = 2n+1 \]

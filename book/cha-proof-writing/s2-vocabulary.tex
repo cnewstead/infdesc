@@ -90,7 +90,37 @@ Let $n \in \mathbb{Z}$ and suppose that $n$ is divisible by $4$. Then by definit
 \end{snippet}
 \end{exercise}
 
-\subsubsection*{Introducing assumptions}
+\subsubsection*{Assuming implications: reducing a problem to another problem}
+
+One of the ways that an assumption of the form $p \Rightarrow q$ is useful is that it `reduces' the problem of proving $q$ to that of proving $p$.
+
+\begin{vocabulary}
+\label{vcbAssumingImplications}
+\index[vocabulary]{suffices@it suffices to show that}
+The following construction can be used to indicate to a reader that you are invoking an assumption of the form $p \Rightarrow q$ to prove a goal $q$ by instead proving $p$.
+
+\begin{vocabtemplate}
+[\textbf{Since} \propstate{$p \Rightarrow q$} | \textbf{By} \propcite{$p \Rightarrow q$} ], (\textbf{in order to prove} \propstate{$q$},) \textbf{it suffices to prove} \propstate{$p$}.
+\end{vocabtemplate}
+\end{vocabulary}
+
+We used this construction in the proof of the strong induction principle:
+
+\begin{extract}[\xtrsource{\Cref{thmStrongInduction}}]
+\label{xtrAssumingImplicationsExample}
+\xtremph{Notice that $q(n)$ implies $p(n)$} for all $n \ge n_0$, since given $n \ge n_0$, if $p(k)$ is true for all $n_0 \le k \le n$, then in particular $p(k)$ is true when $k=n$.
+
+So \xtremph{it suffices to prove $q(n)$ is true} for all $n \ge n_0$.
+\end{extract}
+
+In the proof of \Cref{propBinomialSymmetry}, we used \Cref{vcbAssumingImplications} in the very first sentence to guide the rest of the proof.
+
+\begin{extract}[\xtrsource{\Cref{propBinomialSymmetry}}]
+\label{xtrAssumingImplicationsExampleTwo}
+First note that $\binom{n}{k} = \left| \binom{[n]}{k} \right|$ and $\binom{n}{n-k} = \left| \binom{[n]}{n-k} \right|$, so \xtremph{in order to prove $\binom{n}{k} = \binom{n}{n-k}$}, \xtremph{it suffices by \Cref{strComparingSizesOfFiniteSets} to find a bijection $f : \binom{[n]}{k} \to \binom{[n]}{n-k}$}.
+\end{extract}
+
+\subsubsection*{Proving implications: introducing assumptions}
 
 Several kinds of logical formulae are proved by introducing new assumptions into a proof. For example:
 \begin{itemize}
@@ -166,8 +196,6 @@ so indeed $8$ divides $n$, as required.
 \end{extract}
 
 Proofs of set equality by double containment also follow this format; in \Cref{secSets} we denoted the steps by ($\subseteq$) and ($\supseteq$), respectively.
-
-
 
 \subsubsection*{Assuming disjunctions: breaking into cases}
 
@@ -275,27 +303,11 @@ Proofs by contradiction need not be long and drawn out---sometimes you just need
 \dots{} it remains to show that $r < b$. Well, \xtremph{if $r \ge b$ then} $r-b \ge 0$, but $r-b=r_{k+1}$, so \xtremph{this would imply $r_{k+1} \in R$, contradicting minimality of $r$}. \xtremph{Hence $r < b$} \dots{}
 \end{extract}
 
-\subsubsection*{Assuming implications: reducing the problem}
-
-\todo{}
-
-\begin{vocabulary}
-\label{vcbAssumingImplications}
-\index[vocabulary]{suffices@it suffices to show that}
-The following construction can be used to indicate to a reader that you are invoking an assumption of the form $p \Rightarrow q$ to prove a goal $q$ by instead proving $p$.
-
-\begin{vocabtemplate}
-[\textbf{Since} \propstate{$p \Rightarrow q$} | \textbf{By} \propcite{$p \Rightarrow q$} ], (\textbf{in order to prove} \propstate{$q$},) \textbf{it suffices to prove} \propstate{$p$}.
-
-\vtor
-
-\propproof{$p$}. [\textbf{Since} \propstate{$p \Rightarrow q$} | \textbf{By} \propcite{$p \Rightarrow q$}], \textbf{it follows that} \propstate{$q$}.
-\end{vocabtemplate}
-\end{vocabulary}
-
-\todo{}
-
 \subsubsection*{Proving universally quantified statements: introducing variables}
+
+As discussed in \Cref{strProvingUniversal}, proving that a property $p(x)$ hold for \textit{all} elements $x$ of a set $X$ is done by introducing a new variable $x \in X$ and, assuming nothing about that variable other than that it is an element of $X$, deriving the truth of $p(x)$.
+
+This sounds scary, but introducing the variable $x$ is very easy to do.
 
 \begin{vocabulary}
 \label{vcbIntroducingVariable}
@@ -318,12 +330,33 @@ The following constructions can be used to introduce a new variable $x$, referri
 \textbf{Given} $x \in X$, ~\dots{}
 \end{vocabtemplate}
 
-Explicit use of the word `arbitrary' can be useful to drive home the point that nothing is assumed about $x$ other than that it is an element of $X$. Typically, however, this is optional.
+Explicit use of the word `arbitrary' can be useful to drive home the point that nothing is assumed about $x$ other than that it is an element of $X$. In practice, it is optional.
 \end{vocabulary}
+
+If you turn to almost any page in the book, you will see an instance of \Cref{vcbIntroducingVariable}.
+
+For example, in the next extract, the goal was to prove the universally quantified proposition meaning that $g \circ f$ is injective, that is $\forall a,b \in X,[(g \circ f)(a) = (g \circ f)(b) \Rightarrow a=b]$.
+
+\begin{extract}[\xtrsource{\Cref{propCompositeOfInjectionsIsInjection}}]
+\label{xtrVariableIntroductionExample}
+\dots{} \xtremph{let $a,b \in X$}.
+We need to prove that
+\[ (g \circ f)(a) = (g \circ f)(b) \quad \Rightarrow \quad a=b \]
+\dots{}
+\end{extract}
+
+Variables can also be introduced mid-sentence using the word `given', like in the next extract.
+
+\begin{extract}[\xtrsource{\Cref{exBijectionFromIntegersFromMinusNToNToBracketTwoNPlusOne}}]
+\label{xtrIntroducingVariableExampleTwo}
+We need to prove \xtremph{$f(k) \in X$ for all $k \in [2n+1]$}. Well \xtremph{given $k \in [2n+1]$}, we have $1 \le k \le 2n+1$, and so
+\[ -n = 1-(n+1) \le ~ \underbrace{k-(n+1)}_{=f(k)} ~  \le (2n+1) - (n+1) = n \]
+so that \xtremph{$f(k) \in X$ as claimed}.
+\end{extract}
 
 \subsubsection*{Proving existentially quantified statements: making definitions}
 
-\todo{}
+When proving a statement of the form $\exists x \in X,~ p(x)$, we usually have to define an element $a \in X$ that makes $p(a)$ true, and then prove that $p(a)$ is true.
 
 \begin{vocabulary}
 \label{vcbDefiningVariable}
@@ -331,17 +364,31 @@ Explicit use of the word `arbitrary' can be useful to drive home the point that 
 The following construction can be used to indicate that you are proving that there exists an element $x$ of a set $X$ such that $p(x)$ is true.
 
 \begin{vocabtemplate}
-\textbf{Define} \vardefine{$a$}. \propproof{$p(a)$}.
+[\textbf{Define} | \textbf{Let}] \vardefine{$a$}. \propproof{$p(a)$}.
 
-(\textbf{It follows that} \propstate{$\exists x \in X,~p(x)$}.)
+([\textbf{It follows that} | \textbf{So} | \textbf{Therefore}] \propstate{$\exists x \in X,~p(x)$}.)
 \end{vocabtemplate}
 \end{vocabulary}
 
-\todo{}
+Proofs of divisibility (see \Cref{defDivision}) often use this construction, as in the following example.
+
+\begin{extract}[\xtrsource{\Cref{thmPrimeIffIrred}}]
+\label{xtrProvingExistsExample}
+\xtremph{Define $q = ku+bv$}; then
+\[ b = abu+pbv = pku+pbv = p(ku+bv) = qp \]
+\xtremph{so $p \mid b$}, as required.
+\end{extract}
+
+Here is another example, which uses the word `let'.
+
+\begin{extract}[\xtrsource{thmCauchySchwarzInequality}]
+\label{xtrProvingExistsExampleTwo}
+If $\vec y \ne \vec 0$ then let $a=\lVert \vec y \rVert^2$ and $b=\vec x \cdot \vec y$; otherwise, let $a=0$ and $b=1$. In both cases, we have $a \vec x = b \vec y$ and $a,b$ are not both zero.
+\end{extract}
 
 \subsubsection*{Assuming existentially quantified statements: choosing elements}
 
-\todo{}
+Another reason why variables might be introduces is because an \textit{assumption} is existentially quantified. For example, if we know that $8$ is even, then we know that $8 = 2k$ \textit{for some} $k \in \mathbb{Z}$.
 
 \begin{vocabulary}
 \label{vcbAssumingExistential}
@@ -353,7 +400,19 @@ The following construction can be used to indicate that you are invoking an assu
 \end{vocabtemplate}
 \end{vocabulary}
 
-\todo{}
+Again, proofs involving division yield several examples of when this construction is used.
+
+\begin{extract}[\xtrsource{\Cref{thmAllSolutionsOfLDEFromOneSolution}}]
+\label{xtrIntroducingExistentialVariableExample}
+\dots{} so by \Cref{propADividesBC}, we have \xtremph{$a \mid y_0-y$ and $b \mid x-x_0$}. \xtremph{Let $k,\ell \in \mathbb{Z}$ be such that} \xtremph{$x-x_0=kb$ and $y_0-y = \ell a$}.
+\end{extract}
+
+Here is an example from \Cref{secCompletenessConvergence} on the convergence of sequences; here, the existentially quantified assumption allowing us to introduce the variables $a$ and $b$ was cited.
+
+\begin{extract}[\xtrsource{\Cref{thmBolzanoWeierstrass}}]
+\label{xtrIntroducingVariablesExistentialExampleTwo}
+Let $(x_n)$ be a sequence of real numbers and \xtremph{et $a,b \in \mathbb{R}$ be such that} $a < x_n < b$ for each $n \ge 0$---the numbers \xtremph{$a$ and $b$ exist since} the sequence $(x_n)$ is bounded.
+\end{extract}
 
 \subsection*{`Without loss of generality'}
 
@@ -527,7 +586,3 @@ It follows by the weak induction principle that $p(n)$ is true for all $n \ge n_
 \end{snippet}
 
 This is now a perfectly good template for a proof of $\forall n \ge n_0,~ p(n)$. But this is exactly what a proof by induction looks like: `Step 1' is the base case, `Step 2' is the induction step, the assumption $p(n)$ in Step 2 is the induction hypothesis, and the goal $p(n+1)$ in Step 2 is the induction goal!
-
-\subsection*{Long proofs}
-
-\todo{}

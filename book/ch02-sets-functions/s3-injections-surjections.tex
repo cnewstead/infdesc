@@ -72,8 +72,12 @@ The following example is slightly more sophisticated.
 Let $f : X \to Y$ and $g : Y \to Z$ be functions. If $f$ and $g$ are injective, then $g \circ f$ is injective.
 \end{proposition}
 \begin{cproof}
-Suppose that $f$ and $g$ are injective and let $a,b \in X$. We need to prove that
+Suppose that $f$ and $g$ are injective and
+%% BEGIN EXTRACT (xtrVariableIntroductionExample) %%
+let $a,b \in X$.
+We need to prove that
 \[ (g \circ f)(a) = (g \circ f)(b) \quad \Rightarrow \quad a=b \]
+%% END EXTRACT %%
 So assume $(g \circ f)(a) = (g \circ f)(b)$. By definition of function composition, this implies that $g(f(a))=g(f(b))$. By injectivity of $g$, we have $f(a)=f(b)$; and by injectivity of $f$, we have $a=b$.
 \end{cproof}
 

@@ -218,13 +218,48 @@ defined by $i(r) = [r]_n$ for all $0 \le r < |n|$ is a bijection.
 
 A partition of a set $X$ is a way of breaking $X$ up into mutually disjoint subsets. They will be an immensely useful tool for counting how many elements a finite set has in \Cref{chCombinatorics}, and will reappear in \Cref{secCardinalArithmetic} for defining arithmetic operations with cardinal numbers.
 
-\begin{definition}
+\begin{restatable}{definition}{rdefPartition}
 \label{defPartition}
-A \textbf{partition} of a set $X$ is a collection $\mathcal{U} = \{ U_i \mid i \in I \}$ of inhabited subsets of $X$ such that, for each $a \in X$, there is a unique subset $U_i \in \mathcal{U}$ such that $a \in U_i$.
-\end{definition}
+\index{pairwise disjoint}
+\index{disjoint!pairwise}
+A \textbf{partition} of a set $X$ is a collection $\mathcal{U} = \{ U_i \mid i \in I \}$ of subsets of $X$ such that the following conditions hold:
+\begin{enumerate}[(a)]
+\item For each $i \in I$, the subset $U_i$ is inhabited;
+\item The sets $U_i$ for $i \in I$ are \textbf{pairwise disjoint}---that is, $U_i \cap U_j$ is empty for all $i,j \in I$ with $i \ne j$;
+\item $\bigcup_{i \in I} U_i = X$.
+\end{enumerate}
+\end{restatable}
+
+Note that, by contraposition, condition (b) in \Cref{exConditionsForPartition} is equivalent to saying that for all $i,j \in I$, if $U_i \cap U_j$ is inhabited, then $i=j$---this is useful for verifying pairwise disjointness in proofs.
+
+\begin{strategy}[Proving a family of subsets forms a partition]
+\label{strProvingSubsetsFormPartition}
+Let $X$ be a set. In order to prove a collection $\mathcal{U} \subseteq \mathcal{P}(X)$ is a partition of $X$, it suffices to prove:
+\begin{enumerate}[(a)]
+\item Each $U \in \mathcal{U}$ is inhabited;
+\item For all $U, V \in \mathcal{U}$, if $U \cap V$ is inhabited, then $U=V$;
+\item For all $a \in X$, there is some $U \in \mathcal{U}$ such that $a \in U$.
+\end{enumerate}
+\end{strategy}
 
 \begin{example}
-We can partition $\mathbb{Z}$ as $E \cup O$, where $E$ is the set of all even integers and $O$ is the set of all odd integers. Indeed, for each integer $a$, there is a unique set $U \in \{ E, O \}$ such that $a \in U$---namely, $U=E$ if $a$ is even, and $U=O$ if $a$ is odd.
+\label{exPartitionOfZIntoEvenAndOdd}
+We can partition $\mathbb{Z}$ as $E \cup O$, where $E$ is the set of all even integers and $O$ is the set of all odd integers:
+\begin{enumerate}[(a)]
+\item $E$ and $O$ are inhabited, since $0 \in E$ and $1 \in O$.
+\item The family $\{ E, O \}$ is pairwise disjoint if and only if $E \cap O$ is empty; and it is, since no integer can be both even and odd.
+\item $E \cup O = \mathbb{Z}$ since every integer is either even or odd.
+\end{enumerate}
+\end{example}
+
+\begin{example}
+\label{exPartitionOfNIntoPairs}
+The sets $\{ 2n, 2n+1 \}$ for $n \in \mathbb{N}$ form a partition of $\mathbb{N}$:
+\begin{enumerate}[(a)]
+\item $2n \in \{ 2n, 2n+1 \}$ for each $n \in \mathbb{N}$, so the sets are all inhabited.
+\item Suppose that $m,n \in \mathbb{N}$ and that $\{ 2m, 2m+1 \} \cap \{ 2n, 2n+1 \}$ is inhabited. Note that $2m \ne 2n+1$ and $2n \ne 2m+1$ by the division theorem (\Cref{thmDivisionTheorem}), so either $2m=2n$ or $2m+1=2n+1$. But in both cases we see that $m=n$. Hence the sets $\{ 2n, 2n+1 \}$ for $n \in \mathbb{N}$ are pairwise disjoint. 
+\item Given $a \in \mathbb{N}$, we have $a=2n+i$, where $n \in \mathbb{N}$ is the quotient of $a$ when divided by $2$, and where $i \in \{0,1\}$ is the remainder of $a$ when divided by $2$. But then $a \in \{ 2n, 2n+1 \}$. Thus $\bigcup_{n \in \mathbb{N}} \{ 2n, 2n+1 \} = \mathbb{N}$.
+\end{enumerate}
 \end{example}
 
 \begin{exercise}
@@ -236,24 +271,8 @@ That is, $\mathcal{F}$ is the set of subsets of $X$ given by the preimages of in
 
 \begin{exercise}
 \label{exConditionsForPartition}
-Let $X$ be a set and let $\mathcal{U} = \{ U_i \mid i \in I \}$ be a family of subsets of $X$. Prove that $\mathcal{U}$ is a partition of $X$ if and only if each of the following conditions holds:
-\begin{enumerate}[(a)]
-\item For each $i \in I$, the subset $U_i$ is inhabited;
-\item For all $i,j \in I$, if $U_i \cap U_j$ is inhabited, then $i=j$;
-\item $\bigcup_{i \in I} U_i = X$.
-\end{enumerate}
+Let $X$ be a set and let $\mathcal{U} = \{ U_i \mid i \in I \}$ be a family of inhabited subsets of $X$. Prove that $\mathcal{U}$ is a partition of $X$ if and only if for reach $a \in X$, there is a unique set $U_i \in \mathcal{U}$ with $a \in U_i$.
 \end{exercise}
-
-Note that, by contraposition, condition (b) in \Cref{exConditionsForPartition} is equivalent to saying that the subsets in $\mathcal{U}$ are \textit{pairwise disjoint}---that is, given $i,j \in I$, if $i \ne j$, then $U_i \cap U_j$ is empty.
-
-\begin{strategy}[Proving a family of subsets forms a partition]
-Let $X$ be a set. In order to prove a collection $\mathcal{U} \subseteq \mathcal{P}(X)$ is a partition of $X$, it suffices to prove:
-\begin{enumerate}[(a)]
-\item Each $U \in \mathcal{U}$ is inhabited;
-\item For all $U, V \in \mathcal{U}$, if $U \cap V$ is inhabited, then $U=V$;
-\item For all $a \in X$, there is some $U \in \mathcal{U}$ such that $a \in U$.
-\end{enumerate}
-\end{strategy}
 
 \begin{exercise}
 \label{exQuotientIsPartition}

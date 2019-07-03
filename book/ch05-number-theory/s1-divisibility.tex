@@ -485,7 +485,10 @@ so $(x,y)$ is indeed a solution to the equation.
 \[ a(x-x_0) + b(y-y_0) = (ax_0 + by_0) - (ax+by) = c-c = 0 \]
 so that
 \[ a(x-x_0) = b(y_0-y) \]
-Now $a$ and $b$ are coprime, so by \Cref{propADividesBC}, we have $a \mid y_0-y$ and $b \mid x-x_0$. Let $k,\ell \in \mathbb{Z}$ be such that $x-x_0=kb$ and $y_0-y = \ell a$. Then substituting into the above equation yields
+%% BEGIN EXTRACT (xtrIntroducingExistentialVariableExample) %%
+Now $a$ and $b$ are coprime, so by \Cref{propADividesBC}, we have $a \mid y_0-y$ and $b \mid x-x_0$. Let $k,\ell \in \mathbb{Z}$ be such that $x-x_0=kb$ and $y_0-y = \ell a$.
+%% END EXTRACT %%
+Then substituting into the above equation yields
 \[ a \cdot k b = b \cdot \ell a \]
 and hence $(k-\ell)ab = 0$. Since $ab \ne 0$, we have $k=\ell$, so that
 \[ x = x_0 + kb \quad \text{and} \quad y = y_0-ka \]

@@ -8,26 +8,22 @@
 % \newcommand{\adapteremail}{exampleface-mclastname@example.web}
 %
 % Any duplications, derivations or adaptations of this work
-% must be released under the same licence.
+% must be released under the Creative Commons BY-SA 4.0 licence.
 
 \newcommand{\adaptername}{} % Your full name
 \newcommand{\adapteremail}{} % Your email address
 
-\documentclass[10pt]{book}
+% Page layout
+% 0:6"x9", 1:a4, 2:usletter, 3:tablet, 4:phone
+\newcounter{bookformat}\setcounter{bookformat}{4}
 
-% Book version
-% Set versionpatch to -1 for 'preview' versions
+% Book version - if you are adapting the book, please leave
+% these unchanged so that the original version can be traced.
 \newcounter{versionmajor}\setcounter{versionmajor}{0}
 \newcounter{versionminor}\setcounter{versionminor}{3}
-\newcounter{versionpatch}\setcounter{versionpatch}{-1}
+\newcounter{versionpatch}\setcounter{versionpatch}{0}
 
-% Contact and website information
-\newcommand{\authoremail}{clive@infinitedescent.xyz}
-\newcommand{\bookurl}{https://infinitedescent.xyz}
-
-% Page layout
-% 0:6x9, 1:a4, 2:usletter, 3:tablet, 4:phone
-\newcounter{bookformat}\setcounter{bookformat}{0}
+\documentclass[10pt]{book}
 
 % Includes
 \input{book/includes/_includes.tex}
@@ -123,6 +119,12 @@
     \label{chAdditionalTopics}
     \input{book/ch10-additional-topics/_additional-topics.tex}
 
+% Source: LaTeX Stack Exchange
+% https://tex.stackexchange.com/q/6489 (Malabarba)
+% https://tex.stackexchange.com/a/6494 (Stefan Kottwitz)
+% https://tex.stackexchange.com/a/6494#comment971771_6494 (egreg)
+\addtocontents{toc}{\protect\pagebreak}
+
 \appendix
 \begin{appendices}
 \renewcommand{\sectionmark}[1]{\markboth{\leftmark}{Section \thesection.\ #1}}
@@ -178,9 +180,8 @@
 
 \clearpage\newpage\clearpage
 \chapter*{Licence}
+\pagestyle{empty}
 \addcontentsline{toc}{part}{Licence}
-    \renewcommand{\chaptermark}[1]{\markboth{Licence}{Licence}}
-    \renewcommand{\sectionmark}[1]{\markboth{Licence}{Licence}}
     \renewcommand\chaptername{Licence}
     \input{book/licence/_licence.tex}
 
