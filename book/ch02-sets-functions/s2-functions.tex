@@ -354,7 +354,7 @@ Let $X$ be a set and let $U, V \subseteq X$. Then $U=V$ if and only if $\chi_U =
 \begin{cproof}
 \fixlistskip
 \begin{itemize}
-\item ($\subseteq$)
+\item ($\Rightarrow$)
 %% BEGIN EXTRACT (xtrAssumeExample) %%
 Assume $U=V$ and let $a \in X$. Then
 \begin{align*}
@@ -363,9 +363,9 @@ Assume $U=V$ and let $a \in X$. Then
 &\Leftrightarrow \chi_V(a) = 1 && \text{by definition of $\chi_V$}
 \end{align*}
 %% END EXTRACT %%
-Likewise $\chi_U(a) = 0$ if and only if $\chi_V(a) = 1$, so that $\chi_U = \chi_V$ by function extensionality.
+Likewise $\chi_U(a) = 0$ if and only if $\chi_V(a) = 0$, so that $\chi_U = \chi_V$ by function extensionality.
 
-\item ($\supseteq$) Assume $\chi_U = \chi_V$ and let $a \in X$. Then
+\item ($\Leftarrow$) Assume $\chi_U = \chi_V$ and let $a \in X$. Then
 \begin{align*}
 a \in U & \Leftrightarrow \chi_U(a) = 1 && \text{by definition of $\chi_U$} \\
 &\Leftrightarrow \chi_V(a) = 1 && \text{since $\chi_U = \chi_V$} \\
@@ -496,27 +496,9 @@ Let $f : X \to Y$ be a function, let $U \subseteq X$ and let $V \subseteq Y$. Th
 \end{example}
 
 The following exercise demonstrates that preimages interact very nicely with the basic set operations (intersection, union and relative complement):
-\begin{exercise}
-Let $f : X \to Y$ be a function and let $U, V \subseteq Y$. Prove that:
-\begin{enumerate}[(a)]
-\item $f^{-1}[U \cap V] = f^{-1}[U] \cap f^{-1}[V]$;
-\item $f^{-1}[U \cup V] = f^{-1}[U] \cup f^{-1}[V]$; and
-\item $f^{-1}[Y \setminus U] = X \setminus f^{-1}[U]$.
-\end{enumerate}
-\end{exercise}
 
 \begin{exercise}
 Let $f : X \to Y$ be a function. Prove that $f^{-1}[\varnothing] = \varnothing$ and $f^{-1}[Y]=X$.
-\end{exercise}
-
-\begin{exercise}
-Let $f : X \to Y$ be a function. Provide a proof of the truth or falsity of each of the following statements:
-\begin{enumerate}[(a)]
-\item $U \subseteq f^{-1}[f[U]]$ for all $U \subseteq X$;
-\item $f^{-1}[f[U]] \subseteq U$ for all $U \subseteq X$;
-\item $V \subseteq f[f^{-1}[V]]$ for all $V \subseteq Y$;
-\item $f[f^{-1}[V]] \subseteq V$ for all $V \subseteq Y$.
-\end{enumerate}
 \end{exercise}
 
 \begin{exercise}

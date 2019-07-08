@@ -59,6 +59,46 @@ The temptation is to write a long string of equations, but it is far less painfu
 }
 \end{chapex}
 
+\begin{definition}
+\label{defOpenSubsetOfR}
+\index{open!subset of $\mathbb{R}$}
+A subset $U \subseteq \mathbb{R}$ is \textbf{open} if, for all $a \in U$, there exists $\delta > 0$ such that $(a-\delta, a+\delta) \subseteq U$.
+\end{definition}
+
+In Questions \Crefrange{cqOpenSubsetsOfRBegin}{cqOpenSubsetsOfREnd} you will prove some elementary facts about open subsets of $\mathbb{R}$.
+
+\begin{chapex}
+\label{cqOpenSubsetsOfRBegin}
+For each of the following subsets of $\mathbb{R}$, determine (with proof) whether it is open:
+\begin{multicols}{3}
+\begin{enumerate}[(a)]
+\item $\varnothing$;
+\item $(0,1)$;
+\item $(0,1]$;
+\item $\mathbb{Z}$;
+\item $\mathbb{R} \setminus \mathbb{Z}$;
+\item $\mathbb{Q}$.
+\end{enumerate}
+\end{multicols}
+\end{chapex}
+
+\begin{chapex}
+Prove that a subset $U \subseteq \mathbb{R}$ is open if and only if, for all $a \in U$, there exist $u,v \in \mathbb{R}$ such that $u<a<v$ and $(u,v) \subseteq U$.
+\end{chapex}
+
+\begin{chapex}
+In this question you will prove that the intersection of finitely many open sets is open, but the intersection of infinitely many open sets might not be open.
+\begin{enumerate}[(a)]
+\item Let $n \ge 1$ and suppose $U_1, U_2, \dots, U_n$ are open subsets of $\mathbb{R}$. Prove that the intersection $U_1 \cap U_2 \cap \cdots \cap U_n$ is open.
+\item Prove that $(0,1+\frac{1}{n})$ is open for all $n \ge 1$, but that $\bigcap_{n \ge 1} (0,1+\textstyle\frac{1}{n})$ is not open.
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+\label{cqOpenSubsetsOfREnd}
+Prove that a subset $U \subseteq \mathbb{R}$ is open if and only if it can be expressed as a union of open intervals---more precisely, $U \subseteq \mathbb{R}$ is open if and only if, for some indexing set $I$, there exist real numbers $a_i, b_i$ for each $i \in I$, such that $U = \bigcup_{i \in I} (a_i, b_i)$.
+\end{chapex}
+
 \subsection*{Functions}
 
 \begin{chapex}
@@ -84,6 +124,14 @@ Prove that there is a unique function $f : \mathbb{R} \to \mathbb{R}$ that is bo
 \end{chapex}
 
 \begin{chapex}
+Let $U \subseteq \mathbb{R}$, and let $\chi_U : \mathbb{R} \to \{0,1\}$ be the indicator function of $U$.
+\begin{enumerate}[(a)]
+\item Prove that $\chi_U$ is an even function if and only if $U = \{ -u \mid u \in U \}$;
+\item Prove that $\chi_U$ is an odd function if and only if $\mathbb{R} \setminus U = \{ -u \mid u \in U \}$.
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
 Prove that for every function $f : \mathbb{R} \to \mathbb{R}$, there is a unique even function $g : \mathbb{R} \to \mathbb{R}$ and a unique odd function $h : \mathbb{R} \to \mathbb{R}$ such that $f(x)=g(x)+h(x)$ for all $x \in \mathbb{R}$.
 \hintlabel{cqEveryFunctionIsUniquelySumOfEvenAndOdd}{%
 Consider $f(x)+f(-x)$ and $f(x)-f(-x)$ for $x \in \mathbb{R}$.
@@ -98,10 +146,48 @@ Fix $n \in \mathbb{N}$ and consider how $\theta_n$ interacts with functions $f :
 \end{chapex}
 
 \begin{chapex}
-Let $X$ be a set and let $U, V \subseteq X$. Describe the indicator function $\chi_{U \symmdiff V}$ of the symmetric difference of $U$ and $V$ (\Cref{defSymmetricDifference}) in terms of $\chi_U$ and $\chi_V$.
+Let $X$ be a set and let $U, V \subseteq X$. Describe the indicator function $\chi_{U \symmdiff V}$ of the symmetric difference of $U$ and $V$ (see \Cref{defSymmetricDifference}) in terms of $\chi_U$ and $\chi_V$.
 \end{chapex}
 
 \subsection*{Images and preimages}
+
+In \Crefrange{cqComputeImageBegin}{cqComputeImageEnd}, find the image $f[U]$ of the subset $U$ of the codomain of the function $f$ described in the question.
+
+\begin{chapex}
+\label{cqComputeImageBegin}
+$f : \mathbb{R} \to \mathbb{R}$; $f(x) = \sqrt{1+x^2}$ for all $x \in \mathbb{R}$; $U = \mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+$f : \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$; $f(a,b) = a+2b$ for all $(a,b) \in \mathbb{Z} \times \mathbb{Z}$; $U = \{ 1 \} \times \mathbb{Z}$.
+\end{chapex}
+
+\begin{chapex}
+$f : \mathbb{N} \to \mathcal{P}(\mathbb{N})$; $f(0) = \varnothing$ and $f(n+1) = f(n) \cup \{ n \}$ for all $n \in \mathbb{N}$; $U = \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+$f : \mathbb{R}^{\mathbb{R}} \to \mathbb{R}^{\mathbb{R}}$ (where $\mathbb{R}^{\mathbb{R}}$ is the set of all functions $\mathbb{R} \to \mathbb{R}$); $f(h)(x) = h(|x|)$ for all $h \in \mathbb{R}^{\mathbb{R}}$ and all $x \in \mathbb{R}$; $U = \mathbb{R}^{\mathbb{R}}$.
+\hintlabel{cqComputeImageEnd}{%
+Begin by observing that each $h \in f[\mathbb{R}^{\mathbb{R}}]$ is an even function, in the sense of \Cref{defEvenOddFunction}.
+}
+\end{chapex}
+
+In \Crefrange{cqComputePreimageBegin}{cqComputePreimageEnd}, find the preimage $f^{-1}[V]$ of the subset $V$ of the codomain of the function $f$ described in the question.
+
+\begin{chapex}
+\label{cqComputePreimageBegin}
+$f : \mathbb{R} \to \mathbb{R}$; $f(x) = \sqrt{1+x^2}$ for all $x \in \mathbb{R}$; $V = (-5,5]$.
+\end{chapex}
+
+\begin{chapex}
+$f : \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$; $f(a,b) = a+2b$ for all $(a,b) \in \mathbb{Z} \times \mathbb{Z}$; $V = \{ n \in \mathbb{Z} \mid n \text{ is odd} \}$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqComputePreimageEnd}
+$f : \mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N}) \to \mathcal{P}(\mathbb{N})$; $f(A,B) = A \cap B$ for all $(A,B) \in \mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})$; $V = \{ \varnothing \}$.
+\end{chapex}
 
 \begin{chapex}
 Let $f : X \to Y$ be a function. For each of the following statements, either prove it is true or find a counterexample.
@@ -113,6 +199,37 @@ Let $f : X \to Y$ be a function. For each of the following statements, either pr
 \item $f[f^{-1}[V]] \subseteq V$ for all $V \subseteq Y$.
 \end{enumerate}
 \end{multicols}
+\end{chapex}
+
+\begin{chapex}
+Let $f : X \to Y$ be a function, let $A$ be a set, and let $p : X \to A$ and $i : A \to Y$ be functions such that the following conditions hold:
+\begin{enumerate}[(i)]
+\item $i$ is injective;
+\item $i \circ p = f$; and
+\item If $q : X \to B$ and $j : B \to Y$ are functions such that $j$ is injective and $j \circ q = f$, then there is a unique function $u : A \to B$ such that $j \circ u = i$.
+\end{enumerate}
+Prove that there is a unique bijection $v : A \to f[X]$ such that $i(a)=v(a)$ for all $a \in f[X]$.
+\hintlabel{cqUniversalPropertyOfImage}{%
+This problem is very fiddly. First prove that conditions (i)--(iii) are satisfied when $A = f[X]$ and $p$ and $i$ are chosen appropriately. Then condition (iii) in each case (for $A$ and for $f[X]$) defines functions $v : A \to f[X]$ and $w : f[X] \to A$, and gives uniqueness of $v$. You can prove that these functions are mutually inverse using the `uniqueness' part of condition (iii).
+}
+\end{chapex}
+
+\begin{chapex}
+Let $f : X \to Y$ be a function and let $U, V \subseteq Y$. Prove that:
+\begin{enumerate}[(a)]
+\item $f^{-1}[U \cap V] = f^{-1}[U] \cap f^{-1}[V]$;
+\item $f^{-1}[U \cup V] = f^{-1}[U] \cup f^{-1}[V]$; and
+\item $f^{-1}[Y \setminus U] = X \setminus f^{-1}[U]$.
+\end{enumerate}
+Thus preimages preserve the basic set operations.
+\end{chapex}
+
+\begin{chapex}
+Let $f : X \to Y$ and $g : Y \to Z$ be functions.
+\begin{enumerate}[(a)]
+\item Prove that $(g \circ f)[U] = g[f[U]]$ for all $U \subseteq X$;
+\item Prove that $(g \circ f)^{-1}[W] = f^{-1}[g^{-1}[W]]$ for all $W \subseteq Z$.
+\end{enumerate}
 \end{chapex}
 
 \subsection*{Injections, surjections and bijections}

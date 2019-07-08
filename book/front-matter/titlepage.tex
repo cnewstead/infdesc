@@ -23,7 +23,8 @@ Pure Mathematics}
 \iforiginal{%
 \textit{Version \arabic{versionmajor}.\arabic{versionminor}%
 \ifnumgreater{\value{versionpatch}}{0}{, revision \arabic{versionpatch}}{}%
-\ifnumless{\value{versionpatch}}{0}{ preview}{}}\\
+\ifnumless{\value{versionpatch}}{0}{ preview}{}}%
+\ifnumequal{\value{versionstable}}{0}{ {\color{red}(unstable build)}}{}\\
 }
 \textit{Last updated on \customdate\today}%
 \iforiginal{\\

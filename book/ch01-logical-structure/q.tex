@@ -29,6 +29,26 @@ Let $p$ and $q$ be propositions, and assume that $p \Rightarrow (\neg q)$ is tru
 \end{enumerate}
 \end{chapex}
 
+In \Crefrange{cqStructureProofBegin}{cqStructureProofEnd}, use the definitions of the logical operators in \Cref{secPropositionalLogic} to describe what steps should be followed in order to prove the propositional formula in the question; the letters $p$, $q$, $r$ and $s$ are propositional variables.
+
+\begin{chapex}
+\label{cqStructureProofBegin}
+$(p \wedge q) \Rightarrow (\neg r)$
+\end{chapex}
+
+\begin{chapex}
+$(p \vee q) \Rightarrow (r \Rightarrow s)$
+\end{chapex}
+
+\begin{chapex}
+$(p \Rightarrow q) \Leftrightarrow (\neg p \Rightarrow \neg q)$
+\end{chapex}
+
+\begin{chapex}
+\label{cqStructureProofEnd}
+$(p \wedge (\neg q)) \vee (q \wedge (\neg p))$
+\end{chapex}
+
 % Variables and quantifiers %
 
 \begin{chapex}
@@ -39,7 +59,9 @@ Find a statement in plain English, involving no variables at all, that is equiva
 Find a purely symbolic logical formula that is equivalent to the following statement, and then prove it: ``\textit{No matter which integer you may choose, there will be an integer greater than it.}''
 \end{chapex}
 
-
+\begin{chapex}
+Let $X$ be a set and let $p(x)$ be a predicate. Find a logical formula representing the statement `there are exactly two elements $x \in X$ such that $p(x)$ is true'. Use the structure of this logical formula to describe how a proof should be structured, and use this structure to prove that there are exactly two real numbers $x$ such that $x^2=1$.
+\end{chapex}
 
 % Logical equivalence %
 
@@ -82,5 +104,5 @@ Use \Cref{defUniqueExistentialQuantifier} to write out a maximally negated logic
 \end{chapex}
 
 \begin{chapex}
-Let $X$ be a set and let $p(x)$ be a predicate. Find a logical formula representing the statement `there are exactly two elements $x \in X$ such that $p(x)$ is true'. Use the structure of this logical formula to describe how a proof should be structured, and use this structure to prove that there are exactly two real numbers $x$ such that $x^2=1$.
+Define a new quantifier $\forall !$ such that de Morgan's laws for quantifiers (\Cref{thmDeMorganQuantifiers}) hold with $\forall$ and $\exists$ replaced by $\forall !$ and $\exists !$, respectively.
 \end{chapex}

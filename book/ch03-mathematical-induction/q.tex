@@ -56,8 +56,55 @@ Let $a \in \mathbb{N}$ and assume that the last digit in the decimal expansion o
 \end{chapex}
 
 \begin{chapex}
+Let $a,b \in \mathbb{R}$, and let $a_0, a_1, a_2, \dots$ be a sequence such that $a_0 = a$, $a_1=b$ and $a_n = \dfrac{a_{n-1} + a_{n+1}}{2}$ for all $n \ge 1$. Prove that $a_n = a + (b-a) n$ for all $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Let $f : \mathbb{R} \to \mathbb{R}$ be a function such that $f(x+y) = f(x) + f(y)$ for all $x,y \in \mathbb{R}$.
+\begin{enumerate}[(a)]
+\item Prove by induction that there is a real number $a$ such that $f(n) = an$ for all $n \in \mathbb{N}$.
+\item Deduce that $f(n) = an$ for all $n \in \mathbb{Z}$.
+\item Deduce further that $f(x) = ax$ for all $x \in \mathbb{Q}$.
+\end{enumerate}
+\hintlabel{cqHomomorphismFromRPlusToRPlus}{%
+To find the value of $a$ in part (a), try substituting some small values of $x$ and $y$ into the equation $f(x+y)=f(x)+f(y)$. For part (b), use the fact that $n + (-n) = 0$ for all $n \in \mathbb{N}$. For part (c), consider the number $b f(\frac{a}{b})$ when $a,b \in \mathbb{Z}$ and $b \ne 0$.
+}
+\end{chapex}
+
+\begin{chapex}
 Let $f : \mathbb{R} \to \mathbb{R}$ be a function such that $f(0) > 0$ and $f(x+y)=f(x)f(y)$ for all $x,y \in \mathbb{R}$. Prove that there is some positive real number $a$ such that $f(x)=a^x$ for all \textit{rational} numbers $x$..
 \hintlabel{cqHomomorphismFromRPlusToRTimes}{%
-Start by proving by induction on $n \in \mathbb{N}$ that $f(n) = a^n$ for all $n \in \mathbb{N}$. Then deduce that $f(n) = a^n$ for all $n \in \mathbb{Z}$, and finally deduce that $f(x)=a^x$ for all $x \in \mathbb{Q}$.
+Like in \Cref{cqHomomorphismFromRPlusToRPlus}, prove this first for $x \in \mathbb{N}$ (by induction), then for $x \in \mathbb{Z}$, and finally for $x \in \mathbb{Q}$.
+}
+\end{chapex}
+
+\subsection*{Some examples from calculus}
+
+\Crefrange{cqCalculusBegin}{cqCalculusEnd} assume familiarity with the basic techniques of differential and integral calculus.
+
+\begin{chapex}
+\label{cqCalculusBegin}
+Prove that $\dfrac{d^n}{dx^n}(xe^x) = (n+x)e^x$ for all $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Find and prove an expression for $\dfrac{d^n}{dx^n}(x^2e^x)$ for all $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+Let $f$ and $g$ be differentiable functions. Prove that
+\[ \dfrac{d^n}{dx^n}(f(x)g(x)) = \sum_{k=0}^n \dbinom{n}{k} f^{(k)}(x) g^{(n-k)}(x) \]
+for all $n \in \mathbb{N}$, where the notation $h^{(r)}$ denotes the $r^{\text{th}}$ derivative of $h$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqCalculusEnd}
+\begin{enumerate}[(a)]
+\item Prove that $\displaystyle \int_0^{\frac{\pi}{2}} \sin^{n+2}(x)~dx = \dfrac{n+1}{n+2} \int_0^{\frac{\pi}{2}} \sin^n(x)~dx$ for all $n \in \mathbb{N}$.
+\item Use induction to prove that $\displaystyle \int_0^{\frac{\pi}{2}} \sin^{2n}(x)~dx = \dfrac{\pi}{2^{2n+1}} \dbinom{2n}{n}$ for all $n \in \mathbb{N}$.
+\item Find and prove an expression for $\displaystyle \int_0^{\frac{\pi}{2}} \sin^{2n+1}(x)~dx$ for all $n \in \mathbb{N}$.
+\end{enumerate}
+\hintlabel{cqIntegralOfSinToTheN}{%
+For (a) use integration by parts; you do not need induction. For parts (b) and (c), use part (a).
 }
 \end{chapex}
