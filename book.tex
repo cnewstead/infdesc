@@ -20,8 +20,8 @@
 % Book version - if you are adapting the book, please leave
 % these unchanged so that the original version can be traced.
 \newcounter{versionmajor}\setcounter{versionmajor}{0}
-\newcounter{versionminor}\setcounter{versionminor}{3}
-\newcounter{versionpatch}\setcounter{versionpatch}{1}
+\newcounter{versionminor}\setcounter{versionminor}{4}
+\newcounter{versionpatch}\setcounter{versionpatch}{-1}
 \newcounter{versionstable}\setcounter{versionstable}{0}
 
 \documentclass[10pt]{book}
@@ -43,82 +43,42 @@
 \newgeometry{centering,bindingoffset={0in}}
 \input{book/front-matter/titlepage.tex}
 \restoregeometry
+
 \clearpage
 
-% Copyright page
-\newpage
 \input{book/front-matter/copyright.tex}
 
 % Table of contents
 \bookmark[page=3,level=0]{Contents}
 \tableofcontents
 
-% Preface
-\chapter*{Preface}
-\addcontentsline{toc}{chapter}{Preface}
-\markboth{Preface}{Preface}
-    \input{book/front-matter/preface.tex}
-
-% Acknowledgements
-\chapter*{Acknowledgements}
-\addcontentsline{toc}{chapter}{Acknowledgements}
-\markboth{Acknowledgements}{Acknowledgements}
-    \input{book/front-matter/acknowledgements.tex}
+\input{book/front-matter/preface.tex}
+\input{book/front-matter/acknowledgements.tex}
 
 \mainmatter
 
 \setcounter{chapter}{-1}
 
-\chapter{Getting started}
-\markboth{Chapter \thechapter.\ Getting started}{Chapter \thechapter.\ Getting started}
-    \label{chGettingStarted}
-    \input{book/ch00-getting-started/_getting-started.tex}
+\input{book/ch00-getting-started/_getting-started.tex}
 
 \part{Core concepts}
 \label{ptCoreConcepts}
 
-\chapter{Logical structure}
-    \label{chLogicalStructure}
-    \input{book/ch01-logical-structure/_logical-structure.tex}
-
-\chapter{Sets and functions}
-    \label{chSetsFunctions}
-    \input{book/ch02-sets-functions/_sets-functions.tex}
-
-\chapter{Mathematical induction}
-    \label{chMathematicalInduction}
-    \input{book/ch03-mathematical-induction/_mathematical-induction.tex}
-
-\chapter{Relations}
-    \label{chRelations}
-    \input{book/ch04-relations/_relations.tex}
+\input{book/ch01-logical-structure/_logical-structure.tex}
+\input{book/ch02-sets/_sets.tex}
+\input{book/ch03-functions/_functions.tex}
+\input{book/ch04-mathematical-induction/_mathematical-induction.tex}
+\input{book/ch05-relations/_relations.tex}
 
 \part{Topics in pure mathematics}
 \label{ptTopics}
 
-\chapter{Number theory}
-    \label{chNumberTheory}
-    \input{book/ch05-number-theory/_number-theory.tex}
-
-\chapter{Enumerative combinatorics}
-    \label{chCombinatorics}
-    \input{book/ch06-enumerative-combinatorics/_enumerative-combinatorics.tex}
-    
-\chapter{Real numbers}
-    \label{chRealNumbers}
-    \input{book/ch07-real-numbers/_real-numbers.tex}
-    
-\chapter{Infinity}
-    \label{chInfinity}
-    \input{book/ch08-infinity/_infinity.tex}
-    
-\chapter{Discrete probability theory}
-    \label{chProbabilityTheory}
-    \input{book/ch09-probability-theory/_probability-theory.tex}
-    
-\chapter{Additional topics}
-    \label{chAdditionalTopics}
-    \input{book/ch10-additional-topics/_additional-topics.tex}
+\input{book/ch06-number-theory/_number-theory.tex}
+\input{book/ch07-enumerative-combinatorics/_enumerative-combinatorics.tex}
+\input{book/ch08-real-numbers/_real-numbers.tex}
+\input{book/ch09-infinity/_infinity.tex}
+\input{book/ch10-probability-theory/_probability-theory.tex}
+\input{book/ch11-additional-topics/_additional-topics.tex}
 
 % Source: LaTeX Stack Exchange
 % https://tex.stackexchange.com/q/6489 (Malabarba)
@@ -127,34 +87,19 @@
 \addtocontents{toc}{\protect\pagebreak}
 
 \appendix
+
 \begin{appendices}
+
 \renewcommand{\sectionmark}[1]{\markboth{\leftmark}{Section \thesection.\ #1}}
 \renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{\rightmark}}
 
 \part*{Appendices}
 \addcontentsline{toc}{part}{Appendices}
 
-\chapter{Proof-writing}
-    \label{apxWriting}
-    \renewcommand\chaptername{Proof-writing}
-    \input{book/cha-proof-writing/_proof-writing.tex}
-
-\chapter{Mathematical miscellany}    
-    \label{apxMiscellany}
-    \renewcommand\chaptername{Mathematical miscellany}
-    \input{book/chb-miscellany/_miscellany.tex}
-
-\chapter{Hints for selected exercises}
-    \markboth{Appendix \thechapter.\ Hints to selected exercises}{Appendix \thechapter.\ Hints to selected exercises}
-    \label{apxHints}
-    \renewcommand\chaptername{Hints to selected exercises}
-    \input{book/chc-hints/_hints.tex}
-
-\chapter{Typesetting mathematics with \LaTeX{}}
-    \markboth{Appendix \thechapter.\ Typesetting mathematics with \LaTeX{}}{Typesetting mathematics using \LaTeX{}}
-    \label{apxLaTeX}
-    \renewcommand\chaptername{Typesetting mathematics with \LaTeX{}}
-    \input{book/chd-latex/_latex.tex}
+\input{book/cha-proof-writing/_proof-writing.tex}
+\input{book/chb-miscellany/_miscellany.tex}
+\input{book/chc-hints/_hints.tex}
+\input{book/chd-latex/_latex.tex}
 
 \end{appendices}
 
@@ -165,7 +110,7 @@
 \addcontentsline{toc}{part}{Indices}
 
 \renewcommand{\chaptername}{Indices}
-\newpage
+
 \addcontentsline{toc}{chapter}{Index of topics}
 \printindex
 
@@ -179,11 +124,8 @@
 \printindex[latex]%
 }
 
-\newpage
+\input{book/licence/_licence.tex}
 
-\chapter*{Licence}
-\addcontentsline{toc}{part}{Licence}
-    \renewcommand\chaptername{Licence}
-    \input{book/licence/_licence.tex}
+\cleardoublepage
 
 \end{document}

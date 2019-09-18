@@ -1,0 +1,364 @@
+\section{Finite sets}
+\secbegin{secFiniteSets}
+
+As its title suggests, this section is all about exploring the properties of finite sets, and to do this we must first define what we mean by `finite'. We certainly know a finite set when we see one---for example:
+\begin{itemize}
+\item The set $\{ \text{red}, \text{orange}, \text{yellow}, \text{green}, \text{blue}, \text{purple} \}$ is finite.
+\item The set $[0,1]$ is infinite, but it has finite length.
+\item The set $[0,\infty)$ is infinite and has infinite length.
+\item The set $\mathcal{P}(\mathbb{N})$ is infinite, but has no notion of `length' to speak of.
+\item The empty set $\varnothing$ is finite.
+\end{itemize}
+
+If we are to make a definition of `finite set', we must first figure out what the finite sets above have in common but the infinite sets do not.
+
+It is difficult to define `finite' without being imprecise. A first attempt at a definition might be something like the following:
+\begin{center}
+\textit{A set $X$ is finite if the elements of $X$ don't go on forever.}
+\end{center}
+This is good intuition, but isn't good enough as a mathematical definition, because `go on' and `forever' are not precise terms (unless they themselves are defined). So let's try to make this more precise:
+\begin{center}
+\textit{A set $X$ is finite if the elements of $X$ can be listed one by one\\
+in such a way that the list has both a start and an end.}
+\end{center}
+This is better but is still not entirely precise---it is not entirely clear what is meant by `listed one by one'. But we can make this precise: to list the elements of $X$ one-by-one means that we are specifying a `first element', a `second element', a `third element', and so on. To say that this list has an end means that we eventually reach the `$n^{\text{th}}$ element', for some $n \in \mathbb{N}$, and there is no `$(n+1)^{\text{st}}$ element'. In other words, for some natural number $n$, we are pairing up the elements of $X$ with the natural numbers from $1$ to $n$.
+
+Recall that, for each $n \in \mathbb{N}$, the set of natural numbers from $1$ up to $n$ has its own notation:
+
+\RSdefBracketN*
+
+Since `pairing up' really means `finding a bijection', we are now ready to define what it means for a set to be finite.
+
+\begin{definition}
+\label{defFiniteSet}
+\index{finite set}
+\index{infinite set}
+\index{enumeration!of a finite set}
+A set $X$ is \textbf{finite} if there exists a bijection $f : [n] \to X$ for some $n \in \mathbb{N}$. The function $f$ is called an \textbf{enumeration} of $X$. If $X$ is not finite we say it is \textbf{infinite}.
+\end{definition}
+
+This definition suggests the following strategy for proving that a set is finite.
+
+\begin{strategy}[Proving that a set is finite]
+In order to prove that a set $X$ is finite, it suffices to find a bijection $[n] \to X$ for some $n \in \mathbb{N}$.
+\end{strategy}
+
+\begin{example}
+\label{exSomeFiniteSets}
+Let $X = \{ \text{red}, \text{orange}, \text{yellow}, \text{green}, \text{blue}, \text{purple} \}$. We said above that $X$ is finite; now we can prove it. Define $f : [6] \to X$ by
+\[ \begin{matrix}
+f(1) = \text{red} & f(2) = \text{orange} & f(3) = \text{yellow} \\
+f(4) = \text{green} & f(5) = \text{blue} & f(6) = \text{purple}
+\end{matrix} \]
+The function $f$ is evidently a bijection, since each element of $X$ can be expressed uniquely as $f(k)$ for some $k \in [6]$. So $X$ is finite.
+\end{example}
+
+\begin{exercise}
+\label{exBracketNIsFinite}
+Prove that $[n]$ is finite for each $n \in \mathbb{N}$.
+\end{exercise}
+
+Note that \Cref{exBracketNIsFinite} implies, in particular, that $\varnothing$ is finite, since $\varnothing = [0]$.
+
+\subsection*{The size of a finite set}
+
+Whilst it might sometimes be useful just to know \textit{that} set is finite, it will be even more useful to know how many elements it has. This quantity is called the \textit{size} of the set. Intuitively, the size of the set should be the length of the list of its elements, but for this to be well-defined, we first need to know that the number of elements in the list is independent of the order in which we list them.
+
+The `list of elements' of a finite set $X$ is the bijection $[n] \to X$ given by \Cref{defFiniteSet}, and $n$ is the length of the list, this means that we need to prove that if $[m] \to X$ and $[n] \to X$ are bijections, then $m=n$. This will be \Cref{thmUniquenessOfSize}.
+
+To be able to prove this, we must first prove some technical results that we will use in the proof.
+
+\begin{lemma}
+\label{lemRemoveElementFromSet}
+Let $X$ be an inhabited set. There is a bijection $X \setminus \{ a \} \to X \setminus \{ b \}$ for all $a, b \in X$.
+\end{lemma}
+
+\begin{cproof}
+Define $f : X \setminus \{ a \} \to X \setminus \{ b \}$ by
+\[ f(x) = \begin{cases} a & \text{if } x = b \\ x & \text{otherwise} \end{cases} \]
+Note that $f$ is well-defined since it ensures that $f(x) \ne b$ for any $x \in X \setminus \{ a \}$.
+
+We prove that $f$ is a bijection by finding an inverse.
+
+So define $g : X \setminus \{ b \} \to X \setminus \{ a \}$ by
+\[ g(x) = \begin{cases} b & \text{if } x = a \\ x & \text{otherwise} \end{cases} \]
+Again, $g$ is well-defined since we have ensured that $g(x) \ne a$ for any $x \in X \setminus \{ b \}$.
+
+Given $x \in X$, if $x \ne a$ and $x \ne b$, then $f(x) \ne a$ and $g(x) \ne b$, so that
+\[ g(f(x)) = g(x) = x \quad \text{and} \quad f(g(x)) = f(x) = x \]
+Moreover $g(f(b)) = g(a) = b$ and $f(g(a)) = f(b) = a$.
+
+This proves that $g \circ f = \mathrm{id}_{X \setminus \{ a \}}$ and $f \circ g = \mathrm{id}_{X \setminus \{ b \}}$, so that $g$ is an inverse for $f$, as required.
+\end{cproof}
+
+\begin{theorem}
+\label{thmJectionsAndSizeOfNaturalNumbers}
+Let $m,n \in \mathbb{N}$.
+\begin{enumerate}[(a)]
+\item If there exists an injection $f : [m] \to [n]$, then $m \le n$.
+\item If there exists a surjection $g : [m] \to [n]$, then $m \ge n$.
+\item If there exists a bijection $h : [m] \to [n]$, then $m=n$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of (a)]
+For fixed $m \in \mathbb{N}$, let $p(m)$ be the assertion that, for all $n \in \mathbb{N}$, if there exists an injection $[m] \to [n]$, then $m \le n$. We prove that $p(m)$ is true for all $m \in \mathbb{N}$ by induction.
+
+\begin{itemize}
+\item (\textbf{Base case}) We need to prove that, for all $n \in \mathbb{N}$ if there exists an injection $[0] \to [n]$, then $0 \le n$. This is automatically true, since $0 \le n$ for all $n \in \mathbb{N}$.
+\item (\textbf{Induction step}) Fix $m \in \mathbb{N}$ and suppose that, for all $n \in \mathbb{N}$, if there exists an injection $[m] \to [n]$, then $m \le n$.
+
+Now let $n \in \mathbb{N}$ and suppose that there is an injection $f : [m+1] \to [n]$. We need to prove that $m+1 \le n$.
+
+First note that $n \ge 1$. Indeed, since $m+1 \ge 1$, we have $1 \in [m+1]$, and so $f(1) \in [n]$. This means that $[n]$ is inhabited, and so $n \ge 1$. In particular, $n-1 \in \mathbb{N}$ and so the set $[n-1]$ is well-defined. It suffices to prove that $m \le n-1$.
+
+Let $a = f(m+1) \in [n]$ and define $f^- : [m] \to [n] \setminus \{ a \}$ by $f^-(k) = f(k)$ for all $k \in [m]$. Note that $f^-$ is well-defined; indeed, $f(k) \ne a$ for all $k \in [m]$ since $a = f(m+1)$ and $f$ is injective.
+
+The function $f^-$ is injective. To see this, let $k, \ell \in [m]$ and suppose $f^-(k) = f^-(\ell)$. Then $f(k) = f(\ell)$ by definition of $f^-$, and so $k = \ell$ by injectivity of $f$.
+
+Since $[n-1] = [n] \setminus \{ n \}$, there is a bijection $s : [n] \setminus \{ a \} \to [n-1]$ by \Cref{lemRemoveElementFromSet}. In particular, $s$ is injective, and so $s \circ f^-$ is an injection $[m] \to [n-1]$ by \Cref{propCompositeOfInjectionsIsInjection}.
+
+By the induction hypothesis, we have $m \le n-1$, and so $m+1 \le n$ as required.
+\end{itemize}
+The result now follows by induction.
+\end{cproof}
+
+\begin{exercise}
+Prove parts (b) and (c) of \Cref{thmJectionsAndSizeOfNaturalNumbers}.
+\hintlabel{exFinishProofOfJectionsAndSizeOfNaturalNumbers}{%
+Part (b) has a proof by induction that looks much like the one in part (a). In the induction step, given a surjection $g : [m+1] \to [n]$, observe that we must have $n \ge 1$, and construct a surjection $g^- : [m+1] \setminus \{ a \} \to [n-1]$ for some suitable $a \in [m+1]$. Then invoke \Cref{lemRemoveElementFromSet}, now using the fact that $[m] = [m+1] \setminus \{m+1\}$.
+}
+\end{exercise}
+
+Phew! That was fun. With these technical results proved, we can now prove the theorem we needed for the size of a finite set to be well-defined.
+
+\begin{theorem}[Uniqueness of size]
+\label{thmUniquenessOfSize}
+Let $X$ be a finite set and let $f : [m] \to X$ and $g : [n] \to X$ be enumerations of $X$, where $m,n \in \mathbb{N}$. Then $m=n$.
+\end{theorem}
+
+\begin{cproof}
+Since $f : [m] \to X$ and $g : [n] \to X$ are bijections, the function $g^{-1} \circ f : [m] \to [n]$ is a bijection by \Cref{exCompositeOfBijectionsIsBijection,exInverseBijection}. Hence $m=n$ by \Cref{thmJectionsAndSizeOfNaturalNumbers}(c).
+\end{cproof}
+
+As we mentioned above, \Cref{thmUniquenessOfSize} tells us that any two ways of listing (enumerating) the elements of a finite set yield the same number of elements. We may now make the following definition.
+
+\begin{definition}
+\label{defSize}
+\index{size}
+Let $X$ be a finite set. The \textbf{size} of $X$, written $|X|$, is the unique natural number $n$ for which there exists a bijection $[n] \to X$.
+\end{definition}
+
+\begin{example}
+\Cref{exSomeFiniteSets} showed that $|\{ \text{red}, \text{orange}, \text{yellow}, \text{green}, \text{blue}, \text{purple} \}| = 6$, and provided the proof was correct, \Cref{exBracketNIsFinite} showed that $|[n]| = n$ for all $n \in \mathbb{N}$; in particular, $|\varnothing| = 0$.
+\end{example}
+
+\begin{example}
+\label{exBijectionFromIntegersFromMinusNToNToBracketTwoNPlusOne}
+Fix $n \in \mathbb{N}$ and let $X = \{ a \in \mathbb{Z} \mid -n \le a \le n \}$. There is a bijection $f : [2n+1] \to X$ defined by $f(k) = k-n-1$. Indeed:
+\begin{itemize}
+\item \textbf{$f$ is well-defined.}
+%% BEGIN EXTRACT (xtrIntroducingVariableExampleTwo) %%
+We need to prove $f(k) \in X$ for all $k \in [2n+1]$. Well given $k \in [2n+1]$, we have $1 \le k \le 2n+1$, and so
+\[ -n = 1-(n+1) \le ~ \underbrace{k-(n+1)}_{=f(k)} ~  \le (2n+1) - (n+1) = n \]
+so that $f(k) \in X$ as claimed.
+%% END EXTRACT %%
+\item \textbf{$f$ is injective.} Let $k, \ell \in [2n+1]$ and assume $f(k) = f(\ell)$. Then $k - n - 1 = \ell - n - 1$, and so $k = \ell$.
+\item \textbf{$f$ is surjective.} Let $a \in X$ and define $k = a+n+1$. Then
+\[ 1 = (-n) + n + 1 \le ~ \underbrace{a + n + 1}_{= k} ~ \le n + n + 1 = 2n+1 \]
+and so $k \in [2n+1]$, and moreover $f(k) = (a+n+1)-n-1 = a$.
+\end{itemize}
+Since $f$ is a bijection, we have $|X| = 2n+1$ by \Cref{defSize}.
+\end{example}
+
+\begin{exercise}
+\label{exAddRemoveElementsOfFiniteSets}
+Let $X$ be a finite set with $|X| = n > 1$. Let $a \in X$ and let $b \not \in X$. Prove that
+\begin{enumerate}[(a)]
+\item $X \setminus \{ a \}$ is finite and $|X \setminus \{ a \}| = n-1$; and
+\item $X \cup \{ b \}$ is finite and $|X \cup \{ b \}| = n+1$.
+\end{enumerate}
+Identify where in your proofs you make use the hypotheses that $a \in X$ and $b \not \in X$.
+\end{exercise}
+
+\subsection*{Comparing the sizes of finite sets}
+
+When we used dots and stars to motivate the definitions of injective and surjective functions at the beginning of \Cref{secInjectionsSurjections}, we suggested the following intuition:
+\begin{itemize} 
+\item If there is an injection $f : X \to Y$, then $X$ has `at most as many elements as $Y$'; and
+\item If there is a surjection $g : X \to Y$, then $X$ has `at least as many elements as $Y$'.
+\end{itemize}
+
+We are now in a position to prove this, at least when $X$ and $Y$ are finite. The following theorem is a generalisation of \Cref{thmJectionsAndSizeOfNaturalNumbers}.
+
+\begin{theorem}
+\label{thmFiniteSetsAndJections}
+Let $X$ and $Y$ be sets.
+\begin{enumerate}[(a)]
+\item If $Y$ is finite and there is an injection $f : X \to Y$, then $X$ is finite and $|X| \le |Y|$.
+\item If $X$ is finite and there is a surjection $f : X \to Y$, then $Y$ is finite and $|X| \ge |Y|$.
+\item If one of $X$ or $Y$ is finite and there is a bijection $f : X \to Y$, then $X$ and $Y$ are both finite and $|X| = |Y|$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of (a)]
+\item We prove by induction that, for all $n \in \mathbb{N}$, if $Y$ is a finite set of size $n$ and there is an injection $f : X \to Y$, then $X$ is finite and $|X| \le n$.
+
+\begin{itemize}
+\item (\textbf{Base case}) Let $Y$ be a finite set of size $0$---that is, $Y$ is empty. Suppose there is an injection $f : X \to Y$. If $X$ is inhabited, then there exists an element $a \in X$, so that $f(a) \in Y$. This contradicts emptiness of $Y$, so that $X$ must be empty. Hence $|X| = 0 \le 0$, as required.
+
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and assume that, if $Y$ is a finite set of size $n$ and there is an injection $f : X \to Y$, then $X$ is finite and $|X| \le n$.
+
+Fix a finite set $Y$ of size $n+1$ and an injection $f : X \to Y$. We need to prove that $X$ is finite and $|X| \le n+1$.
+
+If $X$ is empty, then $|X| = 0 \le n+1$ as required. So assume that $X$ is inhabited, and fix an element $a \in X$.
+
+Define $f^{\vee} : X \setminus \{ a \} \to Y \setminus \{ f(a) \}$ by $f^{\vee}(x) = f(x)$ for all $x \in X \setminus \{ a \}$. Note that $f^{\vee}$ is well-defined since $f(x) \ne f(a)$ for any $x \in X \setminus \{ a \}$ by injectivity of $f$. Moreover $f^{\vee}$ is injective; indeed, let $x,y \in X \setminus \{ a \}$ and assume $f^{\vee}(x) = f^{\vee}(y)$. Then
+\[f(x) = f^{\vee}(x) = f^{\vee}(y) = f(y) \quad \Rightarrow \quad x=y\]
+by injectivity of $f$. So $f^{\vee}$ is an injection.
+
+By \Cref{exAddRemoveElementsOfFiniteSets}, $Y \setminus \{ f(a) \}$ is finite and $|Y \setminus \{ f(a) \}| = (n+1) - 1 = n$.
+
+By the induction hypothesis, $X \setminus \{ a \}$ is finite and $|X \setminus \{ a \}| \le (n+1) - 1$. But $|X \setminus \{ a \}| = |X| - 1$ by \Cref{exAddRemoveElementsOfFiniteSets}, and so $|X| \le n+1$, as required.
+\end{itemize}
+
+The result now follows by induction.
+\end{cproof}
+
+\begin{exercise}
+Prove parts (b) and (c) of \Cref{thmFiniteSetsAndJections}.
+\end{exercise}
+
+\Cref{thmFiniteSetsAndJections} suggests the following strategies for comparing the sizes of finite sets:
+
+\begin{strategy}[Comparing the sizes of finite sets]
+\label{strComparingSizesOfFiniteSets}
+Let $X$ and $Y$ be finite sets.
+\begin{enumerate}[(a)]
+\item In order to prove that $|X| \le |Y|$, it suffices to find an injection $X \to Y$.
+\item In order to prove that $|X| \ge |Y|$, it suffices to find a surjection $X \to Y$.
+\item \label{strBijectiveProof} In order to prove that $|X| = |Y|$, it suffices to find a bijection $X \to Y$.
+\end{enumerate}
+Strategy \ref{strBijectiveProof} is commonly known as \textbf{bijective proof}.
+\end{strategy}
+
+\subsection*{Closure properties of finite sets}
+
+We now use \Cref{strComparingSizesOfFiniteSets} to prove some \textit{closure properties} of finite sets---that is, operations we can perform on finite sets to ensure that the result remains finite.
+
+\begin{exercise}
+Let $X$ be a finite set. Prove that every subset $U \subseteq X$ is finite and $|U| \le |X|$.
+\hintlabel{exSubsetOfFiniteSetIsFinite}{%
+Given $U \subseteq X$, find an injection $U \to X$ and apply \Cref{thmFiniteSetsAndJections}(a).
+}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ and $Y$ be finite sets. Prove that $X \cap Y$ is finite.
+\hintlabel{exIntersectionOfFiniteSetsIsFinite}{%
+Recall that $X \cap Y \subseteq X$ for all sets $X$ and $Y$.
+}
+\end{exercise}
+
+\begin{proposition}
+\label{propUnionOfFiniteSetsIsFinite}
+Let $X$ and $Y$ be finite sets. Then $X \cup Y$ is finite, and moreover
+\[ |X \cup Y| = |X| + |Y| - |X \cap Y| \]
+\end{proposition}
+
+\begin{cproof}
+We will prove this in the case when $X$ and $Y$ are disjoint. The general case, when $X$ and $Y$ are not assumed to be disjoint, will be \Cref{exSizeOfUnion}.
+
+Let $m = |X|$ and $n=|Y|$, and let $f : [m] \to X$ and $g : [n] \to Y$ be bijections.
+
+Since $X$ and $Y$ are disjoint, we have $X \cap Y = \varnothing$. Define $h : [m+n] \to X \cup Y$ as follows; given $k \in [m+n]$, let
+\[ h(k) = \begin{cases} f(k) & \text{if } k \le m \\ g(k-m) & \text{if } k > m \end{cases} \]
+Note that $h$ is well-defined: the cases $k \le m$ and $k > m$ are mutually exclusive, they cover all possible cases, and $k-m \in [n]$ for all $m+1 \le k \le n$ so that $g(k-m)$ is defined. It is then straightforward to check that $h$ has an inverse $h^{-1} : X \cup Y \to [m+n]$ defined by
+\[ h^{-1}(z) = \begin{cases} f^{-1}(z) & \text{if } z \in X \\ g^{-1}(z)+m & \text{if } z \in Y \end{cases} \]
+Well-definedness of $h^{-1}$ relies fundamentally on the assumption that $X \cap Y = \varnothing$, as this is what ensures that the cases $x \in X$ and $x \in Y$ are mutually exclusive.
+
+%% BEGIN EXTRACT (xtrConclusionExampleTwo) %%
+Hence $|X \cup Y| = m+n = |X| + |Y|$, which is as required since $|X \cap Y| = 0$.
+%% END EXTRACT %%
+\end{cproof}
+
+\begin{exercise}
+\label{exSizeOfUnion}
+The following steps complete the proof of \Cref{propUnionOfFiniteSetsIsFinite}:
+\begin{enumerate}[(a)]
+\item Given sets $A$ and $B$, prove that the sets $A \times \{ 0 \}$ and $B \times \{ 1 \}$ are disjoint, and find bijections $A \to A \times \{ 0 \}$ and $B \to B \times \{ 1 \}$. Write $A \sqcup B$\nindex{unionDisjoint}{$\sqcup$}{disjoint union} \inlatex{sqcup}\lindexmmc{sqcup}{$\sqcup$} to denote the set $(A \times \{ 0 \}) \cup (B \times \{ 1 \})$. The set $A \sqcup B$ is called the \textbf{disjoint union}\index{disjoint union} of $A$ and $B$.
+\item Prove that, if $A$ and $B$ are finite then $A \sqcup B$ is finite and
+\[ |A \sqcup B| = |A| + |B| \]
+\item Let $X$ and $Y$ be sets. Find a bijection
+\[ (X \cup Y) \sqcup (X \cap Y) \to X \sqcup Y \]
+\item Complete the proof of \Cref{propUnionOfFiniteSetsIsFinite}---that is, prove that if $X$ and $Y$ are finite sets, not necessarily disjoint, then $X \cup Y$ is finite and
+\[ |X \cup Y| = |X| + |Y| - |X \cap Y| \]
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a finite set and let $U \subseteq X$. Prove that $X \setminus U$ is finite, and moreover $|X \setminus U| = |X| - |U|$.
+\hintlabel{exSizeOfRelativeComplement}{%
+Apply \Cref{propUnionOfFiniteSetsIsFinite} with $Y=U$.
+}
+\end{exercise}
+
+\begin{exercise}
+\label{exSizeOfCartesianProduct}
+Let $m,n \in \mathbb{N}$. Prove that $|[m] \times [n]| = mn$.
+\hintlabel{exBijectionBetweenProductOfBracketSets}{%
+Prove by induction on $n \in \mathbb{N}$ that, for all $m,n \in \mathbb{N}$, there is a bijection $[mn] \to [m] \times [n]$.
+}
+\end{exercise}
+
+\begin{proposition}
+\label{propProductOfFiniteSetsIsFinite}
+Let $X$ and $Y$ be finite sets. Then $X \times Y$ is finite, and moreover
+\[ |X \times Y| = |X| \cdot |Y| \]
+\end{proposition}
+\begin{cproof}
+Let $X$ and $Y$ be finite sets, let $m=|X|$ and $n=|Y|$, and let $f : [m] \to X$ and $g : [n] \to Y$ be bijections. Define a function $h : [m] \times [n] \to X \times Y$ by
+\[ h(k,\ell) = (f(k),g(\ell)) \]
+for each $k \in [m]$ and $\ell \in [n]$. It is easy to see that this is a bijection, with inverse defined by
+\[ h^{-1}(x,y) = (f^{-1}(x), g^{-1}(y)) \]
+for all $x \in X$ and $y \in Y$. By \Cref{exBijectionBetweenProductOfBracketSets} there is a bijection $p : [mn] \to [m] \times [n]$, and by \Cref{exCompositeOfBijectionsIsBijection} the composite $h \circ p : [mn] \to X \times Y$ is a bijection. Hence $|X \times Y| = mn$.
+\end{cproof}
+
+In summary, we have proved that the property of finiteness is preserved by taking subsets, pairwise unions, pairwise intersections, pairwise cartesian products, and relative complements. 
+
+\subsection*{Infinite sets}
+
+We conclude this section by proving that not all sets are finite---specifically, we'll prove that $\mathbb{N}$ is infinite. \textit{Intuitively} this seems extremely easy: of \textit{course} $\mathbb{N}$ is infinite! But in mathematical practice, this isn't good enough: we need to use our definition of `infinite' to prove that $\mathbb{N}$ is infinite. Namely, we need to prove that there is no bijection $[n] \to \mathbb{N}$ for any $n \in \mathbb{N}$. We will use \Cref{lemFinSetGreatestElement} below in our proof.
+
+\begin{lemma}
+\label{lemFinSetGreatestElement}
+Every inhabited finite set of natural numbers has a greatest element.
+\end{lemma}
+\begin{cproof}
+We'll prove by induction on $n \ge 1$ that every subset $U \subseteq \mathbb{N}$ of size $n$ has a greatest element.
+\begin{itemize}
+\item (\textbf{Base case}) Take $U \subseteq \mathbb{N}$ with $|U|=1$. then $U = \{ m \}$ for some $m \in \mathbb{N}$. Since $m$ is the only element of $U$, it is certainly the greatest element of $U$!
+
+\item (\textbf{Induction step}) Fix $n \ge 1$ and suppose that every set of natural numbers of size $n$ has a greatest element (\textbf{IH}).
+
+Let $U \subseteq \mathbb{N}$ with $|U| = n+1$. We wish to show that $U$ has a greatest element.
+
+Since $|U| = n+1$, we may write $U = \{ m_1, m_2, \dots, m_n, m_{n+1} \}$ for distinct natural numbers $m_k$. But then $|U \setminus \{ m_{n+1} \}| = n$ by \Cref{exAddRemoveElementsOfFiniteSets}, and so by the induction hypothesis, $U \setminus \{ m_{n+1} \}$ has a greatest element, say $m_k$. Now:
+\begin{itemize}
+\item If $m_k < m_{n+1}$, then $m_{n+1}$ is the greatest element of $U$.
+\item If $m_k > m_{n+1}$, then $m_k$ is the greatest element of $U$.
+\end{itemize}
+In any case, $U$ has a greatest element. This completes the induction step.
+\end{itemize}
+\end{cproof}
+
+\begin{theorem}
+\label{thmNIsInfinite}
+The set $\mathbb{N}$ is infinite.
+\end{theorem}
+
+\begin{cproof}
+%% BEGIN EXTRACT (xtrContradictionExample) %%
+We proceed by contradiction. Suppose $\mathbb{N}$ is finite. Then $|\mathbb{N}| = n$ for some $n \in \mathbb{N}$, and hence $\mathbb{N}$ is either empty (nonsense, since $0 \in \mathbb{N}$) or, by \Cref{lemFinSetGreatestElement}, it has a greatest element $g$. But $g+1 \in \mathbb{N}$ since every natural number has a successor, and $g+1 > g$, so this contradicts maximality of $g$. Hence $\mathbb{N}$ is infinite.
+%% END EXTRACT %%
+\end{cproof}

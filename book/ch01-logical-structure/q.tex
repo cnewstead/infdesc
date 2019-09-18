@@ -77,6 +77,58 @@ How might this logical equivalence help you to prove statements of the form `$p$
 Prove using truth tables that $p \Rightarrow q \not\equiv q \Rightarrow p$. Give an example of propositions $p$ and $q$ such that $p \Rightarrow q$ is true but $q \Rightarrow p$ is false.
 \end{chapex}
 
+In \Crefrange{cqTruthTablesBegin}{cqTruthTablesEnd}, find a logical formula whose column in a truth table is as shown.
+
+\begin{chapex}
+\label{cqTruthTablesBegin}
+\begin{tabular}{cc|c}
+$p$ & $q$ & \hspace{50pt} \\ \hline
+\TT & \TT & \FF \\
+\TT & \FF & \TT \\
+\FF & \TT & \TT \\
+\FF & \FF & \FF \\
+\end{tabular}
+\end{chapex}
+
+\begin{chapex}
+\begin{tabular}{cc|c}
+$p$ & $q$ & \hspace{50pt} \\ \hline
+\TT & \TT & \TT \\
+\TT & \FF & \FF \\
+\FF & \TT & \TT \\
+\FF & \FF & \FF \\
+\end{tabular}
+\end{chapex}
+
+\begin{chapex}
+\begin{tabular}{ccc|c}
+$p$ & $q$ & $r$ & \hspace{50pt} \\ \hline
+\TT & \TT & \TT & \TT \\
+\TT & \TT & \FF & \TT \\
+\TT & \FF & \TT & \FF \\
+\TT & \FF & \FF & \FF \\
+\FF & \TT & \TT & \FF \\
+\FF & \TT & \FF & \FF \\
+\FF & \FF & \TT & \TT \\
+\FF & \FF & \FF & \TT \\
+\end{tabular}
+\end{chapex}
+
+\begin{chapex}
+\label{cqTruthTablesEnd}
+\begin{tabular}{ccc|c}
+$p$ & $q$ & $r$ & \hspace{50pt} \\ \hline
+\TT & \TT & \TT & \TT \\
+\TT & \TT & \FF & \FF \\
+\TT & \FF & \TT & \FF \\
+\TT & \FF & \FF & \FF \\
+\FF & \TT & \TT & \TT \\
+\FF & \TT & \FF & \FF \\
+\FF & \FF & \TT & \TT \\
+\FF & \FF & \FF & \FF \\
+\end{tabular}
+\end{chapex}
+
 \begin{chapex}
 A new logical operator $\uparrow$ is defined by the following rules:
 \begin{enumerate}[(i)]

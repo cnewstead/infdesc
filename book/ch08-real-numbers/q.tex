@@ -1,0 +1,68 @@
+\subsection*{Inequalities and means}
+
+\begin{chapex}
+Compute $\lVert 2({-1},{-5},1,5,1) - (2,{-1},1,{-2},8) \rVert$.
+\end{chapex}
+
+\begin{chapex}
+Let $a,b \in \mathbb{R}$ and let $a_0,a_1,a_2,\dots,a_n \in \mathbb{R}$ with $a_0=a$ and $a_n=b$. Prove that $|a-b| \le \sum_{k=1}^n |a_{k-1} - a_k|$.
+\end{chapex}
+
+\begin{chapex}
+Let $n \in \mathbb{N}$. Prove that $\vec x \cdot \vec y = \vec y \cdot \vec x$ for all $\vec x, \vec y \in \mathbb{R}^n$.
+\end{chapex}
+
+\begin{chapex}
+Let $n \in \mathbb{N}$, let $\vec x, \vec y \in \mathbb{R}^n$ and let $a,b,c,d \in \mathbb{R}$. Prove that $(a \vec x + b \vec y) \cdot (c \vec x + d \vec y) = ac \lVert \vec x \rVert^2 + bd \lVert \vec y \rVert^2 + (ad+bc) (\vec x \cdot \vec y)$.
+\end{chapex}
+
+\begin{chapex}
+Let $a,b,c,d \in \mathbb{R}$. Assume that $a^2+b^2 = 9$, $c^2+d^2=25$ and $ac+bd = 15$. Find the value of $\dfrac{a+2b}{c+2d}$.
+\hintlabel{cqCauchySchwarzGivenMagnitudeAndDotProduct}{%
+Consider what the Cauchy--Schwarz inequality has to say about the vectors $(a,b)$ and $(c,d)$. Note also that $a+2b = (a,b) \dot (1,2)$ and $c+2d = (c,d) \cdot (1,2)$.
+}
+\end{chapex}
+
+\begin{chapex}
+Let $\vec a \in \mathbb{R}^3$ and $r > 0$, and define
+\[ B(\vec a; r) = \{ \vec x \in \mathbb{R}^3 \mid \lVert \vec x - \vec a \rVert < r \} \]
+Prove that $\lVert \vec x - \vec y \rVert < 2r$ for all $\vec x, \vec y \in B(\vec a; r)$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $a^3+b^3+c^3 \ge abc$ for all positive real numbers $a,b,c$. When does equality occur?
+\end{chapex}
+
+\begin{chapex}
+Let $a,b,c > 0$. Prove that $\dfrac{b+c}{a} + \dfrac{c+a}{b} + \dfrac{a+b}{c} \ge 6$, with equality if and only if $a=b=c$.
+\hintlabel{cqHarmonicAndArithmeticMeans}{%
+Begin by comparing the harmonic and arithmetic means of the numbers $a$, $b$ and $c$.
+}
+\end{chapex}
+
+\begin{chapex}
+Let $a,b,c \in \mathbb{R}$. Prove that $a^4 + b^4 + c^4 \ge \dfrac{(ab+bc+ca)^2}{3}$. When does equality occur?
+\hintlabel{cqQMAMWithCauchySchwarz}{%
+Begin by seeing what the QM--AM inequality says about the numbers $a^2$, $b^2$ and $c^2$. Then apply the Cauchy--Schwarz inequality, noting that $ab+bc+ca$ is the scalar product of two vectors.
+}
+\end{chapex}
+
+\begin{chapex}
+\textit{Unit cost averaging} is an investment strategy in which an investor invests a fixed amount of money in an asset in equal instalments over a fixed period of time.
+
+Let $a,b \in \mathbb{R}$ with $a<b$, let $n \ge 1$, and let $f : [a,b] \to (0,\infty)$ be such that at time $t \in [a,b]$, an asset is trading at £$f(t)$ per share. Assume that you invest a total of £$M$ in the asset in equal instalments of £$\dfrac{M}{n}$ at times $t_0, t_1, \dots, t_{n-1}$, where $M \in [0,\infty)$, $n \ge 1$, and $t_i = a + i \cdot \dfrac{b-a}{n}$ for all $0 \le i < n$.
+
+\begin{enumerate}[(a)]
+\item Prove that the value of the shares that you hold at time $b$ is equal to
+\[ \text{£}~\dfrac{f(b)}{\mathrm{HM} \big ( f(t_0),~ f(t_1),~ \dots,~ f(t_{n-1}) \big)} \cdot M \]
+where $\mathrm{HM}(a_1,a_2,\dots,a_n)$ denotes the harmonic mean of $a_1,a_2,\dots,a_n \in \mathbb{R}$.
+
+\item Under what condition have you made a profit?
+\end{enumerate}
+\end{chapex}
+
+\subsection*{Sequences}
+
+\begin{chapex}
+Does there exist a sequence $(x_n)$ such that $(x_{n+1} - x_n) \to 0$ but $(x_n)$ diverges?
+\end{chapex}

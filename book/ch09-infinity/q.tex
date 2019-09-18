@@ -1,0 +1,199 @@
+\subsection*{Countability}
+
+In \Crefrange{cqProveCountableBegin}{cqProveCountableEnd}, prove that the set is countable.
+
+\begin{chapex}
+\label{cqProveCountableBegin}
+The set $D = \left\{ \dfrac{a}{2^n} \mid a \in \mathbb{Z}, n \in \mathbb{N} \right\}$ of \textit{dyadic} rational numbers.
+\end{chapex}
+
+\begin{chapex}
+The set of all functions $[n] \to \mathbb{Z}$, where $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all real numbers whose square is rational.
+\end{chapex}
+
+\begin{chapex}
+\label{cqProveCountableEnd}
+The following set:
+\[
+[(\mathbb{Z} \times \mathbb{Q}) \setminus (\mathbb{N} \times \mathbb{Z})] \cup \{ n \in \mathbb{N} \mid \exists u,v \in \mathbb{N},\, n=5u+6v \} \cup \{ x \in \mathbb{R} \mid x-\sqrt{2} \in \mathbb{Q} \}
+\]
+\end{chapex}
+
+In \Crefrange{cqProveUncountableBegin}{cqProveUncountableEnd}, prove that the set is uncountable.
+
+\begin{chapex}
+\label{cqProveUncountableBegin}
+The set of all functions $\mathbb{Z} \to \{ 0,1 \}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all subsets $U \subseteq \mathbb{N}$ such that neither $U$ nor $\mathbb{N} \setminus U$ is finite.
+\end{chapex}
+
+\begin{chapex}
+\label{cqProveUncountableEnd}
+The set of all sequences of rational numbers that converge to $0$.
+\end{chapex}
+
+In \Crefrange{cqDetermineIfCountableBegin}{cqDetermineIfCountableEnd}, determine whether the set is countable or uncountable, and then prove it.
+
+\begin{chapex}
+\label{cqDetermineIfCountableBegin}
+The set of all functions $f : \mathbb{N} \to \mathbb{N}$ that are weakly decreasing---that is, such that for all $m,n \in \mathbb{N}$, if $m \le n$, then $f(m) \ge f(n)$.
+\end{chapex}
+
+\begin{chapex}
+The set of all functions $f : \mathbb{N} \to \mathbb{Z}$ that are weakly decreasing.
+\end{chapex}
+
+% \begin{definition}
+% \label{defPeriodicFunction}
+% \index{function!periodic}
+% \index{periodic function}
+% Given a set $X$ and a subset $U \subseteq \mathbb{R}$ that is closed under addition (that is, $a+b \in U$ for all $a,b \in U$), a function $f : U \to X$ is \textbf{periodic} if there exists some positive $p \in U$ such that $f(x+p)=f(x)$ for all $x \in U$.
+% \end{definition}
+
+\begin{chapex}
+The set of all periodic functions $f : \mathbb{Z} \to \mathbb{Q}$---that is, such that there is some integer $p > 0$ such that $f(x+p) = f(x)$ for all $x \in \mathbb{Z}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all periodic functions $f : \mathbb{Q} \to \mathbb{Z}$---that is, such that there is some rational number $p > 0$ such that $f(x+p) = f(x)$ for all $x \in \mathbb{Q}$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqDetermineIfCountableEnd}
+The set of all real numbers $x$ such that $a_0 + a_1x + \cdots + a_dx^d = 0$ for some rational numbers $a_0,a_1,\dots,a_d$ with $a_d \ne 0$.
+\end{chapex}
+
+\begin{chapex}
+A subset $D \subseteq \mathbb{R}$ is \textit{dense} if $(a-\varepsilon, a+\varepsilon) \cap U$ is inhabited for all $a \in \mathbb{R}$ and all $\varepsilon > 0$---intuitively, this means that there are elements of $U$ arbitrarily close to any real number. Must a dense subset of $\mathbb{R}$ be uncountable?
+\end{chapex}
+
+\subsection*{Cardinality}
+
+In \Crefrange{cqFindCardinalityBegin}{cqFindCardinalityEnd}, determine whether the cardinality of the set is equal to $\aleph_0$, equal to $\mathfrak{c}$, or greater than $\mathfrak{c}$.
+
+\begin{chapex}
+\label{cqFindCardinalityBegin}
+$\mathcal{P}(\mathbb{R})$.
+\end{chapex}
+
+\begin{chapex}
+The set of all finite subsets of $\mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all countably infinite subsets of $\mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+$\mathbb{R} \times \mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all functions $f : \mathbb{N} \to \mathbb{R}$ such that $f(n) = 0$ for all but finitely many $n \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+The set of all functions $\mathbb{Q} \to \mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqFindCardinalityEnd}
+The set of all functions $\mathbb{R} \to \mathbb{R}$.
+\end{chapex}
+
+\begin{chapex}
+Prove that there is a set $\mathcal{C}$ of pairwise disjoint circles in $\mathbb{R}^2$ such that $|\mathcal{C}| = \mathfrak{c}$; formally, a circle is a subset $C \subseteq \mathbb{R}^2$ of the form
+\[ C = \{ (x,y) \mid (x-a)^2 + (y-b)^2 = r^2 \} \]
+for some $a,b \in \mathbb{R}$ and some $r > 0$.
+\end{chapex}
+
+\begin{chapex}
+Prove that there does not exist a set $\mathcal{D}$ of pairwise disjoint discs in $\mathbb{R}^2$ such that $|\mathcal{D}| = \mathfrak{c}$; formally, a disc is a subset $D \subseteq \mathbb{R}^2$ of the form
+\[ D = \{ (x,y) \mid (x-a)^2 + (y-b)^2 \le r^2 \} \]
+for some $a,b \in \mathbb{R}$ and some $r>0$.
+\hintlabel{cqDiscsInPlane}{%
+Start by proving that any disc $D \subseteq \mathbb{R}^2$ contains a point whose coordinates are both rational.
+}
+\end{chapex}
+
+\subsection*{Cardinal arithmetic}
+
+\begin{chapex}
+Prove that $\kappa + 0 = \kappa \cdot 1 = \kappa^1 = \kappa$ for all cardinal numbers $\kappa$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\kappa^0 = 1^{\kappa} = 1$ for all cardinal numbers $\kappa$.
+\end{chapex}
+
+\begin{chapex}
+Let $\kappa$ be an infinite cardinal number such that $\kappa \cdot \kappa = \kappa$. Prove that $\kappa^{\kappa} = 2^{\kappa}$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\mathfrak{c}^{\mathfrak{c}} = 2^{2^{\aleph_0}}$.
+\end{chapex}
+
+\begin{chapex}
+Let $\kappa$, $\lambda$ and $\mu$ be cardinal numbers.
+\begin{enumerate}[(a)]
+\item Prove that if $\kappa \le \lambda$, then $\kappa + \mu \le \lambda + \mu$.
+\item Suppose that $\kappa + \mu \le \lambda + \mu$. Must it be the case that $\kappa \le \lambda$?
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+Let $\kappa$, $\lambda$ and $\mu$ be cardinal numbers.
+\begin{enumerate}[(a)]
+\item Prove that if $\kappa \le \lambda$, then $\kappa \cdot \mu \le \lambda \cdot \mu$.
+\item Suppose that $\kappa \cdot \mu \le \lambda \cdot \mu$ and $\mu > 0$. Must it be the case that $\kappa \le \lambda$?
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+Let $\kappa$, $\lambda$ and $\mu$ be cardinal numbers.
+\begin{enumerate}[(a)]
+\item Prove that if $\kappa \le \lambda$, then $\kappa^{\mu} \le \lambda^{\mu}$.
+\item Suppose that $\kappa^{\mu} \le \lambda^{\mu}$ and $\mu > 0$. Must it be the case that $\kappa \le \lambda$?
+\end{enumerate}
+\end{chapex}
+
+\begin{chapex}
+Let $\kappa$, $\lambda$ and $\mu$ be cardinal numbers.
+\begin{enumerate}[(a)]
+\item Prove that if $\kappa \le \lambda$, then $\mu^{\kappa} \le \mu^{\lambda}$.
+\item Suppose that $\mu^{\kappa} \le \mu^{\lambda}$ and $\mu > 1$. Must it be the case that $\kappa \le \lambda$?
+\end{enumerate}
+\end{chapex}
+
+\begin{definition}
+Given cardinal numbers $\kappa$ and $\lambda$, define the \textbf{binomial coefficient} $\dbinom{\kappa}{\lambda}$ by
+\[ \dbinom{\kappa}{\lambda} = |\{ U \subseteq [\kappa] \mid |U| = \lambda \}| \]
+\end{definition}
+
+\begin{chapex}
+Let $\kappa$ be a cardinal number. Prove that
+\[ \dbinom{\aleph_0}{\kappa} = \begin{cases} 1 & \text{if } \kappa = 0 \\ \aleph_0 & \text{if } \kappa \in \mathbb{N} \text{ and } \kappa > 0 \\ 2^{\aleph_0} & \text{if } \kappa = \aleph_0 \\ 0 & \text{if } \kappa \not\in \mathbb{N} \cup \{ \aleph_0 \} \end{cases} \]
+\end{chapex}
+
+\begin{chapex}
+Find the values of $\dbinom{\mathfrak{c}}{\kappa}$ for $\kappa \in \mathbb{N} \cup \{ \aleph_0, \mathfrak{c} \}$.
+\end{chapex}
+
+\begin{chapex}
+Prove that $\displaystyle \sum_{\lambda \le \kappa} \dbinom{\kappa}{\lambda} = 2^{\kappa}$ for all cardinal numbers $\kappa$.
+\end{chapex}
+
+\begin{chapex}
+Define the factorial $\kappa !$ of a cardinal number $\kappa$ in a way that generalises the notion of factorial $n!$ for a natural number $n$. Find expressions for $\aleph_0!$ and $\mathfrak{c}!$.
+\hintlabel{cqFactorialOfCardinalNumber}{%
+Think combinatorially. You should not try to generalise the recursive definition of factorials (\Cref{defFactorialRecursive}); and you \textit{very much should not} try to generalise the informal definition `$n! = 1 \times 2 \times \cdots \times n$'.
+}
+\end{chapex}

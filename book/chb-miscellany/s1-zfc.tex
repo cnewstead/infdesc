@@ -3,6 +3,27 @@
 
 \todo{}
 
+\subsection*{Na\"{i}ve set theory and Russell's paradox}
+
+\todo{}
+
+\begin{theorem}[Russell's paradox]
+\label{thmRussellsParadox}
+\index{Russell's paradox}
+\index{paradox!Russell's}
+Under na\"{i}ve set theory, the set $R = \{ x \mid x \not\in x \}$ satisfies neither $R \in R$ nor $R \not\in R$.
+\end{theorem}
+
+\begin{cproof}
+The definition of $R$ implies that $R \in R$ if and only if $R \not\in R$, so that both the assertion that $R \in R$ and the assertion that $R \not\in R$ lead to a contradiction.
+\end{cproof}
+
+Several resolutions to Russell's paradox were suggested in the first half of the 20\supth{} century. Some did this by restricting how set-builder notation can be used, so that not \textit{all} expressions of the form $\{ x \mid p(x) \}$ define sets; others did this by assigning a \textit{type} to each object and restricting how objects of one type may interact with objects of another type.
+
+The foundation that was eventually adopted by the mathematical community at large is \textit{Zermelo--Fraenkel set theory} (ZF), these days usually with the addition of the axiom of choice (ZFC). As such, this is the foundational system presented here.
+
+It is worth noting, however, that other systems continue to be studied by mathematicians, logicians, philosophers and computer scientists. In particular, \textit{Martin--L\"{o}f type theory} is a popular mathematical foundation used by computer scientists, as it much more closely mimics how programming languages work.
+
 \subsection*{Zermelo--Fraenkel set theory}
 
 \todo{}

@@ -280,7 +280,7 @@ The law of double negation is important because it suggests a second way that we
 In order to prove a proposition $p$ is true, it suffices to assume that $p$ is false and derive a contradiction.
 \end{strategy}
 
-At first sight, \Cref{strProofByContradictionIndirect} looks very similar to \Cref{strProvingNegationsDirect}, but there is an important difference:
+At first sight, \Cref{strProofByContradictionIndirect} looks very similar to \Cref{strProvingNegationsDirect}, which we also termed \textit{proof by contradiction}. But there is an important difference between the two:
 \begin{itemize}
 \item \Cref{strProvingNegationsDirect} says that to prove that a proposition is \textit{false}, it suffices to assume that it is \textit{true} and derive a contradiction;
 \item \Cref{strProofByContradictionIndirect} says that to prove that a proposition is \textit{true}, it suffices to assume that it is \textit{false} and derive a contradiction.
@@ -528,7 +528,7 @@ Let's start at the beginning. The negation of the formula we started with is:
 The key to maximally negating a logical formula is to ignore information that is not immediately relevant. Here, the expression that we are negating takes the form $\neg \exists a \in \mathbb{R},\, (\text{stuff})$. It doesn't matter what the `stuff' is just yet; all that matters is that we are negating an existentially quantified statement, and so de Morgan's laws for quantifiers tells us that this is logically equivalent to $\forall a \in \mathbb{R},\, \neg (\text{stuff})$. We apply this rule and just re-write the `stuff', to obtain:
 \[ \forall a \in \mathbb{R},\, \neg \forall \varepsilon \in \mathbb{R},\, (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
 %
-Now we are negating a universally quantified statement, $\neg \forall \varepsilon \in \mathbb{R},\, (\text{stuff})$ which, by de Morgan's laws for quantifiers, is equivalent to $\exists \varepsilon \in \mathbb{R},\, (\text{stuff})$:
+Now we are negating a universally quantified statement, $\neg \forall \varepsilon \in \mathbb{R},\, (\text{stuff})$ which, by de Morgan's laws for quantifiers, is equivalent to $\exists \varepsilon \in \mathbb{R},\, \neg (\text{stuff})$:
 \[ \forall a \in \mathbb{R},\, \exists \varepsilon \in \mathbb{R},\, \neg (\varepsilon > 0 \Rightarrow \exists N \in \mathbb{N},\, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n-a| < \varepsilon])\]
 %
 At this point, the statement being negated is of the form $(\text{stuff}) \Rightarrow (\text{junk})$, which by \Cref{exNegationOfImplication} negates to $(\text{stuff}) \wedge \neg (\text{junk})$. Here, `stuff' is $\varepsilon > 0$ and `junk' is $\exists N \in \mathbb{N}, \forall n \in \mathbb{N},\, [n \ge N \Rightarrow |x_n - a| < \varepsilon]$. So performing this negation yields:

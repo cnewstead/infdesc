@@ -1,0 +1,381 @@
+\section{Set operations}
+\secbegin{secSetOperations}
+
+In \Cref{exPositiveNegativeSetBuilderNotation} we noted that $[0,\infty)$ is the set of all non-negative real numbers. What if we wanted to talk about the set of all non-negative rational numbers instead? It would be nice if there was some expression in terms of $[0,\infty)$ and $\mathbb{Q}$ to denote this set.
+
+This is where \textit{set operations} come in---they allow us to use previously defined sets to introduce new sets.
+
+\subsubsection*{Intersection ($\cap$)}
+The \textit{intersection} of two sets is the set of things which are elements of both sets.
+
+\begin{definition}
+\index{intersection!pairwise}
+\nindex{intersection}{$\cap$}{intersection}
+Let $X$ and $Y$ be sets. The (\textbf{pairwise}) \textbf{intersection} of $X$ and $Y$, denoted $X \cap Y$ \inlatex{cap}\lindexmmc{cap}{$\cap$}, is defined by
+\[ X \cap Y = \{ a \mid a \in X \wedge a \in Y \} \]
+\end{definition}
+
+\begin{example}
+By definition of intersection, we have $x \in [0,\infty) \cap \mathbb{Q}$ if and only if $x \in [0,\infty)$ and $x \in \mathbb{Q}$. Since $x \in [0,\infty)$ if and only if $x$ is a non-negative real number (see \Cref{exPositiveNegativeSetBuilderNotation}), it follows that $[0,\infty) \cap \mathbb{Q}$ is the set of all non-negative rational numbers.
+\end{example}
+
+\begin{exercise}
+Prove that $[0,\infty) \cap \mathbb{Z} = \mathbb{N}$.
+\end{exercise}
+
+\begin{exercise}
+Write down the elements of the set
+\[ \{ 0, 1, 4, 7 \} \cap \{ 1, 2, 3, 4, 5 \} \]
+\end{exercise}
+
+\begin{exercise}
+Express $[-2,5) \cap [4,7)$ as a single interval.
+\end{exercise}
+
+\begin{proposition}
+\label{propSubsetFromIntersection}
+Let $X$ and $Y$ be sets. Prove that $X \subseteq Y$ if and only if $X \cap Y = X$.
+\end{proposition}
+
+\begin{cproof}
+%% BEGIN QUOTATION (xtrSoExample) %%
+Suppose that $X \subseteq Y$. We prove $X \cap Y = X$ by double containment.
+\begin{itemize}
+\item ($\subseteq$) Suppose $a \in X \cap Y$. Then $a \in X$ and $a \in Y$ by definition of intersection, so in particular we have $a \in X$.
+\item ($\supseteq$) Suppose $a \in X$. Then $a \in Y$ since $X \subseteq Y$, so that $a \in X \cap Y$ by definition of intersection.
+\end{itemize}
+%% END QUOTATION %%
+
+Conversely, suppose that $X \cap Y = X$. To prove that $X \subseteq Y$, let $a \in X$. Then $a \in X \cap Y$ since $X = X \cap Y$, so that $a \in Y$ by definition of intersection, as required.
+\end{cproof}
+
+\begin{exercise}
+Let $X$ be a set. Prove that $X \cap \varnothing = \varnothing$.
+\end{exercise}
+
+\begin{definition}
+Let $X$ and $Y$ be sets. We say $X$ and $Y$ are \textbf{disjoint} if $X \cap Y$ is empty.
+\end{definition}
+
+\begin{example}
+The sets $\{ 0,2,4 \}$ and $\{ 1,3,5 \}$ are disjoint, since they have no elements in common.
+\end{example}
+
+\begin{exercise}
+Let $a,b,c,d \in \mathbb{R}$ with $a<b$ and $c<d$. Prove that the open intervals $(a,b)$ and $(c,d)$ are disjoint if and only if $b<c$ or $d<a$.
+\end{exercise}
+
+\subsubsection*{Union ($\cup$)}
+The \textit{union} of two sets is the set of things which are elements of at least one of the sets.
+
+\begin{definition}
+\index{union!pairwise}
+Let $X$ and $Y$ be sets. The (\textbf{pairwise}) \textbf{union} of $X$ and $Y$, denoted $X \cup Y$\nindex{union}{$\cup$}{union} \inlatex{cup}\lindexmmc{cup}{$\cup$}, is defined by
+\[ X \cup Y = \{ a \mid a \in X \vee a \in Y \} \]
+\end{definition}
+
+\begin{example}
+Let $E$ be the set of even integers and $O$ be the set of odd integers. Since every integer is either even or odd, $E \cup O = \mathbb{Z}$. Note that $E \cap O = \varnothing$, thus $\{E,O\}$ is an example of a \textit{partition} of $\mathbb{Z}$---see \Cref{defPartition}.
+\end{example}
+
+\begin{exercise}
+Write down the elements of the set
+\[ \{ 0, 1, 4, 7 \} \cup \{ 1, 2, 3, 4, 5 \} \]
+\end{exercise}
+
+\begin{exercise}
+Express $[-2,5) \cup [4,7)$ as a single interval.
+\end{exercise}
+
+The union operation allows us to define the following class of sets that will be particularly useful for us when studying counting principles in \Cref{secCountingPrinciples}.
+
+\begin{exercise}
+Let $X$ and $Y$ be sets. Prove that $X \subseteq Y$ if and only if $X \cup Y = Y$.
+\end{exercise}
+
+\begin{example}
+\label{exIntersectionDistributesOverUnion}
+Let $X,Y,Z$ be sets. We prove that $X \cap (Y \cup Z) = (X \cap Y) \cup (X \cap Z)$.
+\begin{itemize}
+\item ($\subseteq$) Let $x \in X \cap (Y \cup Z)$. Then $x \in X$, and either $x \in Y$ or $x \in Z$. If $x \in Y$ then $x \in X \cap Y$, and if $x \in Z$ then $x \in X \cap Z$. In either case, we have $x \in (X \cap Y) \cup (X \cap Z)$.
+\item ($\supseteq$) Let $x \in (X \cap Y) \cup (X \cap Z)$. Then either $x \in X \cap Y$ or $x \in X \cap Z$. In both cases we have $x \in X$ by definition of intersection 
+In the first case we have $x \in Y$, and in the second case we have $x \in Z$; in either case, we have $x \in Y \cup Z$, so that $x \in X \cap (Y \cup Z)$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+\label{exUnionDistributesOverIntersection}
+Let $X,Y,Z$ be sets. Prove that $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$.
+\end{exercise}
+
+\subsubsection*{Indexed families of sets}
+
+We will often have occasion to take the intersection or union not of just two sets, but of an arbitrary collection of sets (even of infinitely many sets). For example, we might want to know which real numbers are elements of $[0, 1+\frac{1}{n})$ for each $n \ge 1$, and which real numbers are elements of at least one of such sets.
+
+Our task now is therefore to generalise our pairwise notions of intersection and union to arbitrary collections of sets, called \textit{indexed families} of sets.
+
+\begin{definition}
+\label{defIndexedFamily}
+\index{set!indexed family of}
+\index{indexed family}
+\index{family of sets}
+An (\textbf{indexed}) \textbf{family of sets} is a specification of a set $X_i$ for each element $i$ of some \textbf{indexing set} $I$. We write $\{ X_i \mid i \in I \}$ for the indexed family of sets.
+\end{definition}
+
+\begin{example}
+\label{exIndexedFamilyOfHalfOpenIntervals}
+The sets $[0,1+\frac{1}{n})$ mentioned above assemble into an indexed family of sets, whose indexing set is $\{ n \in \mathbb{N} \mid n \ge 1 \}$. We can abbreviate this family of sets by
+\[ \{ [0,1+\textstyle\frac{1}{n}) \mid n \ge 1 \} \]
+Observe that we have left implicit the fact that the variable $n$ is ranging over the natural numbers and just written `$n \ge 1$' on the right of the vertical bar, rather than separately defining $I = \{ n \in \mathbb{N} \mid n \ge 1 \}$ and writing $\{ [0,1+\frac{1}{n}) \mid n \in I \}$.
+\end{example}
+
+\begin{definition}
+\label{defIndexedIntersectionUnion}
+\index{intersection}
+\index{union}
+\index{intersection!indexed}
+\index{union!indexed}
+\nindex{intersectionindexed}{$\bigcap_{i \in I}$}{indexed intersection}
+\nindex{unionindexed}{$\bigcup_{i \in I}$}{indexed union}
+The (\textbf{indexed}) \textbf{intersection} of an indexed family $\{ X_i \mid i \in I \}$ is defined by
+\[ \bigcap_{i \in I} X_i = \{ a \mid \forall i \in I,\, a \in X_i \} \quad \text{\inlatex{bigcap\_\{i \textbackslash{}in I\}}} \]
+The (\textbf{indexed}) \textbf{union} of $\{ X_i \mid i \in I \}$ is defined by
+\[ \bigcup_{i \in I} X_i = \{ a \mid \exists i \in I,\, a \in X_i \} \quad \text{\inlatex{bigcup\_\{i \textbackslash{}in I\}}} \]
+\end{definition}
+
+\begin{example}
+\label{exIndexedIntersectionOfHalfOpenIntervals}
+We prove that the intersection of the half-open intervals $[0,1+\frac{1}{n})$ for $n \ge 1$ is $[0,1]$. We will use the notation $\displaystyle \bigcap_{n \ge 1}$ as shorthand for $\displaystyle \bigcap_{n \in \{ x \in \mathbb{N} ~\mid~ x \ge 1 \}}$.
+
+\begin{itemize}
+\item $(\subseteq)$ Let $x \in \displaystyle\bigcap_{n \ge 1} [0,1+\frac{1}{n})$.
+
+Then $x \in [0,1+\frac{1}{n})$ for all $n \ge 1$. In particular, $x \ge 0$.
+
+To see that $x \le 1$, assume that $x>1$---we will derive a contradiction. Since $x>1$, we have $x-1 > 0$. Let $N \ge 1$ be some natural number greater or equal to $\frac{1}{x-1}$, so that $\frac{1}{N} \le x-1$. Then $x \ge 1 + \frac{1}{N}$, and hence $x \not\in [0,1+\frac{1}{N})$, contradicting the assumption that $x \in [0,1+\frac{1}{n})$ for all $n \ge 1$.
+
+So we must have $x \le 1$ after all, and hence $x \in [0,1]$.
+
+\item ($\supseteq$) Let $x \in [0,1]$.
+
+To prove that $x \in \displaystyle \bigcap_{n \ge 1} [0,1+\frac{1}{n})$, we need to show that $x \in [0,1+\frac{1}{n})$ for all $n \ge 1$. So fix $n \ge 1$. Since $x \in [0,1]$, we have $x \ge 0$ and $x \le 1 < 1+\frac{1}{n}$, so that $x \in [0,1+\frac{1}{n})$, as required.
+\end{itemize}
+
+Hence $\displaystyle\bigcap_{n \ge 1} [0,1+\frac{1}{n}) = [0,1]$ by double containment.
+\end{example}
+
+\begin{exercise}
+Express $\displaystyle\bigcup_{n \ge 1} [0,1+\frac{1}{n})$ as an interval.
+\end{exercise}
+
+\begin{exercise}
+Prove that $\displaystyle\bigcap_{n \in \mathbb{N}} [n] = \varnothing$ and $\displaystyle\bigcup_{n \in \mathbb{N}} [n] = \{ k \in \mathbb{N} \mid k \ge 1 \}$.
+\end{exercise}
+
+Indexed intersections and unions generalise their pairwise counterparts, as the following exercise proves.
+
+\begin{exercise}
+\label{exIndexedIntersectionUnionGeneralisePairwise}
+Let $X_1$ and $X_2$ be sets. Prove that
+\[ X_1 \cap X_2 = \bigcap_{k \in [2]} X_k \quad \text{and} \quad X_1 \cup X_2 = \bigcup_{k \in [2]} X_k \]
+\end{exercise}
+
+\begin{exercise}
+\label{exSubsetsFiniteIntersectionInhabitedInfiniteIntersectionEmpty}
+Find a family of sets $\{ X_n \mid n \in \mathbb{N} \}$ such that:
+\begin{enumerate}[(i)]
+\item $\displaystyle\bigcup_{n \in \mathbb{N}} X_n = \mathbb{N}$;
+\item $\displaystyle\bigcap_{n \in \mathbb{N}} X_n = \varnothing$; and
+\item $X_i \cap X_j \ne \varnothing$ for all $i,j \in \mathbb{N}$.
+\end{enumerate}
+\begin{backhint}
+\hintref{exSubsetsFiniteIntersectionInhabitedInfiniteIntersectionEmpty}
+You need to find a family of subsets of $\mathbb{N}$ such that (i) any two of the subsets have infinitely many elements in common, but (ii) given any natural number, you can find one of the subsets that it is \textit{not} an element of.
+\end{backhint}
+\end{exercise}
+
+\subsubsection*{Relative complement ($\setminus$)}
+
+\begin{definition}
+\index{relative complement}
+\index{complement!relative}
+\nindex{complement}{$\setminus$}{relative complement}
+Let $X$ and $Y$ be sets. The \textbf{relative complement} of $Y$ in $X$, denoted $X \setminus Y$ \inlatex{setminus}\lindexmmc{setminus}{$\setminus$}, is defined by
+\[ X \setminus Y = \{ x \in X \mid x \not \in Y \} \]
+\end{definition}
+
+\begin{example}
+Let $E$ be the set of all even integers. Then $n \in \mathbb{Z} \setminus E$ if and only if $n$ is an integer and $n$ is not an even integer; that is, if and only if $n$ is odd. Thus $\mathbb{Z} \setminus E$ is the set of all odd integers.
+
+Moreover, $n \in \mathbb{N} \setminus E$ if and only if $n$ is a natural number and $n$ is not an even integer. Since the even integers which are natural numbers are precisely the even natural numbers, $\mathbb{N} \setminus E$ is precisely the set of all odd natural numbers.
+\end{example}
+
+\begin{exercise}
+Write down the elements of the set
+\[ \{ 0, 1, 4, 7 \} \setminus \{ 1, 2, 3, 4, 5 \} \]
+\end{exercise}
+
+\begin{exercise}
+Express $[-2,5) \setminus [4,7)$ and $[4,7) \setminus [-2,5)$ as intervals.
+\end{exercise}
+
+\begin{exercise}
+\label{exSetMinusSetMinus}
+Let $X$ and $Y$ be sets. Prove that $Y \setminus (Y \setminus X)= X \cap Y$, and deduce that $X \subseteq Y$ if and only if $Y \setminus (Y \setminus X) = X$.
+\end{exercise}
+
+\subsubsection*{Comparison with logical operators and quantifiers}
+
+The astute reader will have noticed some similarities between set operations and the logical operators and quantifiers that we saw in \Cref{chLogicalStructure}.
+
+Indeed, this can be summarised in the following table. In each row, the expressions in both columns are equivalent, where $p$ denotes `$a \in X$', $q$ denotes `$a \in Y$', and $r(i)$ denotes `$a \in X_i$'.
+
+\begin{center}\begin{tabular}{c|c}
+sets & logic \\ \hline
+$a \not\in X$ & $\neg p$ \\
+$a \in X \cap Y$ & $p \wedge q$ \\
+$a \in X \cup Y$ & $p \vee q$ \\
+$a \in \bigcap_{i \in I} X_i$ & $\forall i \in I,\, r(i)$ \\
+$a \in \bigcup_{i \in I} X_i$ & $\exists i \in I,\, r(i)$ \\
+$a \in X \setminus Y$ & $p \wedge (\neg q)$
+\end{tabular}\end{center}
+
+This translation between logic and set theory does not stop there; in fact, as the following theorem shows, De Morgan's laws for the logical operators (\Cref{thmDeMorganLogicalOperators}) and for quantifiers (\Cref{thmDeMorganQuantifiers}) also carry over to the set operations of union and intersection.
+
+\begin{theorem}[De Morgan's laws for sets]
+\label{thmDeMorganForSets}
+\index{de Morgan's laws!for sets}
+Given sets $A,X,Y$ and a family $\{ X_i \mid i \in I \}$, we have
+\begin{enumerate}[(a)] 
+\item $A \setminus (X \cup Y) = (A \setminus X) \cap (A \setminus Y)$;
+\item $A \setminus (X \cap Y) = (A \setminus X) \cup (A \setminus Y)$;
+\item $\displaystyle A \setminus \bigcup_{i \in I} X_i = \bigcap_{i \in I} (A \setminus X_i)$;
+\item $\displaystyle A \setminus \bigcap_{i \in I} X_i = \bigcup_{i \in I} (A \setminus X_i)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{cproof}[of (a)]
+Let $a$ be arbitrary. By definition of union and relative complement, the assertion that $a \in A \setminus (X \cup Y)$ is equivalent to the logical formula
+\[ a \in A \wedge \neg (a \in X \vee a \in Y) \]
+By de Morgan's laws for logical operators, this is equivalent to
+\[ a \in A \wedge (a \not\in X \wedge a \not\in Y) \]
+which, in turn, is equivalent to
+\[ a \in A \wedge a \not\in X) \wedge (a \in A \wedge a \not\in Y \]
+But then by definition of intersection and relative complement, this is equivalent to
+\[ a \in (A \setminus X) \cap (A \setminus Y) \]
+Hence $A \setminus (X \cup Y) = (A \setminus X) \cap (A \setminus Y)$, as required.
+\end{cproof}
+
+\begin{exercise}
+Complete the proof of de Morgan's laws for sets.
+\end{exercise}
+
+\subsection*{Power sets}
+
+\begin{definition}
+\label{defPowerSet}
+\index{power set}
+Let $X$ be a set. The \textbf{power set} of $X$, written $\mathcal{P}(X)$\nindex{PX}{$\mathcal{P}(X)$}{power set} \inlatex{mathcal\{P\}}\lindexmmc{mathcal}{$\mathcal{A}, \mathcal{B}, \dots$}, is the set of all subsets of $X$.
+\end{definition}
+
+\begin{example}
+There are four subsets of $\{ 1, 2 \}$, namely
+\[ \varnothing, \quad \{ 1 \}, \quad \{ 2 \}, \quad \{ 1, 2 \} \]
+so $\mathcal{P}(X) = \{\varnothing, \{ 1 \}, \{ 2 \}, \{ 1, 2 \}\}$.
+\end{example}
+
+\begin{exercise}
+Write out the elements of $\mathcal{P}(\{1, 2, 3\})$.
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a set. Show that $\varnothing \in \mathcal{P}(X)$ and $X \in \mathcal{P}(X)$.
+\end{exercise}
+
+\begin{exercise}
+Write out the elements of $\mathcal{P}(\varnothing)$, $\mathcal{P}(\mathcal{P}(\varnothing))$ and $\mathcal{P}(\mathcal{P}(\mathcal{P}(\varnothing)))$.
+\end{exercise}
+
+Power sets are often a point of confusion because they bring the property of being a \textit{subset} of one set to that of being an \textit{element} of another, in the sense that for all sets $U$ and $X$ we have
+\[ U \subseteq X \quad \Leftrightarrow \quad U \in \mathcal{P}(X) \]
+This distinction looks easy to grasp, but when the sets $U$ and $X$ look alike, it's easy to fall into various traps. Here's a simple example.
+
+\begin{example}
+It is true that $\varnothing \subseteq \varnothing$, but false that $\varnothing \in \varnothing$. Indeed,
+\begin{itemize}
+\item $\varnothing \subseteq \varnothing$ means $\forall x \in \varnothing,\, x \in \varnothing$; but propositions of the form $\forall x \in \varnothing,\, p(x)$ are always true, as discussed in \Cref{exEverythingIsTrueOfElementsOfEmptySet}.
+\item The empty set has no elements; if $\varnothing \in \varnothing$ were true, it would mean that $\varnothing$ had an element (that element being $\varnothing$). So it must be the case that $\varnothing \not \in \varnothing$.
+\end{itemize}
+\end{example}
+
+The following exercise is intended to help you overcome similar potential kinds of confusion by means of practice. Try to think precisely about what the definitions involved are.
+
+\begin{exercise}
+Determine, with proof, whether or not each of the following statements is true.
+\begin{enumerate}[(a)]
+\item $\mathcal{P}(\varnothing) \in \mathcal{P}(\mathcal{P}(\varnothing))$;
+\item $\varnothing \in \{ \{ \varnothing \} \}$;
+\item $\{ \varnothing \} \in \{ \{ \varnothing \} \}$;
+\item $\mathcal{P}(\mathcal{P}(\varnothing)) \in \{ \varnothing, \{ \varnothing, \{ \varnothing \} \} \}$.
+\end{enumerate}
+Repeat the exercise with all instances of `$\in$' replaced by `$\subseteq$'.
+\end{exercise}
+
+\subsubsection*{Product ($\times$)}
+
+\begin{definition}
+\label{defCartesianProductPairwise}
+\index{product of sets!pairwise}
+\index{ordered pair}
+Let $X$ and $Y$ be sets. The (\textbf{pairwise}) \textbf{cartesian product} of $X$ and $Y$ is the set $X \times Y$\nindex{cartesian product}{$\times$}{cartesian product} \inlatex{times}\lindexmmc{times}{$\times$} defined by
+\[ X \times Y = \{ (a,b) \mid a \in X \wedge b \in Y \} \]
+The elements $(a,b) \in X \times Y$ are called \textbf{ordered pairs}, whose defining property is that, for all $a,x \in X$ and all $b,y \in Y$, we have $(a,b) = (x,y)$ if and only if $a=x$ and $b=y$.
+\end{definition}
+
+\begin{example}
+If you have ever taken calculus, you will probably be familiar with the set $\mathbb{R} \times \mathbb{R}$.
+\[ \mathbb{R} \times \mathbb{R} = \{ (x,y) \mid x,y \in \mathbb{R} \} \]
+Formally, this is the set of ordered pairs of real numbers. Geometrically, if we interpret $\mathbb{R}$ as an infinite line, the set $\mathbb{R} \times \mathbb{R}$ is the (real) plane: an element $(x,y) \in \mathbb{R} \times \mathbb{R}$ describes the point in the plane with coordinates $(x,y)$.
+
+We can investigate this further. For example, the following set:
+\[ \mathbb{R} \times \{ 0 \} = \{ (x,0) \mid x \in \mathbb{R} \} \]
+is precisely the $x$-axis. We can describe graphs as subsets of $\mathbb{R} \times \mathbb{R}$. Indeed, the graph of $y=x^2$ is given by
+\[ G = \{ (x,y) \in \mathbb{R} \times \mathbb{R} \mid y = x^2 \} = \{ (x,x^2) \mid x \in \mathbb{R} \} \subseteq \mathbb{R} \times \mathbb{R} \]
+\end{example}
+
+\begin{exercise}
+Write down the elements of the set $\{ 1, 2 \} \times \{ 3, 4, 5 \}$.
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a set. Prove that $X \times \varnothing = \varnothing$.
+\end{exercise}
+
+\begin{exercise}
+\label{exCartesianProductNotAssociative}
+Let $X$, $Y$ and $Z$ be sets. Under what conditions is it true that $X \times Y = Y \times X$? Under what conditions is it true that $(X \times Y) \times Z = X \times (Y \times Z)$?
+\end{exercise}
+
+We might have occasion to take cartesian products of more than two sets. For example, whatever the set $\mathbb{R} \times \mathbb{R} \times \mathbb{R}$ is, its elements \textit{should} be ordered triples $(a,b,c)$ consisting of elements $a,b,c \in \mathbb{R}$. This is where the following definition comes in handy.
+
+\begin{definition}
+\label{defCartesianProductNFold}
+\index{product of sets!nfold@$n$-fold}
+\index{ordered $n$-tuple}
+Let $n \in \mathbb{N}$ and let $X_1, X_2, \dots, X_n$ be sets. The (\textbf{$n$-fold}) \textbf{cartesian product} of $X_1, X_2, \dots, X_n$ is the set $\prod_{k=1}^n X_k$\nindex{cartesian product nfold}{$\Pi_{k=1}^n$}{cartesian product ($n$-fold)} \inlatex{prod\_\{k=1\}\^{}\{n\}}\lindexmmc{prod}{$\Pi_{k=1}^{n}$} defined by
+\[ \prod_{k=1}^n X_k = \{ (a_1, a_2, \dots, a_n) \mid a_k \in X_k \text{ for all } 1 \le k \le n \} \]
+The elements $(a_1, a_2, \dots, a_n) \in \prod_{k=1}^n X_k$ are called \textbf{ordered $k$-tuples}, whose defining property is that, for all $1 \le k \le n$ and all $a_k,b_k \in X_k$, we have $(a_1, a_2, \dots, a_n) = (b_1, b_2, \dots, b_n)$ if and only if $a_k = b_k$ for all $1 \le k \le n$.
+
+Given a set $X$, write $X^n$\nindex{cartesian product nfold}{$X^n$}{cartesian product ($n$-fold)} to denote the set $\prod_{k=1}^n X$. We might on occasion also write
+\[ X_1 \times X_2 \times \cdots \times X_n = \prod_{k=1}^n X_k \]
+\end{definition}
+
+\begin{example}
+In \Cref{exCartesianProductNotAssociative} you might have noticed that the sets $(X \times Y) \times Z$ and $X \times (Y \times Z)$ are not always equal---\Cref{defCartesianProductNFold} introduces a \textit{third} potentially non-equal cartesian product of $X$, $Y$ and $Z$. For example, consider when $X=Y=Z=\mathbb{R}$. Then
+\begin{itemize}
+\item The elements of $(\mathbb{R} \times \mathbb{R}) \times \mathbb{R}$ are ordered pairs $((a,b),c)$, where $(a,b)$ is itself an ordered pair of real numbers and $c$ is a real number.
+\item The elements of $\mathbb{R} \times (\mathbb{R} \times \mathbb{R})$ are ordered pairs $(a,(b,c))$, where $a$ is a real number and $(b,c)$ is an ordered pair of real numbers.
+\item The elements of $\mathbb{R} \times \mathbb{R} \times \mathbb{R}$ ($=\mathbb{R}^3$) are ordered triples $(a,b,c)$, where $a$, $b$ and $c$ are real numbers.
+\end{itemize}
+So, although these three sets \textit{appear} to be the same, zooming in closely on the definitions reveals that there are subtle differences between them. A sense in which they are the same is that there are \textit{bijections} between them---the notion of a bijection will be introduced in \Cref{secInjectionsSurjections}.
+\end{example}
