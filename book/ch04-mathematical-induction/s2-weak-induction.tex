@@ -20,7 +20,7 @@ then $p(n)$ is true for all $n \ge n_0$.
 Define $X = \{ n \in \mathbb{N} \mid p(n_0 + n) \text{ is true} \}$; that is, given a natural number $n$, we have $n \in X$ if and only if $p(n_0 + n)$ is true. Then
 \begin{itemize}
 \item $0 \in X$, since $n_0 + 0 = n_0$ and $p(n_0)$ is true by (i).
-\item Let $n \in \mathbb{N}$ and assume $n \in X$. Then $p(n_0+n)$ is true. Since $n_0 + n \ge n_0$ and $p(n_0+n)$ is true, we have $p(n_0+n+1)$ is true by (ii). But then $n_0+n+1 \in X$.
+\item Let $n \in \mathbb{N}$ and assume $n \in X$. Then $p(n_0+n)$ is true. Since $n_0 + n \ge n_0$ and $p(n_0+n)$ is true, we have $p(n_0+n+1)$ is true by (ii). But then $n+1 \in X$.
 \end{itemize}
 
 So by \Cref{defNotionOfNaturalNumbers}(iii) we have $\mathbb{N} \subseteq X$. Hence $p(n_0 + n)$ is true for all $n \in \mathbb{N}$. But this is equivalent to saying that $p(n)$ is true for all $n \ge n_0$.
@@ -277,8 +277,8 @@ The following exercises generalises \Cref{exSumOfPowersOf2} to prove the correct
 \begin{exercise}
 \label{exFormulaForGeometricProgression}
 Let $a,r \in \mathbb{R}$ with $r \ne 1$. Then
-\[ \sum_{k=0}^n ar^n = \frac{a(1-r^{n+1})}{1-r} \]
-for all $n \in \mathbb{N}$.
+\[ \sum_{k=0}^n ar^k = \frac{a(1-r^{n+1})}{1-r} \]
+for all $n \in \mathbb{N}$. [You may assume that $r^ir^j=r^{i+j}$ for all $i,j \in \mathbb{N}$.]
 \end{exercise}
 
 When attempting the following exercise, you might find that your induction step requires an auxiliary result, which itself has a proof by induction.

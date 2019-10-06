@@ -86,9 +86,9 @@ Any two notions of natural numbers are essentially the same, in a very strong se
 \end{theorem}
 
 \begin{proof}
-The function $f$ with the desired properties is obtained from \Cref{defNotionOfNaturalNumbers} applied to $(\mathbb{N}_1, z_1, s_1)$, with $X = \mathbb{N}_2$, $a = z_2$ and $h = s_2$. This also gives us uniqueness of $f$, so it remains only to prove that $f$ is a bijection.
+By applying the recursion theorem (\Cref{thmRecursion}) for $(\mathbb{N}_1, z_1, s_1)$, with $X = \mathbb{N}_2$, $a = z_2$ and $h : \mathbb{N}_1 \times \mathbb{N}_2 \to \mathbb{N}_2$ defined by $h(m,n) = s_2(n)$ for all $m \in \mathbb{N}_1$ and $n \in \mathbb{N}_2$, we obtain a function $f : \mathbb{N}_1 \to \mathbb{N}_2$ such that $f(z_1) = z_2$ and $f(s_1(n)) = s_2(f(n))$ for all $n \in \mathbb{N}_1$. This also gives us uniqueness of $f$, so it remains only to prove that $f$ is a bijection.
 
-By applying \Cref{defNotionOfNaturalNumbers} to $(\mathbb{N}_2, z_2, s_2)$, with $X = \mathbb{N}_1$, $a = z_1$ and $f = s_1$, we obtain a (unique!) function $g : \mathbb{N}_2 \to \mathbb{N}_1$ such that $g(z_2) = z_1$ and $g(s_2(n)) = s_1(g(n))$ for all $n \in \mathbb{N}_2$.
+Likewise, by applying \Cref{thmRecursion} to $(\mathbb{N}_2, z_2, s_2)$, with $X = \mathbb{N}_1$, $a = z_1$ and $h : \mathbb{N}_2 \times \mathbb{N}_1 \to \mathbb{N}_1$ defined by $h(m,n) = s_1(n)$ for aall $m \in \mathbb{N}_2$ and $n \in \mathbb{N}_1$, we obtain a (unique!) function $g : \mathbb{N}_2 \to \mathbb{N}_1$ such that $g(z_2) = z_1$ and $g(s_2(n)) = s_1(g(n))$ for all $n \in \mathbb{N}_2$.
 
 But then $g(f(z_1)) = g(z_2) = z_1$ and, for all $n \in \mathbb{N}_1$, we have
 \[ g(f(s_1(n))) = g(s_2(f(n))) = s_2(g(f(n))) \]
