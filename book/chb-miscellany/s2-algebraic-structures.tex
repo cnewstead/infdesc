@@ -182,14 +182,14 @@ Let $X$ be a set equipped with elements $0$ (`zero') and $1$ (`unit'), and binar
 \item[(F5)] (Commutativity) $x+y=y+x$ for all $x,y \in X$.
 \end{itemize}
 \item \textbf{Axioms for multiplication}
-\begin{itemize}
+\begin{itemize}[leftmargin=30pt]
 \item[(F6)] (Associativity) $x \cdot (y \cdot z) = (x \cdot y) \cdot z$ for all $x,y,z \in X$.
 \item[(F7)] (Identity) $x \cdot 1 = x$ for all $x \in X$.
 \item[(F8)] (Inverse) For all $x \in X$ with $x \ne 0$, there exists $y \in X$ such that $x \cdot y = 1$.
 \item[(F9)] (Commutativity) $x \cdot y = y \cdot x$ for all $x,y \in X$.
 \end{itemize}
 \item \textbf{Distributivity}
-\begin{itemize}
+\begin{itemize}[leftmargin=30pt]
 \item[(F10)] $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$ for all $x,y,z \in X$.
 \end{itemize}
 \end{itemize}
@@ -288,14 +288,14 @@ What makes the real numbers useful is not simply our ability to add, subtract, m
 Let $X$ be a set, $0,1 \in X$ be elements, $+,{\cdot}$ be binary operations, and $\le$ be a relation on $X$. The structure $(X,0,1,+,{\cdot},{\le})$ is an \textbf{ordered field} if it satisfies the field axioms (F1)--(F10) (see \Cref{axField}) and, additionally, it satisfies the following axioms:
 \begin{itemize}
 \item \textbf{Linear order axioms}
-\begin{itemize}
+\begin{itemize}[leftmargin=30pt]
 \item[(PO1)] (Reflexivity) $x \le x$ for all $x \in X$.
 \item[(PO2)] (Antisymmetry) For all $x,y \in X$, if $x \le y$ and $y \le x$, then $x=y$.
 \item[(PO3)] (Transitivity) For all $x,y,z \in X$, if $x \le y$ and $y \le z$, then $x \le z$.
 \item[(PO4)] (Linearity) For all $x,y \in X$, either $x \le y$ or $y \le x$.
 \end{itemize}
 \item \textbf{Interaction of order with arithmetic}
-\begin{itemize}
+\begin{itemize}[leftmargin=30pt]
 \item[(OF1)] For all $x,y,z \in X$, if $x \le y$, then $x+z \le y+z$.
 \item[(OF2)] For all $x,y \in X$, if $0 \le x$ and $0 \le y$, then $0 \le xy$. 
 \end{itemize}
@@ -372,7 +372,7 @@ We wanted to characterise the reals completely, but so far we have failed to do 
 \index{complete ordered field}
 \index{completeness axiom}
 Let $X$ be a set, $0,1 \in X$ be elements, $+,{\cdot}$ be binary operations, and $\le$ be a relation on $X$. The structure $(X,0,1,+,{\cdot},{\le})$ is a \textbf{complete ordered field} if it is an ordered field---that is, it satisfies axioms (F1)--(F10), (PO1)--(PO4) and (OF1)--(OF2) (see \Cref{axField,axOrderedField})---and, in addition, it satisfies the following \textbf{completeness axiom}:
-\begin{itemize}
+\begin{itemize}[leftmargin=30pt]
 \item[(C1)] Let $A \subseteq X$. If $A$ has an upper bound, then it has a least upper bound. Specifically, if there exists $u \in X$ such that $a \le u$ for all $a \in A$, then there exists $s \in X$ such that
 \begin{itemize}
 \item $a \le s$ for all $a \in A$; and

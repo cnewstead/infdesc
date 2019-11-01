@@ -445,7 +445,7 @@ then $p(x)$ is true for all $x \in A$.
 
 \begin{cproof}
 Assume that for all rules $\sigma$ and all $a_1,\dots,a_r \in A$ we have
-\[ [p(a_1) \wedge p(a_2) \wedge \cdots \wedge p(a_r)] \Rightarrow p(f_{\sigma}(a_1,a_2,\dots,a_r)) \]
+\[ [\forall i \in [r],~ p(a_i)] \Rightarrow p(f_{\sigma}(a_1,a_2,\dots,a_r)) \]
 
 Let $X = \{ a \in A \mid p(a) \} \subseteq A$. Then for all $a \in A$ we have $a \in X$ if and only if $p(a)$ is true. Thus we have
 \[ [\forall i \in [r],~ a_i \in X] \Rightarrow f_{\sigma}(a_1,a_2,\dots,a_r) \in X \]
@@ -471,13 +471,13 @@ This suggests the following proof strategy.
 \index{proof!by structural induction}
 \index{induction!on an inductively defined set}
 In order to prove a proposition of the form $\forall a \in A,~ p(a)$, where $A$ is an inductively defined set, it suffices to prove for all rules $\sigma$ that
-\[ [p(a_1) \wedge p(a_2) \wedge \cdots \wedge p(a_r)] \Rightarrow p(f_{\sigma}(a_1,a_2,\dots,a_r)) \]
+\[ [\forall i \in [r],~ p(a_i)] \Rightarrow p(f_{\sigma}(a_1,a_2,\dots,a_r)) \]
 Equivalently, it suffices to:
 \begin{itemize}
 \item For each basic element $a \in A$, prove $p(a)$---this is the \textbf{base case} for $a$;
 \item For each constructor $\sigma$ of arity $r>0$, let $a_1,a_2,\dots,a_r \in A$ and assume that $p(a_i)$ is true for all $i \in [r]$, and prove that $p(f_{\sigma}(a_1,a_2,\dots,a_r))$ is true---this is the \textbf{induction step} for $\sigma$.
 \end{itemize}
-The assumption $p(a_1,a_2,\dots,a_r)$ in the induction step for $\sigma$ is called the \textbf{induction hypothesis} for $\sigma$.
+The assumption $\forall i \in [r],~p(a_i)$ in the induction step for $\sigma$ is called the \textbf{induction hypothesis} for $\sigma$.
 \end{strategy}
 
 \begin{example}

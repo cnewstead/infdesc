@@ -214,19 +214,6 @@ Any function $f : X \to Y$ with finite domain can be specified by listing its va
 }
 \end{exercise}
 
-\begin{example}
-We count the number of ways we can shuffle a standard deck of cards in such a way that the colour of the cards alternate between red and black.
-
-A procedure for choosing the order of the cards is as follows:
-\begin{enumerate}[(i)]
-\item Choose the colour of the first card. There are $2$ such choices. This then determines the colours of the remaining cards, since they have to alternate.
-\item Choose the order of the red cards. There are $26!$ such choices.
-\item Choose the order of the black cards. There are $26!$ such choices.
-\end{enumerate}
-By the multiplication principle, there are $2 \cdot (26!)^2$ such rearrangements. This number is huge, and in general there is no reason to write it out. Just for fun, though:
-\[325\;288\;005\;235\;264\;929\;014\;077\;766\;819\;257\;214\;042\;112\;000\;000\;000\;000\]
-\end{example}
-
 \begin{exercise}
 Since September 2001, car number plates on the island of Great Britain have taken the form \texttt{XX\;NN\;XXX}, where each \texttt{X} can be any letter of the alphabet except for `I', `Q' or `Z', and \texttt{NN} is the last two digits of the year. [This is a slight simplification of what is really the case, but let's not concern ourselves with \textit{too} many details!] How many possible number plates are there? Number plates of vehicles registered in the region of Yorkshire begin with the letter `Y'. How many Yorkshire number plates can be issued in a given year?
 \end{exercise}
@@ -336,6 +323,19 @@ The image (\Cref{defImage}) of an injection $[3] \to [4]$ must be a subset of $[
 }
 \end{exercise}
 
+\begin{example}
+We count the number of ways we can shuffle a standard deck of cards in such a way that the colour of the cards alternate between red and black.
+
+A procedure for choosing the order of the cards is as follows:
+\begin{enumerate}[(i)]
+\item Choose the colour of the first card. There are $2$ such choices. This then determines the colours of the remaining cards, since they have to alternate.
+\item Choose the order of the red cards. There are $26!$ such choices.
+\item Choose the order of the black cards. There are $26!$ such choices.
+\end{enumerate}
+By the multiplication principle, there are $2 \cdot (26!)^2$ such rearrangements. This number is huge, and in general there is no reason to write it out. Just for fun, though:
+\[325\;288\;005\;235\;264\;929\;014\;077\;766\;819\;257\;214\;042\;112\;000\;000\;000\;000\]
+\end{example}
+
 \subsection*{Sums and partitions}
 
 We saw in \Cref{propUnionOfFiniteSetsIsFinite} that, given two finite sets $X$ and $Y$, the union $X \cup Y$ is finite. We also found formulae for their size, namely $|X \cup Y| = |X| + |Y| - |X \cap Y|$. The \textit{addition principle} (\Cref{strAdditionPrinciple}) generalises this formula to any finite number of sets, provided the sets have no elements in common with one another---that is they are \textit{pairwise disjoint}. [The hypothesis of pairwise disjointness is removed in the \textit{inclusion--exclusion principle}, which is studied in \Cref{secAlternatingSums}.]
@@ -367,7 +367,7 @@ Prove \Cref{thmAdditionPrinciple}. The proof follows the same pattern as that of
 
 \begin{strategy}[Counting using the addition principle]
 \label{strAdditionPrinciple}
-Let $X$ be a finite set. In order to compute $|X|$, it suffices to find a partition $U_1, U_2, \dots, U_n$ of $X$; it then follows that $|X| = \sum_{k=1}^n |X_i|$.
+Let $X$ be a finite set. In order to compute $|X|$, it suffices to find a partition $U_1, U_2, \dots, U_n$ of $X$; it then follows that $|X| = \sum_{k=1}^n |U_i|$.
 \end{strategy}
 
 \begin{example}
@@ -454,7 +454,7 @@ Let $C$ be set of colours of the socks, so that $|C| = k$, and let $X$ be the se
 
 Thus the question becomes: what size must $X$ be in order to have $|f^{-1}[\{c\}]| \ge 2$ for some $c \in C$? [The English translation of this question is: how many socks must we have picked in order for two of the socks to have the same colour?]
 
-Well, by the pigeonhole principle, we can guarantee $|f^{-1}[\{c\}]| \ge 2$ (or equivalently $>1$) if and only if $|X| > 2|C|$. That is, we need to select at least $2k + 1$ socks to guarantee a matching pair.
+Well, by the pigeonhole principle, we can guarantee $|f^{-1}[\{c\}]| \ge 2$ (or equivalently $>1$) if and only if $|X| > |C|$. That is, we need to select at least $k + 1$ socks to guarantee a matching pair.
 \end{example}
 
 \begin{exercise}
