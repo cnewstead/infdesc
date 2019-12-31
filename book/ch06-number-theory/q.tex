@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \subsection*{Greatest common divisors}
 
 In \Crefrange{cqEuclideanAlgorithmBegin}{cqEuclideanAlgorithmEnd}, use the Euclidean algorithm (\Cref{strEuclideanAlgorithm}) to find the greatest common divisor of the given pair of integers.
@@ -96,4 +97,76 @@ Let $b \in \mathbb{N}$ with $b \ge 2$. Find an expression in terms of $n \in \ma
 \hintlabel{cqTrailingZerosOfFactorialByInductionBaseB}{%
 This will be similar to \Cref{cqTrailingZerosOfFactorialByInduction} in the end; to get started, consider the greatest prime factor of $b$.
 }
+\end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqNumberTheoryTFBegin}{cqNumberTheoryTFEnd}
+
+\begin{chapex} % True
+\label{cqNumberTheoryTFBegin}
+There is an integer that is not coprime to any integer.
+\end{chapex}
+
+\begin{chapex} % False
+Every linear Diophantine equation has a solution.
+\end{chapex}
+
+\begin{chapex} % True
+Every integer $n$ is coprime to its successor $n+1$.
+\end{chapex}
+
+\begin{chapex} % True
+If the greatest common divisors of two integers is $3$, and their least common multiple of $7$, then their product is $21$.
+\end{chapex}
+
+\begin{chapex} % True
+Every integer is congruent modulo $7$ to its remainder when divided by $21$.
+\end{chapex}
+
+\begin{chapex} % Never
+\label{cqNumberTheoryTFEnd}
+Let $k \ge 1$. Then $15^k \equiv 1 \bmod 6$.
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqNumberTheoryASNBegin}{cqNumberTheoryASNEnd}
+
+\begin{chapex} % Sometimes
+\label{cqNumberTheoryASNBegin}
+Let $a,b,c \in \mathbb{Z}$. If $\mathrm{gcd}(a,b) = 2$ and $\mathrm{gcd}(b,c) = 2$, then $\mathrm{gcd}(a,b) = 2$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $a,b \in \mathbb{Z}$. Then $\mathrm{gcd}(a,b) = \mathrm{gcd}(a,\mathrm{gcd}(a,b))$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $a,b \ge 2$. Then $\mathrm{gcd}(a,b) = \mathrm{lcm}(a,b)$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $n \in \mathbb{Z}$. Then $n^2+1$ is coprime to $n^4+n^2+1$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $p \in \mathbb{Z}$ be prime. Then $p$ is coprime to all integers $a \ne p$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $p,q,r,s \in \mathbb{Z}$ be positive primes and suppose that $pq=rs$. Then $p=r$ and $q=s$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $p_1, p_2, \dots, p_s, q_1, q_2, \dots, q_t \in \mathbb{Z}$ be prime and suppose that $p_1p_2 \dots p_s = q_1 q_2 \dots q_t$. Then $s=t$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $a,b \in \mathbb{Z}$ and let $p$ be a positive prime. Then $p \mid (a+b)^p-a-b$.
+\end{chapex}
+
+\begin{chapex} % Always
+\label{cqNumberTheoryASNEnd}
+Let $n \ge 0$ and let $b>0$. Then $n$ is congruent modulo $b-1$ to the sum of the digits in its base-$b$ expansion.
 \end{chapex}

@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \subsection*{Sets}
 
 \begin{chapex}
@@ -137,3 +138,109 @@ Prove that a subset $U \subseteq \mathbb{R}$ is open if and only if it can be ex
 Let $\{ A_n \mid n \in \mathbb{N} \}$ and $\{ B_n \mid n \in \mathbb{N} \}$ be families of sets such that, for all $i \in \mathbb{N}$, there exists some $j \ge i$ such that $B_j \subseteq A_i$. Prove that $\bigcap_{n \in \mathbb{N}} A_n = \bigcap_{n \in \mathbb{N}} B_n$.
 \end{chapex}
 
+\subsection*{True--False questions}
+
+\tfquestiontext{cqSetsTFBegin}{cqSetsTFEnd}
+
+\begin{chapex}
+\label{cqSetsTFBegin}
+If $E$ is a set and $\neg \forall x,\, x \in E$, then $E = \varnothing$.
+\end{chapex}
+
+\begin{chapex}
+If $E$ is a set and $\forall x,\, \neg x \in E$, then $E = \varnothing$.
+\end{chapex}
+
+\begin{chapex}
+$\{ 1, 2, 3 \} = \{ 1, 2, 1, 3, 2, 1 \}$
+\end{chapex}
+
+\begin{chapex}
+$\varnothing \in \varnothing$
+\end{chapex}
+
+\begin{chapex}
+$\varnothing \in \{ \varnothing \}$
+\end{chapex}
+
+\begin{chapex}
+$\varnothing \in \{ \{ \varnothing \} \}$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqSetsTFEnd}
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqSetsASNBegin}{cqSetsASNEnd}
+
+\begin{chapex} % Always
+\label{cqSetsASNBegin}
+Let $a$ and $b$ be arbitrary objects. Then $\{ a, b \} = \{ b, a \}$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $a$, $b$ and $c$ be arbitrary objects. Then $\{ a, b \} = \{ a, c \}$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets and suppose there is some $a$ such that $a \in X \Leftrightarrow a \in Y$. Then $X = Y$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $X$ and $Y$ be sets and suppose there is some $a$ such that $a \in X$ but $a \not\in Y$. Then $X = Y$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets with $X \ne Y$. Then $\forall a,\, a \in X \Rightarrow a \not\in Y$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ and $Y$ be sets with $X \cap Y = \varnothing$. Then $\forall a,\, a \in X \Rightarrow a \not\in Y$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ and $Y$ be sets with $X \ne Y$. Then $\exists a,\, a \in X \wedge a \not\in Y$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets of sets and suppose that $X \in Y$. Then $X \subseteq Y$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ be a set. Then $\varnothing \in \mathcal{P}(X)$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ be a set. Then $\{ \varnothing \} \in \mathcal{P}(X)$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ be a set. Then $\{ \varnothing, X \} \subseteq \mathcal{P}(X)$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ and $Y$ be sets such that $\mathcal{P}(X) = \mathcal{P}(Y)$. Then $X = Y$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets such that $X \setminus Y = \varnothing$. Then $X = Y$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$, $Y$ and $Z$ be sets such that $X \setminus Y = Z$ and $Y \subseteq Z$. Then $X = Y \cup Z$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets. Then $X \cup Y = X \cap Y$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ be a set and let $A \subseteq X$. Then $A \in X$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqSetsASNEnd}
+
+\end{chapex}

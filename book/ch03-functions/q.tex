@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \begin{chapex}
 Show that there is only one function whose codomain is empty. What is its domain?
 \hintlabel{cqFunctionEmptyCodomain}{%
@@ -171,4 +172,106 @@ Prove that the function $f : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ define
 \hintlabel{cqElementaryBijectionNTimesNToN}{%
 Start by proving that $\dbinom{m}{2} < \dbinom{m+1}{2}$ for all $m \ge 1$. Deduce that, for all $n \in \mathbb{N}$, there is a unique natural number $k$ such that $\dbinom{k+1}{2} \le n < \dbinom{k+2}{2}$. Can you see what this has to do with the function $f$?
 }
+\end{chapex}
+
+\begin{chapex}
+Let $e : X \to X$ be a function such that $e \circ e = e$. Prove that there exist a set $Y$ and functions $f : X \to Y$ and $g : Y \to X$ such that $g \circ f = e$ and $f \circ g = \mathrm{id}_Y$.
+\hintlabel{exSplitIdempotents}{%
+Consider the set of fixed points of $e$---that is, elements $x \in X$ such that $e(x)=x$.
+}
+\end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqFunctionsTFBegin}{cqFunctionsTFEnd}
+
+\begin{chapex} % False
+\label{cqFunctionsTFBegin}
+The set $G = \{ (x,y) \in \mathbb{R} \times \mathbb{R} \mid x^2=y^2 \}$ is the graph of a function.
+\end{chapex}
+
+\begin{chapex} % True
+The set $G = \{ (x,y) \in \mathbb{Z}\times \mathbb{N} \mid x^2=y^2 \}$ is the graph of a function.
+\end{chapex}
+
+\begin{chapex} % False
+Every function with empty domain has an empty codomain.
+\end{chapex}
+
+\begin{chapex} % True
+Every function with empty codomain has an empty domain.
+\end{chapex}
+
+\begin{chapex} % False (in general)
+The image of a function is a subset of its domain.
+\end{chapex}
+
+\begin{chapex} % True
+Given a function $f : X \to Y$, the assignment $V \mapsto f^{-1}[V]$ defines a function $\mathcal{P}(Y) \to \mathcal{P}(X)$.
+\end{chapex}
+
+\begin{chapex} % True
+Let $f$, $g$ and $h$ be composable functions. If $h \circ g \circ f$ is injective, then $g$ is injective.
+\end{chapex}
+
+\begin{chapex} % True
+\label{cqFunctionsTFEnd}
+Every left inverse is surjective and every right inverse is injective.
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqFunctionsASNBegin}{cqFunctionsASNEnd}
+
+\begin{chapex} % Always
+\label{cqFunctionsASNBegin}
+Let $f : X \to Y$ be a function and let $U \subseteq X$. Then there is a function $g : U \to Y$ defined by $g(x) = f(x)$ for all $x \in U$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $f : X \to Y$ be a function and let $V \subseteq Y$. Then there is a function $g : X \to V$ defined by $g(x) = f(x)$ for all $x \in X$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ be a set. Then there is a unique function $X \to \{ 0 \}$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ be a set. Then there is a unique function $X \to \varnothing$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets and let $G \subseteq X \times Y$. Then $G$ is the graph of a function $f : X \to Y$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $f : \{ 1, 2, 3 \} \to \{ 1, 2 \}$, let $G = \mathrm{Gr}(f)$ and let $G' = \{ (y,x) \mid (x,y) \in G \}$. Then $G'$ is the graph of a function $\{ 1, 2 \} \to \{ 1, 2, 3 \}$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $f : X \to Y$ be a function and let $U \subseteq X$ be inhabited. Then $f[U]$ is inhabited.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $f : X \to Y$ be a function and let $V \subseteq Y$ be inhabited. Then $f^{-1}[V]$ is inhabited.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $f : \{ 1, 2 \} \to \{ 1, 2, 3 \}$ be a function. Then $f$ is injective.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $f : \{ 1, 2 \} \to \{ 1, 2, 3 \}$ be a function. Then $f$ is surjective.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $a,b,c,d \in \mathbb{R}$ and define $f : \mathbb{R}^2 \to \mathbb{R}^2$ by $f(x,y) = (ax+by,cx+dy)$ for all $(x,y) \in \mathbb{R}^2$. Then $f$ is injective if and only if $f$ is surjective.
+\hintlabel{cqLinearMapInjectiveIffSurjective}{%
+First prove that $f$ is bijective if and only if $ad \ne bc$.
+}
+\end{chapex}
+
+\begin{chapex} % Sometimes
+\label{cqFunctionsASNEnd}
+Let $U, V \subseteq \mathbb{R}$ and suppose that $x^2 \in V$ for all $x \in U$. The function $f : U \to V$ defined by $f(x) = x^2$ is injective.
 \end{chapex}

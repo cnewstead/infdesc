@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \subsection*{Recursive definitions}
 
 In \Crefrange{cqRecursiveDefinitionsOfArithmeticOperationsBegin}{cqRecursiveDefinitionsOfArithmeticOperationsEnd}, use the recursive definitions of addition, multiplication and exponentiation directly to prove the desired equation.
@@ -123,4 +124,46 @@ You will need to use the angle addition formulae
 \hintlabel{cqIntegralOfSinToTheN}{%
 For (a) use integration by parts; you do not need induction. For parts (b) and (c), use part (a).
 }
+\end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqInductionTFBegin}{cqInductionTFEnd}
+
+\begin{chapex}
+\label{cqInductionTFBegin}
+
+\end{chapex}
+
+\begin{chapex} % False
+Given some logical formula $p(x)$ with free variable $x \in \mathbb{N}$, if for all $x \in \mathbb{N}$ there exists some $y \le x$ such that $p(x)$ is false, then $p(x)$ is false for all $x \in \mathbb{N}$.
+\end{chapex}
+
+\begin{chapex}
+\label{cqInductionTFEnd}
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqInductionASNBegin}{cqInductionASNEnd}
+
+\begin{chapex}
+\label{cqInductionASNBegin}
+
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $n,k,\ell \in \mathbb{Z}$. Then $\dbinom{n}{k+\ell} = \dbinom{n}{k} + \dbinom{n}{\ell}$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $m,n \ge 2$. Then $(m+n)! = m!+n!$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $p(x)$ be a logical formula with free variable $x \in \mathbb{Z}$, and suppose that $p(0)$ is true and, for all $n \in \mathbb{Z}$, if $p(n)$ is true, then $p(n+1)$ and $p(n-2)$ are true. Then $\forall n \in \mathbb{Z},\, p(n)$ is true.
+\end{chapex}
+
+\begin{chapex}
+\label{cqInductionASNEnd}
 \end{chapex}

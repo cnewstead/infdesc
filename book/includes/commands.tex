@@ -1,3 +1,5 @@
+% !TeX root = ../../book.tex
+
 %
 % Custom symbols and commands
 %
@@ -54,20 +56,6 @@
 \setlength{\quotesymbolwidth}{\widthof{\quoteintrosymbol}}
 % \addtolength{\quotesymbolwidth}{1pt}
 
-% Warning messages for incomplete sections
-\newcommand{\chexwarning}{%
-    \begin{figure}[H]\centering {\Large \color{red} \textbf{Under construction!}} \\
-    The end-of-chapter exercise sections are new and in an incomplete state.\end{figure}%
-}
-\newcommand{\incomplete}{%
-    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
-    This section is not yet finished---do not rely on its correctness or completeness.\end{figure}%
-}
-\newcommand{\incompletefromhere}{%
-    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
-    The section beyond this point is not yet finished---do not rely on its correctness or completeness.\end{figure}%
-}
-
 % For scaling figures that might overflow with small page sizes
 \newcommand{\fitwidth}[1]{\resizebox{\textwidth}{!}{#1}}
 \newcommand{\fitwidthc}[2]{\resizebox{#1\textwidth}{!}{#2}}
@@ -105,6 +93,29 @@
 \newenvironment{vocabtemplate}{\begin{minipage}{0.05\linewidth}~\end{minipage}\vline\hspace{7pt}\begin{minipage}{0.9\linewidth}}{\end{minipage}}
 
 \newenvironment{snippet}{\begin{minipage}[b]{7pt}~\end{minipage}\vline\hspace{7pt}\begin{minipage}[b]{0.88\linewidth}}{\end{minipage}}
+
+% Warning messages for incomplete sections
+\newcommand{\chexwarning}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Under construction!}} \\
+    The end-of-chapter exercise sections are new and in an incomplete state.\end{figure}%
+}
+\newcommand{\incomplete}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
+    This section is not yet finished---do not rely on its correctness or completeness.\end{figure}%
+}
+\newcommand{\incompletefromhere}{%
+    \begin{figure}[H]\centering {\Large \color{red} \textbf{Warning!}} \\
+    The section beyond this point is not yet finished---do not rely on its correctness or completeness.\end{figure}%
+}
+
+% Instructions for true-false and always-sometimes-never questions
+\newcommand{\tfquestiontext}[2]{%
+In \Crefrange{#1}{#2}, determine (with proof) whether the statement is true or false.
+}
+\newcommand{\asnquestiontext}[2]{%
+In \Crefrange{#1}{#2}, determine (with proof) whether the conclusion is always, sometimes or never true under the given hypotheses.
+}
+
 
 
 % Math mode

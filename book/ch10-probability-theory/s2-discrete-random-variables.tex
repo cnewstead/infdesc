@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \section{Discrete random variables}
 \secbegin{secDiscreteRandomVariables}
 
@@ -159,8 +160,8 @@ As with events, there is a notion of independence for random variables.
 \begin{definition}
 \label{defIndependentRandomVariables}
 \index{independent!random variables}
-\index{mutually independent!random variables}
-Let $(\Omega,\mathbb{P})$ be a discrete probability space and let $X,Y : \Omega \to E$ be discrete random variables on $(\Omega,\mathbb{P})$. We say $X$ and $Y$ are \textbf{independent} if, for all $e,e' \in E$, the events $\{ X=e \}$ and $\{ Y=e' \}$ are independent. More generally, random variables $X_1,X_2,\dots,X_n$ are \textbf{mutually independent} if, for all $e_1,e_2,\dots,e_n \in E$, the events $\{ X_i = e_i \}$ are mutually independent.
+\index{pairwise independent!random variables}
+Let $(\Omega,\mathbb{P})$ be a discrete probability space and let $X,Y : \Omega \to E$ be discrete random variables on $(\Omega,\mathbb{P})$. We say $X$ and $Y$ are \textbf{independent} if, for all $e,e' \in E$, the events $\{ X=e \}$ and $\{ Y=e' \}$ are independent. More generally, random variables $X_1,X_2,\dots,X_n$ are \textbf{pairwise independent} if, for all $e_1,e_2,\dots,e_n \in E$, the events $\{ X_i = e_i \}$ are pairwise independent.
 \end{definition}
 
 \begin{example}
@@ -184,7 +185,7 @@ The events $\{ X = e \}$ and $\{ Y = e' \}$ are independent, and so $X$ and $Y$ 
 A coin which shows heads with probability $p \in [0,1]$, and tails otherwise, is flipped five times. For each $i \in [5]$, let
 \[ X_i = \begin{cases} 0 & \text{if the } i^{\text{th}} \text{ flip shows tails} \\
 1 & \text{if the } i^{\text{th}} \text{ flip shows heads} \end{cases} \]
-Prove that the random variables $X_1,X_2,X_3,X_4,X_5$ are mutually independent.
+Prove that the random variables $X_1,X_2,X_3,X_4,X_5$ are pairwise independent.
 \end{exercise}
 
 One final technicality that we mention before continuing concerns performing arithmetic with random variables which assume real values.
@@ -373,7 +374,7 @@ An urn contains $n \ge 1$ distinct coupons. Each time you draw a coupon that you
 For each $k \in [n]$, let $X_k$ be the random variable representing the number of draws required to draw the $k^{\text{th}}$ new coupon, after $k-1$ coupons have been collected. Then the total number of times a coupon must be drawn is $X = X_1+X_2+\cdots+X_n$.
 
 After $k-1$ coupons have been collected, there are $n-k+1$ uncollected coupons remaining in the urn, and hence on any given draw, an uncollected coupon is drawn with probability $\frac{n-k+1}{n}$, and a coupon that has already been collected is drawn with probability $\frac{k-1}{n}$. Hence for each $r \in \mathbb{N}^+$ we have
-\[ \mathbb{P}[X_k=r] = \left( \frac{k-1}{n} \right)^{r-1} \left( \frac{n-k+1}{n} \right) \]
+\[ \mathbb{P} \{ X_k=r \} = \left( \frac{k-1}{n} \right)^{r-1} \left( \frac{n-k+1}{n} \right) \]
 That is to say, $X_k$ is geometrically distributed on $\mathbb{N}^+$ with parameter $\frac{n-k+1}{n}$.
 
 We will use this in \Cref{exCoinCollectorExpectation} to compute the number of times a person should expect to have to draw coupons from the urn until they win.

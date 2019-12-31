@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \subsection*{Countability}
 
 In \Crefrange{cqProveCountableBegin}{cqProveCountableEnd}, prove that the set is countable.
@@ -196,4 +197,76 @@ Define the factorial $\kappa !$ of a cardinal number $\kappa$ in a way that gene
 \hintlabel{cqFactorialOfCardinalNumber}{%
 Think combinatorially. You should not try to generalise the recursive definition of factorials (\Cref{defFactorialRecursive}); and you \textit{very much should not} try to generalise the informal definition `$n! = 1 \times 2 \times \cdots \times n$'.
 }
+\end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqInfinityTFBegin}{cqInfinityTFEnd}
+
+\begin{chapex} % True
+\label{cqInfinityTFBegin}
+For any two countably infinite sets $X$ and $Y$, there exists a bijection $X \to Y$.
+\end{chapex}
+
+\begin{chapex} % False
+For any two uncountable sets $X$ and $Y$, there exists a bijection $X \to Y$.
+\end{chapex}
+
+\begin{chapex} % False
+The product of countably many countable sets is countable.
+\end{chapex}
+
+\begin{chapex} % True
+Every countably infinite can be partitioned into infinitely many infinite subsets.
+\end{chapex}
+
+\begin{chapex} % False
+There are countably many infinite subsets of $\mathbb{N}$.
+\end{chapex}
+
+\begin{chapex} % True
+The set $\mathbb{N} \times \mathbb{Z} \times \mathbb{Q}$ is countably infinite.
+\end{chapex}
+
+\begin{chapex} % False
+$\aleph_0$ is the smallest cardinal number.
+\end{chapex}
+
+\begin{chapex} % False
+For all sets $X$, if $U \subsetneqq X$, then $|U| < |X|$.
+\end{chapex}
+
+\begin{chapex} % False
+\label{cqInfinityTFEnd}
+$2^{\kappa} < 3^{\kappa}$ for all cardinal numbers $\kappa > 0$.
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqInfinityASNBegin}{cqInfinityASNEnd}
+
+\begin{chapex} % Always
+\label{cqInfinityASNBegin}
+Let $X$ be a set and suppose that there exists an injection $\mathbb{N} \to X$. Then there exists an injection $\mathbb{Q} \to X$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $X$ be a set. Then $\mathcal{P}(X)$ is countably infinite.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ be a set, let $\kappa$ and $\lambda$ be cardinal numbers, and suppose that $\lambda \le \kappa = |X|$. Then $X$ has a subset of size $\lambda$.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ and $Y$ be sets with $|X| \le |Y|$. Then $|\mathcal{P}(X)| \le |\mathcal{P}(Y)|$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $n \in \mathbb{N}$ with $n \ge 2$. Then $\aleph_0^n > \aleph_0$.
+\end{chapex}
+
+\begin{chapex} % Always
+\label{cqInfinityASNEnd}
+Let $\kappa$ be a cardinal number with $\kappa \ge \aleph_0$. Then $\aleph_0^{\kappa} > \aleph_0$.
 \end{chapex}

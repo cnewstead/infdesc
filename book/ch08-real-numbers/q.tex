@@ -1,3 +1,4 @@
+% !TeX root = ../../book.tex
 \subsection*{Inequalities and means}
 
 \begin{chapex}
@@ -65,4 +66,76 @@ where $\mathrm{HM}(a_1,a_2,\dots,a_n)$ denotes the harmonic mean of $a_1,a_2,\do
 
 \begin{chapex}
 Does there exist a sequence $(x_n)$ such that $(x_{n+1} - x_n) \to 0$ but $(x_n)$ diverges?
+\end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqRealNumbersTFBegin}{cqRealNumbersTFEnd}
+
+\begin{chapex} % False
+\label{cqRealNumbersTFBegin}
+For all $x,y \in \mathbb{R}$ we have $|x-y| \le |x| - |y|$.
+\end{chapex}
+
+\begin{chapex} % False
+The function $f : \mathbb{R}^n \to \mathbb{R}$ defined by $f(\vec x) = \lVert \vec x \rVert$ for all $\vec x \in \mathbb{R}^n$ is injective.
+\end{chapex}
+
+\begin{chapex} % False
+The function $f : \mathbb{R}^n \to \mathbb{R}$ defined by $f(\vec x) = \lVert \vec x \rVert$ for all $\vec x \in \mathbb{R}^n$ is surjective.
+\end{chapex}
+
+\begin{chapex} % True
+For all $\vec x, \vec y \in \mathbb{R}^n$ we have $\lVert 2\vec x - 3\vec y \rVert \le 2\lVert \vec x \rVert + 3\lVert \vec y \rVert$.
+\end{chapex}
+
+\begin{chapex} % True
+Every convergent sequence is bounded.
+\end{chapex}
+
+\begin{chapex} % False
+Every convergent equence is eventually monotone.
+\end{chapex}
+
+\begin{chapex} % False
+\label{cqRealNumbersTFEnd}
+Every subsequence of a divergent sequence diverges.
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqRealNumbersASNBegin}{cqRealNumbersASNEnd}
+
+\begin{chapex} % Always
+\label{cqRealNumbersASNBegin}
+Let $\vec x, \vec y \in \mathbb{R}^n$ and suppose that $\lVert \vec x - \vec y \rVert = 0$. Then $\vec x = \vec y$.
+\end{chapex}
+
+\begin{chapex} % Never
+Let $x_1, x_2, \dots, x_n \ge 0$. Then the harmonic mean of the $x_i$s is greater than their quadratic mean.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $y_1, y_2, \dots, y_m \ge 0$. Then the geometric mean of the $y_j$s is less than or equal to their quadratic mean.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $(x_n)$ be a sequence of real numbers and suppose that the subsequences $(x_{2n})$ and $(x_{2n+1})$ both converge. Then $(x_n)$ converges.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $(x_n)$ be a sequence of real numbers and suppose that the subsequences $(x_{2n})$, $(x_{2n+1})$ and $(x_{3n})$ all converge. Then $(x_n)$ converges.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $f : \mathbb{R} \to \mathbb{R}$, let $(x_n)$ be a sequence of real numbers, and suppose that $(x_n) \to a \in \mathbb{R}$. Then $(x_n^2) \to a^2$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $f : \mathbb{R} \to \mathbb{R}$, let $(x_n)$ be a sequence of real numbers, and suppose that $(x_n) \to a \in \mathbb{R}$. Then $(f(x_n)) \to f(a)$.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+\label{cqRealNumbersASNEnd}
+Let $(a_n)$ be a sequence of real numbers and suppose that $(a_n) \to 0$. Then $\sum_{n \ge 0} a_n$ converges.
 \end{chapex}
