@@ -159,3 +159,75 @@ Use \Cref{defUniqueExistentialQuantifier} to write out a maximally negated logic
 \begin{chapex}
 Define a new quantifier $\forall !$ such that de Morgan's laws for quantifiers (\Cref{thmDeMorganQuantifiers}) hold with $\forall$ and $\exists$ replaced by $\forall !$ and $\exists !$, respectively.
 \end{chapex}
+
+\subsection*{True--False questions}
+
+\tfquestiontext{cqLogicTFBegin}{cqLogicTFEnd}
+
+\begin{chapex} % True
+\label{cqLogicTFBegin}
+Every implication is logically equivalent to its contrapositive.
+\end{chapex}
+
+\begin{chapex} % False
+Every implication is logically equivalent to its converse.
+\end{chapex}
+
+\begin{chapex} % True
+Every propositional formula whose only logical operators are conjunctions and negations is logically equivalent to a propositional formula whose only logical operators are disjunctions and negations.
+\end{chapex}
+
+\begin{chapex} % False
+Every propositional formula whose only logical operators are conjunctions is logically equivalent to a propositional formula whose only logical operators are disjunctions.
+\end{chapex}
+
+\begin{chapex} % False
+The formulae $p \wedge (q \vee r)$ and $(p \wedge q) \vee r$ are logically equivalent.
+\end{chapex}
+
+\begin{chapex} % True
+The formulae $p \vee (q \vee r)$ and $(p \vee q) \wedge (p \vee r)$ are logically equivalent.
+\end{chapex}
+
+\begin{chapex} % False
+The logical formulae $\neg \forall x \in X,\, \forall y \in Y,\, p(x,y)$ and $\exists x \in X,\, \forall y \in Y,\, p(x,y)$ are logically equivalent.
+\end{chapex}
+
+\begin{chapex} % False
+$\neg \forall x \ge 0,\, \exists y \in \mathbb{R},\, y^2=x$ is logically equivalent to $\forall x < 0,\, \exists y \not\in \mathbb{R},\, y^2 \ne x$.
+\end{chapex}
+
+\begin{chapex} % True
+$\neg \forall x \ge 0,\, \exists y \in \mathbb{R},\, y^2=x$ is logically equivalent to $\exists x \ge 0,\, \forall y \in \mathbb{R},\, y^2 \ne x$.
+\end{chapex}
+
+\begin{chapex} % False
+\label{cqLogicTFEnd}
+$\neg \forall x \ge 0,\, \exists y \in \mathbb{R},\, y^2=x$ is logically equivalent to $\exists x < 0,\, \forall y \in \mathbb{R},\, y^2 = x$.
+\end{chapex}
+
+\subsection*{Always--Sometimes--Never questions}
+
+\asnquestiontext{cqLogicASNBegin}{cqLogicASNEnd}
+
+\begin{chapex} % Sometimes
+\label{cqLogicASNBegin}
+Let $p$ and $q$ be propositions and assume that $p$ is true. Then $p \Rightarrow q$ is true.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $p$ and $q$ be propositions and assume that $p$ is false. Then $p \Rightarrow q$ is true.
+\end{chapex}
+
+\begin{chapex} % Always
+Let $X$ and $Y$ be sets and let $p(x,y)$ be a predicate with free variables $x \in X$ and $y \in Y$. Then the logical formulae $\forall x \in X,\, \forall y \in Y,\, p(x,y)$ and $\forall y \in Y,\, \forall x \in X,\, p(x,y)$ are logically equivalent.
+\end{chapex}
+
+\begin{chapex} % Sometimes
+Let $X$ and $Y$ be sets and let $p(x,y)$ be a predicate with free variables $x \in X$ and $y \in Y$. Then the logical formulae $\forall x \in X,\, \exists y \in Y,\, p(x,y)$ and $\exists y \in Y,\, \forall x \in X,\, p(x,y)$ are logically equivalent.
+\end{chapex}
+
+\begin{chapex} % Never
+\label{cqLogicASNEnd}
+Let $X$ and $Y$ be sets and let $p(x,y)$ be a predicate with free variables $x \in X$ and $y \in Y$. Then the logical formulae $\forall x \in X,\, \forall y \in Y,\, p(x,y)$ and $\exists x \in X,\, \exists y \in Y,\, \neg p(x,y)$ are logically equivalent.
+\end{chapex}
