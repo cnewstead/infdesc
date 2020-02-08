@@ -2,17 +2,23 @@
 \section{Set theoretic foundations}
 \secbegin{secZFC}
 
-\todo{}
-
 \subsection*{Na\"{i}ve set theory and Russell's paradox}
 
-\todo{}
+\textit{Na\"{i}ve set theory} formalises what we mean when we say `a set is a collection of objects'. It consists of just two axioms:
+\begin{itemize}
+\item \textbf{Extensionality:} If two sets contain exactly the same elements, then they are equal.
+\item \textbf{Comprehension:} For any logical formula $p(x)$ with free variable $x$, there is a set whose elements are precisely those objects $x$ such that $p(x)$ is true.
+\end{itemize}
+
+Note that the comprehension axiom implies that anything that we can define using set-builder notation $\{ x \mid p(x) \}$ is a set.
+
+Unfortunately, na\"{i}ve set theory is not consistent---the most famous proof of this is due to Bertrand Russell, stated next.
 
 \begin{theorem}[Russell's paradox]
 \label{thmRussellsParadox}
 \index{Russell's paradox}
 \index{paradox!Russell's}
-Under na\"{i}ve set theory, the set $R = \{ x \mid x \not\in x \}$ satisfies neither $R \in R$ nor $R \not\in R$.
+Under na\"{i}ve set theory, the set $R = \{ x \mid x \not\in x \}$ satisfies neither $R \in R$ nor $R \not\in R$. Thus na\"{i}ve set theory is inconsistent.
 \end{theorem}
 
 \begin{cproof}
@@ -27,7 +33,7 @@ It is worth noting, however, that other systems continue to be studied by mathem
 
 \subsection*{Zermelo--Fraenkel set theory}
 
-\todo{}
+Zermelo--Fraenkel set theory overcomes Russell's paradox by deleting the axiom of comprehension and replacing it with axioms of two kinds: axioms that posit the existence of some sets (such as the empty set), and axioms that describe how to construct new sets from sets already known to exist (such as their power set). In this theory, everything is a set, and so all mathematical objects---numbers, functions, relations, and so on---are encoded as sets of some kind. This is in contrast to \textit{type theories}, which describe mathematical objects in terms of their intrinsic properties.
 
 The first two axioms of ZF set theory that we introduce are the \textit{axiom of extensionality} and the \textit{axiom of foundation}. They concern the behaviour of the set elementhood relation $\in$, with the axiom of extensionality describing how it relates to equality of sets (as in \Cref{axSetEquality}), and axiom of foundation 
 
