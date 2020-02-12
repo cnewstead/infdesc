@@ -102,22 +102,83 @@ But then $g(f(z_1)) = g(z_2) = z_1$ and, for all $n \in \mathbb{N}_1$, we have
 and so $g \circ f = \mathrm{id}_{\mathbb{N}_1}$ by \Cref{lemIdentityFromNNN}. Likewise $f \circ g = \mathrm{id}_{\mathbb{N}_2}$. Hence $g$ is an inverse for $f$, so that $f$ is a bijection, as required.
 \end{proof}
 
-\todo{}
+With this settled, we will now simply work with a fixed notion of natural numbers $(\mathbb{N}, z, s)$, and not worry too much about how it is constructed---if you like, take $\mathbb{N} = \mathbb{N}_{\mathsf{vN}}$, $z = 0_{\mathsf{vN}} = \varnothing$ and $s(n) = n^+ = n \cup \{ n \}$ for all $n \in \mathbb{N}$.
 
-\todo{Arithmetic operations, order}
+The arithmetic operations that we know and love---addition, multiplication and exponentiation---are defined using recursion in \Cref{secPeanosAxioms}; so are factorials and binomial coefficients.
 
-\todo{Define relation for the integers, prove it's well-defined, provide intuition.}
+We can define more familiar notions involving natural numbers. For example, we can define the relation $\le$ on $\mathbb{N}$ by defining $m \le n$ to mean $\exists k \in \mathbb{N},\, m+k=n$. An alternative approach would be to define `$m \le n$' for $m,n \in \mathbb{N}$ by an iterated recursion on $m$ and $n$---specifically:
+\begin{itemize}
+\item $0 \le 0$ is true;
+\item For all $m \in \mathbb{N}$, $m+1 \le 0$ is false;
+\item For all $n \in \mathbb{N}$, $0 \le n+1$ is true; and
+\item For all $m,n \in \mathbb{N}$, $m+1 \le n+1$ is true if and only if $m \le n$ is true.
+\end{itemize}
 
-\begin{definition}
-\label{defIntegersFromNaturalNumbers}
+\begin{exercise}
+Prove that the recursive definition of $\le$ is equivalent to the definition of `$m \le n$' as `$\exists k \in \mathbb{N},\, m+k=n$'.
+\hintlabel{exTwoDefinitionsOfLeqOnN}{%
+Define two relations $\le$ and $\le'$ on $\mathbb{N}$, one using the recursive definition and the other using the definition as a logical formula; then use induction to prove that $m \le n \Leftrightarrow m \le' n$ for all $m,n \in \mathbb{N}$.
+}
+\end{exercise}
+
+\subsection*{Integers}
+
+Now that we have constructed the natural numbers, it is time to construct the integers. The intuition behind the definition we are about to give is that integers tell us the difference between two natural numbers. Thus when we think of $3$ as an integer, we are talking about an increase of $3$ from one natural number to another (say $0$ to $3$, or $7$ to $10$); and when we think of $-4$ as an integer, we are talking about a decrease of $4$ from one natural number to another (say $4$ to $0$, or $10$ to $6$).
+
+A first attempt might be to define $\mathbb{Z}$ to be $\mathbb{N} \times \mathbb{N}$, and interpret $(a,b) \in \mathbb{N} \times \mathbb{N}$ to represent the integer $b-a$. Unfortunately this doesn't quite work, since for instance the integer $3$ would be represented as $(0,3)$ and as $(7,10)$---and, more generally, as $(n,n+3)$ for all $n \in \mathbb{N}$.
+
+So instead, we will declare two pairs $(a,b)$, $(c,d) \in \mathbb{N} \times \mathbb{N}$ to represent the same integer whenever $b-a = d-c$. To make this formal, a couple of things need to happen:
+\begin{enumerate}[(1)]
+\item We need to make precise what we mean by `declare two pairs to represent the same integer'---this will be done by defining an equivalence relation on $\mathbb{N} \times \mathbb{N}$ and then passing to the quotient (see \Cref{secEquivalenceRelationsPartitions}).
+\item We cannot use subtraction in our definition of the equivalence relation, since we have not yet defined a notion of subtraction for $\mathbb{N}$.
+\end{enumerate}
+
+Fortunately for us, (2) is easy to resolve: we can state the equation $b-a = d-c$ for $m,n \in \mathbb{N}$ equivalently as $a+d = b+c$; this is the equation that we will use to define the equivalence relation on $\mathbb{N} \times \mathbb{N}$ in (1).
+
+\begin{lemma}
+The relation $\sim$ on $\mathbb{N} \times \mathbb{N}$, defined for $(a,b), (c,d) \in \mathbb{N} \times \mathbb{N}$ by $(a,b) \sim (c,d)$ if and only if $a+d=b+c$, is an equivalence relation.
+\end{lemma}
+
+\begin{cproof}
+\fixlistskip%
+\begin{itemize}
+\item (\textbf{Reflexivity}) Let $(a,b) \in \mathbb{N} \times \mathbb{N}$. Then $a+b = b+a$, so that $(a,b) \sim (a,b)$.
+\item (\textbf{Symmetry}) Let $(a,b), (c,d) \in \mathbb{N} \times \mathbb{N}$ and assume that $(a,b) \sim (c,d)$. Then $a+d=b+c$, so $c+b=d+a$, and so $(c,d) \sim (a,b)$.
+\item (\textbf{Transitivity}) Let $(a,b), (c,d), (e,f) \in \mathbb{N} \times \mathbb{N}$ and assume that $(a,b) \sim (c,d)$ and $(c,d) \sim (e,f)$. Then $a+d=b+c$ and $c+f=d+e$. But then
+\[ (a + f) + (c + d) = (a+d) + (c+f) = (b+c) + (d+e) = (b+e) + (c+d) \]
+so cancelling $c+d$ from both sides gives $a+f = b+e$, and so $(a,b) \sim (e,f)$, as required.
+
+We should be careful to note that we did not assume the existence of a subtraction operation when we cancelled $c+d$ from both sides of the equation: the fact that $u+w=v+w$ implies $u=v$ for all $u,v,w \in \mathbb{N}$ can be proved by induction on $w$ using only Peano's axioms.
+\fixlistskip%
+\end{itemize}
+\end{cproof}
+
+Now that we have an equivalence relation on $\mathbb{N} \times \mathbb{N}$, we can take $\mathbb{Z}$ to be the resulting set of equivalence classes (that is, the quotient).
+
+\begin{construction}
+\label{cnsIntegersFromNaturalNumbers}
 The \textbf{set of integers} is the set $\mathbb{Z}$ defined by
 \[ \mathbb{Z} = (\mathbb{N} \times \mathbb{N})/{\sim} \]
 where $\sim$ is the equivalence relation on $\mathbb{N} \times \mathbb{N}$ defined by
 \[ (a,b) \sim (c,d) \text{ if and only if } a+d=b+c \]
 for all $(a,b),(c,d) \in \mathbb{N} \times \mathbb{N}$.
-\end{definition}
+\end{construction}
 
-\todo{Arithmetic operations, order}
+We interpret the element $[(a,b)]_{\sim} \in \mathbb{Z}$ to be the integer $b-a$. So for example we have
+\[ 3 = [(0,3)]_{\sim} = [(7,10)]_{\sim} \quad \text{and} \quad -4 = [(4,0)]_{\sim} = [(10,6)]_{\sim} \]
+
+Several remarks are now in order.
+
+The first, and perhaps most alarming, is that this construction of $\mathbb{Z}$ means that we do not have $\mathbb{N} \subseteq \mathbb{Z}$: the elements of $\mathbb{Z}$ are sets of pairs of natural numbers, meaning that the natural number `$3$' is not equal to the integer `$3$' (which is really equal to $[(0,3)]_{\sim}$). However, we will regard $\mathbb{N}$ as being a subset of $\mathbb{Z}$ by identifying each natural number $n$ with the element $[(0,n)]_{\sim}$. What justifies this identification is the following exercise.
+
+\begin{exercise}
+\label{exRepresentativesOfElementsOfZ}
+Prove that every element of $\mathbb{Z}$, as defined in \Cref{cnsIntegersFromNaturalNumbers}, is equal to exactly one of the following: $[(0,0)]_{\sim}$, or $[(0,n)]_{\sim}$ for some $n>0$, or $[(n,0)]_{\sim}$ for some $n>0$.
+\end{exercise}
+
+\Cref{exRepresentativesOfElementsOfZ} implies that the `inclusion' function $i : \mathbb{N} \to \mathbb{Z}$ defined by $i(n) = [(0,n)]_{\sim}$ for all $n \in \mathbb{N}$ is injective. When $n \in \mathbb{N}$, we will simply write `$n$' to denote the integer $[(0,n)]_{\sim}$. Likewise, the function $j : \mathbb{N} \to \mathbb{Z}$ defined by $j(n) = [(n,0)]_{\sim}$ for all $n \in \mathbb{N}$ is injective, and we will write `$-n$' for the integer $[(n,0)]_{\sim}$. Note that we have $n=-n$ if and only if $n=0$, which is to be expected.
+
+\subsection*{Rational numbers}
 
 \todo{Define relation for the rationals, prove it's well-defined, provide intuition.}
 
