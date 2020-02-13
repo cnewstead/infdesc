@@ -136,6 +136,7 @@ So instead, we will declare two pairs $(a,b)$, $(c,d) \in \mathbb{N} \times \mat
 Fortunately for us, (2) is easy to resolve: we can state the equation $b-a = d-c$ for $m,n \in \mathbb{N}$ equivalently as $a+d = b+c$; this is the equation that we will use to define the equivalence relation on $\mathbb{N} \times \mathbb{N}$ in (1).
 
 \begin{lemma}
+\label{lemEquivalenceRelationToConstructZFromN}
 The relation $\sim$ on $\mathbb{N} \times \mathbb{N}$, defined for $(a,b), (c,d) \in \mathbb{N} \times \mathbb{N}$ by $(a,b) \sim (c,d)$ if and only if $a+d=b+c$, is an equivalence relation.
 \end{lemma}
 
@@ -181,8 +182,8 @@ What makes the integers special is that we can also negate them, which in turn a
 \item $-[(a,b)]_{\sim} = [(b,a)]_{\sim}$---the intuition here is that for all $a,b \in \mathbb{N}$ we have $-(b-a) = a-b$.
 \item $[(a,b)]_{\sim} - [(c,d)]_{\sim} = [(a+d,b+c)]_{\sim}$---the intuition here is that for all $a,b,c,d \in \mathbb{N}$ we have $(b-a) - (d-c) = (b+c) - (a+d)$.
 \end{itemize}
-Note in particular that these definitions give
-\[ [(a,b)]_{\sim} - [(c,d)]_{\sim} = [(a,b)]_{\sim} + (-[(c,d)]_{\sim}) \]
+The negation and subtraction operations may be defined in terms of one another: they are related by the identities
+\[ -[(a,b)]_{\sim} = [(0,0)]_{\sim} - [(a,b)]_{\sim} \quad \text{and} \quad [(a,b)]_{\sim} - [(c,d)]_{\sim} = [(a,b)]_{\sim} + (-[(c,d)]_{\sim}) \]
 Again, we should but will not prove that the negation and subtraction operations are well-defined.
 
 The second and perhaps most alarming remark is that this construction of $\mathbb{Z}$ means that we do not have $\mathbb{N} \subseteq \mathbb{Z}$: the elements of $\mathbb{Z}$ are equivalence classes of pairs of natural numbers, meaning that the natural number `$3$' is not equal to the integer `$3$' (which is really equal to $[(0,3)]_{\sim}$). However, we will regard $\mathbb{N}$ as being a subset of $\mathbb{Z}$ by identifying each natural number $n$ with the element $[(0,n)]_{\sim} \in \mathbb{Z}$. What justifies this identification is the following exercise.
@@ -201,6 +202,7 @@ Note also that the identification of $n \in \mathbb{N}$ with $i(n) = [(0,n)]_{\s
 The next result proves that $\mathbb{Z}$ is a \textit{ring}---what this means in essence is that the operations of addition, multiplication and negation satisfy the basic properties that we take for granted when doing arithmetic with integers.
 
 \begin{theorem}[$\mathbb{Z}$ is a ring]
+\label{thmZIsARing}
 \fixlistskip%
 \begin{enumerate}[(a)]
 \item (\textbf{Associativity of addition}) $(a+b)+c = a+(b+c)$ for all $a,b,c \in \mathbb{Z}$.
@@ -235,20 +237,59 @@ as required.
 
 \subsection*{Rational numbers}
 
-\todo{Define relation for the rationals, prove it's well-defined, provide intuition.}
+Just as we constructed the integers from the natural numbers by formalising what we mean by the `difference' of two natural numbers, we will construct the rational numbers from the integers by formalising what we mean by the `ratio' of two integers.
 
-\begin{definition}
-\label{defRationalsFromIntegers}
+Since rational numbers should take the form $\dfrac{a}{b}$ with $a,b \in \mathbb{Z}$ and $b \ne 0$, a first attempt at constructing $\mathbb{Q}$ might be to take $\mathbb{Q} = \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$, and letting the pair $(a,b)$ represent the fraction $\dfrac{a}{b}$. But just as an integer cannot be expressed uniquely as the difference of two natural numbers, a rational number cannot be expressed uniquely as the ratio of two integers---for example, we have $\dfrac{1}{2} = \dfrac{2}{4}$.
+
+This means that we must identify $(a,b) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$ with $(c,d) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$ whenever $\dfrac{a}{b} = \dfrac{c}{d}$. But wait! We have not yet defined a division operation, so we cannot use it in our construction of $\mathbb{Q}$---so instead, we will identify $(a,b)$ with $(c,d)$ whenever $ad=bc$, noting that this will be equivalent to $\dfrac{a}{b} = \dfrac{c}{d}$ once we have defined a division operation.
+
+\begin{lemma}
+\label{lemEquivalenceRelationToConstructQFromZ}
+The relation $\sim$ on $\mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$, defined for $(a,b), (c,d) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$ by letting $(a,b) \sim (c,d)$ if and only if $ad=bc$, is an equivalence relation.
+\end{lemma}
+
+\begin{csketch}
+The proof is essentially the same as that of \Cref{lemEquivalenceRelationToConstructZFromN}, but with addition replaced by multiplication; the proof of transitivity uses fact that for $u,v,w \in \mathbb{Z}$ with $u \ne 0$, we have $uv=uw \Rightarrow v=w$, which can be proved by induction on $|u| \ge 1$ without using a division operation.
+\end{csketch}
+
+\begin{construction}
+\label{cnsRationalsFromIntegers}
 The \textbf{set of rational numbers} is the set $\mathbb{Q}$ defined by
 \[ \mathbb{Q} = (\mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})) / {\sim} \]
 where $\sim$ is the equivalence relation on $\mathbb{Z} \times (\mathbb{Z} \setminus \{0\})$ defined by
 \[ (a,b) \sim (c,d) \text{ if and only if } ad=bc \]
 for all $(a,b),(c,d) \in \mathbb{Z} \times (\mathbb{Z} \setminus \{ 0 \})$.
-\end{definition}
+\end{construction}
 
-\todo{Arithmetic operations, order}
+We will write `$\dfrac{a}{b}$' to denote the element $[(a,b)]_{\sim} \in \mathbb{Q}$, noting that $\dfrac{a}{b} = \dfrac{c}{d}$ if and only if $ad=bc$. We can now define addition, multiplication, negation and subtraction operations on $\mathbb{Q}$ in terms of those on $\mathbb{Z}$---namely, given $a,b,c,d \in \mathbb{Z}$ with $b,d \ne 0$, we define
+\[ \dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad+bc}{bd}, \quad \dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}, \quad -\dfrac{a}{b} = \dfrac{-a}{b}, \quad \dfrac{a}{b} - \dfrac{c}{d} = \dfrac{ad-bc}{bd} \]
 
-\todo{Motivate Dedekind cuts}
+As always, we should (but won't) verify that these operations are well-defined.
+
+Again, we do not have $\mathbb{Z} \subseteq \mathbb{Q}$, but we can embed $\mathbb{Z}$ into $\mathbb{Q}$ in a way that respects the arithmetic operations of addition, multiplication, negation and subtraction.
+
+\begin{exercise}
+Prove that the function $i : \mathbb{Z} \to \mathbb{Q}$ defined by $i(a) = \dfrac{a}{1}$ is an injection, and for all $a,b \in \mathbb{Z}$ we have $i(a+b) = i(a)+i(b)$, $i(ab) = i(a)i(b)$, $i(-a) = -i(a)$ and $i(a-b) = i(a)-i(b)$.
+\end{exercise}
+
+In light of this, given $a \in \mathbb{Z}$, we will typically just write `$a$' for the rational number $i(a) = \dfrac{a}{1} \in \mathbb{Q}$, so we may pretend that $\mathbb{Z} \subseteq \mathbb{Q}$ even though this is not strictly the case.
+
+The construction of $\mathbb{Q}$ also allows for reciprocal and division operations to be defined. Note that $\dfrac{c}{d} = 0$ if and only if $c = c \cdot 1 = 0 \cdot d = 0$; so if $a,b,c,d \in \mathbb{Q}$ with $b,c,d \ne 0$, then we define
+\[ \left(\dfrac{c}{d} \right)^{-1} = \dfrac{d}{c} \quad \textbf{and} \quad \frac{a}{b} \div \frac{c}{d} = \dfrac{ad}{bc} \]
+
+The usual comment about well-definedness applies. Note that for all $a,b \in \mathbb{Z}$ with $b \ne 0$ we have
+\[ a \div b = \dfrac{a}{1} \div \dfrac{b}{1} = \dfrac{a \cdot 1}{1 \cdot b} = \dfrac{a}{b} \]
+So we will dispense with the `$\div$' symbol and simply use the fraction notation.
+
+Note also that the reciprocal and division operations may be defined in terms of one another: they are related by the identities
+\[ y^{-1} = \dfrac{1}{y} \quad \textbf{and} \quad \dfrac{x}{y} = x \cdot y^{-1} \]
+for all $x,y \in \mathbb{Q}$ with $y \ne 0$.
+
+\todo{$\mathbb{Q}$ is a field}
+
+\subsection*{Real numbers}
+
+\todo{}
 
 \begin{definition}[Dedekind's construction of the real numbers]
 \label{defDedekindReals}
