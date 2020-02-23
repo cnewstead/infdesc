@@ -291,6 +291,15 @@ Observe that $7^{n+1} - 2 \cdot 4^{n+1} + 1 = 4(7^n - 2 \cdot 4^n + 1) + 3(7^n -
 }
 \end{exercise}
 
+So far in this section most of the results that we have proved by induction have concerned numbers, and particularly identities involving natural numbers. But the scope of proof by induction is not limited to such results---the next exercise, for example, concerns sets and bijections.
+
+\begin{exercise}
+Let $n \in \mathbb{N}$ and let $\{ X_k \mid 1 \le k \le n \}$ be a family of sets. Prove by induction on $n$ that there is a bijection $\displaystyle \prod_{k=1}^{n+1} X_k \to \left( \prod_{k=1}^n X_k \right) \times X_n$.
+\hintlabel{exProductOfSuccNSets}{%
+To define the bijection, think about what the elements of the two sets look like: The elements of $\prod_{k=1}^{n+1} X_k$ look like $(a_1, a_2, \dots, a_n, a_{n+1})$, where $a_k \in X_k$ for each $1 \le k \le n+1$. On the other hand, the elements of $\left( \prod_{k=1}^n X_k \right) \times X_{n+1}$ look like $((a_1, a_2, \dots, a_n), a_{n+1})$.
+}
+\end{exercise}
+
 \subsection*{Binomials and factorials}
 
 Proof by induction turns out to be a very useful way of proving facts about binomial coefficients $\binom{n}{k}$ and factorials $n!$.
