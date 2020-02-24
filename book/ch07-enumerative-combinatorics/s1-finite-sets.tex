@@ -63,11 +63,28 @@ Note that \Cref{exBracketNIsFinite} implies, in particular, that $\varnothing$ i
 
 \subsection*{The size of a finite set}
 
-Whilst it might sometimes be useful just to know \textit{that} set is finite, it will be even more useful to know how many elements it has. This quantity is called the \textit{size} of the set. Intuitively, the size of the set should be the length of the list of its elements, but for this to be well-defined, we first need to know that the number of elements in the list is independent of the order in which we list them.
+Whilst it might sometimes be useful just to know \textit{that} set is finite, it will be even more useful to know how many elements it has. This quantity is called the \textit{size} of the set. Intuitively, the size of the set should be the length of the list of its elements, but for this to be well-defined, we first need to know that the number of elements in the list is independent of the way we choose to list them.
 
 The `list of elements' of a finite set $X$ is the bijection $[n] \to X$ given by \Cref{defFiniteSet}, and $n$ is the length of the list, this means that we need to prove that if $[m] \to X$ and $[n] \to X$ are bijections, then $m=n$. This will be \Cref{thmUniquenessOfSize}.
 
-To be able to prove this, we must first prove some technical results that we will use in the proof.
+To be able to prove this, we must first prove some technical results involving functions that we will use in the proof.
+
+\begin{lemma}
+\label{lemRemoveElementFromDomainAndCodomain}
+Let $X$ and $Y$ be sets, let $f : X \to Y$ be an injection and let $a \in X$. Then there is an injection $f^{\vee} : X \setminus \{ a \} \to Y \setminus \{ f(a) \}$ defined by $f^{\vee}(x) = f(x)$ for all $x \in X \setminus \{ a \}$. Moreover if $f$ is a bijection $X \to Y$, then $f^{\vee}$ is a bijection $X \setminus \{ a \} \to Y \setminus \{ f(a) \}$.
+\end{lemma}
+
+\begin{cproof}
+Note that $f^{\vee}$ is well-defined by injectivity of $f$: indeed, if we had $f(x) = f(a)$ for some $x \in X \setminus \{ a \}$, then that would imply $x=a \in X \setminus \{ a \}$, which is a contradiction.
+
+To see that $f^{\vee}$ is injective, let $x,y \in X \setminus \{ a \}$ and $f^{\vee}(x) = f^{\vee}(y)$. Then $f(x) = f(y)$, so that $x=y$ by injectivity of $f$.
+
+Now suppose that $f$ is a bijection. Then $f$ has an inverse $g : Y \to X$, which is itself a bijection (and hence an injection). Repeating the above argument with $g$ yields an injection $g^{\vee} : Y \setminus \{ f(a) \} \to X \setminus \{ a \}$ defined by $g^{\vee}(y) = g(y)$ for all $y \in Y$. But then for all $x \in X \setminus \{ a \}$ and all $y \in Y \setminus \{ f(a) \}$ we have
+\[ g^{\vee}(f^{\vee}(x)) = g(f(x)) = x \quad \text{and} \quad f^{\vee}(g^{\vee}(y)) = f(g(y)) \]
+so that $g^{\vee}$ is an inverse for $f^{\vee}$. Hence if $f$ is a bijection, then $f^{\vee}$ is a bijection.
+\end{cproof}
+
+A consequence of \Cref{lemRemoveElementFromDomainAndCodomain} is the next useful result, which we will use in our proof that every set has a unique `size'.
 
 \begin{lemma}
 \label{lemRemoveElementFromSet}
@@ -75,21 +92,9 @@ Let $X$ be an inhabited set. There is a bijection $X \setminus \{ a \} \to X \se
 \end{lemma}
 
 \begin{cproof}
-Define $f : X \setminus \{ a \} \to X \setminus \{ b \}$ by
-\[ f(x) = \begin{cases} a & \text{if } x = b \\ x & \text{otherwise} \end{cases} \]
-Note that $f$ is well-defined since it ensures that $f(x) \ne b$ for any $x \in X \setminus \{ a \}$.
-
-We prove that $f$ is a bijection by finding an inverse.
-
-So define $g : X \setminus \{ b \} \to X \setminus \{ a \}$ by
-\[ g(x) = \begin{cases} b & \text{if } x = a \\ x & \text{otherwise} \end{cases} \]
-Again, $g$ is well-defined since we have ensured that $g(x) \ne a$ for any $x \in X \setminus \{ b \}$.
-
-Given $x \in X$, if $x \ne a$ and $x \ne b$, then $f(x) \ne a$ and $g(x) \ne b$, so that
-\[ g(f(x)) = g(x) = x \quad \text{and} \quad f(g(x)) = f(x) = x \]
-Moreover $g(f(b)) = g(a) = b$ and $f(g(a)) = f(b) = a$.
-
-This proves that $g \circ f = \mathrm{id}_{X \setminus \{ a \}}$ and $f \circ g = \mathrm{id}_{X \setminus \{ b \}}$, so that $g$ is an inverse for $f$, as required.
+Define $f : X \to X$ be the function that swaps $a$ and $b$ and leaves all other elements of $X$ fixed---that is, we define
+\[ f(x) = \begin{cases} b & \text{if } x = a \\ a & \text{if } x = b \\ x & \text{if } x \not\in \{ a, b \} \end{cases} \]
+Note that $f(f(x)) = x$ for all $x \in X$, so $f$ is a bijection---it is its own inverse! Since $f(a) = b$, it follows from \Cref{lemRemoveElementFromDomainAndCodomain} that the function $f^{\vee} : X \setminus \{ a \} \to X \setminus \{ b \}$ defined by $f^{\vee}(x) = f(x)$ for all $x \in X \setminus \{ a \}$ is a bijection, as required.
 \end{cproof}
 
 \begin{theorem}
@@ -113,13 +118,13 @@ Now let $n \in \mathbb{N}$ and suppose that there is an injection $f : [m+1] \to
 
 First note that $n \ge 1$. Indeed, since $m+1 \ge 1$, we have $1 \in [m+1]$, and so $f(1) \in [n]$. This means that $[n]$ is inhabited, and so $n \ge 1$. In particular, $n-1 \in \mathbb{N}$ and so the set $[n-1]$ is well-defined. It suffices to prove that $m \le n-1$.
 
-Let $a = f(m+1) \in [n]$ and define $f^- : [m] \to [n] \setminus \{ a \}$ by $f^-(k) = f(k)$ for all $k \in [m]$. Note that $f^-$ is well-defined; indeed, $f(k) \ne a$ for all $k \in [m]$ since $a = f(m+1)$ and $f$ is injective.
+Let $a = f(m+1) \in [n]$. Then:
+\begin{itemize}
+\item By \Cref{lemRemoveElementFromDomainAndCodomain} there is an injection $f^{\vee} : [m] = [m+1] \setminus \{ m+1 \} \to [n] \setminus \{ a \}$.
+\item By \Cref{lemRemoveElementFromSet} there is a bijection $g : [n] \setminus \{ a \} \to [n] \setminus \{ n \} = [n-1]$.
+\end{itemize}
 
-The function $f^-$ is injective. To see this, let $k, \ell \in [m]$ and suppose $f^-(k) = f^-(\ell)$. Then $f(k) = f(\ell)$ by definition of $f^-$, and so $k = \ell$ by injectivity of $f$.
-
-Since $[n-1] = [n] \setminus \{ n \}$, there is a bijection $s : [n] \setminus \{ a \} \to [n-1]$ by \Cref{lemRemoveElementFromSet}. In particular, $s$ is injective, and so $s \circ f^-$ is an injection $[m] \to [n-1]$ by \Cref{propCompositeOfInjectionsIsInjection}.
-
-By the induction hypothesis, we have $m \le n-1$, and so $m+1 \le n$ as required.
+Composing these two functions gives an injection $g \circ f^{\vee} : [m] \to [n-1]$. But then $m \le n-1$ by the induction hypothesis, and so $m+1 \le n$ as required.
 \end{itemize}
 The result now follows by induction.
 \end{cproof}
@@ -147,7 +152,8 @@ As we mentioned above, \Cref{thmUniquenessOfSize} tells us that any two ways of 
 \begin{definition}
 \label{defSize}
 \index{size}
-Let $X$ be a finite set. The \textbf{size} of $X$, written $|X|$, is the unique natural number $n$ for which there exists a bijection $[n] \to X$.
+\index{cardinality!of a finite set}
+Let $X$ be a finite set. The \textbf{size} (or \textbf{cardinality}) of $X$, written $|X|$, is the unique natural number $n$ for which there exists a bijection $[n] \to X$.
 \end{definition}
 
 \begin{example}
@@ -208,19 +214,15 @@ Let $X$ and $Y$ be sets.
 \begin{itemize}
 \item (\textbf{Base case}) Let $Y$ be a finite set of size $0$---that is, $Y$ is empty. Suppose there is an injection $f : X \to Y$. If $X$ is inhabited, then there exists an element $a \in X$, so that $f(a) \in Y$. This contradicts emptiness of $Y$, so that $X$ must be empty. Hence $|X| = 0 \le 0$, as required.
 
-\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and assume that, if $Y$ is a finite set of size $n$ and there is an injection $f : X \to Y$, then $X$ is finite and $|X| \le n$.
+\item (\textbf{Induction step}) Fix $n \in \mathbb{N}$ and assume that, if $Z$ is a finite set of size $n$ and there is an injection $f : X \to Z$, then $X$ is finite and $|X| \le n$.
 
 Fix a finite set $Y$ of size $n+1$ and an injection $f : X \to Y$. We need to prove that $X$ is finite and $|X| \le n+1$.
 
 If $X$ is empty, then $|X| = 0 \le n+1$ as required. So assume that $X$ is inhabited, and fix an element $a \in X$.
 
-Define $f^{\vee} : X \setminus \{ a \} \to Y \setminus \{ f(a) \}$ by $f^{\vee}(x) = f(x)$ for all $x \in X \setminus \{ a \}$. Note that $f^{\vee}$ is well-defined since $f(x) \ne f(a)$ for any $x \in X \setminus \{ a \}$ by injectivity of $f$. Moreover $f^{\vee}$ is injective; indeed, let $x,y \in X \setminus \{ a \}$ and assume $f^{\vee}(x) = f^{\vee}(y)$. Then
-\[f(x) = f^{\vee}(x) = f^{\vee}(y) = f(y) \quad \Rightarrow \quad x=y\]
-by injectivity of $f$. So $f^{\vee}$ is an injection.
+By \Cref{lemRemoveElementFromDomainAndCodomain}, there is an injection $f^{\vee} : X \setminus \{ a \} \to Y \setminus \{ f(a) \}$. Moreover, by \Cref{exAddRemoveElementsOfFiniteSets}, $Y \setminus \{ f(a) \}$ is finite and $|Y \setminus \{ f(a) \}| = (n+1) - 1 = n$.
 
-By \Cref{exAddRemoveElementsOfFiniteSets}, $Y \setminus \{ f(a) \}$ is finite and $|Y \setminus \{ f(a) \}| = (n+1) - 1 = n$.
-
-By the induction hypothesis, $X \setminus \{ a \}$ is finite and $|X \setminus \{ a \}| \le (n+1) - 1$. But $|X \setminus \{ a \}| = |X| - 1$ by \Cref{exAddRemoveElementsOfFiniteSets}, and so $|X| \le n+1$, as required.
+Applying the induction hypothesis with $Z = Y \setminus \{ f(a) \}$ tells us that, $X \setminus \{ a \}$ is finite and $|X \setminus \{ a \}| \le n$. But $|X \setminus \{ a \}| = |X| - 1$ by \Cref{exAddRemoveElementsOfFiniteSets}, and so $|X| \le n+1$, as required.
 \end{itemize}
 
 The result now follows by induction.
