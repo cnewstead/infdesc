@@ -169,13 +169,13 @@ There are, however, a few more notions that we need to define by recursion so th
 \begin{definition}
 \label{defSumOfRealNumbers}
 Given $n \in \mathbb{N}$, the \textbf{sum} of $n$ real numbers $a_1, a_2, \dots, a_n$ is the real number $\sum_{k=1}^n a_k$ defined by recursion on $n \in \mathbb{N}$ by
-\[ \sum_{k=1}^0 a_k = 0 \quad \text{and} \quad \sum_{k=1}^{n+1} a_k = \left( \sum_{k=0}^n a_k \right) + a_{n+1} \text{ for all } n \in \mathbb{N} \]
+\[ \sum_{k=1}^0 a_k = 0 \quad \text{and} \quad \sum_{k=1}^{n+1} a_k = \left( \sum_{k=1}^n a_k \right) + a_{n+1} \text{ for all } n \in \mathbb{N} \]
 \end{definition}
 
 \begin{definition}
 \label{defProductOfRealNumbers}
 Given $n \in \mathbb{N}$, the \textbf{product} of $n$ real numbers $a_1, a_2, \dots, a_n$ is the real number $\prod_{k=1}^n a_k$ defined by recursion on $n \in \mathbb{N}$ by
-\[ \prod_{k=1}^0 a_k = 1 \quad \text{and} \quad \prod_{k=1}^{n+1} a_k = \left( \prod_{k=0}^n a_k \right) \cdot a_{n+1} \text{ for all } n \in \mathbb{N} \]
+\[ \prod_{k=1}^0 a_k = 1 \quad \text{and} \quad \prod_{k=1}^{n+1} a_k = \left( \prod_{k=1}^n a_k \right) \cdot a_{n+1} \text{ for all } n \in \mathbb{N} \]
 \end{definition}
 
 \begin{example}
