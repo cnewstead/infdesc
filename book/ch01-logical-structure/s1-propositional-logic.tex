@@ -514,7 +514,7 @@ Since $n$ is a positive proper factor of $4$, either $n=1$ or $n=2$.
 Hence $n$ is either even or a perfect square. \qed
 \end{quote}
 
-Notice that in both Case 1 and Case 2, we did not explicitly mention that we had proved that `$n \text{ is even} \vee n \text{ is a perfect square}$', leaving that deducgion to the reader---we only mentioned it after the proofs in each case were complete.
+Notice that in both Case 1 and Case 2, we did not explicitly mention that we had proved that `$n \text{ is even} \vee n \text{ is a perfect square}$', leaving that deduction to the reader---we only mentioned it after the proofs in each case were complete.
 \end{example}
 
 The proof of \Cref{propRemainderOfSquaresModulo3} below splits into \textit{three} cases, rather than just two.
@@ -650,7 +650,7 @@ Let $f(x) = x^2+ax+b$ be a polynomial with $a,b \in \mathbb{R}$, and let $\Delta
 \item If $\Delta = 0$, then $f$ has one real root;
 \item If $\Delta < 0$, then $f$ has no real roots.
 \end{enumerate}
-Given the polynomial $f(x) = x^2-68+1156$, it would be a pain to go through the process of solving the equation $f(x)=0$ in order to determine how many real roots $f$ has. However, each of the propositions (i), (ii) and (iii) take the form $p \Rightarrow q$, so \Cref{strAssumingImplicationsDirect} reduces the problem of finding how many real roots $f$ has to that of evaluating $\Delta$ and comparing it with $0$. And indeed, $(-68)^2 - 4 \times 1156 = 0$, so the implication (ii) together with \elimrule{\Rightarrow} tell us that $f$ has one real root.
+Given the polynomial $f(x) = x^2-68x+1156$, it would be a pain to go through the process of solving the equation $f(x)=0$ in order to determine how many real roots $f$ has. However, each of the propositions (i), (ii) and (iii) take the form $p \Rightarrow q$, so \Cref{strAssumingImplicationsDirect} reduces the problem of finding how many real roots $f$ has to that of evaluating $\Delta$ and comparing it with $0$. And indeed, $(-68)^2 - 4 \times 1156 = 0$, so the implication (ii) together with \elimrule{\Rightarrow} tell us that $f$ has one real root.
 \end{example}
 
 A common task faced by mathematicians is to prove that two conditions are equivalent. For example, given a polynomial $f(x) = x^2+ax+b$ with $a,b \in \mathbb{R}$, we know that \textit{if} $a^2-4b>0$ \textit{then} $f$ has two real roots, but is it also true that if $f$ has two real roots then $a^2-4b>0$? (The answer is `yes'.) The relationship between these two implications is that each is the \textit{converse} of the other.
