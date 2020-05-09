@@ -1,5 +1,27 @@
 % !TeX root = ../../book.tex
 \begin{chapex}
+For each of the following equations, determine whether there exists a function $f : \mathbb{R} \to \mathbb{R}$ such that, for all $x,y \in \mathbb{R}$, the equation holds if and only if $y=f(x)$.
+\begin{multicols}{3}
+\begin{enumerate}[(a)]
+\item $x+y=1$
+\item $x^2+y^2=1$
+\item $x=0$
+\item $y=0$
+\item $(1+x^2)y=1$
+\item $(1-x^2)y=0$
+\end{enumerate}
+\end{multicols}
+\end{chapex}
+
+\begin{chapex}
+Let $X$ be a set. Prove that
+\[ \forall a \in X,\, \exists ! U \in \mathcal{P}(X), (a \in U \wedge \exists ! x \in X,\, x \in U) \]
+Give an explicit description of the function $X \to \mathcal{P}(X)$ that is suggested by this logical formula.
+\hintlabel{cqSingletonSubsetFunction}{%
+}
+\end{chapex}
+
+\begin{chapex}
 Show that there is only one function whose codomain is empty. What is its domain?
 \hintlabel{cqFunctionEmptyCodomain}{%
 Given a function $f : X \to \varnothing$, we must have $f(a) \in \varnothing$ for each $a \in X$.
@@ -133,6 +155,7 @@ Let $f : X \to Y$ and $g : Y \to Z$ be functions.
 \subsection*{Injections, surjections and bijections}
 
 \begin{chapex}
+\fixlistskip%
 \begin{enumerate}[(a)]
 \item Prove that, for all functions $f : X \to Y$ and $g : Y \to Z$, if $g \circ f$ is bijective, then $f$ is injective and $g$ is surjective.
 \item Find an example of a function $f : X \to Y$ and a function $g : Y \to Z$ such that $g \circ f$ is bijective, $f$ is not surjective and $g$ is not injective.

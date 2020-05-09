@@ -227,7 +227,7 @@ An \textbf{inductively defined set} is a set $A$ equipped with a set $R$ of rule
 \item For each $a \in A$, there is a unique rule $\sigma \in R$ and unique elements $a_1,a_2,\dots,a_r \in A$ such that $a = f_{\sigma}(a_1,a_2,\dots,a_r)$; and
 \item For every set $X$, if $f_{\sigma}(a_1,a_2,\dots,a_r) \in X$ for all $\sigma \in R$ and all $a_1,a_2,\dots,a_r \in A$, then $A \subseteq X$.
 \end{enumerate}
-Given a rule $\sigma$ of arity $r$, the functions $f_{\sigma} : A^r \to A$ is called the \textbf{constructor} associated with $\sigma$; the natural number $r$ is called the \textbf{arity} of the constructor.
+Given a rule $\sigma$ of arity $r$, the function $f_{\sigma} : A^r \to A$ is called the \textbf{constructor} associated with $\sigma$; the natural number $r$ is called the \textbf{arity} of the constructor.
 \end{definition}
 
 Note that nullary constructors are the same thing as elements of $A$. Indeed, $A^0 = \{ () \}$, where $()$ is the empty list of elements of $A$, and so specifying a function $f_{\sigma} : A^0 \to A$ is equivalent to specifying an element $f_{\sigma}(\,()\,) \in A$. In this sense, we may regard nullary constructors as \textit{being} the elements of $A$---we call such elements \textit{basic elements}.
