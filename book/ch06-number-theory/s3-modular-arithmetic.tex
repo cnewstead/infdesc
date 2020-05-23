@@ -76,28 +76,28 @@ We now prove that we can treat congruence like equality for the purposes of addi
 
 \begin{theorem}[Modular arithmetic]\label{thmModularArithmetic}\index{modular arithmetic}
 Fix a modulus $n$, and let $a_1,a_2,b_1,b_2 \in \mathbb{Z}$ be such that
-\[ a_1 \equiv b_1 \bmod n \qquad \text{and} \qquad a_2 \equiv b_2 \bmod n \]
+\[ a_1 \equiv a_2 \bmod n \qquad \text{and} \qquad b_1 \equiv b_2 \bmod n \]
 Then the following congruences hold:
 \begin{enumerate}[(a)]
-\item $a_1+a_2 \equiv b_1+b_2 \bmod n$;
-\item $a_1a_2 \equiv b_1b_2 \bmod n$;
-\item $a_1-a_2 \equiv b_1-b_2 \bmod n$.
+\item $a_1+b_1 \equiv a_2+b_2 \bmod n$;
+\item $a_1b_1 \equiv a_2b_2 \bmod n$;
+\item $a_1-b_1 \equiv a_2-b_2 \bmod n$.
 \end{enumerate}
 \end{theorem}
-\begin{cproof} By \Cref{defCongruence} that $n \mid a_1-b_1$ and $n \mid a_2-b_2$, so there exist $q_1,q_2 \in \mathbb{Z}$ such that
-\[ a_1-b_1 = q_1n \qquad \text{and} \qquad a_2-b_2=q_2n \]
+\begin{cproof} By \Cref{defCongruence} that $n \mid a_1-a_2$ and $n \mid b_1-b_2$, so there exist $q_1,q_2 \in \mathbb{Z}$ such that
+\[ a_1-a_2 = qn \qquad \text{and} \qquad b_1-b_2=rn \]
 This implies that
-\[ (a_1+a_2)-(b_1+b_2) = (a_1-b_1)+(a_2-b_2) = q_1n+q_2n = (q_1+q_2)n \]
-so $n \mid (a_1+a_2)-(b_1+b_2)$. This proves (a).
+\[ (a_1+b_1)-(a_2+b_2) = (a_1-a_2)+(b_1-b_2) = qn+rn = (q+r)n \]
+so $n \mid (a_1+b_1)-(a_2+b_2)$. This proves (a).
 
 The algebra for (b) is slightly more involved:
 \begin{align*}
-a_1a_2-b_1b_2 &= (q_1n+b_1)(q_2n+b_2) - b_1b_2 \\
-&= q_1q_2n^2 + b_1q_2n + b_2q_1n + b_1b_2 - b_1b_2 \\
-&= q_1q_2n^2 + b_1q_2n + b_2q_1n \\
-&= (q_1q_2n + b_1q_2 + b_2q_1)n
+a_1b_1-a_2b_2 &= (qn+a_2)(rn+b_2) - a_2b_2 \\
+&= qrn^2 + a_2rn + b_2qn + a_2b_2 - a_2b_2 \\
+&= qrn^2 + a_2rn + b_2qn \\
+&= (qrn + a_2r + b_2q)n
 \end{align*}
-This shows that $n \mid a_1a_2 - b_1b_2$, thus proving (b).
+This shows that $n \mid a_1b_1 - a_2b_2$, thus proving (b).
 
 Now (a) and (b) together imply (c). Indeed, we know that $-1 \equiv -1 \bmod n$ and $b_1 \equiv b_2 \bmod n$, so by (b) we have $-b_1 \equiv -b_2 \bmod n$. We also know that $a_1 \equiv a_2 \bmod n$, and hence $a_1-b_1 \equiv a_2-b_2 \bmod n$ by (a).
 \end{cproof}
