@@ -29,16 +29,19 @@ So by \Cref{defNotionOfNaturalNumbers}(iii) we have $\mathbb{N} \subseteq X$. He
 
 \begin{strategy}[Proof by {(weak)} induction]
 \index{proof!by weak induction}
-In order to prove a proposition of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that $p(n_0)$ is true and that, for all $n \ge n_0$, if $p(n)$ is true, then $p(n+1)$ is true.
-\end{strategy}
-
-Some terminology has evolved for proofs by induction, which we mention now:
+In order to prove a proposition of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that:
+\begin{itemize}
+\item $p(n_0)$ is true; and
+\item For all $n \ge n_0$, if $p(n)$ is true, then $p(n+1)$ is true.
+\end{itemize}
+Some terminology has evolved for proofs by induction:
 \begin{itemize}
 \item The proof of $p(n_0)$ is called the \textbf{base case};
 \item The proof of $\forall n \ge n_0,\, (p(n) \Rightarrow p(n+1))$ is called the \textbf{induction step};
 \item In the induction step, the assumption $p(n)$ is called the \textbf{induction hypothesis};
 \item In the induction step, the proposition $p(n+1)$ is called the \textbf{induction goal}.
 \end{itemize}
+\end{strategy}
 
 The following diagram illustrates the weak induction principle.
 

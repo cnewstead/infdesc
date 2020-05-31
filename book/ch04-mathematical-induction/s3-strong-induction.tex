@@ -59,7 +59,11 @@ By induction, $q(n)$ is true for all $n \ge n_0$. Hence $p(n)$ is true for all $
 \begin{strategy}[Proof by strong induction]
 \label{strStrongInduction}
 \index{proof!by strong induction}
-In order to prove a proposition of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that $p(n_0)$ is true and that, for all $n \ge n_0$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true.
+In order to prove a proposition of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that:
+\begin{itemize}
+\item (\textbf{Base case}) $p(n_0)$ is true; and
+\item (\textbf{Induction step}) For all $n \ge n_0$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true.
+\end{itemize}
 \end{strategy}
 
 Like with weak induction, we can illustrate how strong induction works diagrammatically. The induction hypothesis, represented by the large square, now encompasses $p(k)$ for all $n_0 \le k \le n$, where $p(n_0)$ is the base case.
@@ -132,7 +136,11 @@ Thus by strong induction, we have that $p(n)$ is true for all $n \ge n_0$.
 
 \begin{strategy}[Proof by strong induction with multiple base cases]
 \index{proof!by strong induction with multiple base cases}
-In order to prove a statement of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove $p(k)$ for all $k \in \{ n_0, n_0+1, \dots, n_1 \}$, where $n_1 > n_0$, and then given $n \ge n_1$, assuming $p(k)$ is true for all $n_0 \le k \le n$, prove that $p(n+1)$ is true.
+In order to prove a statement of the form $\forall n \ge n_0,\, p(n)$, it suffices to prove that:
+\begin{itemize}
+\item (\textbf{Base cases}) $p(k)$ for all $k \in \{ n_0, n_0+1, \dots, n_1 \}$, where $n_1 > n_0$; and
+\item (\textbf{Induction step}) For all $n \ge n_1$, if $p(k)$ is true for all $n_0 \le k \le n$, then $p(n+1)$ is true.
+\end{itemize}
 \end{strategy}
 
 This kind of strong induction differs from the usual kind in two main ways:
