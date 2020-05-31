@@ -52,6 +52,17 @@ Let $N$ be a set, let $z \in N$ and let $s : N \to N$. Prove that $(N, z, s)$ is
 
 \subsection*{Proofs by induction}
 
+\begin{exercise}
+\label{exNPowerFiveLessThanFivePowerN}
+Find all natural numbers $n$ such that $n^5 < 5^n$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $(1+x)^{123\;456\;789} \ge 1 + 123\;456\;789\;x$ for all real $x \ge -1$.
+\hintlabel{exBernoullisInequality}{%
+Proving this by induction on $x$ only demonstrates that it is true for \textit{integers} $x \ge -1$, not \textit{real numbers} $x \ge -1$. Try proving a more general fact by induction on a different variable, and deducing this as a special case. (Do you \textit{really} think there is anything special about the natural number $123\;456\;789$?)}
+\end{exercise}
+
 \begin{chapex}
 Let $a \in \mathbb{N}$ and assume that the last digit in the decimal expansion of $a$ is $6$. Prove that the last digit in the decimal expansion of $a^n$ is $6$ for all $n \ge 1$.
 \end{chapex}
@@ -82,6 +93,13 @@ Like in \Cref{cqHomomorphismFromRPlusToRPlus}, prove this first for $x \in \math
 \begin{chapex}
 Let $a,b \in \mathbb{Z}$. Prove that $b-a$ divides $b^n-a^n$ for all $n \in \mathbb{N}$.
 \end{chapex}
+
+\begin{exercise}
+Prove by induction that $7^n - 2 \cdot 4^n + 1$ is divisible by $18$ for all $n \in \mathbb{N}$.
+\hintlabel{exInductionEmbeddedInIductionStep}{%
+Observe that $7^{n+1} - 2 \cdot 4^{n+1} + 1 = 4(7^n - 2 \cdot 4^n + 1) + 3(7^n - 1)$ for all $n \in \mathbb{N}$. You may need to do a separate proof by induction in your induction step.
+}
+\end{exercise}
 
 \subsection*{Some examples from calculus}
 

@@ -174,17 +174,6 @@ Note that the proof in \Cref{propWeakInductionNonzeroBaseCaseExample} says nothi
 \end{itemize}
 So we deduce that $p(n)$ is true when $n=0$ or $n \ge 4$, and false when $n \in \{ 1, 2, 3 \}$.
 
-\begin{exercise}
-\label{exNPowerFiveLessThanFivePowerN}
-Find all natural numbers $n$ such that $n^5 < 5^n$.
-\end{exercise}
-
-\begin{exercise}
-Prove that $(1+x)^{123\;456\;789} \ge 1 + 123\;456\;789\;x$ for all real $x \ge -1$.
-\hintlabel{exBernoullisInequality}{%
-Proving this by induction on $x$ only demonstrates that it is true for \textit{integers} $x \ge -1$, not \textit{real numbers} $x \ge -1$. Try proving a more general fact by induction on a different variable, and deducing this as a special case. (Do you \textit{really} think there is anything special about the natural number $123\;456\;789$?)}
-\end{exercise}
-
 Sometimes a `proof' by induction might appear to be complete nonsense. The following is a classic example of a `fail by induction':
 
 \begin{example}
@@ -279,16 +268,7 @@ The following exercises generalises \Cref{exSumOfPowersOf2} to prove the correct
 \label{exFormulaForGeometricProgression}
 Let $a,r \in \mathbb{R}$ with $r \ne 1$. Then
 \[ \sum_{k=0}^n ar^k = \frac{a(1-r^{n+1})}{1-r} \]
-for all $n \in \mathbb{N}$. [You may assume that $r^ir^j=r^{i+j}$ for all $i,j \in \mathbb{N}$.]
-\end{exercise}
-
-When attempting the following exercise, you might find that your induction step requires an auxiliary result, which itself has a proof by induction.
-
-\begin{exercise}
-Prove by induction that $7^n - 2 \cdot 4^n + 1$ is divisible by $18$ for all $n \in \mathbb{N}$.
-\hintlabel{exInductionEmbeddedInIductionStep}{%
-Observe that $7^{n+1} - 2 \cdot 4^{n+1} + 1 = 4(7^n - 2 \cdot 4^n + 1) + 3(7^n - 1)$ for all $n \in \mathbb{N}$.
-}
+for all $n \in \mathbb{N}$.
 \end{exercise}
 
 So far in this section most of the results that we have proved by induction have concerned numbers, and particularly identities involving natural numbers. But the scope of proof by induction is not limited to such results---the next exercise, for example, concerns sets and bijections.
@@ -340,12 +320,6 @@ so the induction step is finished.
 \end{itemize}
 By induction, we're done.
 \end{example}
-
-\begin{exercise}
-\label{exAlternatingSumOfBinomialCoefficientsIsZero}
-Prove by induction on $n \ge 1$ that
-\[ \sum_{i=0}^n (-1)^i \binom{n}{i} = 0 \]
-\end{exercise}
 
 \begin{theorem}
 \label{thmBinomAsFactorialByInduction}
@@ -437,7 +411,7 @@ Indeed:
 \end{example}
 
 \begin{exercise}
-Prove that $\binom{n}{k} = \binom{n}{n-k}$ for all $n,k \in \mathbb{N}$ with $k \le n$.
+Prove that $\dbinom{n}{k} = \dbinom{n}{n-k}$ for all $n,k \in \mathbb{N}$ with $k \le n$.
 \end{exercise}
 
 A very useful application of binomial coefficients in elementary algebra is to the binomial theorem.
@@ -495,5 +469,13 @@ The proof is greatly simplified by applying the binomial theorem. Indeed, by the
 \[ 0 = 0^n = (-1+1)^n = \sum_{k=0}^n \binom{n}{k}(-1)^k1^{n-k} = \sum_{k=0}^n (-1)^k \binom{n}{k} \]
 Both of these identities can be proved much more elegantly, quickly and easily using \textit{enumerative combinatorics}. This will be the topic covered in \Cref{secCountingPrinciples}.
 \end{example}
+
+\begin{exercise}
+Use the binomial theorem to prove that
+\[ \sum_{i=0}^n (-1)^i \binom{n}{i} = 0 \]
+\hintlabel{exAlternatingSumOfBinomialCoefficientsIsZero}{%
+Note that $(-1)^i \dbinom{n}{i} = \dbinom{n}{i} \cdot (-1)^i \cdot 1^{n-i}$.
+}
+\end{exercise}
 
 \index{induction!weak|)}

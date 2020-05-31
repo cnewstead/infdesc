@@ -80,7 +80,7 @@ Let $n \in \mathbb{Z}$. Prove that if $n \ne 0$, then $a \equiv b \bmod n$ if an
 \end{exercise}
 
 \begin{exercise}
-Let $a,b \in \mathbb{Z}$. When is it true that $a \equiv b \bmod 0$?
+Let $a,b \in \mathbb{Z}$. When is it true that $a \equiv b \bmod 0$? When is it true that $a \equiv b \bmod 1$?
 \end{exercise}
 
 Having got a better feel for how congruence works, we now prove that, for each $n \in \mathbb{Z}$, congruence modulo $n$ is an equivalence relation on $\mathbb{Z}$.
@@ -197,7 +197,7 @@ For congruence, special terminology and notation exists for equivalence classes 
 Let $n \in \mathbb{Z}$. The \textbf{congruence class} of an integer $a$ modulo $n$ is defined by
 \[ [a]_n ~=~ [a]_{\equiv \bmod n} ~=~ \{ x \in \mathbb{Z} \mid a \equiv x \bmod n \} \]
 The set of all congruence classes modulo $n$ is denoted by
-\[ \mathbb{Z}/n\mathbb{Z} ~=~ \mathbb{Z}/{\equiv \bmod n} ~=~ \{ [a]_n \mid a \in \mathbb{Z} \} \]
+\[ \mathbb{Z}/n\mathbb{Z} ~=~ \mathbb{Z}/({\equiv \bmod n}) ~=~ \{ [a]_n \mid a \in \mathbb{Z} \} \]
 \end{definition}
 
 \begin{example}
@@ -277,15 +277,16 @@ Let $X$ be a set and let $\mathcal{U} = \{ U_i \mid i \in I \}$ be a family of i
 
 \begin{exercise}
 \label{exQuotientIsPartition}
-If $\sim$ be an equivalence relation on $X$, then $X/{\sim}$ is a partition $X$. Deduce that, for all $a,b \in X$, we have $a \sim b$ if and only if $[a]_{\sim} = [b]_{\sim}$.
+If $\sim$ be an equivalence relation on $X$, then $X/{\sim}$ is a partition $X$.
 \end{exercise}
 
 In fact, the converse of \Cref{exQuotientIsPartition} is also true, as we prove next.
 
 \begin{proposition}
 \label{propPartitionIsQuotientByEquivalenceRelation}
-Let $X$ be a set and let $\mathcal{U}$ be a partition of $X$. Then $\mathcal{U}=X/{\sim}$ for exactly one equivalence relation $\sim$ on $X$.
+Let $X$ be a set and let $\mathcal{U}$ be a partition of $X$. Then $\mathcal{U}=X/{\sim}$ for a unique equivalence relation $\sim$ on $X$.
 \end{proposition}
+
 \begin{cproof}
 Define a relation $\sim$ by
 \[ x \sim y \quad \Leftrightarrow \quad \exists U \in \mathcal{U},\, x \in U \text{ and } y \in U \]
