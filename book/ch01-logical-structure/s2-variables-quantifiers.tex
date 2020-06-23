@@ -462,7 +462,8 @@ In both of the foregoing examples, you might have noticed that the `$\forall\exi
 
 This idea is formalised in \Cref{thmQuantifierAlternation} below, which despite its abstract nature, has an extremely simple proof.
 
-\begin{theorem} \label{thmQuantifierAlternation}
+\begin{theorem}
+\label{thmQuantifierAlternation}
 Let $p(x,y)$ be a logical formula with free variables $x \in X$ and $y \in Y$. Then
 \[\exists y \in Y,\, \forall x \in X,\, p(x,y) \Rightarrow \forall x \in X,\, \exists y \in Y,\, p(x,y)\]
 \end{theorem}
@@ -474,3 +475,39 @@ Using our assumption $\exists y \in Y,\, \forall x \in X,\, p(x,y)$, we may choo
 \end{cproof}
 
 Statements of the form $\exists y \in Y,\, \forall x \in X,\, p(x,y)$ imply some kind of \textit{uniformity}: a value of $y$ making $\forall x \in X,\, p(x,y)$ true can be thought of as a `one size fits all' solution to the problem of proving $p(x,y)$ for a given $x \in X$. Later in your studies, it is likely that you will encounter the word `uniform' many times---it is precisely this notion of quantifier alternation that the word `uniform' refers to.
+
+\begin{tldr}{secVariablesQuantifiers}
+Variables and logical formulae:
+
+\begin{tldrlist}
+\tldritem{defFreeVariable}
+A variable is \textit{free} if a value can be substituted for it; otherwise it is \textit{bound}.
+
+\tldritem{defPredicate}
+A \textit{predicate} $p(x,y,z,\dots)$ represents a statement involving some free variables $x,y,z,\dots{}$ that becomes a proposition when values for the variables are substituted.
+
+\tldritem{defLogicalFormula}
+A \textit{logical formula} is an expression built using predicates, logical operators and quantifiers.
+\end{tldrlist}
+
+Quantifiers:
+
+\begin{tldrlist}
+\tldritem{defUniversalQuantifier}
+The \textit{universal quantifier} ($\forall$) represents `for all'. We prove $\forall x \in X,\, p(x)$ by introducing a variable $x \in X$ and, assuming nothing about $x$ other than that it is an element of $X$, deriving $p(x)$; we can use an assumption of the form $\forall x \in X,\, p(x)$ by deducing $p(a)$ whenever we know that $a \in X$.
+
+\tldritem{defExistentialQuantifier}
+The \textit{existential quantifier} ($\exists$) represents `there exists\dots{} such that\dots{}'. We prove $\exists x \in X,\, p(x)$ by finding (with proof) an element $a \in X$ for which $p(a)$ is true; we can use an assumption of the form $\exists x \in X,\, p(x)$ by introducing a variable $a \in X$ and assuming that $p(a)$ is true.
+
+\tldritem{defUniqueExistentialQuantifier}
+The \textit{unique existential quantifier} ($\exists !)$ represents `there exists a unique\dots{} such that\dots{}'. We prove $\exists ! x \in X,\, p(x)$ in two parts: (1) Prove $\exists x \in X,\, p(x)$; and (2) Let $a,b \in X$, assume that $p(a)$ and $p(b)$ are true, and derive $a=b$.
+\end{tldrlist}
+
+Quantifier alternation:
+
+\begin{tldrlist}
+\tldritem{thmQuantifierAlternation}
+For any logical formula $p(x,y)$, we have that $\exists y \in Y,\, \forall x \in X,\, p(x,y)$ implies $\forall x \in X,\, \exists y \in Y,\, p(x,y)$, but not necessarily vice versa.
+\end{tldrlist}
+
+\end{tldr}

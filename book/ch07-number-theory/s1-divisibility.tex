@@ -1,0 +1,555 @@
+% !TeX root = ../../book.tex
+\section{Division}
+\secbegin{secDivision}
+
+This section introduces the notion of \textit{divisibility}. As we have already mentioned, it is not always the case that one integer can divide another. As you read through this section, note that we never use fractions; everything we do is \textit{internal} to $\mathbb{Z}$, and does not require that we `spill over' to $\mathbb{Q}$ at any point. This will help you when you study ring theory in the future, and is a good practice to mimic in your own work.
+
+The following theorem, called the division theorem, is the crux of everything that is to follow.
+
+\begin{theorem}[Division theorem]
+\label{thmDivisionTheorem}
+\index{division theorem}
+Let $a,b \in \mathbb{Z}$ with $b \ne 0$. There exist unique $q,r \in \mathbb{Z}$ such that
+\[ a = qb + r \quad \text{and} \quad 0 \le r < |b| \]
+\end{theorem}
+
+\begin{strategy*}
+Let's look at the simple case when $a \ge 0$ and $b > 0$. We can always find $q,r$ such that $a=qb+r$, for example $q=0$ and $r=a$. Moreover, by increasing $q$ we can reduce $r$, since
+\[ qb+r = (q+1)b + (r-b) \]
+We will keep doing this until the `remainder' is as small as it can be without being negative. As an example, consider the case when $a=14$ and $b=5$. This procedure gives
+\begin{align*}
+14 &= 0 \times 5 + 14 && \\
+&= 1 \times 5 + 9 && \\
+&= 2 \times 5 + 4 && \leftarrow \text{least nonnegative remainder}\\
+&= 3 \times 5 + (-1) && \\
+&= \cdots
+\end{align*}
+This procedure shows that in this case we should take $q=2$ and $r=4$, since $14 = 2 \times 5 + 4$ and $0 \le 4 < |5|$.
+
+We can show that such a descending sequence of remainders terminates using the well-ordering principle, and then we must argue that the quotient and remainder that we obtain are unique.
+\end{strategy*}
+
+\begin{cproof}
+%% BEGIN EXTRACT (xtrWlogExampleTwo) %%
+We may assume that $b>0$: if not, replace $b$ by $-b$ and $q$ by $-q$. We may also assume that $a \ge 0$. Otherwise, replace $a$ by $-a$, $q$ by $-(q+1)$ and $r$ by $b-r$.
+%% END EXTRACT %%
+
+Thus, what follows assumes that $a \ge 0$ and $b > 0$.
+
+\begin{itemize}
+\item \textbf{Existence.} We prove that such integers $q,r$ exist by the well-ordering principle. Namely, we define a sequence $(r_n)_{n \in \mathbb{N}}$ such that $a=nb+r_n$ and $r_0 > r_1 > r_2 > \cdots$, and use this sequence to find the values of $q,r$.
+
+\begin{itemize}
+\item Let $r_0=a$. Then $a=0b+r_0$, as required.
+\item Suppose $r_n$ has been defined, and let $r_{n+1} = r_n-b$. Then
+\begin{align*}
+(n+1)b+r_{n+1} &= (n+1)b+r_n-b \\
+&= nb + b + r_n - b \\
+&= nb + r = a
+\end{align*}
+Since $b>0$, we must have $r_{n+1} < r_n$ for all $n$.
+\end{itemize}
+
+Let $R = \mathbb{N} \cap \{ r_n \mid n \in \mathbb{N} \}$. That is, $R$ is the set of terms of the sequence which are non-negative. Since $r_0 = a \ge 0$, we have that $r_0 \in R$ and hence $R$ is inhabited. By the well-ordering principle, $R$ has a least element $r_k$ for some $k \in \mathbb{N}$.
+
+Define $q=k$ and $r=r_k$. By construction we have $a=qb+r$ and $r \ge 0$, so
+%% BEGIN EXTRACT (xtrContradictionOneLineExample) %%
+it remains to show that $r < b$. Well, if $r \ge b$ then $r-b \ge 0$, but $r-b=r_{k+1}$, so this would imply $r_{k+1} \in R$, contradicting minimality of $r$. Hence $r < b$%
+%% END EXTRACT %%
+, so $q,r$ are as required.
+
+\item \textbf{Uniqueness.} Suppose $q',r'$ also satisfy $a=q'b+r'$ and $0 \le r' < b$. If we can show that $r'=r$ then this proves that $q=q'$: indeed, if $qb+r=q'b+r$ then we can subtract $r$ and then divide by $b$, since $b>0$.
+
+First note that $q' \ge 0$. If $q'<0$ then $q' \le -1$, so
+\[ a = q'b+r' \le -b+r' \]
+and hence $r' \ge a+b \ge b$ since $a \ge 0$. This contradicts the assumption that $r<b$. So $q' \ge 0$.
+
+Since $q' \ge 0$, we also know that $a=q'b+r_{q'}$, and hence $r' = r_{q'} \in R$. By minimality of $r$ we have $r \le r'$. It remains to show that $r = r'$. If not then $r<r'$. Thus
+\[ qb+r = q'b+r' > q'b+r \quad \Rightarrow \quad qb > q'b \quad \Rightarrow \quad q > q' \]
+and hence $q = q'+t$ for some $t \ge 1$. But then
+\[ q'b+r' = a = qb+r = (q'+t)b+r = q'b+(tb+r) \]
+so $r' = tb + r \ge b$, contradicting $r'<b$. So $r=r'$ as desired, and hence $q=q'$.
+\end{itemize}
+
+At long last, we are done.
+\end{cproof}
+
+\begin{definition}
+\label{defQuotientRemainder}
+\index{quotient!of numbers}
+\index{remainder}
+Let $a,b \in \mathbb{Z}$ with $b \ne 0$, and let $q,r$ be the unique integers such that
+\[ a = qb+r \quad \text{and} \quad 0 \le r < |b| \]
+We say $q$ is the \textbf{quotient} and $r$ is the \textbf{remainder} of $a$ divided by $b$.
+\end{definition}
+
+\begin{example}
+Some examples of division include:
+\[ 14 = 2 \times 5 + 4, \qquad -14 = -3 \times 5 + 1, \qquad 15 = 3 \times 5 + 0 \]
+\end{example}
+
+\begin{definition}
+\label{defDivision}
+\index{division}
+\index{divisor}
+\index{factor}
+Let $a,b \in \mathbb{Z}$. We say $b$ \textbf{divides} $a$, or that $b$ is a \textbf{divisor} (or \textbf{factor}) of $a$, if there exists $q \in \mathbb{Z}$ such that $a=qb$. To denote the fact that $b$ divides $a$ we write $b \mid a$\nindex{division}{$a \mid b$}{division} \inlatex{mid}\lindexmmc{mid}{$\mid$}. For the negation $\neg (b \mid a)$ write $b \nmid a$ \inlatex{nmid}\lindexmmc{nmid}{$\nmid$}.
+\end{definition}
+
+Thus, when $b \ne 0$, saying $b \mid a$ is equivalent to saying that the remainder of $a$ divided by $b$ is $0$.
+
+\begin{example}
+$5$ divides $15$ since $15 = 3 \times 5$. However, $5$ does not divide $14$: we know that the remainder of $14$ divided by $5$ is $4$, not $0$---and it can't be both since we proved in the division theorem that remainders are unique!
+\end{example}
+
+\begin{exercise}
+\label{exOneDivDivZero}
+Show that if $a \in \mathbb{Z}$ then $1 \mid a$, $-1 \mid a$ and $a \mid 0$. For which integers $a$ does $a \mid 1$? For which integers $a$ does $0 \mid a$?
+\end{exercise}
+
+We now introduce the very basic notion of a \textit{unit}. This notion is introduced to rule out trivialities. Units become interesting when talking about general rings, but in $\mathbb{Z}$, the units are very familiar.
+
+\begin{definition}\index{unit}
+Let $u \in \mathbb{Z}$. We say $u$ is a \textbf{unit} if $u \mid 1$; that is, $u$ is a unit if there exists $v \in \mathbb{Z}$ such that $uv=1$.
+\end{definition}
+
+\begin{proposition}\label{propUnitsOfZ}
+The only units in $\mathbb{Z}$ are $1$ and $-1$.
+\end{proposition}
+\begin{cproof}
+First note that $1$ and $-1$ are units, since $1 \cdot 1 = 1$ and $(-1) \cdot (-1) = 1$. Now suppose that $u \in \mathbb{Z}$ is a unit, and let $v \in \mathbb{Z}$ be such that $uv=1$. Certainly $u \ne 0$, since $0v=0 \ne 1$. If $u>1$ or $u<-1$ then $v = \frac{1}{u} \not \in \mathbb{Z}$. So we must have $u \in \{ -1, 1 \}$.
+\end{cproof}
+
+\Cref{exOneDivDivZero} shows that $-1$, $0$ and $1$ are, from the point of view of divisibility, fairly trivial. For this reason, most of the results we discuss regarding divisibility will concern \textbf{nonzero nonunits}\index{nonzero nonunit}, i.e.\ all integers except $-1$, $0$ or $1$.
+
+\subsection*{Greatest common divisors}
+
+\begin{definition}\index{greatest common divisor}
+\label{defGCD}
+Let $a, b \in \mathbb{Z}$. An integer $d$ is a \textbf{greatest common divisor} of $a$ and $b$ if:
+\begin{enumerate}[(a)]
+\item $d \mid a$ and $d \mid b$;
+\item If $q$ is another integer such that $q \mid a$ and $q \mid b$, then $q \mid d$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+\label{exGCDsOfFourAndSix}
+$2$ is a greatest common divisor of $4$ and $6$; indeed:
+\begin{enumerate}[(a)]
+\item $4 = 2 \times 2$, and $6 = 3 \times 2$, so $2 \mid 4$ and $2 \mid 6$;
+\item Suppose $q \mid 4$ and $q \mid 6$. The divisors of $4$ are $\pm 1, \pm 2, \pm 4$ and the divisors of $6$ are $\pm 1$, $\pm 2$, $\pm 3$, $\pm 6$. Since $q$ divides both, it must be the case that $q \in \{ {-2}, {-1}, 1, 2 \}$; in any case, $q \mid 2$.
+\end{enumerate}
+Likewise, $-2$ is a greatest common divisor of $4$ and $6$.
+\end{example}
+
+\begin{exercise}
+\label{exGCDofSixAndFifteen}
+There are two greatest common divisors of $6$ and $15$; find both.
+\begin{backhint}
+\hintref{exGCDofSixAndFifteen}
+Remember that negative integers can be greatest common divisors too.
+\end{backhint}
+\end{exercise}
+
+We will now prove that greatest common divisors \textit{exist}---that is, any two integers have a greatest common divisor---and that they are \textit{unique up to sign}.
+
+\begin{theorem}
+\label{thmGCDsExist}
+Every pair of integers $a,b$ has a greatest common divisor.
+\end{theorem}
+\begin{cproof}
+First note that if $a=b=0$, then $0$ is a greatest common divisor for $a$ and $b$. Moreover, we may take $a,b$ to be non-negative, since divisibility is insensitive to sign. So suppose that $a, b \ge 0$ and that $a,b$ are not both zero.
+
+Define a set $X \subseteq \mathbb{Z}$ by
+\[ X = \{ au+bv \mid u,v \in \mathbb{Z},\ au+bv > 0 \} \]
+That is, $X$ is the set of positive integers of the form $au+bv$.
+
+$X$ is inhabited. To see this, note that $a^2 > 0$ or $b^2 > 0$ since $a \ne 0$ or $b \ne 0$, so letting $u=a$ and $v=b$ in the expression $au+bv$, we see that
+\[ au+bv=a^2+b^2>0 \quad \Rightarrow \quad a^2+b^2 \in X \]
+By the well-ordering principle, $X$ has a least element $d$, and by definition of $X$ there exist $u,v \in \mathbb{Z}$ such that $d = au+bv$.
+
+We will prove that $d$ is a greatest common divisor for $a$ and $b$.
+\begin{itemize}
+\item $d \mid a$. If $a=0$, then this is immediate, so suppose that $a > 0$. Let $q,r \in \mathbb{Z}$ be such that \[ a=qd+r \qquad \text{and} \qquad 0 \le r < d \]
+Moreover
+\[ r = a-qd = a-q(au+bv) = a(1-qu) + b(-qv) \]
+If $r>0$ then this implies that $r \in X$; but this would contradict minimality of $d$, since $r < d$. So we must have $r=0$ after all.
+\item $d \mid b$. The proof of this is identical to the proof that $d \mid a$.
+\item Suppose $q$ is an integer dividing both $a$ and $b$. Then $q \mid au+bv$ by \Cref{exDivisibilityIsLinear}. Since $au+bv=d$, we have $q \mid d$.
+\end{itemize}
+So $d$ is a greatest common divisor of $a$ and $b$ after all.
+\end{cproof}
+
+\begin{exercise}
+\label{exGCDUnique}
+Let $a,b \in \mathbb{Z}$. If $d$ and $d'$ are two greatest common divisors of $a$ and $b$, then either $d=d'$ or $d=-d'$.
+\begin{backhint}
+\hintref{exGCDUnique}
+Start by proving that $d$ and $d'$ must divide each other.
+\end{backhint}
+\end{exercise}
+
+\begin{aside}
+A consequence of \Cref{thmGCDsExist} and \Cref{exGCDUnique} is that every pair of integers has a unique non-negative greatest common divisor! Written symbolically, we can say
+\[ \forall (a,b) \in \mathbb{Z} \times \mathbb{Z},\, \exists ! d \in \mathbb{Z},\, \begin{pmatrix} d \ge 0 \text{ and } d \text{ is a greatest} \\ \text{common divisor for $a$ and $b$} \end{pmatrix} \]
+As discussed in \Cref{secFunctions}, since this is a formula of the form `for all \dots{} there exists a unique \dots{}', this defines a function $\mathrm{gcd} : \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$. We won't explicitly refer to the fact that $\mathrm{gcd}$ is a function; rather, we'll just concern ourselves with its values, as in \Cref{ntnGCDFunction}.
+\end{aside}
+
+\Cref{exGCDUnique} justifies our use of the following notation to refer to greatest common divisors.
+
+\begin{notation}
+\label{ntnGCDFunction}
+\nindex{gcd}{$\mathrm{gcd}$}{greatest common divisor}
+Let $a,b \in \mathbb{Z}$. Denote by $\mathrm{gcd}(a,b)$ \inlatex{mathrm\{gcd\}}\lindexmmc{mathrm}{$\mathrm{Aa}, \mathrm{Bb}, \dots$} the (unique!) non-negative greatest common divisor of $a$ and $b$.
+\end{notation}
+
+\begin{example}
+In \Cref{exGCDsOfFourAndSix}, we saw that both $2$ and $-2$ are greatest common divisors of $4$ and $6$. Using \Cref{ntnGCDFunction}, we can now write $\mathrm{gcd}(4,6)=2$.
+\end{example}
+
+\begin{exercise}
+For each $n \in \mathbb{Z}$, let $D_n \subseteq \mathbb{Z}$ be the set of divisors of $n$. Prove that $D_a \cap D_b = D_{\mathrm{gcd}(a,b)}$ for all $a,b \in \mathbb{Z}$.
+\end{exercise}
+
+Our goal for the rest of this subsection is to investigate the behaviour of greatest common divisors, find out how to compute them, and look into the implications they have for solutions to certain kinds of equations.
+
+\begin{theorem}
+\label{thmGCDSubtractMultiple}
+Let $a,b,q,r \in \mathbb{Z}$, and suppose that $a=qb+r$. Then
+\[ \mathrm{gcd}(a,b) = \mathrm{gcd}(b,r) \]
+\end{theorem}
+\begin{cproof}
+Let $d = \mathrm{gcd}(a,b)$. We check that $d$ satisfies the conditions required to be a greatest common divisor of $b$ and $r$.
+
+Note that $d \mid a$ and $d \mid b$, so let $s,t \in \mathbb{Z}$ be such that $a=sd$ and $b=td$.
+\begin{itemize}
+\item $d \mid b$ by definition, and $d \mid r$ since
+\[ r = a-qb = sd-qtd = (s-qt)d \]
+\item Suppose $d' \mid b$ and $d' \mid r$; say $b = ud'$ and $r=vd'$ with $u,v \in \mathbb{Z}$. Then $d' \mid a$, since
+\[ a = qb+r = qud'+vd' = (qu+v)d' \]
+so $d' \mid d$ since $d = \mathrm{gcd}(a,b)$.
+\end{itemize}
+So $d$ is a greatest common divisor of $b$ and $r$. Since $d>0$, the result is shown.
+\end{cproof}
+
+Combined with the division theorem (\Cref{thmDivisionTheorem}), \Cref{thmGCDSubtractMultiple} gives a relatively fast algorithm for computing the greatest common divisor of two integers, known as the \textbf{Euclidean algorithm}.
+
+\begin{strategy}[Euclidean algorithm]
+\label{strEuclideanAlgorithm}
+\index{Euclidean algorithm}
+Let $a,b \in \mathbb{Z}$. To compute $\mathrm{gcd}(a,b)$, proceed as follows.
+\begin{itemize}
+\item Set $r_0 = |a|$ and $r_1 = |b|$.
+\item Given $r_{n-2}$ and $r_{n-1}$, define $r_n$ to be the remainder of $r_{n-2}$ divided by $r_{n-1}$.
+\item Stop when $r_n = 0$; then $r_{n-1} = \mathrm{gcd}(a,b)$.
+\end{itemize}
+\end{strategy}
+
+\begin{example}
+We will find the greatest common divisor of $148$ and $28$.
+\begin{align*}
+148 &= 5 \times 28 + 8 && \\
+28 &= 3 \times 8 + 4 && \\
+8 &= 2 \times \boxed{4} + 0 && \leftarrow \text{Stop!}
+\end{align*}
+Hence $\mathrm{gcd}(148, 28) = 4$. Here the sequence of remainders is given by:
+\[ r_0=148, \quad r_1 = 28, \quad r_2 = 8, \quad r_3 = 4, \quad r_4 = 0 \]
+\end{example}
+
+\begin{example} \label{exGCD13115757}
+The Euclidean algorithm works surprisingly quickly, even for relatively large numbers. Consider the problem of computing $\mathrm{gcd}(1311, 5757)$ for example:
+\begin{align*}
+5757 &= 4 \times 1311 + 513 && \\
+1311 &= 2 \times 513 + 285 && \\
+513 &= 1 \times 285 + 228 && \\
+285 &= 1 \times 228 + 57 && \\
+228 &= 4 \times \boxed{57} + 0 && \leftarrow \text{Stop!}
+\end{align*}
+Hence $\mathrm{gcd}(1311,5757) = 57$. Here the sequence of remainders is given by:
+\[ r_0=5757, \quad r_1 = 1311, \quad r_2 = 513, \quad r_3 = 285, \quad r_4 = 228, \quad r_5 = 57, \quad r_6 = 0 \]
+\end{example}
+
+\begin{example}
+Here's an example where one of the numbers is negative: we compute the value of $\mathrm{gcd}(-420, 76)$:
+\begin{align*}
+-420 &= (-6) \times 76 + 36 && \\
+76 &= 2 \times 36 + 4 && \\
+36 &= 9 \times \boxed{4} + 0 && \leftarrow \text{Stop!}
+\end{align*}
+Hence $\mathrm{gcd}(-420, 76) = 4$.
+\end{example}
+
+\begin{example}
+\label{exGCDsofPairs}
+Use the Euclidean algorithm to compute the greatest common divisors of the following pairs of integers
+\[ (12, 9), \quad (100, 35), \quad (7125, 1300), \quad (1010, 101010), \quad (-4, 14) \]
+\end{example}
+
+The following theorem will be useful when we study modular arithmetic in \Cref{secModularArithmetic}; it is called a `lemma' for historical reasons, and is really an important result in its own right.
+
+\begin{theorem}[B\'{e}zout's lemma]
+\label{thmBezout}
+Let $a,b,c \in \mathbb{Z}$, and let $d = \mathrm{gcd}(a,b)$. The equation
+\[ ax+by = c \]
+has a solution $(x,y) \in \mathbb{Z} \times \mathbb{Z}$ if and only if $d \mid c$.
+\end{theorem}
+\begin{cproof}
+($\Rightarrow$) Write $a=a'd$ and $b=b'd$, for $a',b' \in \mathbb{Z}$. If there exist $x,y \in \mathbb{Z}$ such that $ax+by=c$, then 
+\[ c = ax+by = a'dx+b'dy = (a'x+b'y)d \]
+and so $d \mid c$.
+
+($\Leftarrow$) Suppose $d \mid c$, and let $c=kd$ for some $k \in \mathbb{Z}$.
+
+If $c=0$, then a solution is $x=y=0$. If $c<0$, then $ax+by=c$ if and only if $a(-x)+b(-y)=-c$; so we may assume that $c>0$.
+
+%% BEGIN EXTRACT %%
+We proved in \Cref{thmGCDsExist} that a greatest common divisor of $a$ and $b$ is a least element of the set
+\[ X = \{ au+bv \mid u,v \in \mathbb{Z},\ au+bv > 0 \} \]
+So let $u,v \in \mathbb{Z}$ be such that $au+bv=d$. Then
+\[ a(ku) + b(kv) = k(au+bv) = kd = c \]
+and so letting $x=ku$ and $y=kv$, we see that the equation $ax+by=c$ has a solution $(x,y) \in \mathbb{Z} \times \mathbb{Z}$.
+%% END EXTRACT %%
+\end{cproof}
+
+B\'{e}zout's lemma completely characterises when the equation $ax+by=c$ has a solution. An easy generalisation of B\'{e}zout's lemma provides a complete characterisation of when solutions to \textbf{linear Diophantine equations}\index{Diophantine equation!linear}\index{linear Diophantine equation} exist, that is equations of the form
+\[ ax+by=c \]
+where $a,b,c \in \mathbb{Z}$. We will soon develop an algorithm for computing \textit{all} solutions to these equations.
+
+\begin{example}
+Here are some examples of applications of B\'{e}zout's lemma.
+\begin{itemize}
+\item Consider the equation $1311x+5757y=12963$. We computed in \Cref{exGCD13115757} that $\mathrm{gcd}(1311,5757) = 57$. But $57 \nmid 12963$ since $12963 = 227 \times 57 + 24$. By B\'{e}zout's lemma, the equation $1311x+5757y=12963$ has no integer solutions.
+\item For fixed $z$, the equation $4u+6v=z$ has solutions exactly when $z$ is even, since $\mathrm{gcd}(4,6)=2$.
+\item For fixed $a,b$, the equation $au+bv=0$ always has solution. Indeed, setting $u=b$ and $v=-a$ gives a solution; but we knew one had to exist since by \Cref{exOneDivDivZero} we know that $d \mid 0$ for all $d \in \mathbb{Z}$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+\label{exSolutionsToLDEs}
+Which of the following equations have solutions?
+\begin{enumerate}[(a)]
+\item $12u + 9v = -18$
+\item $12u + 9v = 1$
+\item $100u + 35v = 125$
+\item $7125u + 1300v = 0$
+\item $1010u + 101010v = 1010101010101010$
+\item $14u - 4v = 12$
+\end{enumerate}
+\begin{backhint}
+\hintref{exSolutionsToLDEs}
+\Cref{exGCDsofPairs} would be a good starting point.
+\end{backhint}
+\end{exercise}
+
+\subsection*{Coprimality}
+
+\begin{definition}
+\label{defCoprime}
+\index{coprime}
+\index{relatively prime}
+Let $a,b \in \mathbb{Z}$. We say $a$ and $b$ are \textbf{coprime} (or \textbf{relatively prime}), and write $a \perp b$\nindex{coprime}{$\perp$}{coprime} \inlatex{perp}\lindexmmc{perp}{$\perp$} (read `$a$ is coprime to $b$'), if $\mathrm{gcd}(a,b) = 1$.
+\end{definition}
+
+\begin{example}
+$4 \perp 9$. To see this, note that if $d \mid 4$ then $d \in \{ {-4}, {-2}, {-1}, 1, 2, 4 \}$, and if $d \mid 9$ then $d \in \{ {-9}, {-3}, {-1}, 1, 3, 9 \}$. Hence if $d \mid 4$ and $d \mid 9$, then $d = 1$ or $d = -1$. It follows that $\mathrm{gcd}(4,9)=1$.
+\end{example}
+
+\begin{exercise}
+\label{exCoprimeTo15}
+Which integers in the set $[15]$ are coprime to $15$?
+\end{exercise}
+
+\begin{proposition}
+Let $a,b \in \mathbb{Z}$. The following are equivalent:
+\begin{enumerate}[(1)] \setlength{\itemindent}{20pt}
+\item $a$ and $b$ are coprime;
+\item If $d \in \mathbb{Z}$ with $d \mid a$ and $d \mid b$, then $d$ is a unit.
+\end{enumerate}
+\end{proposition}
+\begin{cproof} We prove that condition (1) implies condition (2), and vice versa.
+\begin{itemize}
+\item (1)$\Rightarrow$(2). Suppose $a$ and $b$ are coprime, and fix $d \in \mathbb{Z}$ with $d \mid a$ and $d \mid b$. Then $d \mid \mathrm{gcd}(a,b) = 1$, so $d$ is a unit.
+
+\item (2)$\Rightarrow$(1). Suppose condition (2) above holds. We prove that $1$ satisfies the conditions required to be a greatest common divisor of $a$ and $b$. The fact that $1 \mid a$ and $1 \mid b$ is automatic; and the fact that if $d \mid a$ and $d \mid b$ implies $d \mid 1$ is precisely the condition (2) that we are assuming.
+\end{itemize}
+
+Hence the two conditions are equivalent.
+\end{cproof}
+
+\begin{exercise}
+\label{exDivByGCDIsCoprime}
+Let $a$ and $b$ be integers, not both zero, and let $d = \mathrm{gcd}(a,b)$. The integers $\frac{a}{d}$ and $\frac{b}{d}$ are coprime.
+\end{exercise}
+
+The following corollary is a specialisation of B\'{e}zout's lemma to the case when $a$ and $b$ are coprime.
+
+\begin{corollary}
+Let $a,b \in \mathbb{Z}$. The equation $au+bv=1$ has a solution if and only if $a$ and $b$ are coprime. Moreover, if $a$ and $b$ are coprime, then the equation $au+bv=z$ has a solution for all $z \in \mathbb{Z}$.
+\end{corollary}
+
+\begin{cproof}
+By B\'{e}zout's lemma (\Cref{thmBezout}), the equation $au+bv=1$ has a solution if and only if $\mathrm{gcd}(a,b) \mid 1$. But the only positive divisor of $1$ is $1$, so a solution exists if and only if $\mathrm{gcd}(a,b) = 1$, which is precisely the assertion that $a$ and $b$ are coprime.
+
+If $a$ and $b$ are coprime, then $1 = \mathrm{gcd}(a,b) \mid z$ for all $z \in \mathbb{Z}$. So by B\'{e}zout's lemma again, the equation $au+bv=z$ has a solution for all $z \in \mathbb{Z}$.
+\end{cproof}
+
+A useful consequence of B\'{e}zout's lemma is the following result:
+
+\begin{proposition}
+\label{propADividesBC}
+Let $a,b,c \in \mathbb{Z}$. If $a$ and $b$ are coprime and $a \mid bc$, then $a \mid c$.
+\end{proposition}
+
+\begin{cproof}
+By B\'{e}zout's lemma (\Cref{thmBezout}) there exist integers $u$ and $v$ such that $au+bv=1$. Multiplying by $c$ gives $acu+bcv=c$. Since $a \mid bc$, we can write $bc=ka$ for some $k \in \mathbb{Z}$, and so $acu+kav=c$. But then \[ (cu+kv)a = c \] which proves that $a \mid c$.
+\end{cproof}
+
+\subsection*{Linear Diophantine equations}
+\index{Diophantine equation!linear}
+\index{linear Deiophantine equation}
+We have now seen two important results:
+\begin{itemize}
+\item The \textbf{Euclidean algorithm}, which was a procedure for computing the greatest common divisor of two integers.
+\item \textbf{B\'{e}zout's lemma}, which provides a necessary and sufficient condition for equations of the form $ax+by=c$ to have an integer solution.
+\end{itemize}
+We will now develop the \textbf{reverse Euclidean algorithm}\index{Euclidean algorithm!reverse}\index{reverse Euclidean algorithm}, which provides a method for computing a solutions to (bivariate) linear Diophantine equations, when such a solution exists. Then we will prove a theorem that characterises \textit{all} integer solutions in terms of a given solution.
+
+\begin{example}
+Suppose we want to find integers $x$ and $y$ such that $327x+114y=18$. Running the Euclidean algorithm yields that $\mathrm{gcd}(327,114)=3$ --- see below. For reasons soon to become apparent, we rearrange each equation to express the remainder on its own.
+\begin{align*}
+327 &= 2 \times 114 + 99 && \Rightarrow & 99 &= 327 - 2 \times 114 \tag{1} \\
+114 &= 1 \times 99 + 15 && \Rightarrow & 15 &= 114 - 1 \times 99 \tag{2} \\
+99 &= 6 \times 15 + 9 && \Rightarrow & \hspace{6pt}9 &= 99 - 6 \times 15 \tag{3} \\
+15 &= 1 \times 9 + 6 && \Rightarrow & \hspace{6pt}6 &= 15 - 1 \times 9 \tag{4} \\
+9 &= 1 \times 6 + 3 && \Rightarrow & \hspace{6pt}3 &= 9 - 1 \times 6 \tag{5} \\
+6 &= 2 \times 3 + 0 && 
+\end{align*}
+We can then express $3$ in the form $327u+114v$ by successively substituting the equations into each other:
+\begin{itemize}
+\item Equation (5) expresses $3$ as a linear combination of $6$ and $9$. Substituting equation (4) yields:
+\[ 3 = 9 - 1 \times (15 - 1 \times 9) \quad \Rightarrow \quad 3 = 2 \times 9 - 1 \times 15 \]
+\item This now expresses $3$ as a linear combination of $9$ and $15$. Substituting equation (3) yields:
+\[ 3 = 2 \times (99 - 6 \times 15) - 1 \times 15 \quad \Rightarrow \quad 3 = (-13)\times 15 + 2 \times 99 \]
+\item This now expresses $3$ as a linear combination of $15$ and $99$. Substituting equation (2) yields:
+\[ 3 = (-13)\times(114 - 1 \times 99) + 2 \times 99 \quad \Rightarrow \quad 3 = 15 \times 99 - 13 \times 114 \]
+\item This now expresses $3$ as a linear combination of $99$ and $114$. Substituting equation (1) yields:
+\[ 3 = 15 \times (327 - 2 \times 114) - 13 \times 114 \quad \Rightarrow \quad 3 = (-43) \times 114 + 15 \times 327 \]
+\end{itemize}
+Now that we've expressed $3$ as a linear combination of $114$ and $327$, we're nearly done: we know that $18 = 6 \times 3$, so multiplying through by $6$ gives
+\[ 18 = (-258) \times 114 + 90 \times 327 \]
+Hence $(x,y) = (90,{-258})$ is a solution to the equation $327x+114y=18$.
+\end{example}
+
+\begin{prooftip}
+Let $a,b \in \mathbb{Z}$ and let $d = \mathrm{gcd}(a,b)$. To find integers $x,y$ such that $ax+by=d$:
+\begin{enumerate}[(i)]
+\item Run the Euclidean algorithm on the pair $(a,b)$, keeping track of all quotients and remainders.
+\item Rearrange each equation of the form $r_{n-2} = q_nr_{n-1}+r_n$ to isolate $r_n$.
+\item Substitute for the remainders $r_k$ in reverse order until $\mathrm{gcd}(a,b)$ is expressed in the form $ax+by$ for some $x,y \in \mathbb{Z}$.
+\end{enumerate}
+This process is called the \textbf{reverse Euclidean algorithm}.
+\end{prooftip}
+
+\begin{exercise}
+Find a solution $(x,y) \in \mathbb{Z} \times \mathbb{Z}$ to the equation $630x + 385y = 4340$.
+\end{exercise}
+
+Now that we have a procedure for computing \textit{one} solution to the equation $ax+by=c$, we need to come up with a procedure for computing \textit{all} solutions. This can be done by proving the following theorem.
+
+\begin{theorem}
+\label{thmAllSolutionsOfLDEFromOneSolution}
+Let $a,b,c \in \mathbb{Z}$, where $a$ and $b$ are not both zero. Suppose that $x_0$ and $y_0$ are integers such that $ax_0+by_0 = c$. Then, $(x,y) \in \mathbb{Z} \times \mathbb{Z}$ is another solution to the equation $ax+by=c$ if and only if
+\[ x = x_0 + k \cdot \frac{b}{\mathrm{gcd}(a,b)} \qquad \text{and} \qquad y = y_0 - k \cdot \frac{a}{\mathrm{gcd}(a,b)} \]
+for some $k \in \mathbb{Z}$.
+\end{theorem}
+
+Thus, as soon as we've found one solution $(x,y)=(x_0,y_0)$ to the equation $ax+by=c$, this theorem tells us what all other solutions must look like.
+
+\begin{cproof}[of \Cref{thmAllSolutionsOfLDEFromOneSolution}]
+We prove the two directions separately.
+
+($\Rightarrow$). First suppose that $(x_0,y_0)$ is an integer solution to the equation $ax+by=c$. Let $k \in \mathbb{Z}$ and let
+\[ x = x_0 + k \cdot \frac{b}{\mathrm{gcd}(a,b)} \qquad \text{and} \qquad y = y_0 - k \cdot \frac{a}{\mathrm{gcd}(a,b)} \]
+Then
+\begin{align*}
+& ax+by && \\
+&= a \left( x_0 + k \cdot \frac{b}{\mathrm{gcd}(a,b)} \right) + b \left( y_0 - k \cdot \frac{a}{\mathrm{gcd}(a,b)} \right) && \text{by definition of $x$ and $y$} \\
+&= (ax_0 + by_0) + ak \cdot \frac{b}{\mathrm{gcd}(a,b)} - kb \cdot \frac{a}{\mathrm{gcd}(a,b)} && \text{rearranging} \\
+&= (ax_0 + by_0) + \frac{kab-kab}{\mathrm{gcd}(a,b)} && \text{combining the fractions} \\
+&= ax_0 + by_0 && \text{since $kab-kab=0$} \\
+&= c && \text{since $(x_0,y_0)$ is a solution}
+\end{align*}
+so $(x,y)$ is indeed a solution to the equation.
+
+($\Leftarrow$). First suppose that $a \perp b$. Fix a solution $(x_0,y_0)$ to the equation $ax+by=c$, and let $(x,y)$ be another solution. Then
+\[ a(x-x_0) + b(y-y_0) = (ax_0 + by_0) - (ax+by) = c-c = 0 \]
+so that
+\[ a(x-x_0) = b(y_0-y) \]
+%% BEGIN EXTRACT (xtrIntroducingExistentialVariableExample) %%
+Now $a$ and $b$ are coprime, so by \Cref{propADividesBC}, we have $a \mid y_0-y$ and $b \mid x-x_0$. Let $k,\ell \in \mathbb{Z}$ be such that $x-x_0=kb$ and $y_0-y = \ell a$.
+%% END EXTRACT %%
+Then substituting into the above equation yields
+\[ a \cdot k b = b \cdot \ell a \]
+and hence $(k-\ell)ab = 0$. Since $ab \ne 0$, we have $k=\ell$, so that
+\[ x = x_0 + kb \quad \text{and} \quad y = y_0-ka \]
+Now we drop the assumption that $a \perp b$. Let $\mathrm{gcd}(a,b) = d \ge 1$. We know that $d \mid c$, by B\'{e}zout's lemma (\Cref{thmBezout}), and so 
+\[ \frac{a}{d} x + \frac{b}{d} y = \frac{c}{d} \]
+is another linear Diophantine equations, and moreover $\frac{a}{d} \perp \frac{b}{d}$ by \Cref{exDivByGCDIsCoprime}. By what we proved above, we have
+\[ x = x_0 + k \cdot \frac{b}{d} \quad \text{and} \quad y=y_0-k \cdot \frac{a}{d} \]
+for some $k \in \mathbb{Z}$. But this is exactly what we sought to prove!
+\end{cproof}
+
+\begin{example}
+We know that $(x,y) = (90,{-258})$ is a solution to the equation $327x+114y=18$, and
+\[ \displaystyle \frac{327}{\mathrm{gcd}(327,114)} = \frac{327}{3} = 109 \qquad \text{and} \qquad \displaystyle \frac{114}{\mathrm{gcd}(327,114)} = \frac{114}{3} = 38 \]
+so this theorem tells us that $(x,y) \in \mathbb{Z} \times \mathbb{Z}$ is a solution to the equation $327x+114y=18$ if and only if
+\[ x = 90 + 38k \qquad \text{and} \qquad y = -258-109k \]
+for some $k \in \mathbb{Z}$.
+\end{example}
+
+\begin{exercise}
+Find all integers $x,y$ such that
+\[ 630x + 385y = 4340 \]
+\end{exercise}
+
+\subsection*{Least common multiples}
+
+You would be forgiven for wondering why so much of the foregoing section was devoted to greatest common divisors, with no mention of least common multiples. We will now give the latter some attention.
+
+\begin{definition}
+\label{defLCM}
+\index{least common multiple}
+Let $a, b \in \mathbb{Z}$. An integer $m$ is a \textbf{least common multiple} of $a$ and $b$ if:
+\begin{enumerate}[(a)]
+\item $a \mid m$ and $b \mid m$;
+\item If $c$ is another integer such that $a \mid c$ and $b \mid c$, then $m \mid c$.
+\end{enumerate}
+\end{definition}
+
+The definition of least common multiple is \textit{dual} to that of greatest common divisor (\Cref{defGCD}). This means that many properties of greatest common divisors have corresponding `dual' properties, which hold of least common multiples. As such, we will not say much here about least common multiples, and that which we \textit{do} say is in the form of exercises.
+
+\begin{exercise}
+\label{exLCMExistsUnique}
+Let $a,b \in \mathbb{Z}$. Prove that $a$ and $b$ have a least common multiple. Furthermore, prove that least common multiples are unique up to sign, in the sense that if $m,m'$ are two least common multiples of $a$ and $b$, then $m=m'$ or $m=-m'$.
+\begin{backhint}
+\hintref{exLCMExistsUnique}
+This is essentially the same as \Cref{exGCDUnique}.
+\end{backhint}
+\end{exercise}
+
+As with greatest common divisors, \Cref{exLCMExistsUnique} justifies the following definition.
+
+\begin{definition}
+\label{defLCMFunction}
+Given $a,b \in \mathbb{Z}$, denote by $\mathrm{lcm}(a,b)$\nindex{lcm}{$\mathrm{lcm}$}{least common multiple} \inlatex{mathrm\{lcm\}}\lindexmmc{mathrm}{$\mathrm{Aa}, \mathrm{Bb}, \dots$} the non-negative least common multiple of $a$ and $b$.
+\end{definition}
+
+\begin{exercise}
+\label{exProductOfIntegersIsProductOfGCDAndLCM}
+Let $a,b \in \mathbb{Z}$. Prove that $\mathrm{gcd}(a,b) \cdot \mathrm{lcm}(a,b) = |ab|$.
+\begin{backhint}
+\hintref{exProductOfIntegersIsProductOfGCDAndLCM}
+Define $m = \dfrac{ab}{\mathrm{gcd}(a,b)}$ and prove that $m$ satisfies the definition of being a least common multiple of $a$ and $b$ (\Cref{defLCM}). Then apply \Cref{exLCMExistsUnique}.
+\end{backhint}
+\end{exercise}

@@ -49,3 +49,19 @@
 \newcommand{\chexend}{%
     \renewcommand{\thesection}{\thechapter.\arabic{section}}%
 }
+
+% End-of-section summaries
+\newenvironment{tldr}[1]{%
+\subsection*{TL;DR --- summary of \Cref{#1}}
+}{%
+}
+
+\newenvironment{tldrlist}{%
+\begin{itemize}[labelwidth=50pt,labelsep=30pt,align=parleft]
+}{%
+\end{itemize}
+}
+
+\newcommand{\tldrtag}[1]{\ref{#1}}
+
+\newcommand{\tldritem}[1]{\item[\tldrtag{#1}]}

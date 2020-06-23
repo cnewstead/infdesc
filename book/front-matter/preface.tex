@@ -3,23 +3,45 @@
 \addcontentsline{toc}{chapter}{Preface}
 \markboth{Preface}{Preface}
 
-Hello, and thank you for taking the time to read this quick introduction to the book! I would like to begin with an apology and a warning:
-\begin{center}
-\Large \color{red} \bf This book is still under development!
-\end{center}
-That is to say, there are some sections that are incomplete, as well as other sections which are currently much more terse than I would like them to be.
-
-The most recent version is freely available for download from the following website:
-\begin{center}
+Hello, and thank you for taking the time to read this quick introduction to \textit{An Infinite Descent into Pure Mathematics}! The most recent version of the book is freely available for download from the following website:
+\begin{center} \vspace{-10pt}
 \url{\bookurl}
-\end{center}
-As the book is undergoing constant changes, I advise that you do not print it in its entirety---if you must print anything, then I suggest that you do it a few pages at a time, as needed.
+\end{center} \vspace{-10pt}
+The website also includes information about changes between different versions of the book, an archive of previous versions, and some resources for using \LaTeX{} (see also \Cref{apxLaTeX}).
 
-This book was designed with \textit{inquiry} and \textit{communication} in mind, as they are central to a good mathematical education. One of the upshots of this is that there are many exercises throughout the book, requiring a more active approach to learning, rather than passive reading. These exercises are a fundamental part of the book, and should be completed even if not required by the course instructor. Another upshot of these design principles is that solutions to exercises are not provided---a student seeking feedback on their solutions should speak to someone to get such feedback, be it another student, a teaching assistant or a course instructor.
+\subsection*{About the book}
+
+A student in a typical calculus class will learn the chain rule and then use it to solve some prescribed `chain rule problems' such as computing the derivative of $\sin(1+x^2)$ with respect to $x$, or perhaps solving a word problem involving related rates of change. The expectation is that the student correctly apply the chain rule to derive the correct answer, and show enough work to be believed. In this sense, the student is a \textit{consumer} of mathematics. They are given the chain rule as a tool to be accepted without question, and then use the tool to solve a narrow range of problems.
+
+The goal of this book is to help the reader make the transition from being a \textit{consumer} of mathematics to a \textit{producer} of it. This is what is meant by `pure' mathematics. While a consumer of mathematics might learn the chain rule and use it to compute a derivative, a producer of mathematics might derive the chain rule from the rigorous definition of a derivative, and then prove more abstract versions of the chain rule in more general contexts (such as multivariate analysis).
+
+Consumers of mathematics are expected to say how they used their tools to find their answers. Producers of mathematics, on the other hand, have to do much more: they must be able to keep track of definitions and hypotheses, piece together facts in new and interesting ways, and make their own definitions of mathematical concepts. But even more importantly, once they have done this, they must communicate their findings in a way that others find intelligible, and they must convince others that what they have done is correct, appropriate and worthwhile.
+
+It is this transition from consumption to production of mathematics that guided the principles I used to design and write this book. In particular:
+\begin{itemize}
+\item \textbf{Communication.} Above all, this book aims to help the reader to obtain mathematical literacy and express themselves mathematically. This occurs at many levels of magnification. For example, consider the following expression:
+\[ \forall x \in \mathbb{R},\, [\neg(x = 0) \Rightarrow (\exists y \in \mathbb{R},\, y^2 < x^2)] \]
+After working through this book, you will be able to say what the symbols $\forall$, $\in$, $\mathbb{R}$, $\neg$, $\Rightarrow$ and $\exists$ all mean intuitively and how they are defined precisely. But you will also be able to interpret what the expression means as a whole, explain what it means in plain terms to another person \textit{without} using a jumble of symbols, prove that it is true, and communicate your proof to another person in a clear and concise way.
+
+The kinds of tools needed to do this are developed in the main chapters of the book, and more focus is given to the writing side of things in \Cref{apxWriting}.
+
+\item \textbf{Inquiry.} The research is clear that people learn more when they find things out for themselves. If I took this to the extreme, the book would be blank; however, I do believe it is important to incorporate aspects of inquiry-based learning into the text.
+
+This principle manifests itself in that there are exercises scattered throughout the text, many of which simply require you to prove a result that has been stated. Many readers will find this frustrating, but this is for good reason: these exercises serve as checkpoints to make sure your understanding of the material is sufficient to proceed. That feeling of frustration is what learning feels like---embrace it!
+
+\item \textbf{Strategy.} Mathematical proof is much like a puzzle. At any given stage in a proof, you will have some definitions, assumptions and results that are available to be used, and you must piece them together using the logical rules at your disposal. Throughout the book, and particularly in the early chapters, I have made an effort to highlight useful proof strategies whenever they arise.
+
+\item \textbf{Content.} There isn't much point learning about mathematics if you don't have any concepts to prove results about. With this in mind, \Cref{ptTopics} includes several chapters dedicated to introducing some topic areas in pure mathematics, such as number theory, combinatorics, analysis and probability theory.
+
+\item \textbf{\LaTeX{}.} The \textit{de facto} standard for typesetting mathematics is \LaTeX{}. I think it is important for mathematicians to learn this early in a guided way, so I wrote a brief tutorial in \Cref{apxLaTeX} and have included \LaTeX{} code for all new notation as it is defined throughout the book.
+
+\end{itemize}
+
+
 
 \subsection*{Navigating the book}
 
-This book need not, and emphatically \textit{should not}, be read from front to back. The order of material is chosen so that material appearing later depends only on material appearing earlier (with a couple of exceptions, which are pointed out in the text).
+This book need not, and, emphatically \textit{should not}, be read from front to back. The order of material is chosen so that material appearing later depends only on material appearing earlier, but following the material in the order it is presented may be a fairly dry experience.
 
 The majority of introductory pure mathematics courses cover, at a minimum, symbolic logic, sets, functions and relations. This material is the content of \Cref{ptCoreConcepts}. Such courses usually cover additional topics from pure mathematics, with exactly \textit{which} topics depending on what the course is preparing students for. With this in mind, \Cref{ptTopics} serves as an introduction to a range of areas of pure mathematics, including number theory, combinatorics, set theory, real analysis, probability theory and order theory.
 
@@ -28,28 +50,31 @@ It is not necessary to cover all of \Cref{ptCoreConcepts} before proceeding to t
 The following table shows dependencies between sections. Previous sections within the same chapter as a section should be considered `essential' prerequisites unless indicated otherwise.
 
 \begin{center}
-\begin{tabular}{c|ccc}
-Section & Essential & Recommended & Useful \\ \hline
-\ref{secPropositionalLogic} & \ref{chGettingStarted} &  &  \\
-\ref{secSets} & \ref{secLogicalEquivalence} &  &  \\
-\ref{secFunctions} & \ref{secSetOperations} &  &  \\
-\ref{secPeanosAxioms} & \ref{secLogicalEquivalence} & \ref{secFunctions} & \ref{secInjectionsSurjections} \\
-\ref{secRelations} & \ref{secSets} & \ref{secFunctions} & \ref{secInjectionsSurjections}, \ref{secWeakInduction} \\
-\ref{secDivision} & \ref{secLogicalEquivalence} & \ref{secSets}, \ref{secStrongInduction} & \ref{secFunctions} \\
-\ref{secModularArithmetic} &  & \ref{secEquivalenceRelationsPartitions} &  \\
-\ref{secFiniteSets} & \ref{secInjectionsSurjections}, \ref{secStrongInduction} & \ref{secEquivalenceRelationsPartitions} &  \\
-\ref{secInequalitiesMeans} & \ref{secPeanosAxioms}, \ref{secSets} &  & \ref{secEquivalenceRelationsPartitions} \\
-\ref{secCompletenessConvergence} & \ref{secFunctions} & \ref{secInequalitiesMeans} &  \\
-\ref{secCountableUncountableSets} & \ref{secFiniteSets} &  & \ref{secSeriesSums} \\
-\ref{secCardinalArithmetic} & \ref{secCountingPrinciples} &  &  \\
-\ref{secSeriesSums} & \ref{secFunctions} & \ref{secInequalitiesMeans} & \ref{secModularArithmetic}, \ref{secCountableUncountableSets} \\
-\ref{secDiscreteProbabilitySpaces} & \ref{secCountingPrinciples} & \ref{secCountableUncountableSets}, \ref{secSeriesSums} &  \\
-\ref{secOrdersLattices} & \ref{secEquivalenceRelationsPartitions} &  &  \\
-\ref{secStructuralInduction} & \ref{secStrongInduction}, \ref{secInjectionsSurjections} & \ref{secCountableUncountableSets} & \ref{secOrdersLattices}
+\begin{tabular}{c|c|ccc}
+\textbf{Part} & \textbf{Section} & \textbf{Essential} & \textbf{Recommended} & \textbf{Useful} \\ \hline
+\textbf{\ref{ptCoreConcepts}} & \ref{secPropositionalLogic} & \ref{chGettingStarted} &  &  \\
+&\ref{secSets} & \ref{secLogicalEquivalence} &  &  \\
+&\ref{secFunctions} & \ref{secSetOperations} &  &  \\
+&\ref{secPeanosAxioms} & \ref{secLogicalEquivalence} & \ref{secFunctions} & \ref{secInjectionsSurjections} \\
+&\ref{secRelations} & \ref{secSets} & \ref{secFunctions} & \ref{secInjectionsSurjections}, \ref{secWeakInduction} \\
+&\ref{secFiniteSets} & \ref{secInjectionsSurjections}, \ref{secStrongInduction} & \ref{secEquivalenceRelationsPartitions} &  \\ \hline
+\textbf{\ref{ptTopics}} & \ref{secDivision} & \ref{secLogicalEquivalence} & \ref{secSets}, \ref{secStrongInduction} & \ref{secFunctions} \\
+&\ref{secModularArithmetic} &  & \ref{secEquivalenceRelationsPartitions} &  \\
+&\ref{secCountingPrinciples} & \ref{secFiniteSets} &  \\
+&\ref{secInequalitiesMeans} & \ref{secPeanosAxioms}, \ref{secSets} &  & \ref{secEquivalenceRelationsPartitions} \\
+&\ref{secCompletenessConvergence} & \ref{secFunctions} & \ref{secInequalitiesMeans} &  \\
+&\ref{secSeriesSums} & \ref{secFunctions} & \ref{secInequalitiesMeans} & \ref{secModularArithmetic}, \ref{secCountableUncountableSets} \\
+&\ref{secCardinality} & \ref{secCountableUncountableSets} &  &  \\
+&\ref{secCardinalArithmetic} & \ref{secCountingPrinciples} &  &  \\
+&\ref{secDiscreteProbabilitySpaces} & \ref{secCountingPrinciples} & \ref{secCountableUncountableSets}, \ref{secSeriesSums} &  \\
+&\ref{secOrdersLattices} & \ref{secEquivalenceRelationsPartitions} &  &  \\
+&\ref{secStructuralInduction} & \ref{secStrongInduction}, \ref{secInjectionsSurjections} & \ref{secCountableUncountableSets} & \ref{secOrdersLattices}
 \end{tabular}
 \end{center}
 
-Prerequisites are cumulative. For example, in order to cover \Cref{secCardinalArithmetic}, you should first cover \Cref{chGettingStarted,chSets,chFunctions,chMathematicalInduction} and \Cref{secFiniteSets,secCountingPrinciples,secCountableUncountableSets,secCardinality}.
+Prerequisites are cumulative. For example, in order to cover \Cref{secCardinalArithmetic}, you should first cover \Crefrange{chGettingStarted}{chMathematicalInduction} and \Cref{secFiniteSets,secCountingPrinciples,secCountableUncountableSets,secCardinality}.
+
+
 
 \subsection*{What the numbers, colours and symbols mean}
 
@@ -83,7 +108,9 @@ Some subsections are labelled with the symbol \optmarksymbol{}. This indicates t
 
 \subsection*{Licence}
 
-This book is licensed under the Creative Commons Attribution-ShareAlike 4.0 (\textsc{cc by-sa 4.0}) licence. This means you're welcome to share this book, provided that you give credit to the author and that any copies or derivatives of this book are released under the same licence. The content of the licence can be read in its full glory at the end of the book, and by following the following URL:
+This book is licensed under the Creative Commons Attribution-ShareAlike 4.0 (\textsc{cc by-sa 4.0}) licence. This means you're welcome to share this book, provided that you give credit to the author and that any copies or derivatives of this book are released under the same licence.
+
+The licence can be read in its full glory at the end of the book or by following the following URL:
 \begin{center}
 \url{http://creativecommons.org/licenses/by-sa/4.0/}
 \end{center}

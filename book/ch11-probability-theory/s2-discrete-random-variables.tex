@@ -1,0 +1,545 @@
+% !TeX root = ../../book.tex
+\section{Discrete random variables}
+\secbegin{secDiscreteRandomVariables}
+
+Events in a probability space are sometimes unenlightening when looked at in isolation. For example, suppose we roll a fair six-sided die twice. The outcomes are elements of the set $[6] \times [6]$, each occurring with equal probability $\frac{1}{36}$. The event that the die rolls sum to $7$ is precisely the subset
+\[ \{ (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \} \subseteq [6] \times [6] \]
+and so we can say that the probability that the two rolls sum to $7$ is
+\[ \mathbb{P}( \{ (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \}) = \frac{1}{6} \]
+However, it is not at all clear from the expression $\{ (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \}$ that, when we wrote it down, what we had in mind was the event that the sum of the die rolls is $7$. Moreover, the expression of the event in this way does not make it clear how to generalise to other possible sums of die rolls.
+
+Note that the sum of the die rolls defines a function $S : [6] \times [6] \to [12]$, defined by
+\[ S(a,b) = a+b \text{ for all } (a,b) \in [6] \times [6] \]
+The function $S$ allows us to express our event in a more enlightening way: indeed,
+\[ \{ (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \} = \{ (a,b) \in [6] \times [6] \mid a+b=7 \} = S^{-1}[\{7\}] \]
+(Recall the definition of \textit{preimage} in \Cref{defPreimage}.) Thus the probability that the sum of the two die rolls is $7$ is equal to $\mathbb{P}(S^{-1}[\{7\}])$.
+
+If we think of $S$ not as a function $[6] \times [6] \to [12]$, but as a $[12]$-valued \textit{random variable}, which varies according to a random outcome in $[6] \times [6]$, then we can informally say
+\[ \mathbb{P}\{S = 7\} = \frac{1}{6} \quad \text{which formally means} \quad \mathbb{P}(S^{-1}[\{7\}]) = \frac{1}{6} \]
+This affords us much more generality. Indeed, we could ask what the probability is that the die rolls sum to a value greater than or equal to $7$. In this case, note that the die rolls $(a,b)$ sum to a number greater than or equal to $7$ if and only if $a+b \in \{7,8,9,10,11,12\}$, which occurs if and only if $(a,b) \in S^{-1}[\{7,8,9,10,11,12\}]$. Thus, we might informally say
+\[ \mathbb{P}\{S \ge 7\} = \frac{7}{12} \quad \text{which formally means} \quad \mathbb{P}(S^{-1}[\{7,8,9,10,11,12\}]) = \frac{7}{12} \]
+We might also ask what the probability is that the sum of the die rolls is prime. In this case, we might informally say
+\[ \mathbb{P}\{S \text{ is prime}\} = \frac{5}{12} \quad \text{which formally means} \quad \mathbb{P}(S^{-1}[\{2,3,5,7,11\}])  = \frac{5}{12} \]
+and so on. In each of these cases, we're defining events---which are subsets of the sample space---in terms of conditions on the values of a random variable (which is, formally, a function).
+
+We make the above intuition formal in \Cref{defRandomVariable}.
+
+\begin{definition}
+\label{defRandomVariable}
+\index{random variable}
+\index{event!that $X=e$}
+\index{event!that $p(X)$}
+Let $(\Omega,\mathbb{P})$ be a probability space and let $E$ be a set. An \textbf{$E$-valued random variable on $(\Omega,\mathbb{P})$} is a function $X : \Omega \to E$ such that the image
+\[ X[\Omega] = \{ X(\omega) \mid \omega \in \Omega \} \]
+is countable. The set $E$ is called the \textbf{state space} of $X$. A random variable with countable state space is called a \textbf{discrete random variable}.
+\end{definition}
+
+Before we proceed with examples, some notation for events regarding values of random variables will be particularly useful.
+
+\begin{notation}
+\label{ntnRandomVariableEvents}
+\nindex{Xxe}{$\{X=e\}$}{event that $X=e$}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a set and let $X$ be an $E$-valued random variable on $(\Omega,\mathbb{P})$. For each $e \in E$, write
+\[ \{ X = e \} = \{ \omega \in \Omega \mid X(\omega) = e \} = X^{-1}[\{ e \}] \]
+to denote the event that $X$ takes the value $e$. More generally, for each logical formula $p(x)$ with free variable $x$ ranging over $E$, we write
+\[ \{ p(X) \} = \{ \omega \in \Omega \mid p(X(\omega)) \} = X^{-1}[ \{ e \in E \mid p(e) \}] \]
+for the event that the value of $X$ satisfies $p(x)$.
+\end{notation}
+
+We will usually write $\mathbb{P}\{X=e\}$ instead of $\mathbb{P}(\{X=e\})$ for the probability that a random variable $X$ takes a value $e$, and so on.
+
+\begin{example}
+\label{exThreeCoinFlips}
+We can model a sequence of three coin flips using the probability space $(\Omega,\mathbb{P})$, where $\Omega = \{ \text{H}, \text{T} \}^3$ and $\mathbb{P}(\{\omega\}) = \frac{1}{8}$ for all $\omega \in \Omega$.
+
+Let $N$ be the real-valued random variable representing number of heads that show. This is formalised as a function
+\[ N : \Omega \to \mathbb{R} \quad \text{where} \quad N(i_1,i_2,i_3) = \text{the number of heads amongst } i_1,i_2,i_3 \]
+for example, $N(\text{H},\text{T},\text{H}) = 2$. Now
+\begin{itemize}
+\item The probability that exactly two heads show is
+\begin{align*}
+\mathbb{P}\{N=2\} &= \mathbb{P}(N^{-1}[ \{ 2 \} ]) && \text{by \Cref{ntnRandomVariableEvents}} \\
+&= \mathbb{P}(\{ (\text{H},\text{H},\text{T}), (\text{H},\text{T},\text{H}), (\text{T},\text{H},\text{H}) \}) && \text{evaluating event $N^{-1}[ \{ 2 \} ]$} \\
+&= \frac{3}{2^3} = \frac{3}{8} &&
+\end{align*}
+\item The probability that at least two heads show is
+\begin{align*}
+\mathbb{P}\{N \ge 2\} &= \mathbb{P}(\{ \omega \in \Omega \mid N(\omega) \ge 2 \}) && \text{by \Cref{ntnRandomVariableEvents}} \\
+&= \mathbb{P}\left( \begin{Bmatrix} (\text{H},\text{H},\text{T}), & (\text{H},\text{T},\text{H}), \\ (\text{T},\text{H},\text{H}), & (\text{H},\text{H},\text{H})\phantom{,} \end{Bmatrix} \right) && \text{evaluating event} \\
+&= \frac{4}{2^3} = \frac{1}{2} && 
+\end{align*}
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+With probability space $(\Omega,\mathbb{P})$ and random variable $N$ defined as in \Cref{exThreeCoinFlips}, compute $\mathbb{P}\{N \text{ is odd}\}$ and $\mathbb{P}\{N = 4\}$.
+\end{exercise}
+
+Each random variable comes with an associated \textit{probability mass function}, which allows us to `forget' the underlying probability space for the purposes of studying only the random variable.
+
+\begin{definition}
+\label{defPMF}
+\index{probability mass function}
+Let $(\Omega, \mathbb{P})$ be a probability space, let $X : \Omega \to E$ be an $E$-valued random variable. The \textbf{probability mass function} of $X$ is the function $f_X : E \to [0,1]$ defined by
+\[ f_X(e) = \mathbb{P}\{X=e\} \text{ for all } e \in E \]
+\end{definition}
+
+\begin{example}
+\label{exThreeCoinFlipsPMF}
+The probability mass function of the random variable $N$ from \Cref{exThreeCoinFlips} is the function $f_N : \mathbb{R} \to [0,1]$ defined by
+\[ f_N(e) = \mathbb{P}\{N=e\} = \frac{1}{8} \binom{3}{e} \]
+for all $e \in \{ 0,1,2,3 \}$, and $f_N(e)=0$ otherwise. Indeed, there are $2^3=8$ possible outcomes, each equally likely, and $\binom{3}{e}$ of those outcomes show exactly $e$ heads for $e \in \{0,1,2,3\}$.
+\end{example}
+
+\begin{exercise}
+Let $(\Omega, \mathbb{P})$ be a probability space, let $E$ be a set, let $X$ be an $E$-valued random variable and let $U \subseteq E$. Prove that the event $\{X \in U\}$ is equal to the preimage $X^{-1}[U]$. Deduce that
+\[ \mathbb{P}\{X \in U\} = \sum_{e \in U} f_X(e) \]
+\end{exercise}
+
+In \Cref{exThreeCoinFlipsPMF}, we could have just specified the value of $f_N$ on $\{0,1,2,3\}$, with the understanding that $N$ does not take values outside of this set and hence that $\mathbb{P}\{N=e\}=0$ for all $e \not \in \{0,1,2,3\}$. This issue arises frequently when dealing with real-valued discrete random variables, and it will be useful to ignore most (or all) of those real numbers which are not values of the random variable.
+
+As such, for $E \subseteq \mathbb{R}$, we will from now on blur the distinction between the following concepts:
+\begin{enumerate}[(i)]
+\item $E$-valued random variables;
+\item Real-valued random variables $X$ such that $\mathbb{P}\{X=x\}=0$ for all $x \not \in E$.
+\end{enumerate}
+
+\begin{example}
+The probability mass function of the random variable $N$ from \Cref{exThreeCoinFlips} can be taken to be the function $f_X : \{0,1,2,3\} \to [0,1]$ defined by
+\[ f_X(k) = \frac{1}{8} \binom{3}{k} \text{ for all } k \in \{ 0,1,2,3\} \]
+\end{example}
+
+\begin{lemma}
+\label{lemRVEventsAreMutuallyExclusive}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a set and let $X$ be an $E$-valued random variable. The events $\{ X=e \}$ for $e \in E$ are mutually exclusive, and their union is $\Omega$.
+\end{lemma}
+\begin{cproof}
+If $e,e' \in E$, then for all $\omega \in \Omega$ we have
+\begin{align*}
+\omega \in \{ X=e \} \cap \{ X=e' \} &\Leftrightarrow \omega \in X^{-1}[\{e\}] \cap X^{-1}[\{e'\}] && \text{by \Cref{ntnRandomVariableEvents}} \\
+&\Leftrightarrow X(\omega)=e \text{ and } X(\omega) = e' && \text{by definition of preimage} \\
+&\Rightarrow e=e' &&
+\end{align*}
+so if $e \ne e'$ then $\{ X=e \} \cap \{ X=e' \} = \varnothing$. So the events are mutually exclusive.
+
+Moreover, if $\omega \in \Omega$, then $\omega \in \{ X = X(\omega) \}$. Hence
+\[ \Omega = \bigcup_{e \in E} \{ X=e \} \]
+as required.
+\end{cproof}
+
+\begin{theorem}
+\label{thmPMFSumsTo1}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a countable set, and let $X$ be an $E$-valued random variable. Then
+\[ \sum_{e \in E} f_X(e) = 1 \]
+\end{theorem}
+
+\begin{cproof}
+Since $f_X(e) = \mathbb{P}\{X=e\}$ for all $e \in E$, we need to check that
+\[ \sum_{e \in E} \mathbb{P}\{X=e\} = 1 \]
+By \Cref{lemRVEventsAreMutuallyExclusive}, we have
+\[ \sum_{e \in E} \mathbb{P}\{ X = e \} = \mathbb{P}\left( \bigcup_{e \in E} \{ X = e \} \right) = \mathbb{P}(\Omega) = 1 \]
+as required.
+\end{cproof}
+
+The following corollary follows immediately.
+
+\begin{corollary}
+\label{corPushforwardMeasure}
+\index{pushforward probability measure}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a countable set, and let $X$ be an $E$-valued random variable. The function $X_*\mathbb{P} : \mathcal{P}(E) \to [0,1]$ defined by
+\[ (X_*\mathbb{P})(A) = \sum_{e \in A} f_X(e) = \mathbb{P}\{X \in A\} \]
+for all $A \subseteq E$ defines a probability measure on $E$. The space $(E,X_*\mathbb{P})$ is called the \textbf{pushforward probability measure}\index{probability measure!pushforward}\index{pushforward measure} of $X$. \qed
+\end{corollary}
+
+\Cref{corPushforwardMeasure} implies that any statement about probability measures can be applied to the pushforward measure. For example,
+\[ \mathbb{P}\{X \in A \cup B\} = \mathbb{P}\{X \in A\} + \mathbb{P}\{X \in B\} - \mathbb{P}\{X \in A \cap B\} \]
+for all subsets $A,B \subseteq E$.
+
+As with events, there is a notion of independence for random variables.
+
+\begin{definition}
+\label{defIndependentRandomVariables}
+\index{independent!random variables}
+\index{pairwise independent!random variables}
+Let $(\Omega,\mathbb{P})$ be a discrete probability space and let $X,Y : \Omega \to E$ be discrete random variables on $(\Omega,\mathbb{P})$. We say $X$ and $Y$ are \textbf{independent} if, for all $e,e' \in E$, the events $\{ X=e \}$ and $\{ Y=e' \}$ are independent. More generally, random variables $X_1,X_2,\dots,X_n$ are \textbf{pairwise independent} if, for all $e_1,e_2,\dots,e_n \in E$, the events $\{ X_i = e_i \}$ are pairwise independent.
+\end{definition}
+
+\begin{example}
+A fair six-sided die is rolled twice. Let $X$ be the value shown on the first roll and $Y$ be the value shown on the second roll.
+
+We can model this situation by letting $\Omega = [6] \times [6]$ with $\mathbb{P}(\{(a,b)\})=\frac{1}{36}$ for all $(a,b) \in \Omega$. The random variables $X,Y$ can thus be taken to be functions $\Omega \to [6]$ defined by
+\[ X(a,b)=a \text{ and } Y(a,b)=b \text{ for all } (a,b) \in \Omega \]
+So let $e,e' \in [6]$. Note first that
+\begin{align*}
+& \{ X = e \} \cap \{ Y = e' \} && \\
+&= \{ (a,b) \in \Omega \mid a=e \} \cap \{ (a,b) \in \Omega \mid b=e' \} && \text{by \Cref{ntnRandomVariableEvents}} \\
+&= \{ (a,b) \in \Omega \mid a=e \text{ and } b=e' \} && \\
+&= \{ (e,e') \} &&
+\end{align*}
+Hence
+\[ \mathbb{P}(\{ X = e \} \cap \{ Y = e' \}) = \mathbb{P}(\{(e,e')\}) = \frac{1}{36} = \frac{1}{6} \cdot \frac{1}{6} = \mathbb{P}\{X=e\}\mathbb{P}\{Y=e'\} \]
+The events $\{ X = e \}$ and $\{ Y = e' \}$ are independent, and so $X$ and $Y$ are independent.
+\end{example}
+
+\begin{exercise}
+A coin which shows heads with probability $p \in [0,1]$, and tails otherwise, is flipped five times. For each $i \in [5]$, let
+\[ X_i = \begin{cases} 0 & \text{if the } i^{\text{th}} \text{ flip shows tails} \\
+1 & \text{if the } i^{\text{th}} \text{ flip shows heads} \end{cases} \]
+Prove that the random variables $X_1,X_2,X_3,X_4,X_5$ are pairwise independent.
+\end{exercise}
+
+One final technicality that we mention before continuing concerns performing arithmetic with random variables which assume real values.
+
+\begin{notation}
+\label{ntnRandomVariableArithmetic}
+Let $(\Omega,\mathbb{P})$ be a probability space, and let $X,Y$ be real-valued random variables on $(\Omega,\mathbb{P})$. Then we can define a new real-valued random variable $X+Y$ by
+\[ (X+Y)(\omega) = X(\omega) + Y(\omega) \text{ for all } \omega \in \Omega \]
+Likewise for multipication, scalar multiplication and constants: for each $\omega \in \Omega$, define
+\[ (XY)(\omega) = X(\omega)Y(\omega), \quad (aX)(\omega) = a \cdot X(\omega), \quad a(\omega)=a \]
+where $a \in \mathbb{R}$. Note that the random variables $X+Y, XY, aX, a$ are all supported on a countable set.
+\end{notation}
+
+\begin{example}
+A coin which shows heads with probability $p \in [0,1]$, and tails otherwise, is flipped $n$ times. For each $i \in [n]$, let
+\[ X_i = \begin{cases} 0 & \text{if the } i^{\text{th}} \text{ flip shows tails} \\
+1 & \text{if the } i^{\text{th}} \text{ flip shows heads} \end{cases} \]
+Then each $X_i$ is a $\{ 0,1 \}$-valued random variable.
+
+Define $X = X_1 + X_2 + \cdots + X_n$. Then $X$ is a $\{ 0,1,\dots,n \}$-valued random variable representing the number of heads that show in total after the coin is flipped $n$ times.
+\end{example}
+
+\subsection*{Probability distributions}
+\index{probability distribution}
+
+Most of the random variables we are interested in are characterised by one of a few \textit{probability distributions}. We won't define the term `probability distribution' precisely---indeed, its use in the mathematical literature is often ambiguous and informal---instead, we will take it to mean any description of the random behaviour of a probability space or random variable.
+
+The \textit{uniform distribution} models the real-world situation in which any of a fixed number of outcomes occurs with equal probability.
+
+\begin{definition}[Uniform distribution]
+\label{defUniformDistribution}
+\index{probability distribution!uniform}
+\index{uniform distribution}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a finite set, and let $X : \Omega \to E$ be a random variable. We say $X$ follows the \textbf{uniform distribution on $E$}, or $X$ is \textbf{uniformly distributed on $E$}, if $f_X$ is constant---that is, if
+\[ f_X(e)=\frac{1}{|E|} \text{ for all } e \in E \]
+If $X$ is uniformly distributed on $E$, we write $X \sim \mathrm{Unif}(E)$ \inlatex{sim}\lindexmmc{sim}{$\sim$}.
+\end{definition}
+
+\begin{example}
+Let $(\Omega,\mathbb{P})$ be the probability space modelling the roll of a fair six-sided die, and let $X$ be the $[6]$-valued random variable representing the number shown. Then for each $k \in [6]$ we have
+\[ f_X(k) = \mathbb{P}\{X=k\} = \mathbb{P}(\{k\}) = \frac{1}{6} \]
+so $X$ is uniformly distributed on $[6]$.
+\end{example}
+
+\begin{exercise}
+Let $(\Omega,\mathbb{P})$ be the probability space modelling the roll of a fair six-sided die, and let $X$ be the $\{0,1\}$-valued random variable which is equal to $0$ if the die shows an even number and $1$ if the die shows an odd number. Prove that $X \sim \mathrm{Unif}(\{0,1\})$.
+\end{exercise}
+
+Before we continue, we prove that the notion of `uniform distribution' does not make sense for countably infinite sets. 
+
+\begin{theorem}
+Let $(\Omega,\mathbb{P})$ be a probability space and let $E$ be a countably infinite set. There is no notion of a uniformly $E$-valued random variable $X$---that is, there is no $p \in [0,1]$ such that $f_X(e)=p$ for all $e \in E$.
+\end{theorem}
+
+\begin{cproof}
+We may assume $E=\mathbb{N}$; otherwise, re-index the sums accordingly.
+
+Let $p \in [0,1]$. Note that
+\[ \sum_{n \in \mathbb{N}} f_X(n) = \sum_{n \in \mathbb{N}} p = \lim_{N \to \infty} \sum_{n=0}^N p = \lim_{N \to \infty} (N+1)p \]
+If $p=0$ then
+\[ \lim_{N \to \infty} (N+1)p = \lim_{N \to \infty} 0 = 0 \]
+If $p>0$ then, for all $K>0$, letting $N = \frac{K}{p}$ yields $(N+1)p = K+p > K$, and hence
+\[ \lim_{N \to \infty} (N+1)p = \infty \]
+Thus $\sum_{n \in \mathbb{N}} p \ne 1$ for all $p \in [0,1]$.
+
+In both cases, we have contradicted \Cref{thmPMFSumsTo1}. As such, there can be no random variable $X : \Omega \to \mathbb{N}$ such that $f_X$ is constant.
+\end{cproof}
+
+The \textit{Bernoulli distribution} models real-world situations in which one of two outcomes occurs, but not necessarily with the same probability.
+
+\begin{definition}[Bernoulli distribution]
+\label{defBernoulliDistribution}
+\index{probability distribtion!Bernoulli}
+\index{Bernoulli distribution}
+Let $(\Omega,\mathbb{P})$ be a probability space. A $\{0,1\}$-valued random variable $X$ follows the \textbf{Bernoulli distribution with parameter} $p$ if its probability mass function $f_X : \{0,1\} \to [0,1]$ satisfies
+\[ f_X(0)=1-p \quad \text{and} \quad f_X(1)=p \]
+If $X$ follows the Bernoulli distribution with parameter $p$, we write $X \sim \mathrm{B}(1,p)$.
+\end{definition}
+
+The reason behind the notation $\mathrm{B}(1,p)$ will become clear soon---the Bernoulli distribution is a specific instance of a more general distribution, which we will see in \Cref{defBinomialDistribution}.
+
+\begin{example}
+\label{exBernoulliCoinFlip}
+A coin shows `heads' with probability $p$ and `tails' with probability $1-p$. Let $X$ be the random variable which takes the value $0$ if the coin shows tails and $1$ if the coin shows heads. Then $X \sim \mathrm{B}(1,p)$.
+\end{example}
+
+\begin{exercise}
+Let $X$ be a $\{0,1\}$-valued random variable. Prove that $X \sim \mathrm{U}(\{0,1\})$ if and only if $X \sim \mathrm{B}(1,\frac{1}{2})$.
+\end{exercise}
+
+Suppose that, instead of flipping a coin just once, as in \Cref{exBernoulliCoinFlip}, you flip it $n$ times. The total number of heads that show must be an element of $\{0,1,\dots,n\}$, and each such element occurs with some positive probability. The resulting probability distribution is called the \textit{binomial distribution}.
+
+\begin{definition}[Binomial distribution]
+\label{defBinomialDistribution}
+\index{binomial distribution}
+\index{probability distribution!binomial}
+Let $(\Omega,\mathbb{P})$ be a probability space. A $\{0,1,\dots,n\}$-valued random variable $X$ follows the \textbf{binomial distribution with parameters} $n,p$ if its probability mass function $f_X : \{0,1,\dots,n\} \to [0,1]$ satisfies
+\[ f_X(k) = \binom{n}{k} p^k (1-p)^{n-k} \]
+for all $k \in \{ 0,1,\dots,n \}$. If $X$ follows the binomial distribution with parameters $n,p$, we write $X \sim \mathrm{B}(n,p)$.
+\end{definition}
+
+\begin{example}
+\label{exBinomialCoinFlip}
+A coin which shows heads with probability $p \in [0,1]$, and tails otherwise, is flipped $n$ times. We will prove that the number of heads that show is binomially distributed.
+
+We can model this situation with probability space $(\Omega,\mathbb{P})$ defined by taking $\Omega = \{\text{H},\text{T}\}^n$, and letting $\mathbb{P}(\{\omega\})=p^h(1-p)^t$ for all $\omega \in \Omega$, where $h$ is the number of heads that show and $t$ is the number of tails that show in outcome $\omega$. For example, if $n=5$ then
+\[ \mathbb{P}(\{ \text{HTHHT} \}) = p^3(1-p)^2 \quad \text{and} \quad \mathbb{P}(\{ \text{TTTTT} \}) = (1-p)^5 \]
+Note in particular that $h+t=n$.
+
+Let $X$ be the random variable which counts the number of heads that show. Formally, we can define $X : \{\text{H},\text{T}\}^n \to \{0,1,\dots,n\}$ by letting $X(\omega)$ be the number of heads that show in outcome $\omega$. For example if $n=5$ then
+\[ X(\text{HTHHT})=3 \quad \text{and} \quad X(\text{TTTTT})=0 \]
+The event $\{ X = k \}$ is the set of $n$-tuples of `H's and `T's which contain exactly $k$ `H'. Hence $|\{X=k\}| = \binom{n}{k}$, since such an $n$-tuple can be specified by choosing the $k$ positions of the `H's, and putting `T's in the remaining positions. Since each outcome in this event occurs with equal probability $p^k(1-p)^{n-k}$, it follows that
+\[ f_X(k) = \binom{n}{k} p^k (1-p)^{n-k} \]
+for all $k \in \{ 0,1,\dots,n \}$. Hence $X \sim \mathrm{B}(n,p)$.
+\end{example}
+
+The following theorem proves that the sum of Bernoulli random variables follows the binomial distribution.
+
+\begin{theorem}
+\label{thmSumOfBernoulliIsBinomial}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $p \in [0,1]$ and let $X_1,X_2,\dots,X_n : \Omega \to \{ 0,1 \}$ be independent random variables such that $X_i \sim \mathrm{B}(1,p)$. Then
+\[ X_1+X_2+\cdots+X_n \sim \mathrm{B}(n,p) \]
+\end{theorem}
+
+\begin{cproof}
+Let $X=X_1+X_2+\cdots+X_n$. For each outcome $\omega$ and each $k \in \{0,1,\dots,n\}$, we have $X(\omega)=k$ if and only if exactly $k$ of the values $X_1(\omega),X_2(\omega),\dots,X_n(\omega)$ are equal to $1$.
+
+For each specification $S$ of \textit{which} of the random variables $X_i$ is equal to $1$, let $A_S \subseteq \Omega$ be the event that this occurs. Formally, this is to say that, for each $S \subseteq [n]$, we define
+\[ A_S = \{ \omega \in \Omega \mid X_i(\omega) = 0 \text{ for all } i \not \in S \text{ and } X_i(\omega) = 1 \text{ for all } i \in S \} \]
+Then $\mathbb{P}(A_S) = p^k(1-p)^{n-k}$, since the random variables $X_1,X_2,\dots,X_n$ are mutually independent.
+
+As argued above sets $\{ A_S \mid U \subseteq [n],\ |S|=k \}$ form a partition of $\{ X = k \}$, and hence
+\[ f_X(k) = \sum_{S \in \binom{[n]}{k}} \mathbb{P}(A_S) = \sum_{S \in \binom{[n]}{k}} p^k(1-p)^{n-k} = \binom{n}{k}p^k(1-p)^{n-k} \]
+which is to say that $X \sim \mathrm{B}(n,p)$.
+\end{cproof}
+
+We will make heavy use of \Cref{thmSumOfBernoulliIsBinomial} when we will study the \textit{expectation} of binomially distributed random variables (\Cref{defExpectation}). First, let's will look at a couple of scenarios in which a binomially distributed random variable is expressed as a sum of independent Bernoulli random variables.
+
+\begin{example}
+In \Cref{exBinomialCoinFlip}, we could have defined
+$\{0,1\}$-valued random variables $X_1,X_2,\dots,X_n$ by letting
+\[ X_i(\omega) = \begin{cases} 0 & \text{if the } i^{\text{th}} \text{ coin flip shows tails} \\ 1 & \text{if the } i^{\text{th}} \text{ coin flip shows heads} \end{cases} \]
+Then the number of heads shown in total is the random variable $X = X_1+X_2+\cdots+X_n$. Note that each random variable $X_i$ follows the Bernoulli distribution with parameter $p$, and they are independent, so that $X \sim \mathrm{B}(n,p)$ by \Cref{thmSumOfBernoulliIsBinomial}.
+\end{example}
+
+In \Cref{exBinomialCoinFlip}, we flipped a coin a fixed number of times and counted how many heads showed. Now suppose that we flip a coin repeatedly until heads show, and then stop. The number of times the coin was flipped before heads shows could, theoretically, be any natural number. This situation is modelled by the \textit{geometric distribution}.
+
+\begin{definition}[Geometric distribution on $\mathbb{N}$]
+\label{defGeometricDistribution}
+\index{geometric distribution!on $\mathbb{N}$}
+\index{probability distribution!geometric (on $\mathbb{N}$)}
+Let $(\Omega,\mathbb{P})$ be a probability space. An $\mathbb{N}$-valued random variable $X$ follows the \textbf{geometric distribution with parameter} $p$ if its probability mass function $f_X : \mathbb{N} \to [0,1]$ satisfies
+\[ f_X(k) = (1-p)^kp \text{ for all } k \in \mathbb{N} \]
+If $X$ follows the geometric distribution with parameter $p$, we write $X \sim \mathrm{Geom}(p)$.
+\end{definition}
+
+\begin{example}
+A coin which shows heads with probability $p \in [0,1]$, and tails otherwise, is flipped repeatedly until heads shows. 
+\end{example}
+
+\begin{exercise}
+Let $p \in [0,1]$ and let $X \sim \mathrm{Geom}(p)$. Prove that
+\[ \mathbb{P}\{X \text{ is even}\} = \frac{1}{2-p} \]
+What is the probability that $X$ is odd?
+\end{exercise}
+
+Occasionally, it will be useful to consider geometrically distributed random variables which are valued in the set
+\[ \mathbb{N}^+ = \{ 1,2,3,\dots \} \]
+of all \textit{positive} natural numbers. The probability mass function of such a random variable is slightly different.
+
+\begin{definition}[Geometric distribution on $\mathbb{N}^+$]
+\label{defGeometricDistributionPositive}
+\index{geometric distribution!on $\mathbb{N}^+$}
+\index{probability distribution!geometric (on $\mathbb{N}^+$)}
+Let $(\Omega,\mathbb{P})$ be a probability space. An $\mathbb{N}^+$-valued random variable $X$ follows the \textbf{geometric distribution with parameter} $p$ if its probability mass function $f_X : \mathbb{N}^+ \to [0,1]$ satisfies
+\[ f_X(k) = (1-p)^{k-1}p \text{ for all } k \in \mathbb{N}^+ \]
+If $X$ follows the geometric distribution with parameter $p$, we write $X \sim \mathrm{Geom}(p)$.
+\end{definition}
+
+It is to be understood from context whether a given geometric random variable is $\mathbb{N}$-valued or $\mathbb{N}^+$-valued.
+
+\begin{example}
+\label{exCoinCollectorSetUp}
+An urn contains $n \ge 1$ distinct coupons. Each time you draw a coupon that you have not drawn before, you get a stamp. When you get all $n$ stamps, you win. Let $X$ be the number of coupons drawn up to, and including, a winning draw.
+
+For each $k \in [n]$, let $X_k$ be the random variable representing the number of draws required to draw the $k^{\text{th}}$ new coupon, after $k-1$ coupons have been collected. Then the total number of times a coupon must be drawn is $X = X_1+X_2+\cdots+X_n$.
+
+After $k-1$ coupons have been collected, there are $n-k+1$ uncollected coupons remaining in the urn, and hence on any given draw, an uncollected coupon is drawn with probability $\frac{n-k+1}{n}$, and a coupon that has already been collected is drawn with probability $\frac{k-1}{n}$. Hence for each $r \in \mathbb{N}^+$ we have
+\[ \mathbb{P} \{ X_k=r \} = \left( \frac{k-1}{n} \right)^{r-1} \left( \frac{n-k+1}{n} \right) \]
+That is to say, $X_k$ is geometrically distributed on $\mathbb{N}^+$ with parameter $\frac{n-k+1}{n}$.
+
+We will use this in \Cref{exCoinCollectorExpectation} to compute the number of times a person should expect to have to draw coupons from the urn until they win.
+\end{example}
+
+\subsection*{Expectation}
+
+We motivate the definition of \textit{expectation} (\Cref{defExpectation}) with the following example.
+
+\begin{example}
+\label{exAverageDieRoll}
+For each $n \ge 1$, let $X_n$ be the average value shown when a fair six-sided die is rolled $n$ times.
+
+When $n$ is small, the value of $X_n$ is somewhat unpredictable. For example, $X_1$ is uniformly distributed, since it takes each of the values $1,2,3,4,5,6$ with equal probability. This is summarised in the following table:
+\begin{center}
+\begin{tabular}{c||c|c|c|c|c|c}
+$e$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\ \hline
+$\mathbb{P}\{X_1=e\}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$
+\end{tabular}
+\end{center}
+The distribution of $X_2$ is shown in the following table:
+\begin{center}
+\begin{tabular}{c||c|c|c|c|c|c|c|c|c|c|c}
+$e$ & $1$ & $1.5$ & $2$ & $2.5$ & $3$ & $3.5$ & $4$ & $4.5$ & $5$ & $5.5$ & $6$ \\ \hline
+$\mathbb{P}\{X_2=e\}$ & $\frac{1}{36}$ & $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ & $\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$ & $\frac{4}{36}$ & $\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$
+\end{tabular}
+\end{center}
+
+As can be seen, the probabilities increase towards the middle of the table; the extreme values occur with low probability. This effect is exaggerated as $n$ increases. Indeed,
+\[ \mathbb{P}\{X_n=1\} = \mathbb{P}\{ X_n=6 \} = \frac{1}{6^n} \]
+so that $\mathbb{P} \{ X_n = 1 \} \to 0$ and $\mathbb{P} \{ X_n = 6 \} \to 0$ as $n \to \infty$; however, it can be shown that for all $\varepsilon > 0$, we have
+\[ \mathbb{P} \{ 3.5 - \varepsilon < X_n < 3.5 + \varepsilon \} \]
+so that $\mathbb{P} \{ |X_n - 3.5| < \varepsilon \} \to 1$ as $n \to \infty$.
+
+Thus when we roll a die repeatedly, we can expect its value to eventually be as close to $3.5$ as we like. This is an instance of a theorem called the \textit{law of large numbers}
+\end{example}
+
+The value $3.5$ in \Cref{exAverageDieRoll} is special because it is the average of the numbers $1,2,3,4,5,6$. More generally, assignments of different probabilities to different values of a random variable $X$ yields a \textit{weighted average} of the possible values. This weighted average, known as the \textit{expectation} of the random variable, behaves in the same way as the number $3.5$ did in \Cref{exAverageDieRoll}.
+
+\begin{definition}
+\label{defExpectation}
+\index{expectation}
+\index{expected value}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E \subseteq \mathbb{R}$ be countable, and let $X$ be an $E$-valued random variable on $(\Omega,\mathbb{P})$. The \textbf{expectation} (or \textbf{expected value}) of $X$, if it exists, is the real number $\mathbb{E}[X]$\nindex{EX}{$\mathbb{E}[X]$}{expectation} \inlatex{mathbb\{E\}}\lindexmmc{mathbb}{$\mathbb{A}, \mathbb{B}, \dots$} defined by
+\[ \mathbb{E}[X] = \sum_{e \in E} e f_X(e) \]
+\end{definition}
+
+\begin{example}
+\label{exExpectationFairDieRoll}
+Let $X$ be a random variable representing the value shown when a fair six-sided die is rolled. Then $X \sim \mathrm{U}([6])$, so that $f_X(k)=\frac{1}{6}$ for all $k \in [6]$, and hence
+\[ \mathbb{E}[X] = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6} = \frac{21}{6} = 3.5 \]
+so the expected value of the die roll is $3.5$.
+\end{example}
+
+\begin{example}
+\label{exExpectationOfBernoulli}
+Let $p \in [0,1]$ and let $X \sim \mathrm{B}(1,p)$. Then
+\[ \mathbb{E}[X] = 0 \cdot (1-p) + 1 \cdot p = p \]
+So the expected value of a Bernoulli random variable is equal to the parameter.
+\end{example}
+
+\begin{exercise}
+Let $(\Omega,\mathbb{P})$ be a probability space and let $c \in \mathbb{R}$. Thinking of $c$ as a \textit{constant} real-valued random variable,\footnote{Formally, we should define $X : \Omega \to \mathbb{R}$ by letting $X(\omega)=c$ for all $\omega \in \Omega$; then compute $\mathbb{E}[X]$.} prove that $\mathbb{E}[c]=c$.
+\end{exercise}
+
+The following lemma provides an alternative method for computing the expectation of a random variable. It will be useful for proving that expectation is \textit{linear} in \Cref{thmLinearityOfExpectation}.
+
+\begin{lemma}
+\label{lemAlternativeDefinitionExpectation}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E$ be a countable set and let $X$ be an $E$-valued random variable on $(\Omega,\mathbb{P})$. Then
+\[ \mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)\mathbb{P}(\{\omega\}) \]
+\end{lemma}
+\begin{cproof}
+Recall from \Cref{lemRVEventsAreMutuallyExclusive} that
+\[ \Omega = \bigcup_{e \in E} \{ X=e \} \]
+and the events $\{ X=e \}$ are mutually exclusive. Hence
+\begin{align*}
+\sum_{\omega \in \Omega} X(\omega)\mathbb{P}(\{\omega\})
+&= \sum_{e \in E} \sum_{\omega \in \{ X=e \}} X(\omega)\mathbb{P}(\{\omega\}) && \text{by \Cref{lemRVEventsAreMutuallyExclusive}} \\
+&= \sum_{e \in E} e \mathbb{P}\{X=e\} && \text{by (ii) in \Cref{propEquivalentSecondAxiomsForDiscreteProbabilitySpace}} \\
+&= \sum_{e \in E} e f_X(e) && \text{by \Cref{defPMF}}
+\end{align*}
+as required.
+\end{cproof}
+
+\begin{proposition}
+\label{propExpectationOfBinomial}
+Let $n \in \mathbb{N}$ and $p \in [0,1]$, and suppose that $X$ is a random variable such that $X \sim \mathrm{B}(n,p)$. Then $\mathbb{E}[X] = np$.
+\end{proposition}
+
+\begin{cproof}
+Since $X \sim \mathrm{B}(n,p)$, we have $f_X(k) = \binom{n}{k}p^k(1-p)^{n-k}$ for all $0 \le k \le n$. Hence
+\begin{align*}
+\mathbb{E}[X] &= \sum_{k=0}^n k \cdot \binom{n}{k} p^k(1-p)^{n-k} && \text{by definition of expectation} \\
+&= \sum_{k=1}^n k \cdot \binom{n}{k} p^k(1-p)^{n-k} && \text{since the $k=0$ term is zero} \\
+&= \sum_{k=1}^n n \binom{n-1}{k-1} p^k(1-p)^{n-k} && \text{by \Cref{propBinomCoeffTwoColourBalls}} \\
+&= \sum_{\ell=0}^{n-1} n \binom{n-1}{\ell} p^{\ell+1}(1-p)^{(n-1)-\ell} && \text{writing $\ell=k+1$} \\
+&= np \cdot \sum_{\ell=0}^{n-1} \binom{n-1}{\ell} p^{\ell}(1-p)^{(n-1)-\ell} && \text{pulling out constant factors} \\
+&= np(p+(1-p))^{n-1} && \text{by the binomial theorem} \\
+&= np && \text{since $p+(1-p)=1$}
+\end{align*}
+as required.
+\end{cproof}
+
+\begin{example}
+A coin which shows heads with probability $\frac{1}{3}$, and tails otherwise, is tossed $12$ times. Letting $X$ be the random variable represent the number of heads that show, we see that $X \sim \mathrm{B}(12,\frac{1}{3})$, and hence the expected number of heads that show is equal to
+\[ \mathbb{E}[X] = 12 \cdot \frac{1}{3} = 4 \]
+\end{example}
+
+\begin{exercise}
+\label{exExpectationOfGeometric}
+Use \Cref{exDerivativeOfGeometricSeries} to prove that the expectation of a $\mathbb{N}$-valued random variable which is geometrically distributed with parameter $p \in [0,1]$ is equal to $\frac{1-p}{p}$. Use this to compute the expected number of times a coin must be flipped before the first time heads shows, given that heads shows with probability $\frac{2}{7}$.
+\end{exercise}
+
+\begin{exercise}
+\label{exExpectationOfGeometricPositive}
+Prove that the expectation of a $\mathbb{N}^+$-valued random variable which is geometrically distributed with parameter $p \in [0,1]$ is equal to $\frac{1}{p}$.
+\end{exercise}
+
+\begin{theorem}[Linearity of expectation]
+\label{thmLinearityOfExpectation}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E \subseteq \mathbb{R}$ be countable, let $X$ and $Y$ be $E$-valued random variables on $(\Omega,\mathbb{P})$, and let $a,b \in \mathbb{R}$. Then
+\[ \mathbb{E}[aX+bY] = a\mathbb{E}[X] + b\mathbb{E}[Y] \]
+\end{theorem}
+
+\begin{cproof}
+This follows directly from the fact that summation is linear. Indeed,
+\begin{align*}
+\mathbb{E}[aX+bY] &= \sum_{\omega \in \Omega} (aX+bY)(\omega) \mathbb{P}(\{\omega\}) && \text{by \Cref{lemAlternativeDefinitionExpectation}} \\
+&= \sum_{\omega \in \Omega} \Big( aX(\omega)\mathbb{P}(\{\omega\}) + bY(\omega)\mathbb{P}(\{\omega\}) \Big) && \text{expanding} \\
+&= a \sum_{\omega \in \Omega} X(\omega)\mathbb{P}(\{\omega\}) + b \sum_{\omega \in \Omega} Y(\omega)\mathbb{P}(\{\omega\}) && \text{by linearity of summation} \\
+&= a\mathbb{E}[X] + b\mathbb{E}[Y] && \text{by \Cref{lemAlternativeDefinitionExpectation}}
+\end{align*}
+as required.
+\end{cproof}
+
+\begin{example}
+Let $X$ be a random variable representing the sum of the numbers shown when a fair six-sided die is rolled twice. We can write $X=Y+Z$, where $Y$ is the value of the first die roll and $Z$ is the value of the second die roll. By \Cref{exExpectationFairDieRoll}, we have $\mathbb{E}[Y]=\mathbb{E}[Z]=3.5$. Linearity of expectation then yields
+\[ \mathbb{E}[X] = \mathbb{E}[Y]+\mathbb{E}[Z] = 3.5+3.5 = 7 \]
+so the expected value of the sum of the two die rolls is $7$.
+\end{example}
+
+\begin{example}
+A coin, when flipped, shows heads with probability $p \in [0,1]$. The coin is flipped. If it shows heads, I gain \$10; if it shows tails, I lose \$20. We compute the least value of $p$ that ensures that I do not expect to lose money.
+
+Let $X$ be the random variable which is equal to $0$ if tails shows, and $1$ if heads shows. then $X \sim \mathrm{B}(1,p)$, so that $\mathbb{E}[X]=p$ by \Cref{exExpectationOfBernoulli}. Let $Y$ be the amount of money I gain. Then
+\[ Y = 10X - 20(1-X) = 30X-20 \]
+Hence my expected winnings are
+\[ \mathbb{E}[Y] = 30\mathbb{E}[X] - 20 = 30p-20 \]
+In order for this number to be non-negative, we require $p \ge \frac{2}{3}$.
+\end{example}
+
+\Cref{thmLinearityOfExpectation} generalises by induction to linear combinations of countably many random variables; this is proved in the following exercise
+
+\begin{exercise}
+Let $(\Omega,\mathbb{P})$ be a probability space, let $E \subseteq \mathbb{R}$ be countable, let $\{ X_i \mid i \in I \}$ be a family of $E$-valued random variables on $(\Omega,\mathbb{P})$, indexed by some countable set $I$, and let $\{ a_n \mid n \in \mathbb{N} \}$ be an $I$-indexed family of real numbers. Prove that
+\[ \mathbb{E} \left[ \sum_{i \in I} a_i X_i \right] = \sum_{i \in I} a_i\mathbb{E}[X_i] \]
+\end{exercise}
+
+\begin{example}
+\label{exCoinCollectorExpectation}
+Recall \Cref{exCoinCollectorSetUp}: an urn contains $n \ge 1$ distinct coupons. Each time you draw a coupon that you have not drawn before, you get a stamp. When you get all $n$ stamps, you win. We find the expected number of times you need to draw a coupon from the urn in order to win.
+
+For each $k \in [n]$, let $X_k$ be the random variable representing the number of draws required to draw the $k^{\text{th}}$ new coupon, after $k-1$ coupons have been collected. Then the total number of times a coupon must be drawn is $X = X_1+X_2+\cdots+X_n$.
+
+We already saw that $X_k \sim \mathrm{Geom}\left( \frac{n-k+1}{n} \right)$ for each $k \in [n]$. By \Cref{exExpectationOfGeometricPositive}, we have $\mathbb{E}[X_k] = \frac{n}{n-k+1}$ for all $k \in [n]$. By linearity of expectation, it follows that
+\[ \mathbb{E}[X] = \sum_{k=1}^n \mathbb{E}[X_k] = \sum_{k=1}^n \frac{n}{n-k+1} = n \sum_{i=1}^n \frac{1}{i} \]
+\end{example}

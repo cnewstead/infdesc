@@ -1021,3 +1021,44 @@ If a contradiction is assumed, any consequence may be derived.
 The principle of explosion is a bit confusing on first sight. To shed a tiny bit of intuition on it, think of it as saying that both true and false propositions are consequences of a contradictory assumption. For instance, suppose that $-1 = 1$. From this we can obtain consequences that are false, such as $0=2$ by adding $1$ to both sides of the equation, and consequences that are true, such as $1=1$ by squaring both sides of the equation.
 
 We will rarely use the principle of explosion directly in our mathematical proofs, but we will use it in \Cref{secLogicalEquivalence} for proving logical formulae are equivalent.
+
+\begin{tldr}{secPropositionalLogic}
+
+The basics:
+
+\begin{tldrlist}
+\tldritem{defPropositionalVariable}
+Propositional variables $p,q,r,\dots$ are used to express simple propositions.
+
+\tldritem{defPropositionalFormula}
+Propositional formulae are more complicated expressions built from propositional variables using logical operators, which represent phrases like `and', `or' and `if\dots{} then\dots{}'.
+\end{tldrlist}
+
+Logical operators:
+\begin{tldrlist}
+\tldritem{defConjunction}
+The \textit{conjunction} operator ($\wedge$) represents `and'. We prove $p \wedge q$ by proving both $p$ and $q$ separately; we can use an assumption of the form $p \wedge q$ by assuming both $p$ and $q$ separately.
+
+\tldritem{defDisjunction}
+The \textit{disjunction} operator ($\vee$) represents `or'. We prove $p \vee q$ by proving at least one of $p$ or $q$; we can use an assumption of the form $p \vee q$ by splitting into cases, assuming that $p$ is true in one case, and assuming that $q$ is true in the other.
+
+\tldritem{defImplication}
+The \textit{implication} operator ($\Rightarrow$) represents `if\dots{} then\dots{}'. We prove $p \Rightarrow q$ by assuming $p$ and deriving $q$; we can use an assumption of the form $p \Rightarrow q$ by deducing $q$ whenever we know that $p$ is true.
+
+\tldritem{defNegation}
+The \textit{negation} operator] ($\neg$) represents `not'. We prove $\neg p$ by assuming $p$ and deriving something known or assumed to be false (this is called \textit{proof by contradiction}); we can use an assumption of the form $\neg p$ by arriving at a contradiction whenever we find that $p$ is true.
+
+\tldritem{defBiconditional}
+The \textit{biconditional} operator ($\Leftrightarrow$) represents `if and only if'. The expression $p \Leftrightarrow q$ is shorthand for $(p \Rightarrow q) \wedge (q \Rightarrow p)$.
+\end{tldrlist}
+
+Logical axioms:
+
+\begin{tldrlist}
+\tldritem{axLEM}
+The \textit{law of excluded middle} says that $p \vee (\neg p)$ is always true. So at any point in a proof, we may split into two cases: one where $p$ is assumed to be true, and one where $p$ is assumed to be false.
+
+\tldritem{axPrincipleOfExplosion}
+The\textit{ principle of explosion} says that if a contradiction is introduced as an assumption, then any conclusion at all can be derived.
+\end{tldrlist}
+\end{tldr}

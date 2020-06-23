@@ -1,0 +1,887 @@
+% !TeX root = ../../book.tex
+\section{Modular arithmetic}
+\secbegin{secModularArithmetic}
+
+Recall the definition of \textit{congruence} modulo an integer from \Cref{secEquivalenceRelationsPartitions}.
+
+\rdefCongruence*
+
+In \Cref{secEquivalenceRelationsPartitions}, we proved that congruence is an equivalence relation:
+
+\rthmCongruenceIsEquivalenceRelation*
+
+In this section, we turn our attention to addition, subtraction, multiplication and division: our goal is to find out how much arithmetic can be done with \textit{equality} replaced by \textit{congruence}. For example:
+\begin{enumerate}[(i)]
+\item Can we add a number to both sides of a congruence? That is, given $a,b,c,n \in \mathbb{Z}$, is it the case that $a \equiv b \bmod n$ implies $a + c \equiv b + c \bmod n$?
+\item Can we multiply both sides of a congruence by a number? That is, given $a,b,c,n \in \mathbb{Z}$, is it the case that $a \equiv b \bmod n$ implies $ac \equiv bc \bmod n$?
+\item Can we divide both sides of a congruence by a nonzero common factor? That is, given $a,b,c,n \in \mathbb{Z}$ with $c \not\equiv 0 \bmod n$, is it the case that if $ac \equiv bc \bmod n$ implies $a \equiv b \bmod n$?
+\end{enumerate}
+
+The answers to (i) and (ii) are `yes', as we will prove; but surprisingly, the answer to (iii) is `no' (except under certain circumstances). For example, $2 \times 3 \equiv 4 \times 3 \bmod 6$, but $2 \not\equiv 4 \bmod 6$, even though $3 \not\equiv 0 \bmod 6$.
+
+In light of this, it is important from the outset to point out that, although congruence is written with a symbol that looks like that of equality (`$\equiv$' vs.\ `$=$'), and although it is an equivalence relation, we can only treat congruence like equality inasmuch as we prove that we can. Specifically:
+\begin{itemize}
+\item In \Cref{thmCongruenceIsEquivalenceRelation} we proved that congruence is an equivalence relation. This allows us to make some basic inferences about congruences---for example, transitivity means that the following implication is valid:
+\[ -5 \equiv 18 \equiv 41 \equiv 64 \bmod 23 \quad \Rightarrow \quad -5 \equiv 64 \bmod 23 \]
+\item \Cref{thmModularArithmetic}, which we will prove soon, tells us that we can treat congruence like equality for the purposes of addition, multiplication and subtraction. Thus it will be valid to write things like
+\[ x \equiv 7 \bmod 12 \quad \Rightarrow \quad 2x+5 \equiv 19 \bmod 12 \]
+and we'll be able to replace values by congruent values in congruences, provided they're only being added, subtracted or multiplied. For example, from the knowledge that $2^{60} \equiv 1 \bmod 61$ and $60! \equiv -1 \bmod 61$, we will be able to deduce
+\[ 2^{60} \cdot 3 \equiv 60! \cdot x \bmod 61 \quad \Rightarrow \quad 3 \equiv -x \bmod 61 \]
+\end{itemize}
+
+After we have worked out what arithmetic properties carry over to congruence, we will be able to prove some interesting theorems involving congruences and discuss their applications.
+
+The first result we prove gives us a few equivalent ways of talking about congruence.
+
+\begin{proposition}
+\label{propModAsDivDiff}
+Fix a modulus $n$ and let $a,b \in \mathbb{Z}$. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $a$ and $b$ leave the same remainder when divided by $n$;
+\item $a=b+kn$ for some $k \in \mathbb{Z}$;
+\item $a \equiv b \bmod n$.
+\end{enumerate}
+\end{proposition}
+
+\begin{cproof}
+We prove (i) $\Leftrightarrow$ (iii) and (ii) $\Leftrightarrow$ (iii).
+\begin{itemize}
+\item (i) $\Rightarrow$ (iii). Suppose $a$ and $b$ leave the same remainder when divided by $n$, and let $q_1,q_2,r \in \mathbb{Z}$ be such that
+\[ a=q_1n+r, \quad b = q_2n+r \quad \text{and} \quad 0 \le r < n \]
+Then $a-b = (q_1-q_2)n$, which proves that $n \mid a-b$, and so $a \equiv b \bmod n$.
+\item (iii) $\Rightarrow$ (i). Suppose that $a \equiv b \bmod n$, so that $b-a = qn$ for some $q \in \mathbb{Z}$. Write
+\[ a=q_1n+r_1, \quad b = q_2n+r_2 \quad \text{and} \quad 0 \le r_1,r_2 < n \]
+We may further assume that $r_1 \le r_2$. (If not, swap the roles of $a$ and $b$---this is fine, since $n \mid b-a$ if and only if $n \mid a-b$.) Now we have
+\begin{align*}
+b-a = qn & \Rightarrow (q_2n+r_2) - (q_1n+r_1) = qn && \\
+& \Rightarrow (q_2-q_1-q)n + (r_2-r_1) = 0 && \text{rearranging}
+\end{align*}
+since $0 \le r_1 \le r_2 < n$ we have $0 \le r_2-r_1 < n$, so that $r_2-r_1$ is the remainder of $0$ when divided by $n$. That is, $r_2-r_1=0$, so $r_1=r_2$. Hence $a$ and $b$ have the same remainder when divided by $n$.
+\item (ii) $\Leftrightarrow$ (iii). We unpack the definitions of (ii) and (iii) to see that they are equivalent. Indeed
+\begin{align*}
+\text{(ii)} &\Leftrightarrow a=b+kn \text{ for some $k \in \mathbb{Z}$} && \\
+&\Leftrightarrow a-b=kn \text{ for some $k \in \mathbb{Z}$} && \text{rearranging} \\
+&\Leftrightarrow n \mid a-b && \text{by definition of divisibility} \\
+&\Leftrightarrow a \equiv b \bmod n && \text{by definition of congruence} \\
+&\Leftrightarrow \text{(iii)} &&
+\end{align*}
+\end{itemize}
+\end{cproof}
+
+\begin{discussion}
+Where in the proof of \Cref{propModAsDivDiff} did we rely on the convention that the modulus $n$ is positive? Is the result still true if $n$ is negative?
+\end{discussion}
+
+We now prove that we can treat congruence like equality for the purposes of adding, subtracting and multiplying (but not dividing!) integers.
+
+\begin{theorem}[Modular arithmetic]\label{thmModularArithmetic}\index{modular arithmetic}
+Fix a modulus $n$, and let $a_1,a_2,b_1,b_2 \in \mathbb{Z}$ be such that
+\[ a_1 \equiv a_2 \bmod n \qquad \text{and} \qquad b_1 \equiv b_2 \bmod n \]
+Then the following congruences hold:
+\begin{enumerate}[(a)]
+\item $a_1+b_1 \equiv a_2+b_2 \bmod n$;
+\item $a_1b_1 \equiv a_2b_2 \bmod n$;
+\item $a_1-b_1 \equiv a_2-b_2 \bmod n$.
+\end{enumerate}
+\end{theorem}
+\begin{cproof} By \Cref{defCongruence} that $n \mid a_1-a_2$ and $n \mid b_1-b_2$, so there exist $q_1,q_2 \in \mathbb{Z}$ such that
+\[ a_1-a_2 = qn \qquad \text{and} \qquad b_1-b_2=rn \]
+This implies that
+\[ (a_1+b_1)-(a_2+b_2) = (a_1-a_2)+(b_1-b_2) = qn+rn = (q+r)n \]
+so $n \mid (a_1+b_1)-(a_2+b_2)$. This proves (a).
+
+The algebra for (b) is slightly more involved:
+\begin{align*}
+a_1b_1-a_2b_2 &= (qn+a_2)(rn+b_2) - a_2b_2 \\
+&= qrn^2 + a_2rn + b_2qn + a_2b_2 - a_2b_2 \\
+&= qrn^2 + a_2rn + b_2qn \\
+&= (qrn + a_2r + b_2q)n
+\end{align*}
+This shows that $n \mid a_1b_1 - a_2b_2$, thus proving (b).
+
+Now (a) and (b) together imply (c). Indeed, we know that $-1 \equiv -1 \bmod n$ and $b_1 \equiv b_2 \bmod n$, so by (b) we have $-b_1 \equiv -b_2 \bmod n$. We also know that $a_1 \equiv a_2 \bmod n$, and hence $a_1-b_1 \equiv a_2-b_2 \bmod n$ by (a).
+\end{cproof}
+
+\Cref{thmModularArithmetic} allows us to perform algebraic manipulations with congruences as if they were equations, provided all we're doing is adding, multiplying and subtracting.
+
+\begin{example}
+We will solve the congruence $3x-5 \equiv 2x+3 \bmod 7$ for $x$:
+\begin{align*}
+& 3x-5 \equiv 2x+3 \bmod 7 && && \\
+\Leftrightarrow\quad & x-5 \equiv 3 \bmod 7 && \text{$(\Rightarrow)$ subtract $2x$} && \text{$(\Leftarrow)$ add $2x$} \\
+\Leftrightarrow\quad & x \equiv 8 \bmod 7 && \text{($\Rightarrow$) add $5$} && \text{($\Leftarrow$) subtract $5$} \\
+\Leftrightarrow\quad & x \equiv 1 \bmod 7 && \text{since $8 \equiv 1 \bmod 7$} &&
+\end{align*}
+So the integers $x$ for which $3x-5$ and $2x+3$ leave the same remainder when divided by $7$, are precisely the integers $x$ which leave a remainder of $1$ when divided by $7$:
+\[ 3x-5 \equiv 2x+3 \bmod 7 \qquad \Leftrightarrow \qquad x = 7q+1 \text{ for some } q \in \mathbb{Z} \]
+\end{example}
+
+\begin{exercise}
+For which integers $x$ does the congruence $5x+1 \equiv x+8 \bmod 3$ hold? Characterise such integers $x$ in terms of their remainder when divided by $3$.
+\end{exercise}
+
+So far this all feels like we haven't done very much: we've just introduced a new symbol $\equiv$ which behaves just like equality\dots but does it really? The following exercises should expose some more ways in which congruence \textit{does} behave like equality, and some in which it \textit{doesn't}.
+
+\begin{exercise}
+Fix a modulus $n$. Is it true that
+\[ a \equiv b \bmod n \quad \Rightarrow \quad a^k \equiv b^k \bmod n \] for all $a,b \in \mathbb{Z}$ and $k \in \mathbb{N}$? If so, prove it; if not, provide a counterexample.
+\end{exercise}
+
+\begin{exercise}
+Fix a modulus $n$. Is it true that
+\[ k \equiv \ell \bmod n \quad \Rightarrow \quad a^k \equiv a^{\ell} \bmod n \]
+for all $k,\ell \in \mathbb{N}$ and $a \in \mathbb{Z}$? If so, prove it; if not, provide a counterexample.
+\end{exercise}
+
+\begin{exercise}
+Fix a modulus $n$. Is it true that
+\[ qa \equiv qb \bmod n \quad \Rightarrow \quad a \equiv b \bmod n \]
+for all $a,b,q \in \mathbb{Z}$ with $q \not \equiv 0 \bmod n$? If so, prove it; if not, provide a counterexample.
+\end{exercise}
+
+\begin{example}
+Now that we have seen several things that we \textit{can} do with modular arithmetic, let's look at some things that we \textit{cannot} do:
+\begin{itemize}
+\item We cannot talk about fractions in modular arithmetic; for instance, it is invalid to say $2x \equiv 1 \bmod 5$ implies $x \equiv \frac{1}{2} \bmod 5$.
+\item We cannot take square roots in modular arithmetic; for instance, it is invalid to say $x^2 \equiv 3 \bmod 4$ implies $x \equiv \pm \sqrt{3} \bmod 4$. In fact, it is invalid to say $x^2 \equiv 1 \bmod 8$ implies $x \equiv \pm 1 \bmod 8$, since for example $3^2 \equiv 1 \bmod 8$ but $3 \not\equiv \pm 1 \bmod 8$.
+\item We cannot replace numbers in exponents by other numbers they are congruent to; for instance, it is invalid to say $x^3 \equiv 2^3 \bmod 4$ implies $x \equiv 2 \bmod 4$.
+\end{itemize}
+\end{example}
+
+\subsection*{Multiplicative inverses}
+
+We made a big deal about the fact that fractions don't make sense in modular arithmetic. That is, it is invalid to say
+\[ 2x \equiv 1 \bmod 5 \quad \Rightarrow \quad x \equiv \frac{1}{2} \bmod 5 \]
+Despite this, we can still make sense of `division', provided we change what we mean when we say `division'. Indeed, the congruence $2x \equiv 1 \bmod 5$ has a solution:
+\begin{align*}
+& 2x \equiv 1 \bmod 5 && && \\
+\Leftrightarrow\quad & 6x \equiv 3 \bmod 5 && \text{($\Rightarrow$) multiply by $3$} && \text{($\Leftarrow$) subtract $3$} \\
+\Leftrightarrow\quad & x \equiv 3 \bmod 5 && \text{since $6 \equiv 1 \bmod 5$}
+\end{align*}
+Here we didn't divide by $2$, but we still managed to cancel the $2$ by instead multiplying through by $3$. For the purposes of solving the equation this had the same effect as division by $2$ would have had if we were allowed to divide. The key here was that $2 \times 3 \equiv 1 \bmod 5$.
+
+\begin{definition}\label{multiplicative inverse}
+Fix a modulus $n$. Given $a \in \mathbb{Z}$, a \textbf{multiplicative inverse} for $a$ modulo $n$ is an integer $u$ such that $au \equiv 1 \bmod n$.
+\end{definition}
+
+\begin{example}
+Some examples of multiplicative inverses are as follows:
+\begin{itemize}
+\item $2$ is a multiplicative inverse of itself modulo $3$, since $2 \times 2 \equiv 4 \equiv 1 \bmod 3$.
+\item $2$ is a multiplicative inverse of $3$ modulo $5$, since $2 \times 3 \equiv 6 \equiv 1 \bmod 5$.
+\item $7$ is also a multiplicative inverse of $3$ modulo $5$, since $3 \times 7 \equiv 21 \equiv 1 \bmod 5$.
+\item $3$ has no multiplicative inverse modulo $6$. Indeed, suppose $u \in \mathbb{Z}$ with $3u \equiv 1 \bmod 6$. Then $6 \mid 3u-1$, so $3u-1 = 6q$ for some $q \in \mathbb{Z}$. But then
+\[ 1 = 3u-6q = 3(u-2q) \]
+which implies that $3 \mid 1$, which is nonsense.
+\end{itemize}
+\end{example}
+
+Knowing when multiplicative inverses exist is very important for solving congruences: if $u$ is a multiplicative inverse for $a$ modulo $n$, then we can solve equations of the form $ax \equiv b \bmod n$ extremely easily:
+\[ ax \equiv b \bmod n \quad \Rightarrow \quad x \equiv ub \bmod n \]
+
+\begin{exercise}
+For $n=7,8,9,10,11,12$, either find a multiplicative inverse for $6$ modulo $n$, or show that no multiplicative inverse exists. Can you spot a pattern?
+\end{exercise}
+
+Some authors write $a^{-1}$ to denote multiplicative inverses. We refrain from this, since it suggests that multiplicative inverses are unique---but they're not, as you'll see in the following exercise.
+
+\begin{exercise}
+Let $n$ be a modulus and let $a \in \mathbb{Z}$. Suppose that $u$ is a multiplicative inverse for $a$ modulo $n$. Prove that, for all $k \in \mathbb{Z}$, $u+kn$ is a multiplicative inverse for $a$ modulo $n$.
+\end{exercise}
+
+\begin{proposition} \label{propMultInvExistence}
+Let $a \in \mathbb{Z}$ and let $n$ be a modulus. Then $a$ has a multiplicative inverse modulo $n$ if and only if $a \perp n$.
+\end{proposition}
+\begin{cproof}
+Note that $a$ has a multiplicative inverse $u$ modulo $n$ if and only if there is a solution $(u,v)$ to the equation $au+nv=1$. Indeed, $au \equiv 1 \bmod n$ if and only if $n \mid au-1$, which occurs if and only if there is some $q \in \mathbb{Z}$ such that $au-1=nq$. Setting $q=-v$ and rearranging yields the desired equivalence.
+
+By B\'{e}zout's lemma (\Cref{thmBezout}), such a solution $(u,v)$ exists if and only if $\mathrm{gcd}(a,n) \mid 1$. This occurs if and only if $\mathrm{gcd}(a,n) = 1$, i.e.\ if and only if $a \perp n$.
+\end{cproof}
+
+\begin{prooftip}
+To solve a congruence of the form $ax \equiv b \bmod n$ when $a \perp n$, first find a multiplicative inverse $u$ for $a$ modulo $n$, and then simply multiply through by $u$ to obtain $x \equiv ub \bmod n$.
+\end{prooftip}
+
+\begin{corollary}
+Let $a,p \in \mathbb{Z}$, where $p$ is a positive prime. If $p \nmid a$ then $a$ has a multiplicative inverse modulo $p$.
+\end{corollary}
+\begin{cproof}
+Suppose $p \nmid a$, and let $d = \mathrm{gcd}(a,p)$. Since $d \mid p$ and $p$ is prime we have $d=1$ or $d=p$. Since $d \mid a$ and $p \nmid a$ we can't have $d=p$; therefore $d=1$. By \Cref{propMultInvExistence}, $a$ has a multiplicative inverse modulo $p$.
+\end{cproof}
+
+\begin{example}
+$11$ is prime, so each of the integers $a$ with $1 \le a \le 10$ should have a multiplicative inverse modulo $11$. And indeed, the following are all congruent to $1$ modulo $11$:
+\[ \begin{matrix}
+1 \times 1 = 1 & 2 \times 6 = 12 & 3 \times 4 = 12 & 4 \times 3 = 12 & 5 \times 9 = 45 \\ 6 \times 2 = 12 & 7 \times 8 = 56 & 8 \times 7 = 56 & 9 \times 5 = 45 & 10 \times 10 = 100
+\end{matrix} \]
+\end{example}
+
+\begin{exercise}
+Find all integers $x$ such that $25x-4 \equiv 4x+3 \bmod 13$.
+\end{exercise}
+
+\subsection*{Orders and totients}
+
+For any modulus $n$, there are only finitely many possible remainders modulo $n$. A nice consequence of this finiteness is that, when $a \perp n$, we can choose some power of $a$ to be its multiplicative inverse, as proved in the following exercise.
+
+\begin{exercise}
+\label{exPowerModN}
+Let $n$ be a modulus and let $a \in \mathbb{Z}$ with $a \perp n$. Prove that there exists $k \ge 1$ such that $a^k \equiv 1 \bmod n$.
+\begin{backhint}
+\hintref{exPowerModN}
+Consider the list $a^0, a^1, a^2, \dots$. Since there are only finitely many remainders modulo $n$, we must have $a^i \equiv a^j \bmod n$ for some $0 \le i < j$.
+\end{backhint}
+\end{exercise}
+
+\Cref{exPowerModN}, together with the well-ordering principle, justify the following definition.
+
+\begin{definition}
+\label{defOrderModularArithmetic}
+Let $n$ be a modulus and let $a \in \mathbb{Z}$ with $a \perp n$. The \textbf{order} of $a$ modulo $n$ is the least $k \ge 1$ such that $a^k \equiv 1 \bmod n$.
+\end{definition}
+
+Note that this definition makes sense by \Cref{exPowerModN} and the well-ordering principle.
+
+\begin{example}
+The powers of $7$ modulo $100$ are:
+\begin{itemize}
+\item $7^1 = 7$, so $7^1 \equiv 7 \bmod 100$;
+\item $7^2 = 49$, so $7^2 \equiv 49 \bmod 100$;
+\item $7^3 = 343$, so $7^3 \equiv 43 \bmod 100$;
+\item $7^4 = 2401$, so $7^4 \equiv 1 \bmod 100$.
+\end{itemize}
+Hence the order of $7$ modulo $100$ is $4$, and $7^3$ and $43$ are multiplicative inverses of $7$ modulo $100$.
+\end{example}
+
+Our focus turns to computing specific values of $k$ such that $a^k \equiv 1 \bmod n$, whenever $a \in \mathbb{Z}$ and $a \perp n$. We first focus on the case when $n$ is prime; then we develop the machinery of \textit{totients} to study the case when $n$ is not prime.
+
+\begin{lemma} \label{lemBinomPrimeExponent}
+Let $a,b \in \mathbb{Z}$ and let $p \in \mathbb{Z}$ be a positive prime. Then $(a+b)^p \equiv a^p+b^p \bmod p$.
+\end{lemma}
+\begin{cproof}
+By the binomial theorem (\Cref{thmBinomialTheorem}), we have
+\[ (a+b)^p = \sum_{k=0}^p \binom{p}{k} a^kb^{p-k} \]
+By \Cref{exPrimeDivBinomCoeff}, $p \mid \binom{p}{k}$ for all $0 < k < p$, and hence $\binom{p}{k} a^k b^{p-k} \equiv 0 \bmod p$ for all $0 < k < p$. Thus
+\[ (a+b)^p \equiv \binom{p}{0}a^0b^{p-0} + \binom{p}{p}a^pb^{p-p} \equiv a^p+b^p \bmod p \]
+as desired.
+\end{cproof}
+
+\begin{theorem}[Fermat's little theorem] \label{thmFermatLittle} \index{Fermat's little theorem}
+Let $a,p \in \mathbb{Z}$ with $p$ a positive prime. Then $a^p \equiv a \bmod p$.
+\end{theorem}
+\begin{cproof}
+We may assume that $a \ge 0$, otherwise replace $a$ by its remainder modulo $p$.
+
+We will prove that $a^{p} \equiv a \bmod p$ by induction on $a$.
+\begin{itemize}
+\item (\textbf{BC}) Since $p > 0$ we have $0^p=0$, hence $0^p \equiv 0 \bmod p$.
+\item (\textbf{IS}) Fix $a \ge 0$ and suppose $a^p \equiv a \bmod p$. Then $(a+1)^p \equiv a^p+1^p \bmod p$ by \Cref{lemBinomPrimeExponent}. Now $a^p \equiv a \bmod p$ by the induction hypothesis, and $1^p = 1$, so we have $(a+1)^p \equiv a+1 \bmod p$.
+\end{itemize}
+By induction, we're done.
+\end{cproof}
+
+The following consequence of \Cref{thmFermatLittle} is often also referred to as `Fermat's little theorem', but is slightly less general since it requires an additional hypothesis. In keeping with the wider mathematical community, we will refer to both \Cref{thmFermatLittle} and \Cref{corFermatLittleAlt} as `Fermat's little theorem'.
+
+\begin{corollary}[Fermat's little theorem --- alternative version]
+\label{corFermatLittleAlt}
+Let $a,p \in \mathbb{Z}$ with $p$ a positive prime and $p \nmid a$. Then $a^{p-1} \equiv 1 \bmod p$.
+\end{corollary}
+\begin{cproof}
+Since $p \nmid a$, it follows that $a \perp p$. \Cref{thmFermatLittle} tells us that $a^p \equiv a \bmod p$. By \Cref{propMultInvExistence}, $a$ has a multiplicative inverse $b$ modulo $p$. Hence
+\[ a^{p}b \equiv ab \bmod p \]
+But $a^{p}b \equiv a^{p-1}ab \bmod p$, and $ab \equiv 1 \bmod p$, so we get
+\[ a^{p-1} \equiv 1 \bmod p \]
+as required.
+\end{cproof}
+
+\Cref{corFermatLittleAlt} can be useful for computing remainders of humongous numbers when divided by smaller primes.
+
+\begin{example}
+We compute the remainder of $2^{1000}$ when divided by $7$. Since $7 \nmid 2$, it follows from Fermat's little theorem (\Cref{corFermatLittleAlt}) that $2^6 \equiv 1 \bmod 7$. Now $1000 = 166 \times 6 + 4$, so
+\[ 2^{1000} \equiv 2^{166 \times 6 + 4} \equiv (2^6)^{166} \cdot 2^4 \equiv 2^4 \equiv 16 \equiv 2 \bmod 7 \]
+so the remainder of $2^{1000}$ when divided by $7$ is $2$.
+\end{example}
+
+\begin{exercise}
+\label{RemainderOfThreeExpBigRemThirteen}
+Find the remainder of $3^{244886}$ when divided by $13$.
+\begin{backhint}
+\hintref{RemainderOfThreeExpBigRemThirteen}
+First find the remainder of $244886$ when divided by $12$.
+\end{backhint}
+\end{exercise}
+
+Unfortunately, the hypothesis that $p$ is prime in Fermat's little theorem cannot be disposed of. For example, $6$ is not prime, and $5^{6-1} = 5^5 = 3125 = 520 \times 6 + 5$, so $5^5 \equiv 5 \bmod 6$. Our next order of business is to generalise \Cref{corFermatLittleAlt} by removing the requirement that the modulus $p$ be prime, and replacing $p-1$ by the \textit{totient} of the modulus.
+
+\begin{definition}
+\label{defTotient}
+\index{totient}
+Let $n \in \mathbb{Z}$. The \textbf{totient}\index{totient} of $n$ is the natural number $\varphi(n)$\nindex{totient}{$\varphi(n)$}{totient} \inlatex{varphi(n)}\lindexmmc{varphi}{$\varphi$} defined by
+\[ \varphi(n) = | \{ k \in [ |n| ] \mid k \perp n \}| \]
+That is, $\varphi(n)$ is the number of integers from $1$ up to $|n|$ which are coprime to $n$. The function $\varphi : \mathbb{Z} \to \mathbb{N}$ is called \textbf{Euler's totient function}.
+\end{definition}
+
+\begin{example}
+\label{exComputationsOfTotients}
+Here are some examples of totients:
+\begin{itemize}
+\item The elements of $[6]$ which are coprime to $6$ are $1$ and $5$, so $\varphi(6)=2$.
+\item If $p$ is a positive prime, then by \Cref{corCoprimeToPrimeIffNotDivisibleByPrime}, every element of $[p]$ is coprime to $p$ except for $p$ itself. Hence if $p$ is a positive prime then $\varphi(p)=p-1$. More generally, if $p$ is prime then $\varphi(p) = |p|-1$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+\label{exTotientMultiplyByPrime}
+Let $n \in \mathbb{Z}$ and let $p > 0$ be prime. Prove that if $p \mid n$, then $\varphi(pn) = p \cdot \varphi(n)$. Deduce that $\varphi(p^k) = p^k-p^{k-1}$ for all prime $p>0$ and all $k \ge 1$.
+\begin{backhint}
+\hintref{exTotientMultiplyByPrime}
+Find a bijection $[p] \times C_n \to C_{pn}$, where $C_n = \{ k \in [|n|] \mid k \perp n \}$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
+\end{backhint}
+\end{exercise}
+
+% \begin{exercise}
+% \label{exTotientOfProductOfTwoPrimes}
+% Let $p$ and $q$ be distinct positive primes. Prove that $\varphi(pq)=(p-1)(q-1)$.
+% \begin{backhint}
+% \hintref{exTotientOfProductOfTwoPrimes}
+% Start by proving that $k \in [pq]$ is \textit{not} coprime to $pq$ if and only if $p \mid k$ or $q \mid k$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
+% \end{backhint}
+% \end{exercise}
+
+\begin{exercise}
+Let $n \in \mathbb{Z}$ and let $p>0$ be prime. Prove that if $p \nmid n$, then $\varphi(pn)=(p-1)\varphi(n)$.
+\hintlabel{exTotientMultiplyByPrimeTwo}{%
+Start by proving that $k \in [pn]$ is \textit{not} coprime to $pn$ if and only if either $p \mid k$ or $k$ is not coprime to $n$. You will need to use the techniques of \Cref{secFiniteSets} in your proof.
+}
+\end{exercise}
+
+Together, \Cref{exTotientMultiplyByPrime,exTotientMultiplyByPrimeTwo} allow us to compute the totient of any integer with up to two primes in its prime factorisation.
+
+\begin{example}
+\label{exTotientOfOneHundred}
+We compute $\varphi(100)$. The prime factorisation of $100$ is $2^2 \times 5^2$. Applying \Cref{exTotientMultiplyByPrime} twice
+\[ \varphi(2^2 \times 5^2) = 2 \times 5 \times \varphi(2 \times 5) = 10\varphi(10) \]
+Finally, \Cref{exTotientMultiplyByPrimeTwo} tells us that
+\[ \varphi(10) = \varphi(2 \times 5) = 1 \times \varphi(5) = 1 \times 4 = 4 \]
+Hence $\varphi(100) = 40$.
+\end{example}
+
+\begin{exercise}
+Prove that $\varphi(100)=40$, this time using the inclusion--exclusion principle.
+\end{exercise}
+
+Euler's theorem uses totients to generalise Fermat's little theorem (\Cref{thmFermatLittle}) to arbitrary moduli, not just prime ones.
+
+\begin{theorem}[Euler's theorem]
+\label{thmEuler}
+\index{Euler's theorem}
+Let $n$ be a modulus and let $a \in \mathbb{Z}$ with $a \perp n$. Then
+\[ a^{\varphi(n)} \equiv 1 \bmod n \]
+\end{theorem}
+\begin{cproof}
+By definition of totient, the set $X$ defined by
+\[ X = \left\{ k \in \left[n\right] \mid k \perp n \right\} \]
+has $\varphi(n)$ elements. List the elements as
+\[ X = \{ x_1, x_2, \dots, x_{\varphi(n)} \} \]
+Note that $ax_i \perp n$ for all $i$, so let $y_i$ be the (unique) element of $X$ such that $ax_i \equiv y_i \bmod n$.
+
+Note that if $i \ne j$ then $y_i \ne y_j$. We prove this by contraposition; indeed, since $a \perp n$, by \Cref{propMultInvExistence}, $a$ has a multiplicative inverse, say $b$. Then
+\[ y_i \equiv y_j \bmod n\ \Rightarrow\ ax_i \equiv ax_j \bmod n\ \Rightarrow\ bax_i \equiv bax_j \bmod n\ \Rightarrow\ x_i \equiv x_j \bmod n \]
+and $x_i \equiv x_j \bmod n$ if and only if $i=j$. Thus
+\[ X = \{ x_1, x_2, \dots, x_{\varphi(n)} \} = \{ y_1, y_2, \dots, y_{\varphi(n)} \} \]
+
+This means that the product of the `$x_i$'s is equal to the product of the `$y_i$'s, and hence
+\begin{align*}
+& x_1 \cdot {\dots} \cdot x_{\varphi(n)} &&
+\\
+&\equiv y_1 \cdot {\dots} \cdot y_{\varphi(n)} \bmod n && \text{since $\{ x_1, \dots \} = \{ y_1, \dots \}$} \\
+&\equiv (ax_1) \cdot {\dots} \cdot (ax_{\varphi(n)}) \bmod n && \text{since $y_i \equiv ax_i \bmod n$}\\
+&\equiv a^{\varphi(n)} \cdot x_1 \cdot {\dots} \cdot x_{\varphi(n)} \bmod n && \text{rearranging}
+\end{align*}
+
+Since each $x_i$ is coprime to $n$, we can cancel the $x_i$ terms (by multiplying by their multiplicative inverses) to obtain
+\[ a^{\varphi(n)} \equiv 1 \bmod n \]
+as required.
+\end{cproof}
+
+\begin{example}
+Some examples of Euler's theorem in action are as follows:
+\begin{itemize}
+\item We have seen that $\varphi(6) = 2$, and we know that $5 \perp 6$. And, indeed,
+\[ 5^{\varphi(6)} = 5^2 = 25 = 4 \times 6 + 1 \]
+so $5^{\varphi(6)} \equiv 1 \bmod 6$.
+\item By \Cref{exTotientMultiplyByPrime}, we have
+\[ \varphi(121) = \varphi(11^2) = 11^2-11^1 = 121-11 = 110 \]
+Moreover, given $a \in \mathbb{Z}$, $a \perp 121$ if and only if $11 \nmid a$ by \Cref{corCoprimeToPrimeIffNotDivisibleByPrime}. Hence $a^{110} \equiv 1 \bmod{121}$ whenever $11 \nmid a$.
+\end{itemize}
+\end{example}
+
+\begin{exercise}
+Use Euler's theorem to prove that the last two digits of $3^{79}$ are `$67$'.
+\hintlabel{exLastTwoDigitsOfPower}{%
+Recall that $\varphi(100) = 40$---this was \Cref{exTotientOfOneHundred}.
+}
+\end{exercise}
+
+\begin{example}
+Let $n$ be a modulus and let $a \in \mathbb{Z}$ with $a \perp n$. Prove that the order of $a$ modulo $n$ divides $\varphi(n)$.
+\end{example}
+
+A formula for the totient of an arbitrary nonzero integer is proved in \Cref{thmTotientFormula}---its proof is an application of the Chinese remainder theorem \Cref{thmChineseRemainder}, and uses the techniques for counting finite sets discussed in \Cref{secCountingPrinciples}.
+
+\subsection*{Wilson's theorem}
+
+We conclude this chapter on number theory with \textit{Wilson's theorem}, which is a nice result that completely characterises prime numbers in the sense that we can tell when a number is prime by computing the remainder of $(n-1)!$ when divided by $n$.
+
+Let's test a few numbers first:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+$n$ & $(n-1)!$ & remainder \\ \hline
+$2$ & $1$ & $1$ \\
+$3$ & $2$ & $2$ \\
+$4$ & $6$ & $2$ \\
+$5$ & $24$ & $4$ \\
+$6$ & $120$ & $0$ \\ 
+$7$ & $720$ & $6$ \\
+$8$ & $5040$ & $0$
+\end{tabular}
+
+\begin{tabular}{c|c|c}
+$n$ & $(n-1)!$ & remainder \\ \hline
+$9$ & $40320$ & $0$ \\
+$10$ & $362880$ & $0$ \\
+$11$ & $3628800$ & $10$ \\
+$12$ & $39916800$ & $0$ \\
+$13$ & $479001600$ & $12$ \\
+$14$ & $6227020800$ & $0$ \\
+$15$ & $87178291200$ & $0$
+\end{tabular}
+\end{center}
+
+It's tempting to say that an integer $n>1$ is prime if and only if $n \nmid (n-1)!$, but this isn't true since it fails when $n=4$. But it's extremely close to being true.
+
+\begin{theorem}[Wilson's theorem] \label{thmWilson}
+Let $n>1$ be a modulus. Then $n$ is prime if and only if $(n-1)! \equiv -1 \bmod n$.
+\end{theorem}
+
+The following sequence of exercises will piece together into a proof of Wilson's theorem.
+
+\begin{exercise} \label{exCompositeDividesFactorial}
+Let $n \in \mathbb{Z}$ be composite. Prove that if $n>4$, then $n \mid (n-1)!$.
+\end{exercise}
+
+\begin{exercise} \label{exSquareCongruentToOneModPrimeUnit}
+Let $p$ be a positive prime and let $a \in \mathbb{Z}$. Prove that, if $a^2 \equiv 1 \bmod p$, then $a \equiv 1 \bmod p$ or $a \equiv {-1} \bmod p$. 
+\begin{backhint}
+\hintref{exSquareCongruentToOneModPrimeUnit}
+You need to use the fact that $p$ is prime at some point in your proof.
+\end{backhint}
+\end{exercise}
+
+\Cref{exSquareCongruentToOneModPrimeUnit} implies that the only elements of $[p-1]$ that are their own multiplicative inverses are $1$ and $p-1$; this morsel of information allows us to deduce result in the following exercise.
+
+\begin{exercise}
+\label{exPrimeFactorialCongruentToMinusOne}
+Let $p$ be a positive prime. Prove that $(p-1)! \equiv -1 \bmod p$.
+\begin{backhint}
+\hintref{exPrimeFactorialCongruentToMinusOne}
+Pair as many elements of $[p-1]$ as you can into multiplicative inverse pairs modulo $p$.
+\end{backhint}
+\end{exercise}
+
+\begin{cproof}[of Wilson's theorem (\Cref{thmWilson})]
+Let $n>1$ be a modulus.
+\begin{itemize} 
+\item If $n$ is prime, then $(n-1)! \equiv -1 \bmod n$ by \Cref{exPrimeFactorialCongruentToMinusOne}.
+\item If $n$ is composite, then either $n=4$ or $n>4$. If $n=4$ then
+\[ (n-1)! = 3! = 6 \equiv 2 \bmod 4 \]
+and so $(n-1)! \not\equiv -1 \bmod n$. If $n>4$, then
+\[ (n-1)! \equiv 0 \bmod n \]
+by \Cref{exCompositeDividesFactorial}.
+\end{itemize}
+Hence $(n-1)! \equiv -1 \bmod n$ if and only if $n$ is prime, as desired.
+\end{cproof}
+
+Since Wilson's theorem completely characterises the positive prime numbers, we could have defined `$n$ is prime', for $n > 1$, to mean that $(n-1)! \equiv -1 \bmod n$. We don't do this because, although this is an interesting result, it is not particularly useful in applications. We might even hope that Wilson's theorem gives us an easy way to test whether a number is prime, but unfortunately even this is a bust: computing the remainder $(n-1)!$ on division by $n$ is not particularly efficient.
+
+However, there are some nice applications of Wilson's theorem, which we will explore now.
+
+\begin{example}
+We'll compute the remainder of $3^{45} \cdot 44!$ when divided by $47$. Note that $3^{45} \cdot 44!$ is equal to a monstrous number with $76$ digits; I don't recommend doing the long division! Anyway\dots{}
+\begin{itemize} 
+\item $47$ is prime, so we can apply both Fermat's little theorem (\Cref{thmFermatLittle}) and Wilson's theorem (\Cref{thmWilson}).
+\item By Fermat's little theorem, we know that $3^{46} \equiv 1 \bmod 47$. Since $3 \cdot 16 = 48 \equiv 1 \bmod{47}$, we have
+\[ 3^{45} \equiv 3^{45} \cdot (3 \cdot 16) \equiv 3^{46} \cdot 16 \equiv 16 \bmod{47} \]
+\item By Wilson's theorem, we have $46! \equiv -1 \bmod 47$. Now
+\begin{itemize}
+\item $46 \equiv -1 \bmod{47}$, so $46$ is its own multiplicative inverse modulo $47$.
+\item The extended Euclidean algorithm yields $45 \cdot 23 \equiv 1 \bmod 47$.
+\end{itemize}
+So we have
+\[ 44! = 44! \cdot (45 \cdot 23) \cdot (46 \cdot 46) \equiv 46! \cdot 23 \cdot 46 \equiv (-1) \cdot 23 \cdot (-1) \equiv 23 \bmod{47} \]
+\end{itemize}
+Putting this information together yields
+\[ 3^{45} \cdot 44! \equiv 16 \cdot 23 = 368 \equiv 39 \bmod 47 \]
+So the remainder left when $3^{45} \cdot 44!$ is divided by $47$ is $39$.
+\end{example}
+
+\begin{exercise}
+Let $p$ be an odd positive prime. Prove that
+\[ \left[ \left( \frac{p-1}{2} \right)! \right]^2 \equiv (-1)^{\frac{p+1}{2}} \bmod p \]
+\end{exercise}
+
+\subsection*{Chinese remainder theorem}
+
+We introduce the Chinese remainder theorem with an example.
+
+\begin{example}
+We find all integer solutions $x$ to the system of congruences
+\[ x \equiv 2 \bmod 5 \quad \text{and} \quad x \equiv 4 \bmod 8 \]
+Note that $x \equiv 4 \bmod 8$ if and only if $x = 4+8k$ for some $k \in \mathbb{Z}$. Now, for all $k \in \mathbb{Z}$ we have
+\begin{align*}
+&x \equiv 2 \bmod 5 && \\
+&\Leftrightarrow 4+8k \equiv 2 \bmod 5 && \text{since } x=4+8k \\
+&\Leftrightarrow 8k \equiv -2 \bmod 5 && \text{subtracting $4$} \\
+&\Leftrightarrow 3k \equiv 3 \bmod 5 && \text{since $8 \equiv -2 \equiv 3 \bmod 5$} \\
+&\Leftrightarrow k \equiv 1 \bmod 5 && \text{multiplying by a multiplicative inverse for $3$ modulo $5$}
+\end{align*}
+So $4+8k \equiv 2 \bmod 5$ if and only if $k = 1 + 5\ell$ for some $\ell \in \mathbb{Z}$.
+
+Combining this, we see that $x$ satisfies both congruences if and only if
+\[ x = 4+8(1+5\ell) = 12+40\ell \]
+for some $\ell \in \mathbb{Z}$.
+
+Hence the integers $x$ for which both congruences are satisfied are precisely those integers $x$ such that $x \equiv 12 \bmod{40}$.
+\end{example}
+
+\begin{exercise}
+Find all integer solutions $x$ to the system of congruences:
+\[ \begin{cases}
+x \equiv {-1} \bmod 4 \\
+x \equiv 1 \bmod 9 \\
+x \equiv 5 \bmod{11}
+\end{cases} \]
+Express your solution in the form $x \equiv a \bmod n$ for suitable $n > 0$ and $0 \le a < n$.
+\end{exercise}
+
+\begin{exercise}
+\label{exCRTExistence}
+Let $m,n$ be coprime moduli and let $a,b \in \mathbb{Z}$. Let $u,v \in \mathbb{Z}$ be such that
+\[ mu \equiv 1 \bmod n \quad \text{and} \quad nv \equiv 1 \bmod m \]
+In terms of $a,b,m,n,u,v$, find an integer $x$ such that
+\[ x \equiv a \bmod m \quad \text{and} \quad x \equiv b \bmod n \]
+\end{exercise}
+
+\begin{exercise}
+\label{exCRTUniqueness}
+Let $m,n$ be coprime moduli and let $x,y \in \mathbb{Z}$. Prove that if $x \equiv y \bmod m$ and $x \equiv y \bmod n$, then $x \equiv y \bmod{mn}$.
+\end{exercise}
+
+\begin{theorem}[Chinese remainder theorem]
+\label{thmChineseRemainder}
+Let $m,n$ be moduli and let $a,b \in \mathbb{Z}$. If $m$ and $n$ are coprime, then there exists an integer solution $x$ to the simultaneous congruences
+\[ x \equiv a \bmod m \quad \text{and} \quad x \equiv b \bmod n \]
+Moreover, if $x,y \in \mathbb{Z}$ are two such solutions, then $x \equiv y \bmod{mn}$.
+\end{theorem}
+\begin{cproof}
+Existence of a solution $x$ is precisely the content of \Cref{exCRTExistence}.
+
+Now let $x,y \in \mathbb{Z}$ be two solutions to the two congruences. Then
+\[ \begin{cases} x \equiv a \bmod m \\ y \equiv a \bmod m \quad \Rightarrow \quad x \equiv y \bmod m \end{cases} \]
+\[ \begin{cases} x \equiv b \bmod n \\ y \equiv b \bmod n \quad \Rightarrow \quad x \equiv y \bmod n \end{cases} \]
+so by \Cref{exCRTUniqueness}, we have $x \equiv y \bmod{mn}$, as required.
+\end{cproof}
+
+We now generalise the Chinese remainder theorem to the case when the moduli $m,n$ are not assumed to be coprime. There are two ways we could make this generalisation: either we could reduce the more general version of the theorem to the version we proved in \Cref{thmChineseRemainder}, or we could prove the more general version from scratch. We opt for the latter approach, but you might want to consider what a `reductive' proof would look like.
+
+\begin{theorem}
+\label{thmCRTGeneral}
+Let $m,n$ be moduli and let $a,b \in \mathbb{Z}$. There exists an integer solution $x$ to the system of congruences
+\[ x \equiv a \bmod m \quad \text{and} \quad x \equiv b \bmod n \]
+if and only if $a \equiv b \bmod \mathrm{gcd}(m,n)$.
+
+Moreover, if $x,y \in \mathbb{Z}$ are two such solutions, then $x \equiv y \bmod{\mathrm{lcm}(m,n)}$
+\end{theorem}
+\begin{cproof}
+Let $d=\mathrm{gcd}(m,n)$, and write $m=m'd$ and $n=n'd$ for some $m',n' \in \mathbb{Z}$.
+
+We prove that an integer solution $x$ to the system of congruences exists if and only if $a \equiv b \bmod d$.
+
+\begin{itemize}
+\item ($\Rightarrow$) Suppose an integer solution $x$ to the system of congruences exists. Then there exist integers $k, \ell$ such that
+\[ x = a+mk = b+n\ell \]
+But $m=m'd$ and $n=n'd$, so we have $a+m'dk=b+n'd\ell$, and so
+\[ a-b = (n'\ell - m'k)d \]
+so that $a \equiv b \bmod d$, as required.
+
+\item ($\Leftarrow$) Suppose $a \equiv b \bmod d$, and let $t \in \mathbb{Z}$ be such that $a-b=td$. Let $u,v \in \mathbb{Z}$ be such that $mu+nv=d$---these exist by B\'{e}zout's lemma (\Cref{thmBezout}). Note also that, since $m=m'd$ and $n=n'd$, dividing through by $d$ yields $m'u+n'v=1$.
+
+Define
+\[ x = an'v+bm'u \]
+Now we have
+\begin{align*}
+x &= an'v + bm'u && \text{by definition of $x$} \\
+&= an'v + (a-td)m'u && \text{since $a-b=td$} \\
+&= a(m'u+n'v) - tdm'u && \text{rearranging} \\
+&= a - tdm'u && \text{since $m'u+n'v=1$} \\
+&= a - tum && \text{since $m=m'd$}
+\end{align*}
+so $x \equiv a \bmod m$. Likewise
+
+\begin{align*}
+x &= an'v+bm'u && \text{by definition of $x$} \\
+&= (b+td)n'v + bm'u && \text{since $a-b=td$} \\
+&= b(m'u+n'v) + tdn'v && \text{rearranging} \\
+&= b + tdn'v && \text{since $m'u+n'v=1$} \\
+&= b + tvn && \text{since $n=n'd$}
+\end{align*}
+so $x \equiv b \bmod n$.
+
+Hence $x = an'v+bm'u$ is a solution to the system of congruences.
+\end{itemize}
+
+We now prove that if $x,y$ are two integer solutions to the system of congruences, then they are congruent modulo $\mathrm{lcm}(a,b)$. First note that we must have
+\[ x \equiv y \bmod m \quad \text{and} \quad x \equiv y \bmod n \]
+so that $x=y+km$ and $x=y+\ell n$ for some $k,\ell \in \mathbb{Z}$. But then
+\[ x-y=km=\ell n \]
+Writing $m=m'd$ and $n=n'd$, we see that $km'd = \ell n'd$, so that $km' = \ell n'$. But $m',n'$ are coprime by \Cref{exDivByGCDIsCoprime}, and hence $m' \mid \ell$ by \Cref{propADividesBC}. Write $\ell = \ell'm'$ for some $\ell' \in \mathbb{Z}$. Then we have
+\[ x-y = \ell n = \ell' m' n \]
+and hence $x \equiv y \bmod m'n$. But $m'n = \mathrm{lcm}(m,n)$ by \Cref{exProductOfIntegersIsProductOfGCDAndLCM}.
+\end{cproof}
+
+This theorem is in fact \textit{constructive}, in that it provides an algorithm for finding all integer solutions $x$ to a system of congruences
+\[ x \equiv a \bmod m \quad \text{and} \quad x \equiv b \bmod n \]
+as follows:
+\begin{itemize}
+\item Use the Euclidean algorithm to compute $d=\mathrm{gcd}(m,n)$.
+\item If $d \nmid a-b$ then there are no solutions, so stop. If $d \mid a-b$, then proceed to the next step.
+\item Use the extended Euclidean algorithm to compute $u,v \in \mathbb{Z}$ such that $mu+nv=d$.
+\item The integer solutions $x$ to the system of congruences are precisely those of the form
+\[ x = \frac{anv + bmu + kmn}{d} \quad \text{for some } k \in \mathbb{Z} \]
+\end{itemize}
+
+\begin{exercise}
+\label{exCRTAlgorithm}
+Verify that the algorithm outlined above is correct. Use it to compute the solutions to the system of congruences
+\[ x \equiv 3 \bmod{12} \quad \text{and} \quad x \equiv 15 \bmod{20} \]
+\end{exercise}
+
+\begin{oexercise}
+\label{exGeneralisedCRT}
+Generalise the Chinese remainder theorem to systems of arbitrarily (finitely) many congruences. That is, given $r \in \mathbb{N}$, find precisely the conditions on moduli $n_1,n_2,\dots,n_r$ and integers $a_1,a_2,\dots,a_r$ such that an integer solution exists to the congruences
+\[ x \equiv a_1 \bmod{n_1}, \quad x \equiv a_2 \bmod{n_2}, \qquad \cdots \qquad x_r \equiv a_r \bmod{n_r} \]
+Find an explicit formula for such a value of $x$, and find a suitable modulus $n$ in terms of $n_1,n_2,\dots,n_r$ such that any two solutions to the system of congruences are congruent modulo $n$.
+\begin{backhint}
+\hintref{exGeneralisedCRT}
+This generalisation will be tricky! You may need to generalise the definitions and results about greatest common divisors and least common multiples that we have seen so far, including B\'{e}zout's lemma. You might want to try proving this first in the case that $n_i \perp n_j$ for all $i \ne j$.
+\end{backhint}
+\end{oexercise}
+
+\begin{exercise}
+\label{exGapsBetweenPrimesLarge}
+Prove that gaps between consecutive primes can be made arbitrarily large. That is, prove that for all $n \in \mathbb{N}$, there exists an integer $a$ such that the numbers
+\[ a,\ a+1,\ a+2,\ \dots,\ a+n \]
+are all composite.
+\begin{backhint}
+\hintref{exGapsBetweenPrimesLarge}
+Observe that if $a,k \in \mathbb{Z}$ and $k \mid a$, then $k \mid a+k$.
+\end{backhint}
+\end{exercise}
+
+\subsection*{Application: tests for divisibility}
+
+The language of modular arithmetic provides a practical setting for proving tests for divisibility using number bases. Number bases were introduced in \Cref{chGettingStarted}, and we gave a preliminary definition in \Cref{defBaseBExpansionPreliminary} of what a number base is. Our first job will be to justify why this definition makes sense at all---that is, we need to prove that every natural number \textit{has} a base-$b$ expansion, and moreover, that it only has one of them. \Cref{thmBaseBExpansion} says exactly this.
+
+\begin{theorem}
+\label{thmBaseBExpansion}
+Let $n \in \mathbb{N}$ and let $b \in \mathbb{N}$ with $b \ge 2$. Then there exist unique $r \in \mathbb{N}$ and $d_0, d_1, \dots, d_r \in \{ 0, 1, \dots, b-1 \}$ such that
+\[ n = \sum_{i=0}^r d_i b^i \]
+and such that $d_r \ne 0$, except $n=0$, in which case $r=0$ and $d_0=0$.
+\end{theorem}
+\begin{cproof}
+We proceed by strong induction on $n$.
+\begin{itemize}
+\item (\textbf{BC}) We imposed the requirement that if $n=0$ then $r=0$ and $d_0=0$; and this evidently satisfies the requirement that $n=\sum_{i=0}^r d_ib^i$.
+\item (\textbf{IS}) Fix $n \ge 0$ and suppose that the requirements of the theorem are satisfied for all the natural numbers up to and including $n$.
+
+By the division theorem (\Cref{thmDivisionTheorem}), there exist unique $u,v \in \mathbb{N}$ such that
+\[ n+1=ub+v \quad \text{and} \quad v \in \{ 0,1,\dots,b-1 \} \]
+Since $b \ge 2$, we have $u < n+1$, and so $u \le n$. It follows from the induction hypothesis that there exist unique $r \in \mathbb{N}$ and $d_1,\dots,d_r \in \{ 0,1,\dots,b-1 \}$ such that
+\[ u=\sum_{i=0}^r d_{i+1}b^i \]
+and $d_r \ne 0$. Writing $d_0=v$ yields
+\[ n = ub+v = \sum_{i=0}^r d_{i+1}b^{i+1} + d_0 = \sum_{i=0}^r d_ib^i \]
+Since $d_r \ne 0$, this proves existence.
+
+For uniqueness, suppose that there exists $s \in \mathbb{N}$ and $e_0,\dots,e_s \in \{ 0,1,\dots,b-1\}$ such that
+\[ n+1 = \sum_{j=0}^s e_jb^j \]
+and $e_s \ne 0$. Then
+\[ n+1 = \left( \sum_{j=1}^s e_jb^{j-1} \right) b + e_0 \]
+so by the division theorem we have $e_0=d_0=v$. Hence
+\[ u = \frac{n+1-v}{b} = \sum_{j=1}^s e_jb^{j-1} = \sum_{i=1}^r d_ib^{j-1} \]
+so by the induction hypothesis, it follows that $r=s$ and $d_i=e_i$ for all $1 \le i \le r$. This proves uniqueness.
+\end{itemize}
+By induction, we're done.
+\end{cproof}
+
+We now re-state the definition of base-$b$ expansion, confident in the knowledge that this definition makes sense.
+
+\begin{definition}
+\label{defBaseBExpansion}
+\index{base-$b$ expansion}
+\index{binary expansion}
+\index{decimal expansion}
+Let $n \in \mathbb{N}$. The \textbf{base-$b$ expansion} of $n$ is the unique string $d_r d_{r-1} \dots d_0$ such that the conditions in \Cref{thmBaseBExpansion} are satisfied. The base-$2$ expansion is also known as the \textbf{binary expansion}, and the base-$10$ expansion is called the \textbf{decimal expansion}.
+\end{definition}
+
+\begin{example}
+Let $n \in \mathbb{N}$. Then $n$ is divisible by $3$ if and only if the sum of the digits in the decimal expansion of $n$ is divisible by $3$. Likewise, $n$ is divisible by $9$ if and only if the sum of the digits in the decimal expansion $n$ is divisible by $9$.
+
+We prove this for divisibility by $3$. Let
+\[ n = d_r d_{r-1} \cdots d_1 d_0 \]
+be the decimal expansion of $n$, and let $s = \sum_{i=0}^r d_i$ be the sum of the digits of $n$.
+
+Then we have
+\begin{align*}
+n &\equiv \sum_{i=0}^r d_i 10^i \bmod 3 && \text{since $n=\sum_i d_i 10^i$} \\
+&\equiv \sum_{i=0}^r d_i 1^i \bmod 3 && \text{since $10 \equiv 1 \bmod 3$} \\
+&\equiv \sum_{i=0}^r d_i && \text{since $1^i=1$ for all $i$} \\
+&\equiv s && \text{by definition of $s$}
+\end{align*}
+Since $n \equiv s \bmod 3$, it follows that $n$ is divisible by $3$ if and only if $s$ is divisible by $3$.
+\end{example}
+
+\begin{exercise}
+Let $n \in \mathbb{N}$. Prove that $n$ is divisible by $5$ if and only if the final digit in the decimal expansion of $n$ is $5$ or $0$.
+
+More generally, fix $k \ge 1$ and let $m$ be the number whose decimal expansion is given by the last $k$ digits of that of $n$. Prove that $n$ is divisible by $5^k$ if and only if $m$ is divisible by $5^k$. For example, we have
+\[ 125 \mid 9\;550\;828\;230\;495\;875 \quad \Leftrightarrow \quad 125 \mid 875 \]
+\end{exercise}
+
+\begin{exercise}
+Let $n \in \mathbb{N}$. Prove that $n$ is divisible by $11$ if and only if the \textit{alternating sum} of the digits of $n$ is divisible by $11$. That is, prove that if the decimal expansion of $n$ is $d_rd_{r-2} \cdots d_0$, then
+\[ 11 \mid n \quad \Leftrightarrow \quad 11 \mid d_0 - d_1 + d_2 - \cdots + (-1)^rd_r \]
+\end{exercise}
+
+\begin{exercise}
+Let $n \in \mathbb{N}$. Find a method for testing if $n$ is divisible by $7$ based on the decimal expansion of $n$.
+\end{exercise}
+
+\subsection*{Application: public-key cryptography}
+
+Public-key cryptography is a method of encryption and decryption that works according to the following principles:
+\begin{itemize}
+\item Encryption is done using a \textit{public key} that is available to anyone.
+\item Decryption is done using a \textit{private key} that is only known to the recipient.
+\item Knowledge of the private key should be extremely difficult to derive from knowledge of the public key.
+\end{itemize}
+
+Specifically, suppose that Alice wants to securely send Bob a message. As the recipient of the message, Bob has a public key and a private key. So:
+\begin{itemize}
+\item Bob sends the \textit{public key} to Alice.
+\item Alice uses the public key to encrypt the message.
+\item Alice sends the encrypted message, which is visible (but encrypted) to anyone who intercepts it.
+\item Bob keeps the private key secret, and uses it upon receipt of the message to decrypt the message.
+\end{itemize}
+Notice that, since the public key can only be used to \textit{encrypt} messages, a hacker has no useful information upon intercepting the message or the public key.
+
+\textbf{RSA encryption}\index{RSA encryption} is an algorithm which provides one means of doing public-key cryptography using the theory of modular arithmetic. It works as follows.
+\begin{enumerate}[leftmargin={37.5pt}, label={\textbf{Step \arabic*.}}]
+\item Let $p$ and $q$ be distinct positive prime numbers, and let $n = pq$. Then $\varphi(n) = (p-1)(q-1)$.
+\item Choose $e \in \mathbb{Z}$ such that $1 < e < \varphi(n)$ and $e \perp \varphi(n)$. The pair $(n,e)$ is called the \textbf{public key}.
+\item Choose $d \in \mathbb{Z}$ such that $de \equiv 1 \bmod \varphi(n)$. The pair $(n,d)$ is called the \textbf{private key}.
+\item To encrypt a message $M$ (which is encoded as an integer), compute $K \in [n]$ such that $K \equiv M^e \bmod n$. Then $K$ is the encrypted message.
+\item The original message $M$ can be recovered since $M \equiv K^d \bmod n$.
+\end{enumerate}
+Computing the private key $(n,d)$ from the knowledge of $(n,e)$ would allow a hacker to decrypt an encrypted message. However, doing so is typically very difficult when the prime factors of $n$ are large. So if we choose $p$ and $q$ to be very large primes---which we can do without much hassle at all---then it becomes computationally infeasible for a hacker to compute the private key.
+
+\textbf{Example.} Suppose I want to encrypt the message $M$, which I have encoded as the integer $32$. Let $p=13$ and $q=17$. Then $n=221$ and $\varphi(n)=192$. Let $e = 7$, and note that $7 \perp 192$. Now $7 \times 55 \equiv 1 \bmod{192}$, so we can define $d=55$.
+\begin{itemize}
+\item The public key is $(221,7)$, which Bob sends to Alice. Now Alice can encrypt the message:
+\[ 32^7 \equiv 59 \bmod 221 \]
+Alice then sends Bob the encrypted message $59$.
+\item The private key is $(221, 55)$, so Bob can decrypt the message:
+\[ 59^{55} \equiv 32 \bmod 221 \]
+so Bob has received Alice's message $32$.
+\end{itemize}
+
+\begin{exercise}
+Prove that the RSA algorithm is correct. Specifically, prove:
+\begin{enumerate}[(a)]
+\item If $n=pq$, for distinct positive primes $p$ and $q$, then $\varphi(n) = (p-1)(q-1)$;
+\item Given $1<e<\varphi(n)$ with $e \perp \varphi(n)$, there exists $d \in \mathbb{Z}$ with $de \equiv 1 \bmod \varphi(n)$.
+\item Given $M,K \in \mathbb{Z}$ with $K \equiv M^e \bmod n$, it is indeed the case that $K^d \equiv M \bmod n$.
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Application: Euler's totient function}
+
+We now derive a formula for computing the totient of an arbitrary integer using the tools from \Cref{secCountingPrinciples}---in particular, if you chose to read this section \textit{before} learning about the multiplication principle, you should skip over this material.
+
+\begin{theorem}[Multiplicativity of Euler's totient function]
+\label{thmTotientIsMultiplicative}
+Let $m,n \in \mathbb{Z}$ and let $\varphi : \mathbb{Z} \to \mathbb{N}$ be Euler's totient function (see \Cref{defTotient}). If $m$ and $n$ are coprime, then $\varphi(mn) = \varphi(m)\varphi(n)$.
+\end{theorem}
+\begin{cproof}
+Since $\varphi(-k)=\varphi(k)$ for all $k \in \mathbb{Z}$, we may assume that $m \ge 0$ and $n \ge 0$. Moreover, if $m=0$ or $n=0$, then $\varphi(m)\varphi(n)=0$ and $\varphi(mn)=0$, so the result is immediate. Hence we may assume that $m>0$ and $n>0$.
+
+Given $k \in \mathbb{Z}$, define
+\[ C_k = \{ a \in [k] \mid a \perp k \} \]
+By definition of Euler's totient function, we thus have $|C_k| = \varphi(k)$ for all $k \in \mathbb{Z}$. We will define a bijection
+\[ f : C_m \times C_n \to C_{mn} \]
+using the Chinese remainder theorem (\Cref{thmChineseRemainder}).
+
+Given $a \in C_m$ and $b \in C_n$, let $f(a, b)$ be the element $x \in [mn]$ such that
+\[ \begin{cases} x \equiv a \bmod m \\ x \equiv b \bmod n \end{cases} \]
+\begin{itemize}
+\item \textbf{$f$ is well-defined.} We check the properties of totality, existence and uniqueness.
+\begin{itemize}
+\item \textbf{Totality.} We have accounted for all the elements of $C_m \times C_n$ in our specification of $f$.
+\item \textbf{Existence.} By the Chinese remainder theorem, there exists $x \in \mathbb{Z}$ such that $x \equiv a \bmod m$ and $x \equiv b \bmod n$. By adding an appropriate integer multiple of $mn$ to $x$, we may additionally require $x \in [mn]$. It remains to check that $x \perp mn$.
+
+So let $d=\mathrm{gcd}(x,mn)$. If $d>1$, then there is a positive prime $p$ such that $p \mid x$ and $p \mid mn$. But then $p \mid m$ or $p \mid n$, meaning that either $p \mid \mathrm{gcd}(x,m)$ or $p \mid \mathrm{gcd}(x,n)$. But $x \equiv a \bmod m$, so $\mathrm{gcd}(x,m) = \mathrm{gcd}(a,m)$; and likewise $\mathrm{gcd}(x,n) = \mathrm{gcd}(b,n)$. So this contradicts the assumption that $a \perp m$ and $b \perp n$. Hence $x \perp mn$ after all.
+\item \textbf{Uniqueness.} Suppose $x,y \in C_{mn}$ both satisfy the two congruences in question. By the Chinese remainder theorem, we have $x \equiv y \bmod mn$, and hence $x=y+kmn$ for some $k \in \mathbb{Z}$. Since $x,y \in [mn]$, we have
+\[ |k|mn = |kmn| = |x-y| \le mn-1 < mn \]
+This implies $|k| < 1$, so that $k=0$ and $x=y$.
+\end{itemize}
+so $f$ is well-defined.
+\item \textbf{$f$ is injective.} Let $a,a' \in C_m$ and $b,b' \in C_n$, and suppose that $f(a,b)=f(a',b')$. Then there is an element $x \in C_{mn}$ such that
+\[ \begin{cases} x \equiv a \bmod m \\ x \equiv a' \bmod m \\ x \equiv b \bmod n \\ x \equiv b' \bmod n \end{cases} \]
+Hence $a \equiv a' \bmod m$ and $b \equiv b' \bmod n$. Since $a,a' \in [m]$ and $b,b' \in [n]$, we must have $a=a'$ and $b=b'$.
+
+\item \textbf{$f$ is surjective.} Let $x \in C_{mn}$. Let $a \in [m]$ and $b \in [n]$ be the (unique) elements such that $x \equiv a \bmod m$ and $x \equiv b \bmod n$, respectively. If $a \in C_m$ and $b \in C_n$, then we'll have $f(a,b)=x$ by construction, so it remains to check that $a \perp m$ and $b \perp n$.
+
+Suppose $d \in \mathbb{Z}$ with $d \mid a$ and $d \mid m$. We prove that $d=1$. Since $x \equiv a \bmod m$, we have $d \mid x$ by \Cref{thmGCDSubtractMultiple}. Since $m \mid mn$, we have $d \mid mn$. By definition of greatest common divisors, it follows that $d \mid \mathrm{gcd}(x,mn)$. But $\mathrm{gcd}(x,mn)=1$, so that $d$ is a unit, and so $a \perp m$ as required.
+
+The proof that $b \perp n$ is similar.
+\end{itemize}
+It was a lot of work to check that it worked, but we have defined a bijection $f : C_m \times C_n \to C_{mn}$. By the multiplication principle, we have
+\[ \varphi(m) \varphi(n) = |C_m| \cdot |C_n| = |C_m \times C_n| = |C_{mn}| = \varphi(mn) \]
+as required.
+\end{cproof}
+
+It turns out that \Cref{thmTotientIsMultiplicative} and \Cref{exTotientMultiplyByPrime} are precisely the ingredients we need to find a general formula for the totient of a nonzero integer.
+
+\begin{restatable}[Formula for Euler's totient function]{theorem}{rthmTotientFormula}
+\label{thmTotientFormula}
+Let $n$ be a nonzero integer. Then
+\[ \varphi(n) = |n| \cdot \prod_{p \mid n} \left( 1 - \frac{1}{p} \right) \]
+where the product is indexed over positive primes $p$ dividing $n$
+\end{restatable}
+\begin{cproof}
+Since $\varphi(n) = \varphi(-n)$ for all $n \in \mathbb{Z}$, we may assume that $n>0$. Moreover
+\[ \varphi(1) = 1 = 1 \cdot \prod_{p \mid 1} \left( 1 - \frac{1}{p} \right) \]
+Note that the product here is empty, and hence equal to $1$, since there are no positive primes $p$ which divide $1$. So now suppose $n>1$.
+
+Using the fundamental theorem of arithmetic (\Cref{thmFTA}), we can write
+\[ n = p_1^{k_1}p_2^{k_2} \cdots p_r^{k_r} \]
+for primes $0<p_1<p_2<\cdots<p_r$ and natural numbers $k_1,k_2,\dots,k_r \ge 1$.
+
+By repeated application of \Cref{thmTotientIsMultiplicative}, we have
+\[ \varphi(n) = \prod_{i=1}^r \varphi(p_i^{k_i}) \]
+By \Cref{exTotientMultiplyByPrime}, we have
+\[ \varphi(p_i^{k_i}) = p_i^{k_i}-p_i^{k_i-1} = p_i^{k_i} \left( 1-\frac{1}{p_i} \right) \]
+Combining these two results, it follows that
+\[ \varphi(n) = \prod_{i=1}^r p_i^{k_i} \left( 1 - \frac{1}{p_i} \right) = \left(\prod_{i=1}^r p_i^{k_i} \right) \left( \prod_{i=1}^r \left( 1 - \frac{1}{p_i} \right) \right) = n \cdot \prod_{i=1}^r \left( 1 - \frac{1}{p_i} \right) \]
+which is as required.
+\end{cproof}

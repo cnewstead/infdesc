@@ -1,48 +1,35 @@
 % !TeX root = ../../book.tex
 Being able to type up your mathematical writing is a beneficial skill to have, and is one that is expected of anyone working in a mathematical field. Unfortunately, most Office-style {\small WYSIWYG} (`what you see is what you get') text editors are not designed for this task---it becomes quickly cumbersome to deal with complicated mathematical notation, and fast alternations between notation and prose.
 
-\LaTeX{} is a markup language that allows you to input both text and mathematical notation, inputting all mathematical notation, text formatting and document structure as code. What follows is a brisk introduction to \LaTeX{}, that should suffice for the purposes of this book.
+\LaTeX{} is a markup language that allows you to input both regular text and mathematical notation, using code to input all symbols and configure the document's formatting and structure. What follows is a brisk introduction to \LaTeX{}, that should suffice for the purposes of this book.
 
-The word \LaTeX{} is pronounced like `\textsc{lay}-tek' or `\textsc{lah}-tek', with a hard `k' sound---the `X' is meant to resemble the Greek letter \textit{chi} ($\chi$), so is pronounced by some people as such. It doesn't really matter how you say it, but do be warned that if you pronounce it like `\textsc{lay}-teks' then people will think you're talking about something somewhat different.
+The word \LaTeX{} is pronounced like `\textsc{lay}-tek' or `\textsc{lah}-tek', with a hard or soft `k' sound---the `X' is meant to resemble the Greek letter \textit{chi} ($\chi$), so is pronounced by some people as such. It doesn't really matter how you say it, but do be warned that if you pronounce it like `\textsc{lay}-teks' then people will think you're talking about something somewhat different.
 
 \subsection*{Finding the software}
 
-You can use \LaTeX{} by installing it on your computer, or by using a web-based editor. There are advantages and disadvantages to both.
+You can use \LaTeX{} by installing it on your computer, or by using a web-based editor on an internet browser. There are advantages and disadvantages to both.
 
 \begin{itemize}
 \item On a web-based editor, everything is set up and ready to go, but you have less control over how everything compiles and you need an internet connection at all times when editing your files.
 \item On a computer, you have more control over how your files compile, you have access to all the logs and auxiliary files (I won't go into this) and you don't need an internet connection---but it can be harder to use different packages, you're at the mercy of your own machine's limitations, and it's more technically involved.
+
+Installing \LaTeX{} on a computer is slightly more complicated. In order to make \LaTeX{} documents on your computer, you need both a \textit{compiler}, for turning the code into a readable document, and an \textit{editor}, for writing the code and facilitating the compilation process.
 \end{itemize}
 
-There are many online and computer-based options available, and the reader is encouraged to research their options, but as a starting point, I present here the \LaTeX{} implementations used for writing this book.
 
-Much of the book was originally written using the online editor \textit{ShareLaTeX}, which has merged with \textit{Overleaf} as of September 2018 and can be accessed at the following URL:
+There are many online and computer-based options available; you are encouraged to research the options, and I make no recommendations for or against any particular \LaTeX{} implementations. As a starting point, though, I present here the \LaTeX{} implementations used for writing this book:
 
-\vspace{-15pt}
-\begin{center}
-\url{https://www.overleaf.com/}
-\end{center}
+\begin{itemize}
+\item \textbf{Computer implementation:}
+\begin{itemize}
+\item \textbf{Compiler:} \textit{TeX Live} (\url{https://www.tug.org/texlive/});
+\item \textbf{Editor:} \textit{TeXstudio} (\url{https://www.texstudio.org/});
+\end{itemize}
+\item \textbf{Web-based implementation:} \textit{Overleaf} (\url{https://www.overleaf.com/}).
+\end{itemize}
 
-\vspace{-15pt}
-Installing \LaTeX{} on a computer is slightly more complicated. In order to make \LaTeX{} documents on your computer, you need both a \textit{compiler}, for turning the code into a readable document, and an \textit{editor}, for writing the code and facilitating the compilation process.
+TeX Live and TeXstudio are both free, open-source and cross-platform. Overleaf is a proprietary service with both free and paid subscriptions.
 
-The compiler used for this book is \textit{TeX Live}:
-
-\vspace{-15pt}
-\begin{center}
-\url{https://www.tug.org/texlive/}
-\end{center}
-
-\vspace{-15pt}
-and the editor is \textit{TeXstudio}:
-
-\vspace{-15pt}
-\begin{center}
-\url{https://www.texstudio.org/}
-\end{center}
-
-\vspace{-15pt}
-Both TeX Live and TeXstudio are free, cross-platform and open-source.
 
 \subsection*{Getting started}
 
@@ -53,7 +40,7 @@ When you have settled on an online \LaTeX{} editor or installed \LaTeX{} on your
 \url{\bookurl/latex/}
 \end{center}
 
-\vspace{-15pt}
+\vspace{-10pt}
 The code is replicated at the end of this section, on page \pageref{pTeXTemplate}.
 
 \newpage
