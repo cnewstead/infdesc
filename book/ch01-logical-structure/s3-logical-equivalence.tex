@@ -635,7 +635,7 @@ Now (b) follows from (a), since logical equivalence is defined in terms of deriv
 %\textit{Aaand breathe!} All this new notation can be overwhelming at first, but it will be worth it in the end. This chapter was all about teaching you a new language---new symbols, new terminology---because without it, our future pursuits will be impossible. If you're stuck now, then don't worry: you'll soon get the hang of it, especially when we start using this new language in context. You can, of course, refer back to the results in this chapter for reference at any point in the future.
 
 \begin{tldr}{secLogicalEquivalence}
-Logical equivalence:
+\subsubsection*{Logical equivalence}
 
 \begin{tldrlist}
 \tldritem{defLogicalEquivalence}
@@ -645,10 +645,11 @@ Two logical formulae are \textit{logically equivalent} (written $\equiv$) if eac
 Two \textit{propositional} formulae are logically equivalent if and only if they have the same truth value for all assignments of truth values to their constituent propositional variables.
 
 \tldritem{defTruthTable}
-The \textit{truth table} of a propositional formula is a tabulation of its truth values under all assignments of truth values to its constituent propositional variables. If the formula contains $n$ variables, then the truth table will have $2^n$ rows in addition to the header row. Two propositional formulae are logically equivalent if and only if they have identical columns in a truth table.
+The \textit{truth table} of a propositional formula is a tabulation of its truth values under all assignments of truth values to its constituent propositional variables. Two propositional formulae are logically equivalent if and only if they have identical columns in a truth table.
 \end{tldrlist}
 
-Some logical equivalences:
+\subsubsection*{Some specific logical equivalences}
+
 \begin{tldrlist}
 \tldritem{thmDoubleNegation}
 The double-negation of a proposition is equivalent to the original proposition. This gives rise to `indirect' proof by contradiction: in order to prove that a proposition $p$ is \textit{true}, assume $p$ is false and derive a contradiction.
@@ -666,7 +667,8 @@ The negation of $p \Rightarrow q$ is logically equivalent to $p \wedge (\neg q)$
 De Morgan's laws for quantifiers say that $\neg \forall x \in X,\, p(x) \equiv \exists x \in X,\, \neg p(x)$ and $\neg \exists x \in X,\, p(x) \equiv \forall x \in X,\, \neg p(x)$. The first of these suggests the strategy of \textit{proof by counterexample}.
 \end{tldrlist}
 
-Maximal negation:
+\subsubsection*{Maximal negation}
+
 \begin{tldrlist}
 \tldritem{defMaximallyNegatedLogicalFormula}
 A logical formula is \textit{maximally negated} if it contains no negation operators (except, perhaps, immediately before a propositional variable or predicate).
@@ -675,7 +677,8 @@ A logical formula is \textit{maximally negated} if it contains no negation opera
 Every logical formula built using the logical operators and quantifiers in this section is logically equivalent to a maximally negated one.
 \end{tldrlist}
 
-Tautologies:
+\subsubsection*{Tautologies}
+
 \begin{tldrlist}
 \tldritem{defTautology}
 A \textit{tautology} is a logical formula that is true no matter what assignment of truth values is given to its constituent propositional variables or what values are substituted for its free variables. Tautologies can be invoked as assumptions at any point in a proof.
