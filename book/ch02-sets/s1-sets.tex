@@ -395,4 +395,76 @@ Some authors write $\{ \}$ instead of $\varnothing$, since $\{ \}$ is simply the
 Let $X$ be a set. Prove that $\varnothing \subseteq X$.
 \end{exercise}
 
-\index{set|)}
+\subsection*{Power sets}
+
+\begin{definition}
+\label{defPowerSet}
+\index{power set}
+Let $X$ be a set. The \textbf{power set} of $X$, written $\mathcal{P}(X)$\nindex{PX}{$\mathcal{P}(X)$}{power set} \inlatex{mathcal\{P\}}\lindexmmc{mathcal}{$\mathcal{A}, \mathcal{B}, \dots$}, is the set of all subsets of $X$.
+\end{definition}
+
+\begin{example}
+There are four subsets of $\{ 1, 2 \}$, namely
+\[ \varnothing, \quad \{ 1 \}, \quad \{ 2 \}, \quad \{ 1, 2 \} \]
+so $\mathcal{P}(X) = \{\varnothing, \{ 1 \}, \{ 2 \}, \{ 1, 2 \}\}$.
+\end{example}
+
+\begin{exercise}
+Write out the elements of $\mathcal{P}(\{1, 2, 3\})$.
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a set. Show that $\varnothing \in \mathcal{P}(X)$ and $X \in \mathcal{P}(X)$.
+\end{exercise}
+
+\begin{exercise}
+Write out the elements of $\mathcal{P}(\varnothing)$, $\mathcal{P}(\mathcal{P}(\varnothing))$ and $\mathcal{P}(\mathcal{P}(\mathcal{P}(\varnothing)))$.
+\end{exercise}
+
+Power sets are often a point of confusion because they bring the property of being a \textit{subset} of one set to that of being an \textit{element} of another, in the sense that for all sets $U$ and $X$ we have
+\[ U \subseteq X \quad \Leftrightarrow \quad U \in \mathcal{P}(X) \]
+This distinction looks easy to grasp, but when the sets $U$ and $X$ look alike, it's easy to fall into various traps. Here's a simple example.
+
+\begin{example}
+It is true that $\varnothing \subseteq \varnothing$, but false that $\varnothing \in \varnothing$. Indeed,
+\begin{itemize}
+\item $\varnothing \subseteq \varnothing$ means $\forall x \in \varnothing,\, x \in \varnothing$; but propositions of the form $\forall x \in \varnothing,\, p(x)$ are always true, as discussed in \Cref{exEverythingIsTrueOfElementsOfEmptySet}.
+\item The empty set has no elements; if $\varnothing \in \varnothing$ were true, it would mean that $\varnothing$ had an element (that element being $\varnothing$). So it must be the case that $\varnothing \not \in \varnothing$.
+\end{itemize}
+\end{example}
+
+The following exercise is intended to help you overcome similar potential kinds of confusion by means of practice. Try to think precisely about what the definitions involved are.
+
+\begin{exercise}
+Determine, with proof, whether or not each of the following statements is true.
+\begin{enumerate}[(a)]
+\item $\mathcal{P}(\varnothing) \in \mathcal{P}(\mathcal{P}(\varnothing))$;
+\item $\varnothing \in \{ \{ \varnothing \} \}$;
+\item $\{ \varnothing \} \in \{ \{ \varnothing \} \}$;
+\item $\mathcal{P}(\mathcal{P}(\varnothing)) \in \{ \varnothing, \{ \varnothing, \{ \varnothing \} \} \}$.
+\end{enumerate}
+Repeat the exercise with all instances of `$\in$' replaced by `$\subseteq$'.
+\end{exercise}
+
+\begin{tldr}{secSets}
+
+\subsubsection*{Sets and subsets}
+
+\begin{tldrlist}
+\tldritem{defSet} A \textit{set} is a collection of objects (called \textit{elements}) from a fixed \textit{universe of discourse} $\mathcal{U}$; we write $x \in X$ to mean that $x$ is an element of the set $X$. Sets can be specified by (explicitly or implicitly) listing their elements $\{ x_1, x_2, \dots, x_n, \dots \}$, or by using \textit{set-builder notation} $\{ x \in X \mid p(x) \}$.
+\tldritem{defSubset} A set $U$ is a \textit{subset} of a set $X$, written $U \subseteq X$, if $\forall a,\, (a \in U \Rightarrow a \in X)$. To prove that $U \subseteq X$, it suffices to introduce a variable $a$, assume that $a \in U$, and derive $a \in X$.
+\tldritem{axSetEquality} Sets $X$ and $Y$ are equal if and only if $\forall a,\, (a \in X \Leftrightarrow a \in Y)$. In order to prove that $X = Y$, it suffices to prove separately that $X \subseteq Y$ and $Y \subseteq X$---this method is called \textit{double containment}.
+\end{tldrlist}
+
+\subsubsection*{Inhabitation and emptiness}
+
+\begin{tldrlist}
+\tldritem{defInhabited} A set $X$ is \textit{inhabited} if it has at least one element; otherwise, it is \textit{empty}.
+\tldritem{thmEmptySetIsUnique} There is a unique empty set, denoted by $\varnothing$ or $\{ \}$.
+\end{tldrlist}
+
+\subsubsection*{Power sets}
+\begin{tldrlist}
+\tldritem{defPowerSet} The \textit{power set} of a set $X$ is the set of all subsets of $X$.
+\end{tldrlist}
+\end{tldr}

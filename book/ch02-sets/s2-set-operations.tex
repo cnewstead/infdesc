@@ -10,6 +10,7 @@ This is where \textit{set operations} come in---they allow us to use previously 
 The \textit{intersection} of two sets is the set of things which are elements of both sets.
 
 \begin{definition}
+\label{defIntersection}
 \index{intersection!pairwise}
 \nindex{intersection}{$\cap$}{intersection}
 Let $X$ and $Y$ be sets. The (\textbf{pairwise}) \textbf{intersection} of $X$ and $Y$, denoted $X \cap Y$ \inlatex{cap}\lindexmmc{cap}{$\cap$}, is defined by
@@ -55,6 +56,7 @@ Let $X$ be a set. Prove that $X \cap \varnothing = \varnothing$.
 \end{exercise}
 
 \begin{definition}
+\label{defDisjoint}
 Let $X$ and $Y$ be sets. We say $X$ and $Y$ are \textbf{disjoint} if $X \cap Y$ is empty.
 \end{definition}
 
@@ -70,6 +72,7 @@ Let $a,b,c,d \in \mathbb{R}$ with $a<b$ and $c<d$. Prove that the open intervals
 The \textit{union} of two sets is the set of things which are elements of at least one of the sets.
 
 \begin{definition}
+\label{defUnion}
 \index{union!pairwise}
 Let $X$ and $Y$ be sets. The (\textbf{pairwise}) \textbf{union} of $X$ and $Y$, denoted $X \cup Y$\nindex{union}{$\cup$}{union} \inlatex{cup}\lindexmmc{cup}{$\cup$}, is defined by
 \[ X \cup Y = \{ a \mid a \in X \vee a \in Y \} \]
@@ -198,11 +201,13 @@ You need to find a family of subsets of $\mathbb{N}$ such that (i) any two of th
 \subsubsection*{Relative complement ($\setminus$)}
 
 \begin{definition}
+\label{defRelativeComplement}
 \index{relative complement}
 \index{complement!relative}
 \nindex{complement}{$\setminus$}{relative complement}
 Let $X$ and $Y$ be sets. The \textbf{relative complement} of $Y$ in $X$, denoted $X \setminus Y$ \inlatex{setminus}\lindexmmc{setminus}{$\setminus$}, is defined by
 \[ X \setminus Y = \{ x \in X \mid x \not \in Y \} \]
+The operation $\setminus$ is also known as the \textbf{set difference} operation. Some authors write $Y - X$ instead of $Y \setminus X$.
 \end{definition}
 
 \begin{example}
@@ -271,57 +276,6 @@ Hence $A \setminus (X \cup Y) = (A \setminus X) \cap (A \setminus Y)$, as requir
 Complete the proof of de Morgan's laws for sets.
 \end{exercise}
 
-\subsection*{Power sets}
-
-\begin{definition}
-\label{defPowerSet}
-\index{power set}
-Let $X$ be a set. The \textbf{power set} of $X$, written $\mathcal{P}(X)$\nindex{PX}{$\mathcal{P}(X)$}{power set} \inlatex{mathcal\{P\}}\lindexmmc{mathcal}{$\mathcal{A}, \mathcal{B}, \dots$}, is the set of all subsets of $X$.
-\end{definition}
-
-\begin{example}
-There are four subsets of $\{ 1, 2 \}$, namely
-\[ \varnothing, \quad \{ 1 \}, \quad \{ 2 \}, \quad \{ 1, 2 \} \]
-so $\mathcal{P}(X) = \{\varnothing, \{ 1 \}, \{ 2 \}, \{ 1, 2 \}\}$.
-\end{example}
-
-\begin{exercise}
-Write out the elements of $\mathcal{P}(\{1, 2, 3\})$.
-\end{exercise}
-
-\begin{exercise}
-Let $X$ be a set. Show that $\varnothing \in \mathcal{P}(X)$ and $X \in \mathcal{P}(X)$.
-\end{exercise}
-
-\begin{exercise}
-Write out the elements of $\mathcal{P}(\varnothing)$, $\mathcal{P}(\mathcal{P}(\varnothing))$ and $\mathcal{P}(\mathcal{P}(\mathcal{P}(\varnothing)))$.
-\end{exercise}
-
-Power sets are often a point of confusion because they bring the property of being a \textit{subset} of one set to that of being an \textit{element} of another, in the sense that for all sets $U$ and $X$ we have
-\[ U \subseteq X \quad \Leftrightarrow \quad U \in \mathcal{P}(X) \]
-This distinction looks easy to grasp, but when the sets $U$ and $X$ look alike, it's easy to fall into various traps. Here's a simple example.
-
-\begin{example}
-It is true that $\varnothing \subseteq \varnothing$, but false that $\varnothing \in \varnothing$. Indeed,
-\begin{itemize}
-\item $\varnothing \subseteq \varnothing$ means $\forall x \in \varnothing,\, x \in \varnothing$; but propositions of the form $\forall x \in \varnothing,\, p(x)$ are always true, as discussed in \Cref{exEverythingIsTrueOfElementsOfEmptySet}.
-\item The empty set has no elements; if $\varnothing \in \varnothing$ were true, it would mean that $\varnothing$ had an element (that element being $\varnothing$). So it must be the case that $\varnothing \not \in \varnothing$.
-\end{itemize}
-\end{example}
-
-The following exercise is intended to help you overcome similar potential kinds of confusion by means of practice. Try to think precisely about what the definitions involved are.
-
-\begin{exercise}
-Determine, with proof, whether or not each of the following statements is true.
-\begin{enumerate}[(a)]
-\item $\mathcal{P}(\varnothing) \in \mathcal{P}(\mathcal{P}(\varnothing))$;
-\item $\varnothing \in \{ \{ \varnothing \} \}$;
-\item $\{ \varnothing \} \in \{ \{ \varnothing \} \}$;
-\item $\mathcal{P}(\mathcal{P}(\varnothing)) \in \{ \varnothing, \{ \varnothing, \{ \varnothing \} \} \}$.
-\end{enumerate}
-Repeat the exercise with all instances of `$\in$' replaced by `$\subseteq$'.
-\end{exercise}
-
 \subsubsection*{Product ($\times$)}
 
 \begin{definition}
@@ -380,3 +334,26 @@ In \Cref{exCartesianProductNotAssociative} you might have noticed that the sets 
 \end{itemize}
 So, although these three sets \textit{appear} to be the same, zooming in closely on the definitions reveals that there are subtle differences between them. A sense in which they are the same is that there are \textit{bijections} between them---the notion of a bijection will be introduced in \Cref{secInjectionsSurjections}.
 \end{example}
+
+\begin{tldr}{secSetOperations}
+
+\subsubsection*{Binary set operations}
+
+\begin{tldrlist}
+\tldritem{defIntersection} The \textit{intersection} of sets $X$ and $Y$ is $X \cap Y = \{ a \mid a \in X \wedge a \in Y \}$.
+\tldritem{defUnion} The \textit{union} of sets $X$ and $Y$ is $X \cup Y = \{ a \mid a \in X \vee a \in Y \}$.
+\tldritem{defRelativeComplement} The \textit{relative complement} of a set $X$ in a set $Y$ is $Y \setminus X = \{ a \mid a \in X \wedge a \not\in Y \}$.
+\tldritem{defCartesianProductPairwise} The \textit{cartesian product} of sets $X$ and $Y$ is $X \times Y = \{ (a,b) \mid a \in X \wedge b \in Y \}$, where $(a,b)$ is an \textit{ordered pair}.
+\end{tldrlist}
+
+\subsubsection*{Indexed set operations}
+
+\begin{tldrlist}
+\tldritem{defIndexedFamily} An \textit{indexed family of sets} $\{ X_i \mid i \in I \}$ is a specification of a set $X_i$ for each element $i$ of some \textit{indexing set} $I$.
+\tldritem{defIndexedIntersectionUnion} The \textit{indexed intersection} of a family $\{ X_i \mid i \in I \}$ is $\bigcap_{i \in I} X_i = \{ a \mid \forall i \in I,\, a \in X_i \}$; the \textit{indexed union} of the family is $\bigcup_{i \in I} X_i = \{ a \mid \exists i \in I,\, a \in X_i \}$.
+\tldritem{defCartesianProductNFold} The \textit{$n$-fold cartesian product} of an $[n]$-indexed family $\{ X_i \mid i \in [n] \}$ is the set $\prod_{k=1}^n X_k = \{ (a_1, \dots, a_n) \mid a_k \in X_k \textbf{ for all } k \in [n] \}$, where $(a_1, \dots, a_n)$ is an \textit{ordered $n$-tuple}.
+\end{tldrlist}
+
+\end{tldr}
+
+\index{set|)}

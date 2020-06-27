@@ -507,4 +507,37 @@ Let $f : X \to Y$ be a function. Prove that $f^{-1}[\varnothing] = \varnothing$ 
 Let $X$ be a set. Prove that every function $f : X \to \{0,1\}$ is the characteristic function of the subset $f^{-1}[\{1\}] \subseteq X$.
 \end{exercise}
 
+\begin{tldr}{secFunctions}
+
+\subsubsection*{Functions and graphs}
+
+\begin{tldrlist}
+\tldritem{defFunction} A \textit{function} $f$ from a set $X$ (called the \textit{domain}) to a set $Y$ (called the \textit{codomain}) assigns to each $x \in X$ a unique element $f(x) \in Y$; we write $f : X \to Y$ to mean that $f$ is a function from $X$ to $Y$.
+\tldritem{axFunctionExtensionality} Two functions are equal if and only if they have the same domain and codomain and the same values at all arguments.
+\tldritem{defFunctionGraph} The \textit{graph} of a function $f : X \to Y$ is $\mathrm{Gr}(f) = \{ (x,f(x)) \mid x \in X \} \subseteq X \times Y$. Two functions $f,g : X \to Y$ are equal if and only if they have the same graph.
+\end{tldrlist}
+
+\subsubsection*{Composition of functions}
+
+\begin{tldrlist}
+\tldritem{defComposite} The \textit{composite} of $f : X \to Y$ and $g : Y \to Z$ is the function $g \circ f : X \to Z$ defined by $(g \circ f)(x) = g(f(x))$ for all $x \in X$.
+\end{tldrlist}
+
+\subsubsection*{Characteristic functions}
+
+\begin{tldrlist}
+\tldritem{defCharacteristicFunction} The \textit{characteristic function} of a subset $U \subseteq X$ is the function $\chi_U : X \to \{ 0, 1 \}$ defined by, for each $a \in X$, letting $\chi_U(a) = 1$ if $a \in U$, and $\chi_U(a) = 0$ otherwise.
+\tldritem{thmCharacteristicFunctionsCharacteriseSubsets} Two subsets of a fixed set are equal if and only if they have equal characteristic functions.
+\tldritem{thmSetIdentitiesFromCharacteristicFunctions} The characteristic functions of intersections, unions and relative complements of subsets $U,V \subseteq X$ can be expressed in terms of $\chi_U$ and $\chi_V$ using arithmetic operations; this gives us another way of proving set identities.
+\end{tldrlist}
+
+\subsubsection*{Images and preimages}
+
+\begin{tldrlist}
+\tldritem{defImage} The \textit{image} of a subset $U \subseteq X$ under a function $f : X \to Y$ is the subset $f[U] = \{ f(x) \mid x \in U \} \subseteq Y$. The \textit{image of $f$} is the subset $f[X] \subseteq Y$.
+\tldritem{defPreimage} The \textit{preimage} of a subset $V \subseteq Y$ under a function $f : X \to Y$ is the subset $f^{-1}[V] = \{ x \in X \mid f(x) \in Y \} \subseteq X$.
+\end{tldrlist}
+
+\end{tldr}
+
 \index{function|)}

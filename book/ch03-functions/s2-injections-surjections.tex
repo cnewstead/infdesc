@@ -539,6 +539,26 @@ In \Cref{secFiniteSets}, we define what it means for a set to be finite and what
 
 Comparing the sizes of infinite sets, and even defining what `size' means for infinite sets, is another can of worms entirely and leads to some fascinating mathematics. For example, we can prove some counterintuitive results, such as the set $\mathbb{N}$ of natural numbers and the set $\mathbb{Q}$ of rational numbers have the same size. The journey down this rabbit hole begins in \Cref{chInfinity}.
 
+\begin{tldr}{secInjectionsSurjections}
+
+\subsubsection*{Injections, surjections and bijections}
+
+\begin{tldrlist}
+\tldritem{defInjection} A function $f : X \to Y$ is \textit{injective} if, for all $a,b \in X$, if $f(a)=f(b)$, then $a=b$; this is equivalent to saying that distinct elements of $X$ are mapped by $f$ to distinct elements of $Y$.
+\tldritem{defSurjection} A function $f : X \to Y$ is \textit{surjective} if, for all $y \in Y$, there exists $x \in X$ such that $f(x)=y$.
+\tldritem{defBijection} A function $f : X \to Y$ is \textit{bijective} if it is both injective and surjective.
+\end{tldrlist}
+
+\subsubsection*{Inverses}
+
+\begin{tldrlist}
+\tldritem{defLeftInverse} A \textit{left inverse} for a function $f : X \to Y$ is a function $g : Y \to X$ such that $g \circ f = \mathrm{id}_X$. If $f$ has a left inverse, then it is injective; conversely, if $f$ is injected \textit{and} $X$ is inhabited, then $f$ has a left inverse.
+\tldritem{defRightInverse} A \textit{right inverse} for a function $f : X \to Y$ is a function $g : Y \to X$ such that $f \circ g = \mathrm{id}_Y$. If $f$ has a right inverse, then it is surjective; conversely, assuming the axiom of choice, if $f$ is surjective, then it has a right inverse.
+\tldritem{defInverse} An \textit{inverse} for a function $f : X \to Y$ is a function $g : Y \to X$ that is both a left inverse and a right inverse for $f$. A function $f$ is bijective if and only if it has an inverse.
+\tldritem{propLeftAndRightInversesAreEqual} If a function $f : X \to Y$ has both a left and a right inverse, then they are equal; in particular, every bijection has a unique inverse, denoted by $f^{-1} : Y \to X$.
+\end{tldrlist}
+
+\end{tldr}
 
 \index{injection|)}
 \index{surjection|)}
