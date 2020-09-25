@@ -69,6 +69,16 @@ Fix $n \in \mathbb{N}$ and consider how $\theta_n$ interacts with functions $f :
 Let $X$ be a set and let $U, V \subseteq X$. Describe the indicator function $\chi_{U \symmdiff V}$ of the symmetric difference of $U$ and $V$ (see \Cref{defSymmetricDifference}) in terms of $\chi_U$ and $\chi_V$.
 \end{chapex}
 
+\begin{chapex}
+\label{cqAntiderivativeOfLogarithm}
+[This question assumes some familiarity with 
+integral calculus.] A lie that is commonly told to calculus students is that
+\[ \int \dfrac{1}{x} \, dx = \log(|x|) + c \]
+where $\log$ denotes the natural logarithm function and $c$ is an arbitrary real constant. Prove that it is actually the case that
+\[ \int \dfrac{1}{x} \, dx = \log(|x|) + a \chi_U(x) + b \chi_V(x) \]
+where $a$ and $b$ are arbitrary real constants, and $U$ and $V$ are particular (inhabited) subsets of $\mathbb{R} \setminus \{ 0 \}$ that you should determine.
+\end{chapex}
+
 \subsection*{Images and preimages}
 
 In \Crefrange{cqComputeImageBegin}{cqComputeImageEnd}, find the image $f[U]$ of the subset $U$ of the domain of the function $f$ described in the question.
